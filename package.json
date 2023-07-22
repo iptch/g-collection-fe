@@ -6,7 +6,8 @@
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+    "start-pwa": "ng build && http-server -p 8080 -c-1 dist/g-collection-fe"
   },
   "private": true,
   "dependencies": {
