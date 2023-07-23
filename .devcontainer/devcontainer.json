@@ -17,7 +17,8 @@
 			"extensions": [
 				"bradlc.vscode-tailwindcss",
 				"esbenp.prettier-vscode",
-				"eamodio.gitlens"
+				"eamodio.gitlens",
+				"PKief.material-icon-theme"
 			]
 		}
 	}
