@@ -1,0 +1,14 @@
+<header class="px-4 py-2 bg-blue-secondary flex justify-between">
+  <button [routerLink]="['']" class="text-white text-xl font-medium">G-Collection</button>
+  <div class="space-x-2">
+    <button [routerLink]="['profile']" class="material-symbols-outlined text-white"
+      >account_circle</button
+    >
+    <button
+      (click)="logout.emit()"
+      class="material-symbols-outlined text-white"
+    >
+      logout
+    </button>
+  </div>
+</header>
