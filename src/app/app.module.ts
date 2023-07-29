@@ -45,7 +45,7 @@ export function MSALInstanceFactory(): IPublicClientApplication {
       clientId: 'e70a5a15-fe06-40a1-a34c-e668cff27a42',
       authority:
         'https://login.microsoftonline.com/044c0dd3-7e2a-4264-bf0d-e23160627910',
-      redirectUri: 'http://localhost:4200',
+      redirectUri: 'https://gentle-field-032acb703.3.azurestaticapps.net',
     },
     cache: {
       cacheLocation: BrowserCacheLocation.LocalStorage,
