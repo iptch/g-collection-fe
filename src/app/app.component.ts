@@ -32,9 +32,6 @@ export class AppComponent implements OnInit, OnDestroy {
       )
       .subscribe(() => {
         this.setLoginDisplay();
-        if (!this.loginDisplay) {
-          this.authenticationService.login();
-        }
       });
   }
 
