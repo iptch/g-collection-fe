@@ -9,7 +9,7 @@
     "test": "ng test",
     "start-pwa": "ng build --configuration development && http-server -p 4200 -c-1 dist/g-collection-fe",
     "prepare": "husky install",
-    "lint": "ng lint --fix",
+    "lint": "ng lint",
     "format": "prettier '**/*' --write --ignore-unknown"
   },
   "private": true,
