@@ -1,8 +1,8 @@
 {
-  "name": "g-collection-fe",
-  "short_name": "g-collection-fe",
-  "theme_color": "#1976d2",
-  "background_color": "#fafafa",
+  "name": "G Collection",
+  "short_name": "G Collection",
+  "theme_color": "#0065a0",
+  "background_color": "#0065a0",
   "display": "standalone",
   "scope": "./",
   "start_url": "./",
