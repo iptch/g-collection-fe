@@ -13,7 +13,7 @@ import { InteractionType } from '@azure/msal-browser';
 export class AuthenticationService {
   constructor(
     @Inject(MSAL_GUARD_CONFIG) private msalGuardConfig: MsalGuardConfiguration,
-    private authService: MsalService
+    private authService: MsalService,
   ) {}
 
   isLoggedIn() {

@@ -20,7 +20,8 @@
         "eamodio.gitlens",
         "PKief.material-icon-theme",
         "Angular.ng-template",
-        "GitHub.vscode-github-actions"
+        "GitHub.vscode-github-actions",
+        "dbaeumer.vscode-eslint"
       ]
     }
   },

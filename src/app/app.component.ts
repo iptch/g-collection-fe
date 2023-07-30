@@ -17,7 +17,7 @@ export class AppComponent implements OnInit, OnDestroy {
 
   constructor(
     private msalBroadcastService: MsalBroadcastService,
-    private authenticationService: AuthenticationService
+    private authenticationService: AuthenticationService,
   ) {}
 
   ngOnInit(): void {
@@ -26,9 +26,9 @@ export class AppComponent implements OnInit, OnDestroy {
     this.msalBroadcastService.inProgress$
       .pipe(
         filter(
-          (status: InteractionStatus) => status === InteractionStatus.None
+          (status: InteractionStatus) => status === InteractionStatus.None,
         ),
-        takeUntil(this._destroying$)
+        takeUntil(this._destroying$),
       )
       .subscribe(() => {
         this.setLoginDisplay();
