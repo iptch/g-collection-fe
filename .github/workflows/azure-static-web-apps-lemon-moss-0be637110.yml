@@ -43,3 +43,4 @@ jobs:
         with:
           azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_LEMON_MOSS_0BE637110 }}
           action: "close"
+          app_location: "/"

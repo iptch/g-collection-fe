@@ -2,5 +2,5 @@ import { EnvironmentConfig } from './environment-config';
 
 export const environment: EnvironmentConfig = {
   production: true,
-  redirectUri: 'https://gentle-field-032acb703.3.azurestaticapps.net',
+  redirectUri: 'https://lemon-moss-0be637110.3.azurestaticapps.net',
 };

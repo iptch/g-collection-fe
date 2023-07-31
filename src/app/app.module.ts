@@ -43,9 +43,9 @@ export function loggerCallback(logLevel: LogLevel, message: string) {
 export function MSALInstanceFactory(): IPublicClientApplication {
   return new PublicClientApplication({
     auth: {
-      clientId: 'e70a5a15-fe06-40a1-a34c-e668cff27a42',
+      clientId: 'dd268c17-3b91-47ab-bcb4-1f87f8a0129d',
       authority:
-        'https://login.microsoftonline.com/044c0dd3-7e2a-4264-bf0d-e23160627910',
+        'https://login.microsoftonline.com/a9080dcf-8589-4cb6-a2e2-21398dc6c671',
       redirectUri: environment.redirectUri,
     },
     cache: {
