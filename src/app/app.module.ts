@@ -29,6 +29,9 @@ import { HomeComponent } from './components/home/home.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { HeaderComponent } from './components/header/header.component';
 import { environment } from './../environments/environment';
+import { QrScannerComponent } from './components/qr-scanner/qr-scanner.component';
+import { QRCodeModule } from 'angularx-qrcode';
+import { QrGeneratorComponent } from './components/qr-generator/qr-generator.component';
 
 const GRAPH_ENDPOINT = 'https://graph.microsoft.com/v1.0/me';
 
@@ -87,6 +90,8 @@ export function MSALGuardConfigFactory(): MsalGuardConfiguration {
     HeaderComponent,
     HomeComponent,
     ProfileComponent,
+    QrScannerComponent,
+    QrGeneratorComponent,
   ],
   imports: [
     BrowserModule,
@@ -94,6 +99,7 @@ export function MSALGuardConfigFactory(): MsalGuardConfiguration {
     AppRoutingModule,
     HttpClientModule,
     MsalModule,
+    QRCodeModule,
     ServiceWorkerModule.register('ngsw-worker.js', {
       enabled: !isDevMode(),
       // Register the ServiceWorker as soon as the application is stable

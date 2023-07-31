@@ -4,22 +4,37 @@ import { BrowserUtils } from '@azure/msal-browser';
 import { HomeComponent } from './components/home/home.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { MsalGuard } from '@azure/msal-angular';
+import { QrScannerComponent } from './components/qr-scanner/qr-scanner.component';
+import { QrGeneratorComponent } from './components/qr-generator/qr-generator.component';
 
 const routes: Routes = [
   {
-    path: 'profile',
-    component: ProfileComponent,
-    canActivate: [MsalGuard],
-  },
-  {
     path: '',
-    component: HomeComponent,
     canActivate: [MsalGuard],
-  },
-  {
-    // Needed for Error routing
-    path: 'error',
-    component: HomeComponent,
+    canActivateChild: [MsalGuard],
+    children: [
+      {
+        path: '',
+        component: HomeComponent,
+      },
+      {
+        path: 'profile',
+        component: ProfileComponent,
+      },
+      {
+        path: 'qr-generator',
+        component: QrGeneratorComponent,
+      },
+      {
+        path: 'qr-scanner',
+        component: QrScannerComponent,
+      },
+      {
+        // Needed for Error routing
+        path: 'error',
+        component: HomeComponent,
+      },
+    ],
   },
 ];
 

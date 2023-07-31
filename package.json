@@ -25,6 +25,8 @@
     "@angular/service-worker": "^16.1.0",
     "@azure/msal-angular": "^3.0.0-beta.1",
     "@azure/msal-browser": "^3.0.0-beta.1",
+    "angularx-qrcode": "^16.0.1",
+    "html5-qrcode": "^2.3.8",
     "http-server": "^14.1.1",
     "material-symbols": "^0.10.2",
     "rxjs": "~7.8.0",

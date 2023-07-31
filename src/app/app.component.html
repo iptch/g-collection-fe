@@ -1,7 +1,5 @@
 <ng-container *ngIf="loginDisplay">
   <app-header (logout)="onLogout()"></app-header>
-  <div class="container p-2">
-    <!--This is to avoid reload during acquireTokenSilent() because of hidden iframe -->
-    <router-outlet *ngIf="!isIframe"></router-outlet>
-  </div>
+  <!--This is to avoid reload during acquireTokenSilent() because of hidden iframe -->
+  <router-outlet *ngIf="!isIframe"></router-outlet>
 </ng-container>
