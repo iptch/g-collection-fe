@@ -3,7 +3,7 @@ import { MsalBroadcastService } from '@azure/msal-angular';
 import { InteractionStatus } from '@azure/msal-browser';
 import { Subject } from 'rxjs';
 import { filter, takeUntil } from 'rxjs/operators';
-import { AuthenticationService } from './services/authentication.service';
+import { AuthService } from './services/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -17,7 +17,7 @@ export class AppComponent implements OnInit, OnDestroy {
 
   constructor(
     private msalBroadcastService: MsalBroadcastService,
-    private authenticationService: AuthenticationService,
+    private authService: AuthService,
   ) {}
 
   ngOnInit(): void {
@@ -36,11 +36,11 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   setLoginDisplay() {
-    this.loginDisplay = this.authenticationService.isLoggedIn();
+    this.loginDisplay = this.authService.isAuthenticated();
   }
 
   onLogout() {
-    this.authenticationService.logout();
+    this.authService.logout();
   }
 
   ngOnDestroy(): void {

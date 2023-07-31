@@ -10,24 +10,24 @@ import { InteractionType } from '@azure/msal-browser';
 @Injectable({
   providedIn: 'root',
 })
-export class AuthenticationService {
+export class AuthService {
   constructor(
     @Inject(MSAL_GUARD_CONFIG) private msalGuardConfig: MsalGuardConfiguration,
-    private authService: MsalService,
+    private msalService: MsalService,
   ) {}
 
-  isLoggedIn() {
-    return this.authService.instance.getAllAccounts().length > 0;
+  isAuthenticated() {
+    return this.msalService.instance.getAllAccounts().length > 0;
   }
 
   logout() {
     if (this.msalGuardConfig.interactionType === InteractionType.Popup) {
-      this.authService.logoutPopup({
+      this.msalService.logoutPopup({
         postLogoutRedirectUri: '/',
         mainWindowRedirectUri: '/',
       });
     } else {
-      this.authService.logoutRedirect({
+      this.msalService.logoutRedirect({
         postLogoutRedirectUri: '/',
       });
     }

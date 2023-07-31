@@ -1,40 +1,7 @@
-<p>home works!</p>
-<p>home works!</p>
-<p>home works!</p>
-<p>home works!</p>
-<p>home works!</p>
-<p>home works!</p>
-<p>home works!</p>
-<p>home works!</p>
-<p>home works!</p>
-<p>home works!</p>
-<p>home works!</p>
-<p>home works!</p>
-<p>home works!</p>
-<p>home works!</p>
-<p>home works!</p>
-<p>home works!</p>
-<p>home works!</p>
-<p>home works!</p>
-<p>home works!</p>
-<p>home works!</p>
-<p>home works!</p>
-<p>home works!</p>
-<p>home works!</p>
-<p>home works!</p>
-<p>home works!</p>
-<p>home works!</p>
-<p>home works!</p>
-<p>home works!</p>
-<p>home works!</p>
-<p>home works!</p>
-<p>home works!</p>
-<p>home works!</p>
-<p>home works!</p>
-<p>home works!</p>
-<p>home works!</p>
-<p>home works!</p>
-<p>home works!</p>
-<p>home works!</p>
-<p>home works!</p>
-<p>home works!</p>
+<p>Unauthenticated request</p>
+<ul class="list-none" *ngIf="joke$ | async as joke">
+  <li><span class="font-medium">Type:</span> {{ joke.type }}</li>
+  <li><span class="font-medium">Setup:</span> {{ joke.setup }}</li>
+  <li><span class="font-medium">Punchline:</span> {{ joke.punchline }}</li>
+  <li><span class="font-medium">Id:</span> {{ joke.id }}</li>
+</ul>
