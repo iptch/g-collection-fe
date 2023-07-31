@@ -65,7 +65,7 @@ export function MSALInstanceFactory(): IPublicClientApplication {
 export function MSALInterceptorConfigFactory(): MsalInterceptorConfiguration {
   const protectedResourceMap = new Map<string, Array<string>>();
   protectedResourceMap.set(GRAPH_ENDPOINT, ['user.read']);
-  // TODO: add backend endpoint
+  // TODO: add backend endpoint to add token via interceptor
 
   return {
     interactionType: InteractionType.Redirect,
