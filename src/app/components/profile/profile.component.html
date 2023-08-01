@@ -1,21 +1,23 @@
-<h1 class="text-blue-secondary m-2 text-lg font-mono">Profil</h1>
+<h1 class="text-blue-secondary m-2 text-2xl font-mono">Profil</h1>
 <div class="bg-black-tertiary m-2 p-2">
-  <h1 class="text-grey-secondary text-xs uppercase pb-1">Login-Daten</h1>
-  <ul class="list-none" *ngIf="profile$ | async as profile">
-    <li>
-      <span class="text-light-pink">Name</span> {{ profile.givenName }}
-      {{ profile.surname }}
-    </li>
-    <li>
-      <span class="text-light-pink">E-Mail</span>
+  <div class="list-none" *ngIf="profile$ | async as profile">
+    <div class="mb-2">
+      <div class="text-light-pink text-sm uppercase">Name</div>
+      {{ profile.givenName }} {{ profile.surname }}
+    </div>
+    <div class="mb-2">
+      <div class="text-light-pink text-sm uppercase">E-Mail</div>
       {{ profile.userPrincipalName }}
-    </li>
-    <li><span class="text-light-pink">ID</span> {{ profile.id }}</li>
-  </ul>
+    </div>
+    <div class="mb-2">
+      <div class="text-light-pink text-sm uppercase">ID</div>
+      {{ profile.id }}
+    </div>
+  </div>
 </div>
 <button
   (click)="logout()"
-  class="bg-dark-pink text-white m-2 py-1 px-2 flex items-center"
+  class="flex items-center m-2 px-2 py-1 space-x-2 bg-dark-pink text-white"
 >
   <span class="material-symbols-outlined">logout</span>
   <span>Logout</span>

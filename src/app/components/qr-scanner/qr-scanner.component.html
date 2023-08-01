@@ -1,3 +1,14 @@
-<h1 class="text-blue-secondary m-2 text-lg font-mono">QR Scanner</h1>
+<h1 class="text-blue-secondary m-2 text-2xl font-mono">QR Scanner</h1>
 <div [hidden]="message" id="qr-scanner"></div>
-<p *ngIf="message">{{ message }}</p>
+<ng-container *ngIf="message">
+  <div class="bg-black-tertiary m-2 p-2 break-words">
+    {{ message }}
+  </div>
+  <button
+    (click)="clearMessage()"
+    class="flex items-center m-2 px-2 py-1 space-x-2 bg-blue-tertiary text-white"
+  >
+    <span class="material-symbols-outlined">qr_code_scanner</span>
+    <span>Scan again</span>
+  </button>
+</ng-container>

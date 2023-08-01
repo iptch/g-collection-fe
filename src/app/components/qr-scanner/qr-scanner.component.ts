@@ -30,6 +30,10 @@ export class QrScannerComponent implements OnInit, OnDestroy {
       });
   }
 
+  clearMessage(): void {
+    this.message = '';
+  }
+
   ngOnDestroy(): void {
     if (this.qrScanner) {
       this.qrScanner
