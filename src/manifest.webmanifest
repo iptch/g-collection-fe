@@ -11,7 +11,7 @@
       "src": "assets/icon.png",
       "sizes": "any",
       "type": "image/png",
-      "purpose": "maskable any"
+      "purpose": "any"
     }
   ]
 }
