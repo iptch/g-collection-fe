@@ -1,8 +1,8 @@
 {
-  "name": "G Collection",
+  "name": "Genius Collection",
   "short_name": "G Collection",
-  "theme_color": "#0065a0",
-  "background_color": "#0065a0",
+  "theme_color": "#1e1e1e",
+  "background_color": "#1e1e1e",
   "display": "standalone",
   "scope": "./",
   "start_url": "./",
@@ -11,7 +11,7 @@
       "src": "assets/icon.png",
       "sizes": "any",
       "type": "image/png",
-      "purpose": "any"
+      "purpose": "maskable any"
     }
   ]
 }

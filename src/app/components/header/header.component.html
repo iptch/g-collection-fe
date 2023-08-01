@@ -1,33 +1,5 @@
 <header
-  class="sticky top-0 flex justify-between items-center h-12 px-4 py-2 bg-blue-secondary"
+  class="sticky top-0 flex justify-center items-center py-1 bg-black-secondary"
 >
-  <button [routerLink]="['']" class="text-white text-xl font-medium">
-    G Collection
-  </button>
-  <div class="flex items-center space-x-2">
-    <button
-      [routerLink]="['qr-generator']"
-      class="material-symbols-outlined text-white"
-    >
-      qr_code
-    </button>
-    <button
-      [routerLink]="['qr-scanner']"
-      class="material-symbols-outlined text-white"
-    >
-      qr_code_scanner
-    </button>
-    <button
-      [routerLink]="['profile']"
-      class="material-symbols-outlined text-white"
-    >
-      account_circle
-    </button>
-    <button
-      (click)="logout.emit()"
-      class="material-symbols-outlined text-white"
-    >
-      logout
-    </button>
-  </div>
+  Genius Collection
 </header>

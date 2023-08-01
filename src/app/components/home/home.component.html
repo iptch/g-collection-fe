@@ -1,7 +1,10 @@
-<p>Unauthenticated request</p>
-<ul class="list-none" *ngIf="joke$ | async as joke">
-  <li><span class="font-medium">Type:</span> {{ joke.type }}</li>
-  <li><span class="font-medium">Setup:</span> {{ joke.setup }}</li>
-  <li><span class="font-medium">Punchline:</span> {{ joke.punchline }}</li>
-  <li><span class="font-medium">Id:</span> {{ joke.id }}</li>
-</ul>
+<h1 class="text-blue-secondary m-2 text-lg font-mono">Home</h1>
+<div class="bg-black-tertiary m-2 p-2">
+  <h1 class="text-grey-secondary text-xs uppercase pb-1">Joke</h1>
+  <ul class="list-none" *ngIf="joke$ | async as joke">
+    <li><span class="text-light-pink">Type</span> {{ joke.type }}</li>
+    <li><span class="text-light-pink">Setup</span> {{ joke.setup }}</li>
+    <li><span class="text-light-pink">Punchline</span> {{ joke.punchline }}</li>
+    <li><span class="text-light-pink">ID</span> {{ joke.id }}</li>
+  </ul>
+</div>

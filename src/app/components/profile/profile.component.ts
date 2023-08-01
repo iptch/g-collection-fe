@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { AuthService } from 'src/app/services/auth.service';
 
 const GRAPH_ENDPOINT = 'https://graph.microsoft.com/v1.0/me';
 
@@ -18,7 +19,10 @@ type ProfileType = {
 export class ProfileComponent implements OnInit {
   profile$!: Observable<ProfileType>;
 
-  constructor(private http: HttpClient) {}
+  constructor(
+    private http: HttpClient,
+    private authService: AuthService,
+  ) {}
 
   ngOnInit() {
     this.getProfile();
@@ -26,5 +30,9 @@ export class ProfileComponent implements OnInit {
 
   getProfile() {
     this.profile$ = this.http.get<ProfileType>(GRAPH_ENDPOINT);
+  }
+
+  logout() {
+    this.authService.logout();
   }
 }
