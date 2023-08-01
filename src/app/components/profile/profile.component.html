@@ -1,18 +1,19 @@
 <h1 class="text-blue-secondary m-2 text-2xl font-mono">Profil</h1>
-<div class="bg-black-tertiary m-2 p-2">
-  <div class="list-none" *ngIf="profile$ | async as profile">
-    <div class="mb-2">
-      <div class="text-light-pink text-sm uppercase">Name</div>
-      {{ profile.givenName }} {{ profile.surname }}
-    </div>
-    <div class="mb-2">
-      <div class="text-light-pink text-sm uppercase">E-Mail</div>
-      {{ profile.userPrincipalName }}
-    </div>
-    <div class="mb-2">
-      <div class="text-light-pink text-sm uppercase">ID</div>
-      {{ profile.id }}
-    </div>
+<div
+  *ngIf="profile$ | async as profile"
+  class="bg-black-tertiary m-2 p-2 space-y-2"
+>
+  <div>
+    <div class="text-light-pink text-sm">Name</div>
+    {{ profile.givenName }} {{ profile.surname }}
+  </div>
+  <div>
+    <div class="text-light-pink text-sm">E-Mail</div>
+    {{ profile.userPrincipalName }}
+  </div>
+  <div>
+    <div class="text-light-pink text-sm">ID</div>
+    {{ profile.id }}
   </div>
 </div>
 <button
