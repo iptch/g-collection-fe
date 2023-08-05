@@ -1,20 +1,20 @@
 <h1 class="text-blue-secondary m-2 text-2xl font-mono">Profil</h1>
-<div
-  *ngIf="profile$ | async as profile"
-  class="bg-black-tertiary m-2 p-2 space-y-2"
->
-  <div>
-    <div class="text-light-pink text-sm">Name</div>
-    {{ profile.givenName }} {{ profile.surname }}
+<div class="bg-black-tertiary m-2 p-2">
+  <div *ngIf="profile$ | async as profile; else loader" class="space-y-2">
+    <div>
+      <div class="text-light-pink text-sm">Name</div>
+      {{ profile.givenName }} {{ profile.surname }}
+    </div>
+    <div>
+      <div class="text-light-pink text-sm">E-Mail</div>
+      {{ profile.userPrincipalName }}
+    </div>
+    <div>
+      <div class="text-light-pink text-sm">ID</div>
+      {{ profile.id }}
+    </div>
   </div>
-  <div>
-    <div class="text-light-pink text-sm">E-Mail</div>
-    {{ profile.userPrincipalName }}
-  </div>
-  <div>
-    <div class="text-light-pink text-sm">ID</div>
-    {{ profile.id }}
-  </div>
+  <ng-template #loader><app-loader></app-loader></ng-template>
 </div>
 <button
   (click)="logout()"

@@ -33,6 +33,7 @@ import { QrScannerComponent } from './components/qr-scanner/qr-scanner.component
 import { QRCodeModule } from 'angularx-qrcode';
 import { QrGeneratorComponent } from './components/qr-generator/qr-generator.component';
 import { NavigationComponent } from './components/navigation/navigation.component';
+import { LoaderComponent } from './components/loader/loader.component';
 
 const GRAPH_ENDPOINT = 'https://graph.microsoft.com/v1.0/me';
 
@@ -94,6 +95,7 @@ export function MSALGuardConfigFactory(): MsalGuardConfiguration {
     QrScannerComponent,
     QrGeneratorComponent,
     NavigationComponent,
+    LoaderComponent,
   ],
   imports: [
     BrowserModule,

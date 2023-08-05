@@ -1,19 +1,22 @@
 <h1 class="text-blue-secondary m-2 text-2xl font-mono">Home</h1>
-<div *ngIf="joke$ | async as joke" class="bg-black-tertiary m-2 p-2 space-y-2">
-  <div>
-    <div class="text-light-pink text-sm">Type</div>
-    {{ joke.type }}
+<div class="bg-black-tertiary m-2 p-2">
+  <div *ngIf="joke$ | async as joke; else loader" class="space-y-2">
+    <div>
+      <div class="text-light-pink text-sm">Type</div>
+      {{ joke.type }}
+    </div>
+    <div>
+      <div class="text-light-pink text-sm">Setup</div>
+      {{ joke.setup }}
+    </div>
+    <div>
+      <div class="text-light-pink text-sm">Punchline</div>
+      {{ joke.punchline }}
+    </div>
+    <div>
+      <div class="text-light-pink text-sm">ID</div>
+      {{ joke.id }}
+    </div>
   </div>
-  <div>
-    <div class="text-light-pink text-sm">Setup</div>
-    {{ joke.setup }}
-  </div>
-  <div>
-    <div class="text-light-pink text-sm">Punchline</div>
-    {{ joke.punchline }}
-  </div>
-  <div>
-    <div class="text-light-pink text-sm">ID</div>
-    {{ joke.id }}
-  </div>
+  <ng-template #loader><app-loader></app-loader></ng-template>
 </div>
