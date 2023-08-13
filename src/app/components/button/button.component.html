@@ -1,0 +1,12 @@
+<button
+  class="flex items-center m-2 px-2 py-1 space-x-2 border-2"
+  [ngClass]="{
+    'text-light-blue': outlined && color === 'blue',
+    'border-dark-blue bg-dark-blue': !outlined && color === 'blue',
+    'text-light-pink': outlined && color === 'pink',
+    'border-dark-pink bg-dark-pink': !outlined && color === 'pink'
+  }"
+>
+  <span *ngIf="symbol" class="material-symbols-outlined">{{ symbol }}</span>
+  <span>{{ text }}</span>
+</button>

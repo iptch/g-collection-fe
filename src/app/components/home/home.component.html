@@ -1,5 +1,5 @@
-<h1 class="text-blue-secondary m-2 text-2xl font-mono">Home</h1>
-<div class="bg-black-tertiary m-2 p-2">
+<app-title>Home</app-title>
+<app-panel>
   <div *ngIf="joke$ | async as joke; else loader" class="space-y-2">
     <div>
       <div class="text-light-pink text-sm">Type</div>
@@ -19,4 +19,4 @@
     </div>
   </div>
   <ng-template #loader><app-loader></app-loader></ng-template>
-</div>
+</app-panel>

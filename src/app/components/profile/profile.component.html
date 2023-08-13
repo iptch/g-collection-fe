@@ -1,5 +1,5 @@
-<h1 class="text-blue-secondary m-2 text-2xl font-mono">Profil</h1>
-<div class="bg-black-tertiary m-2 p-2">
+<app-title>Profil</app-title>
+<app-panel>
   <div *ngIf="profile$ | async as profile; else loader" class="space-y-2">
     <div>
       <div class="text-light-pink text-sm">Name</div>
@@ -15,11 +15,10 @@
     </div>
   </div>
   <ng-template #loader><app-loader></app-loader></ng-template>
-</div>
-<button
+</app-panel>
+<app-button
   (click)="logout()"
-  class="flex items-center m-2 px-2 py-1 space-x-2 bg-dark-pink"
->
-  <span class="material-symbols-outlined">logout</span>
-  <span>Logout</span>
-</button>
+  [text]="'Logout'"
+  [symbol]="'logout'"
+  [color]="'pink'"
+></app-button>
