@@ -2,31 +2,11 @@
   class="fixed bottom-0 w-full flex justify-around items-center h-14 bg-black text-light-gray border-t-2 border-light-blue"
 >
   <button
-    [routerLink]="['qr-generator']"
+    *ngFor="let navigationItem of navigationItems"
+    [routerLink]="[navigationItem.routerLink]"
     routerLinkActive="text-light-blue filled-symbol"
-    class="material-symbols-outlined"
+    class="material-symbols-outlined h-full px-4"
   >
-    qr_code
-  </button>
-  <button
-    [routerLink]="['qr-scanner']"
-    routerLinkActive="text-light-blue filled-symbol"
-    class="material-symbols-outlined"
-  >
-    barcode_reader
-  </button>
-  <button
-    [routerLink]="['home']"
-    routerLinkActive="text-light-blue filled-symbol"
-    class="material-symbols-outlined"
-  >
-    home
-  </button>
-  <button
-    [routerLink]="['profile']"
-    routerLinkActive="text-light-blue filled-symbol"
-    class="material-symbols-outlined"
-  >
-    account_circle
+    {{ navigationItem.symbol }}
   </button>
 </footer>
