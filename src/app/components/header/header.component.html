@@ -1,5 +1,12 @@
 <header
-  class="sticky top-0 flex justify-center items-center py-1 bg-dark-gray text-xl font-medium text-light-gray"
+  class="sticky top-0 h-14 pl-2 flex justify-between items-center bg-dark-gray text-xl font-medium text-light-gray"
 >
-  Genius Collection 2.0
+  <span>Genius Collection 2.0</span>
+  <button
+    [routerLink]="'profile'"
+    routerLinkActive="text-light-blue filled-symbol"
+    class="material-symbols-outlined h-full px-4"
+  >
+    account_circle
+  </button>
 </header>
