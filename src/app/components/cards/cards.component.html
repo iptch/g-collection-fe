@@ -1,1 +1,6 @@
 <app-title>Chärtli</app-title>
+<app-panel>
+  <div *ngIf="cards$ | async as cards">
+    {{ cards.count }}
+  </div>
+</app-panel>
