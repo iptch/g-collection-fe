@@ -6,6 +6,7 @@ import { ProfileComponent } from './components/profile/profile.component';
 import { MsalGuard } from '@azure/msal-angular';
 import { QrScannerComponent } from './components/qr-scanner/qr-scanner.component';
 import { QrGeneratorComponent } from './components/qr-generator/qr-generator.component';
+import { CardsComponent } from './components/cards/cards.component';
 
 const routes: Routes = [
   {
@@ -17,6 +18,10 @@ const routes: Routes = [
         path: '',
         redirectTo: '/home',
         pathMatch: 'full',
+      },
+      {
+        path: 'cards',
+        component: CardsComponent,
       },
       {
         path: 'home',

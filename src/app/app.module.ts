@@ -37,6 +37,7 @@ import { LoaderComponent } from './components/loader/loader.component';
 import { TitleComponent } from './components/title/title.component';
 import { PanelComponent } from './components/panel/panel.component';
 import { ButtonComponent } from './components/button/button.component';
+import { CardsComponent } from './components/cards/cards.component';
 
 const GRAPH_ENDPOINT = 'https://graph.microsoft.com/v1.0/me';
 
@@ -102,6 +103,7 @@ export function MSALGuardConfigFactory(): MsalGuardConfiguration {
     TitleComponent,
     PanelComponent,
     ButtonComponent,
+    CardsComponent,
   ],
   imports: [
     BrowserModule,
