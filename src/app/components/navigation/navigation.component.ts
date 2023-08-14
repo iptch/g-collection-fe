@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 type NavigationItem = {
   routerLink: string;
   symbol: string;
+  text: string;
 };
 
 @Component({
@@ -11,9 +12,9 @@ type NavigationItem = {
 })
 export class NavigationComponent {
   navigationItems: NavigationItem[] = [
-    { routerLink: 'qr-generator', symbol: 'qr_code' },
-    { routerLink: 'qr-scanner', symbol: 'barcode_reader' },
-    { routerLink: 'home', symbol: 'home' },
-    { routerLink: 'cards', symbol: 'diversity_1' },
+    { routerLink: 'qr-generator', symbol: 'qr_code', text: 'Code' },
+    { routerLink: 'qr-scanner', symbol: 'barcode_reader', text: 'Scanner' },
+    { routerLink: 'home', symbol: 'home', text: 'Home' },
+    { routerLink: 'cards', symbol: 'diversity_1', text: 'Chärtli' },
   ];
 }

@@ -5,8 +5,9 @@
     *ngFor="let navigationItem of navigationItems"
     [routerLink]="[navigationItem.routerLink]"
     routerLinkActive="text-light-blue filled-symbol"
-    class="material-symbols-outlined h-full px-4"
+    class="h-full px-4 flex flex-col justify-center items-center"
   >
-    {{ navigationItem.symbol }}
+    <span class="material-symbols-outlined">{{ navigationItem.symbol }}</span>
+    <span class="text-xs mt-0.5">{{ navigationItem.text }}</span>
   </button>
 </footer>
