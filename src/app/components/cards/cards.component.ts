@@ -1,9 +1,17 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, forkJoin, map, switchMap } from 'rxjs';
+import { ImageService } from 'src/app/services/image.service';
 
 type Cards = {
-  count?: number;
+  results: Card[];
+};
+
+type Card = {
+  name: string;
+  email: string;
+  acronym: string;
+  imageUrl?: string;
 };
 
 @Component({
@@ -11,17 +19,31 @@ type Cards = {
   templateUrl: './cards.component.html',
 })
 export class CardsComponent implements OnInit {
-  cards$!: Observable<Cards>;
+  cards$?: Observable<Cards>;
 
-  constructor(private http: HttpClient) {}
+  constructor(
+    private http: HttpClient,
+    private imageService: ImageService,
+  ) {}
 
   ngOnInit(): void {
     this.getCards();
   }
 
   getCards() {
-    this.cards$ = this.http.get<Cards>(
-      'https://g-collection.azurewebsites.net/cards',
-    );
+    this.cards$ = this.http
+      .get<Cards>('https://g-collection.azurewebsites.net/cards')
+      .pipe(
+        switchMap((cards) => {
+          const imageObservables = cards.results.map((card) =>
+            this.imageService
+              .getImageUrl(card.acronym)
+              .then((url) => ({ ...card, imageUrl: url })),
+          );
+          return forkJoin(imageObservables).pipe(
+            map((results) => ({ results })),
+          );
+        }),
+      );
   }
 }

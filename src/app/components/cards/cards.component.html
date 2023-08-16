@@ -1,6 +1,16 @@
 <app-title>Chärtli</app-title>
 <app-panel>
   <div *ngIf="cards$ | async as cards">
-    {{ cards.count }}
+    <div class="grid grid-cols-3 gap-4" *ngFor="let card of cards.results">
+      <div>
+        <img
+          *ngIf="card.imageUrl"
+          [src]="card.imageUrl"
+          alt="{{ card.name }}"
+          class="w-full aspect-square object-cover"
+        />
+        <span>{{ card.name }}</span>
+      </div>
+    </div>
   </div>
 </app-panel>
