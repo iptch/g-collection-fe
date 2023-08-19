@@ -1,5 +1,9 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Html5Qrcode, Html5QrcodeCameraScanConfig } from 'html5-qrcode';
+import {
+  Html5Qrcode,
+  Html5QrcodeCameraScanConfig,
+  Html5QrcodeScannerState,
+} from 'html5-qrcode';
 
 const cameraConfig = { facingMode: 'environment' };
 
@@ -14,7 +18,6 @@ const qrScannerConfig: Html5QrcodeCameraScanConfig = {
 })
 export class QrScannerComponent implements OnInit, OnDestroy {
   private qrScanner!: Html5Qrcode;
-  scannerStarted = false;
   message?: string;
 
   ngOnInit(): void {
@@ -24,7 +27,6 @@ export class QrScannerComponent implements OnInit, OnDestroy {
         cameraConfig,
         qrScannerConfig,
         (qrCodeMessage) => {
-          this.scannerStarted = true;
           this.message = qrCodeMessage;
         },
         () => {
@@ -41,7 +43,7 @@ export class QrScannerComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    if (this.qrScanner && this.scannerStarted) {
+    if (this.qrScanner.getState() !== Html5QrcodeScannerState.NOT_STARTED) {
       this.qrScanner
         .stop()
         .catch((err) => console.log('Error stopping the scanner', err));
