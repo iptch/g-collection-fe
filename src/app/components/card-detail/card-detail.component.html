@@ -1,0 +1,50 @@
+<div *ngIf="card$ | async as card; else loader">
+  <app-title>{{ card.name }}</app-title>
+  <app-panel>
+    <div [hidden]="hiddenQrCode">
+      <app-qr-generator
+        [qrData]="cardId + ''"
+        [width]="imageWidth"
+      ></app-qr-generator>
+    </div>
+    <img
+      #image
+      *ngIf="card.imageUrl"
+      [hidden]="!hiddenQrCode"
+      [src]="card.imageUrl"
+      alt="{{ card.name }}"
+      class="w-full aspect-square object-cover"
+    />
+    <div class="pt-4 space-y-2">
+      <div>
+        <app-field
+          [label]="'Als Kind wollte ich immer ... werden'"
+          [value]="card.job"
+        ></app-field>
+      </div>
+      <div>
+        <app-field
+          [label]="'Meine Superpower'"
+          [value]="card.superpower"
+        ></app-field>
+      </div>
+      <div>
+        <app-field
+          [label]="'Gefällt mir an ipt besonders gut'"
+          [value]="card.must_have"
+        ></app-field>
+      </div>
+    </div>
+  </app-panel>
+  <app-button
+    [text]="'Transfer'"
+    [symbol]="'swap_horiz'"
+    [color]="'pink'"
+    (click)="toggleQrCode()"
+  ></app-button>
+</div>
+<ng-template #loader>
+  <div class="p-2">
+    <app-loader></app-loader>
+  </div>
+</ng-template>

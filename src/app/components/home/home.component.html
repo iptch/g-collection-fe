@@ -1,22 +1,12 @@
 <app-title>Home</app-title>
 <app-panel>
   <div *ngIf="joke$ | async as joke; else loader" class="space-y-2">
+    <div><app-field [label]="'Type'" [value]="joke.type"></app-field></div>
+    <div><app-field [label]="'Setup'" [value]="joke.setup"></app-field></div>
     <div>
-      <div class="text-light-pink text-sm">Type</div>
-      {{ joke.type }}
+      <app-field [label]="'Punchline'" [value]="joke.punchline"></app-field>
     </div>
-    <div>
-      <div class="text-light-pink text-sm">Setup</div>
-      {{ joke.setup }}
-    </div>
-    <div>
-      <div class="text-light-pink text-sm">Punchline</div>
-      {{ joke.punchline }}
-    </div>
-    <div>
-      <div class="text-light-pink text-sm">ID</div>
-      {{ joke.id }}
-    </div>
+    <div><app-field [label]="'ID'" [value]="joke.id"></app-field></div>
   </div>
   <ng-template #loader><app-loader></app-loader></ng-template>
 </app-panel>

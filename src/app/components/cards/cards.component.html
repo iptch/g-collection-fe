@@ -1,16 +1,9 @@
 <app-title>Chärtli</app-title>
 <app-panel>
-  <div *ngIf="cards$ | async as cards">
+  <div *ngIf="cards$ | async as cards; else loader">
     <div class="grid grid-cols-3 gap-4" *ngFor="let card of cards.results">
-      <div>
-        <img
-          *ngIf="card.imageUrl"
-          [src]="card.imageUrl"
-          alt="{{ card.name }}"
-          class="w-full aspect-square object-cover"
-        />
-        <span>{{ card.name }}</span>
-      </div>
+      <app-card-thumbnail [card]="card" [routerLink]="'1'"></app-card-thumbnail>
     </div>
   </div>
+  <ng-template #loader><app-loader></app-loader></ng-template>
 </app-panel>

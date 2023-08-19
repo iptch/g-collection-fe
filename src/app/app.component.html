@@ -1,6 +1,8 @@
 <ng-container *ngIf="loginDisplay">
   <app-header></app-header>
-  <!--This is to avoid reload during acquireTokenSilent() because of hidden iframe -->
-  <router-outlet *ngIf="!isIframe"></router-outlet>
+  <div class="mb-16">
+    <!--This is to avoid reload during acquireTokenSilent() because of hidden iframe -->
+    <router-outlet *ngIf="!isIframe"></router-outlet>
+  </div>
   <app-navigation></app-navigation>
 </ng-container>

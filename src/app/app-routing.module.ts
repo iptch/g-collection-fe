@@ -5,8 +5,8 @@ import { HomeComponent } from './components/home/home.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { MsalGuard } from '@azure/msal-angular';
 import { QrScannerComponent } from './components/qr-scanner/qr-scanner.component';
-import { QrGeneratorComponent } from './components/qr-generator/qr-generator.component';
 import { CardsComponent } from './components/cards/cards.component';
+import { CardDetailComponent } from './components/card-detail/card-detail.component';
 
 const routes: Routes = [
   {
@@ -24,16 +24,16 @@ const routes: Routes = [
         component: CardsComponent,
       },
       {
+        path: 'cards/:id',
+        component: CardDetailComponent,
+      },
+      {
         path: 'home',
         component: HomeComponent,
       },
       {
         path: 'profile',
         component: ProfileComponent,
-      },
-      {
-        path: 'qr-generator',
-        component: QrGeneratorComponent,
       },
       {
         path: 'qr-scanner',

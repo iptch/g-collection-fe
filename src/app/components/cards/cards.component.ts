@@ -1,17 +1,11 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Observable, forkJoin, map, switchMap } from 'rxjs';
+import { Card } from 'src/app/models/card.model';
 import { ImageService } from 'src/app/services/image.service';
 
 type Cards = {
   results: Card[];
-};
-
-type Card = {
-  name: string;
-  email: string;
-  acronym: string;
-  imageUrl?: string;
 };
 
 @Component({

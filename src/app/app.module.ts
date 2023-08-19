@@ -31,13 +31,16 @@ import { HeaderComponent } from './components/header/header.component';
 import { environment } from './../environments/environment';
 import { QrScannerComponent } from './components/qr-scanner/qr-scanner.component';
 import { QRCodeModule } from 'angularx-qrcode';
-import { QrGeneratorComponent } from './components/qr-generator/qr-generator.component';
+import { QrCodeComponent } from './components/qr-code/qr-code.component';
 import { NavigationComponent } from './components/navigation/navigation.component';
 import { LoaderComponent } from './components/loader/loader.component';
 import { TitleComponent } from './components/title/title.component';
 import { PanelComponent } from './components/panel/panel.component';
 import { ButtonComponent } from './components/button/button.component';
 import { CardsComponent } from './components/cards/cards.component';
+import { CardThumbnailComponent } from './components/card-thumbnail/card-thumbnail.component';
+import { CardDetailComponent } from './components/card-detail/card-detail.component';
+import { FieldComponent } from './components/field/field.component';
 
 const GRAPH_ENDPOINT = 'https://graph.microsoft.com/v1.0/me';
 
@@ -99,13 +102,16 @@ export function MSALGuardConfigFactory(): MsalGuardConfiguration {
     HomeComponent,
     ProfileComponent,
     QrScannerComponent,
-    QrGeneratorComponent,
+    QrCodeComponent,
     NavigationComponent,
     LoaderComponent,
     TitleComponent,
     PanelComponent,
     ButtonComponent,
     CardsComponent,
+    CardThumbnailComponent,
+    CardDetailComponent,
+    FieldComponent,
   ],
   imports: [
     BrowserModule,

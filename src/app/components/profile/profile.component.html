@@ -2,17 +2,18 @@
 <app-panel>
   <div *ngIf="profile$ | async as profile; else loader" class="space-y-2">
     <div>
-      <div class="text-light-pink text-sm">Name</div>
-      {{ profile.givenName }} {{ profile.surname }}
+      <app-field
+        [label]="'Name'"
+        [value]="profile.givenName + ' ' + profile.surname"
+      ></app-field>
     </div>
     <div>
-      <div class="text-light-pink text-sm">E-Mail</div>
-      {{ profile.userPrincipalName }}
+      <app-field
+        [label]="'E-Mail'"
+        [value]="profile.userPrincipalName"
+      ></app-field>
     </div>
-    <div>
-      <div class="text-light-pink text-sm">ID</div>
-      {{ profile.id }}
-    </div>
+    <div><app-field [label]="'ID'" [value]="profile.id"></app-field></div>
   </div>
   <ng-template #loader><app-loader></app-loader></ng-template>
 </app-panel>
