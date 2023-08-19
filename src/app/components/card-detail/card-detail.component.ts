@@ -30,6 +30,7 @@ export class CardDetailComponent implements OnInit {
   toggleQrCode() {
     this.imageWidth = this.image.nativeElement.offsetWidth;
     this.hiddenQrCode = !this.hiddenQrCode;
+    window.scroll({ top: 0, left: 0, behavior: 'smooth' });
   }
 
   getCard() {
