@@ -1,4 +1,5 @@
 import type { Config } from 'tailwindcss';
+import { PluginAPI } from 'tailwindcss/types/config';
 
 export default {
   content: ['./src/**/*.{html,ts}'],
@@ -22,5 +23,16 @@ export default {
       },
     },
   },
-  plugins: [],
+  plugins: [
+    function ({ addUtilities }: PluginAPI) {
+      addUtilities({
+        '.filled-symbol': {
+          'font-variation-settings': '"FILL" 1',
+        },
+        '.no-tap-highlight': {
+          '-webkit-tap-highlight-color': 'transparent',
+        },
+      });
+    },
+  ],
 } satisfies Config;

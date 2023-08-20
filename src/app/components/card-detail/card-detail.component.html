@@ -49,9 +49,11 @@
   </app-panel>
   <button
     (click)="toggleQrCode()"
-    class="fixed bottom-14 right-0 m-4 w-14 h-14 bg-dark-pink rounded-full align-middle shadow"
+    class="fixed bottom-14 right-0 m-4 w-14 h-14 bg-dark-pink rounded-full align-middle no-tap-highlight active:bg-light-pink shadow"
   >
-    <span class="material-symbols-outlined align-middle">qr_code</span>
+    <span class="material-symbols-outlined align-middle">{{
+      showQrCode ? 'person' : 'qr_code'
+    }}</span>
   </button>
 </div>
 <ng-template #loader>
