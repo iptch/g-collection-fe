@@ -1,35 +1,27 @@
-import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { Component } from '@angular/core';
 import { Observable } from 'rxjs';
 import { AuthService } from 'src/app/services/auth.service';
-
-const GRAPH_ENDPOINT = 'https://graph.microsoft.com/v1.0/me';
-
-type ProfileType = {
-  givenName?: string;
-  surname?: string;
-  userPrincipalName?: string;
-  id?: string;
-};
+import { Profile } from 'src/app/models/profile.model';
+import { Store } from '@ngrx/store';
+import {
+  selectProfile,
+  selectProfileLoading,
+} from 'src/app/state/profile/profile.selectors';
 
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
 })
-export class ProfileComponent implements OnInit {
-  profile$!: Observable<ProfileType>;
+export class ProfileComponent {
+  loading$: Observable<boolean>;
+  profile$: Observable<Profile>;
 
   constructor(
-    private http: HttpClient,
+    private store: Store,
     private authService: AuthService,
-  ) {}
-
-  ngOnInit() {
-    this.getProfile();
-  }
-
-  getProfile() {
-    this.profile$ = this.http.get<ProfileType>(GRAPH_ENDPOINT);
+  ) {
+    this.loading$ = this.store.select(selectProfileLoading);
+    this.profile$ = this.store.select(selectProfile);
   }
 
   logout() {

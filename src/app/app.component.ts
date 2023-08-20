@@ -4,6 +4,8 @@ import { InteractionStatus } from '@azure/msal-browser';
 import { Subject } from 'rxjs';
 import { filter, takeUntil } from 'rxjs/operators';
 import { AuthService } from './services/auth.service';
+import { Store } from '@ngrx/store';
+import { loadProfile } from './state/profile/profile.actions';
 
 @Component({
   selector: 'app-root',
@@ -16,9 +18,12 @@ export class AppComponent implements OnInit, OnDestroy {
   private readonly _destroying$ = new Subject<void>();
 
   constructor(
+    private store: Store,
     private msalBroadcastService: MsalBroadcastService,
     private authService: AuthService,
-  ) {}
+  ) {
+    this.store.dispatch(loadProfile());
+  }
 
   ngOnInit(): void {
     this.isIframe = window !== window.parent && !window.opener;

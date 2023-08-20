@@ -1,21 +1,22 @@
 <app-title>Profil</app-title>
 <app-panel>
-  <div *ngIf="profile$ | async as profile; else loader" class="space-y-2">
-    <div>
-      <app-field
-        [label]="'Name'"
-        [value]="profile.givenName + ' ' + profile.surname"
-      ></app-field>
+  <ng-container *ngIf="loading$ | async; else content">
+    <app-loader></app-loader>
+  </ng-container>
+  <ng-template #content>
+    <div *ngIf="profile$ | async as profile" class="space-y-2">
+      <div>
+        <app-field [label]="'Name'" [value]="profile.displayName"></app-field>
+      </div>
+      <div>
+        <app-field
+          [label]="'E-Mail'"
+          [value]="profile.userPrincipalName"
+        ></app-field>
+      </div>
+      <div><app-field [label]="'ID'" [value]="profile.id"></app-field></div>
     </div>
-    <div>
-      <app-field
-        [label]="'E-Mail'"
-        [value]="profile.userPrincipalName"
-      ></app-field>
-    </div>
-    <div><app-field [label]="'ID'" [value]="profile.id"></app-field></div>
-  </div>
-  <ng-template #loader><app-loader></app-loader></ng-template>
+  </ng-template>
 </app-panel>
 <app-button
   (click)="logout()"

@@ -1,4 +1,4 @@
-export type Card = {
+export interface Card {
   acronym: string;
   highlight: string;
   job: string;
@@ -7,4 +7,4 @@ export type Card = {
   superpower: string;
   team: string;
   imageUrl?: string;
-};
+}

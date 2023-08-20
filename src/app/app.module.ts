@@ -41,6 +41,11 @@ import { CardsComponent } from './components/cards/cards.component';
 import { CardThumbnailComponent } from './components/card-thumbnail/card-thumbnail.component';
 import { CardDetailComponent } from './components/card-detail/card-detail.component';
 import { FieldComponent } from './components/field/field.component';
+import { StoreModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
+import { ProfileEffects } from './state/profile/profile.effects';
+import { reducers } from './state/reducers';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
 const GRAPH_ENDPOINT = 'https://graph.microsoft.com/v1.0/me';
 
@@ -126,6 +131,17 @@ export function MSALGuardConfigFactory(): MsalGuardConfiguration {
       // or after 30 seconds (whichever comes first).
       registrationStrategy: 'registerWhenStable:30000',
     }),
+    StoreModule.forRoot(reducers, {
+      runtimeChecks: {
+        strictStateImmutability: true,
+        strictActionImmutability: true,
+      },
+    }),
+    StoreDevtoolsModule.instrument({
+      maxAge: 25,
+      logOnly: environment.production,
+    }),
+    EffectsModule.forRoot([ProfileEffects]),
   ],
   providers: [
     {
