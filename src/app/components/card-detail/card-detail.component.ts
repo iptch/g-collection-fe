@@ -14,7 +14,8 @@ export class CardDetailComponent implements OnInit {
   card$?: Observable<Card>;
   cardId!: number;
   imageWidth!: number;
-  hiddenQrCode = true;
+  initializedQrCode = false;
+  showQrCode = false;
 
   constructor(
     private route: ActivatedRoute,
@@ -28,8 +29,11 @@ export class CardDetailComponent implements OnInit {
   }
 
   toggleQrCode() {
-    this.imageWidth = this.image.nativeElement.offsetWidth;
-    this.hiddenQrCode = !this.hiddenQrCode;
+    if (!this.initializedQrCode) {
+      this.imageWidth = this.image.nativeElement.offsetWidth;
+      this.initializedQrCode = true;
+    }
+    this.showQrCode = !this.showQrCode;
     window.scroll({ top: 0, left: 0, behavior: 'smooth' });
   }
 

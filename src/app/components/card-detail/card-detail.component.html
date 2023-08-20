@@ -1,20 +1,25 @@
 <div *ngIf="card$ | async as card; else loader">
-  <app-title>{{ card.name }}</app-title>
+  <app-title [subtitle]="card.team">{{ card.name }}</app-title>
   <app-panel>
-    <div [hidden]="hiddenQrCode">
-      <app-qr-generator
-        [qrData]="cardId + ''"
-        [width]="imageWidth"
-      ></app-qr-generator>
+    <div class="w-full aspect-square flex items-center justify-center relative">
+      <div [hidden]="!initializedQrCode">
+        <app-qr-generator
+          [qrData]="cardId + ''"
+          [width]="imageWidth"
+        ></app-qr-generator>
+      </div>
+      <img
+        #image
+        *ngIf="card.imageUrl"
+        [src]="card.imageUrl"
+        alt="{{ card.name }}"
+        class="w-full h-full object-cover absolute transition-all ease-out duration-200"
+        [ngClass]="{
+          'w-full h-full': !showQrCode,
+          'w-24 h-24 border-2 border-light-pink': showQrCode
+        }"
+      />
     </div>
-    <img
-      #image
-      *ngIf="card.imageUrl"
-      [hidden]="!hiddenQrCode"
-      [src]="card.imageUrl"
-      alt="{{ card.name }}"
-      class="w-full aspect-square object-cover"
-    />
     <div class="pt-4 space-y-2">
       <div>
         <app-field
@@ -42,12 +47,12 @@
       </div>
     </div>
   </app-panel>
-  <app-button
-    [text]="'Transfer'"
-    [symbol]="'swap_horiz'"
-    [color]="'pink'"
+  <button
     (click)="toggleQrCode()"
-  ></app-button>
+    class="fixed bottom-14 right-0 m-4 w-14 h-14 bg-dark-pink rounded-full align-middle shadow"
+  >
+    <span class="material-symbols-outlined align-middle">qr_code</span>
+  </button>
 </div>
 <ng-template #loader>
   <div class="p-2">
