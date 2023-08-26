@@ -1,9 +1,13 @@
-import { HttpClient } from '@angular/common/http';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Observable, switchMap } from 'rxjs';
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
 import { Card } from 'src/app/models/card.model';
-import { ImageService } from 'src/app/services/image.service';
+import { loadCardById } from 'src/app/state/card/card.actions';
+import {
+  selectCardById,
+  selectCardLoading,
+} from 'src/app/state/card/card.selectors';
 
 @Component({
   selector: 'app-card-detail',
@@ -11,7 +15,8 @@ import { ImageService } from 'src/app/services/image.service';
 })
 export class CardDetailComponent implements OnInit {
   @ViewChild('image') image!: ElementRef;
-  card$?: Observable<Card>;
+  loading$?: Observable<boolean>;
+  card$?: Observable<Card | undefined>;
   cardId!: number;
   imageWidth!: number;
   initializedQrCode = false;
@@ -19,13 +24,14 @@ export class CardDetailComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private http: HttpClient,
-    private imageService: ImageService,
+    private store: Store,
   ) {}
 
   ngOnInit(): void {
     this.cardId = Number(this.route.snapshot.paramMap.get('id'));
-    this.getCard();
+    this.store.dispatch(loadCardById({ id: this.cardId }));
+    this.loading$ = this.store.select(selectCardLoading);
+    this.card$ = this.store.select(selectCardById(this.cardId));
   }
 
   toggleQrCode() {
@@ -35,16 +41,5 @@ export class CardDetailComponent implements OnInit {
     }
     this.showQrCode = !this.showQrCode;
     window.scroll({ top: 0, left: 0, behavior: 'smooth' });
-  }
-
-  getCard() {
-    this.card$ = this.http
-      .get<Card>(`https://g-collection.azurewebsites.net/cards/${this.cardId}`)
-      .pipe(
-        switchMap(async (card) => {
-          const url = await this.imageService.getImageUrl(card.acronym);
-          return { ...card, imageUrl: url };
-        }),
-      );
   }
 }

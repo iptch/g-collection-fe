@@ -1,43 +1,24 @@
-import { HttpClient } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
-import { Observable, forkJoin, map, switchMap } from 'rxjs';
+import { Component } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
 import { Card } from 'src/app/models/card.model';
-import { ImageService } from 'src/app/services/image.service';
-
-type Cards = {
-  results: Card[];
-};
+import { loadCards } from 'src/app/state/card/card.actions';
+import {
+  selectAllCards,
+  selectCardLoading,
+} from 'src/app/state/card/card.selectors';
 
 @Component({
   selector: 'app-cards',
   templateUrl: './cards.component.html',
 })
-export class CardsComponent implements OnInit {
-  cards$?: Observable<Cards>;
+export class CardsComponent {
+  loading$?: Observable<boolean>;
+  cards$?: Observable<Card[]>;
 
-  constructor(
-    private http: HttpClient,
-    private imageService: ImageService,
-  ) {}
-
-  ngOnInit(): void {
-    this.getCards();
-  }
-
-  getCards() {
-    this.cards$ = this.http
-      .get<Cards>('https://g-collection.azurewebsites.net/cards')
-      .pipe(
-        switchMap((cards) => {
-          const imageObservables = cards.results.map((card) =>
-            this.imageService
-              .getImageUrl(card.acronym)
-              .then((url) => ({ ...card, imageUrl: url })),
-          );
-          return forkJoin(imageObservables).pipe(
-            map((results) => ({ results })),
-          );
-        }),
-      );
+  constructor(private store: Store) {
+    this.store.dispatch(loadCards());
+    this.loading$ = this.store.select(selectCardLoading);
+    this.cards$ = this.store.select(selectAllCards);
   }
 }

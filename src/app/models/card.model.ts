@@ -1,4 +1,5 @@
 export interface Card {
+  id: number;
   acronym: string;
   highlight: string;
   job: string;
@@ -7,4 +8,8 @@ export interface Card {
   superpower: string;
   team: string;
   imageUrl?: string;
+}
+
+export interface Cards {
+  results: Card[];
 }

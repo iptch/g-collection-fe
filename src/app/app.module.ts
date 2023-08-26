@@ -46,6 +46,7 @@ import { EffectsModule } from '@ngrx/effects';
 import { ProfileEffects } from './state/profile/profile.effects';
 import { reducers } from './state/reducers';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { CardEffects } from './state/card/card.effects';
 
 const GRAPH_ENDPOINT = 'https://graph.microsoft.com/v1.0/me';
 
@@ -141,7 +142,7 @@ export function MSALGuardConfigFactory(): MsalGuardConfiguration {
       maxAge: 25,
       logOnly: environment.production,
     }),
-    EffectsModule.forRoot([ProfileEffects]),
+    EffectsModule.forRoot([ProfileEffects, CardEffects]),
   ],
   providers: [
     {

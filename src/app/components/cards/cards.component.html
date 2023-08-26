@@ -1,9 +1,16 @@
 <app-title>Chärtli</app-title>
 <app-panel>
-  <div *ngIf="cards$ | async as cards; else loader">
-    <div class="grid grid-cols-3 gap-4" *ngFor="let card of cards.results">
-      <app-card-thumbnail [card]="card" [routerLink]="'1'"></app-card-thumbnail>
+  <ng-container *ngIf="loading$ | async; else content"
+    ><app-loader></app-loader
+  ></ng-container>
+  <ng-template #content>
+    <div *ngIf="cards$ | async as cards">
+      <div class="grid grid-cols-3 gap-4" *ngFor="let card of cards">
+        <app-card-thumbnail
+          [card]="card"
+          [routerLink]="'1'"
+        ></app-card-thumbnail>
+      </div>
     </div>
-  </div>
-  <ng-template #loader><app-loader></app-loader></ng-template>
+  </ng-template>
 </app-panel>

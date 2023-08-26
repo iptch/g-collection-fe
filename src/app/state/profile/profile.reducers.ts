@@ -4,17 +4,13 @@ import {
   initialProfileState,
   profileAdapter,
 } from './profile.state';
-import {
-  loadProfile,
-  loadProfileError,
-  loadProfileSuccess,
-} from './profile.actions';
+import * as ProfileActions from './profile.actions';
 
 export const profileReducer = createReducer(
   initialProfileState,
 
   on(
-    loadProfile,
+    ProfileActions.loadProfile,
     (state: ProfileState): ProfileState => ({
       ...state,
       loading: true,
@@ -22,7 +18,7 @@ export const profileReducer = createReducer(
     }),
   ),
 
-  on(loadProfileSuccess, (state, { profile }): ProfileState => {
+  on(ProfileActions.loadProfileSuccess, (state, { profile }): ProfileState => {
     const entityState = profileAdapter.setOne(profile, state);
 
     return {
@@ -33,7 +29,7 @@ export const profileReducer = createReducer(
   }),
 
   on(
-    loadProfileError,
+    ProfileActions.loadProfileError,
     (state): ProfileState => ({
       ...state,
       loading: false,

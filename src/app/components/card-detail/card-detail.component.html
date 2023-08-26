@@ -1,63 +1,67 @@
-<div *ngIf="card$ | async as card; else loader">
-  <app-title [subtitle]="card.team">{{ card.name }}</app-title>
-  <app-panel>
-    <div class="w-full aspect-square flex items-center justify-center relative">
-      <div [hidden]="!initializedQrCode">
-        <app-qr-generator
-          [qrData]="cardId + ''"
-          [width]="imageWidth"
-        ></app-qr-generator>
-      </div>
-      <img
-        #image
-        *ngIf="card.imageUrl"
-        [src]="card.imageUrl"
-        alt="{{ card.name }}"
-        class="w-full h-full object-cover absolute transition-all ease-out duration-200"
-        [ngClass]="{
-          'w-full h-full': !showQrCode,
-          'w-24 h-24 border-2 border-light-pink': showQrCode
-        }"
-      />
-    </div>
-    <div class="pt-4 space-y-2">
-      <div>
-        <app-field
-          [label]="'Als Kind wollte ich immer ... werden'"
-          [value]="card.job"
-        ></app-field>
-      </div>
-      <div>
-        <app-field
-          [label]="'Meine Superpower'"
-          [value]="card.superpower"
-        ></app-field>
-      </div>
-      <div>
-        <app-field
-          [label]="'Gefällt mir an ipt besonders gut'"
-          [value]="card.highlight"
-        ></app-field>
-      </div>
-      <div>
-        <app-field
-          [label]="'Ohne ... könnte ich niemals leben'"
-          [value]="card.must_have"
-        ></app-field>
-      </div>
-    </div>
-  </app-panel>
-  <button
-    (click)="toggleQrCode()"
-    class="fixed bottom-14 right-0 m-4 w-14 h-14 bg-dark-pink rounded-full align-middle no-tap-highlight active:bg-light-pink shadow"
-  >
-    <span class="material-symbols-outlined align-middle">{{
-      showQrCode ? 'person' : 'qr_code'
-    }}</span>
-  </button>
-</div>
-<ng-template #loader>
+<ng-container *ngIf="loading$ | async; else content">
   <div class="p-2">
     <app-loader></app-loader>
+  </div>
+</ng-container>
+<ng-template #content>
+  <div *ngIf="card$ | async as card">
+    <app-title [subtitle]="card.team">{{ card.name }}</app-title>
+    <app-panel>
+      <div
+        class="w-full aspect-square flex items-center justify-center relative"
+      >
+        <div [hidden]="!initializedQrCode">
+          <app-qr-generator
+            [qrData]="cardId + ''"
+            [width]="imageWidth"
+          ></app-qr-generator>
+        </div>
+        <img
+          #image
+          *ngIf="card.imageUrl"
+          [src]="card.imageUrl"
+          alt="{{ card.name }}"
+          class="w-full h-full object-cover absolute transition-all ease-out duration-200"
+          [ngClass]="{
+            'w-full h-full': !showQrCode,
+            'w-24 h-24 border-2 border-light-pink': showQrCode
+          }"
+        />
+      </div>
+      <div class="pt-4 space-y-2">
+        <div>
+          <app-field
+            [label]="'Als Kind wollte ich immer ... werden'"
+            [value]="card.job"
+          ></app-field>
+        </div>
+        <div>
+          <app-field
+            [label]="'Meine Superpower'"
+            [value]="card.superpower"
+          ></app-field>
+        </div>
+        <div>
+          <app-field
+            [label]="'Gefällt mir an ipt besonders gut'"
+            [value]="card.highlight"
+          ></app-field>
+        </div>
+        <div>
+          <app-field
+            [label]="'Ohne ... könnte ich niemals leben'"
+            [value]="card.must_have"
+          ></app-field>
+        </div>
+      </div>
+    </app-panel>
+    <button
+      (click)="toggleQrCode()"
+      class="fixed bottom-14 right-0 m-4 w-14 h-14 bg-dark-pink rounded-full align-middle no-tap-highlight active:bg-light-pink shadow"
+    >
+      <span class="material-symbols-outlined align-middle">{{
+        showQrCode ? 'person' : 'qr_code'
+      }}</span>
+    </button>
   </div>
 </ng-template>
