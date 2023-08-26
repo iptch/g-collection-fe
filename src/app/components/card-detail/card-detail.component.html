@@ -1,4 +1,6 @@
-<ng-container *ngIf="loading$ | async; else content">
+<ng-container
+  *ngIf="(cardLoading$ | async) || (profileLoading$ | async); else content"
+>
   <div class="p-2">
     <app-loader></app-loader>
   </div>
@@ -12,7 +14,7 @@
       >
         <div [hidden]="!initializedQrCode">
           <app-qr-generator
-            [qrData]="cardId + ''"
+            [qrData]="getCode()"
             [width]="imageWidth"
           ></app-qr-generator>
         </div>

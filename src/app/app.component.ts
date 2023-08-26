@@ -12,10 +12,10 @@ import { loadProfile } from './state/profile/profile.actions';
   templateUrl: './app.component.html',
 })
 export class AppComponent implements OnInit, OnDestroy {
-  title = 'g-collection-fe';
   isIframe = false;
   loginDisplay = false;
-  private readonly _destroying$ = new Subject<void>();
+
+  private readonly destroy$ = new Subject<void>();
 
   constructor(
     private store: Store,
@@ -27,29 +27,24 @@ export class AppComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.isIframe = window !== window.parent && !window.opener;
-
     this.msalBroadcastService.inProgress$
       .pipe(
         filter(
           (status: InteractionStatus) => status === InteractionStatus.None,
         ),
-        takeUntil(this._destroying$),
+        takeUntil(this.destroy$),
       )
       .subscribe(() => {
         this.setLoginDisplay();
       });
   }
 
+  ngOnDestroy(): void {
+    this.destroy$.next(undefined);
+    this.destroy$.complete();
+  }
+
   setLoginDisplay() {
     this.loginDisplay = this.authService.isAuthenticated();
-  }
-
-  onLogout() {
-    this.authService.logout();
-  }
-
-  ngOnDestroy(): void {
-    this._destroying$.next(undefined);
-    this._destroying$.complete();
   }
 }
