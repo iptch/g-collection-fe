@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { BrowserUtils } from '@azure/msal-browser';
-import { HomeComponent } from './components/home/home.component';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { MsalGuard } from '@azure/msal-angular';
 import { QrScannerComponent } from './components/qr-scanner/qr-scanner.component';
@@ -16,7 +16,7 @@ const routes: Routes = [
     children: [
       {
         path: '',
-        redirectTo: '/home',
+        redirectTo: '/dashboard',
         pathMatch: 'full',
       },
       {
@@ -28,8 +28,8 @@ const routes: Routes = [
         component: CardDetailComponent,
       },
       {
-        path: 'home',
-        component: HomeComponent,
+        path: 'dashboard',
+        component: DashboardComponent,
       },
       {
         path: 'profile',
@@ -42,7 +42,7 @@ const routes: Routes = [
       {
         // Needed for Error routing
         path: 'error',
-        component: HomeComponent,
+        component: DashboardComponent,
       },
     ],
   },

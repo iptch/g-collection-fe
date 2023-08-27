@@ -25,7 +25,7 @@ import {
   MsalModule,
   MsalInterceptor,
 } from '@azure/msal-angular';
-import { HomeComponent } from './components/home/home.component';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { HeaderComponent } from './components/header/header.component';
 import { environment } from './../environments/environment';
@@ -105,7 +105,7 @@ export function MSALGuardConfigFactory(): MsalGuardConfiguration {
   declarations: [
     AppComponent,
     HeaderComponent,
-    HomeComponent,
+    DashboardComponent,
     ProfileComponent,
     QrScannerComponent,
     QrCodeComponent,

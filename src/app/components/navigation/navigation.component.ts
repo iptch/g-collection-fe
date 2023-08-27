@@ -13,7 +13,7 @@ type NavigationItem = {
 export class NavigationComponent {
   navigationItems: NavigationItem[] = [
     { routerLink: 'qr-scanner', symbol: 'qr_code_scanner', text: 'Scanner' },
-    { routerLink: 'home', symbol: 'home', text: 'Home' },
+    { routerLink: 'dashboard', symbol: 'speed', text: 'Dashboard' },
     { routerLink: 'cards', symbol: 'diversity_1', text: 'Chärtli' },
   ];
 }
