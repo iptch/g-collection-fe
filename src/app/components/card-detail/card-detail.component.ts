@@ -41,8 +41,8 @@ export class CardDetailComponent implements OnInit, OnDestroy {
   private readonly destroy$ = new Subject();
 
   constructor(
-    private route: ActivatedRoute,
-    private store: Store,
+    private readonly route: ActivatedRoute,
+    private readonly store: Store,
   ) {}
 
   ngOnInit(): void {

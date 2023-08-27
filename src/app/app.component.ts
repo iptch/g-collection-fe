@@ -18,9 +18,9 @@ export class AppComponent implements OnInit, OnDestroy {
   private readonly destroy$ = new Subject<void>();
 
   constructor(
-    private store: Store,
-    private msalBroadcastService: MsalBroadcastService,
-    private authService: AuthService,
+    private readonly store: Store,
+    private readonly msalBroadcastService: MsalBroadcastService,
+    private readonly authService: AuthService,
   ) {
     this.store.dispatch(loadProfile());
   }

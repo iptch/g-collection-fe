@@ -19,7 +19,7 @@ export class ProfileEffects {
   });
 
   constructor(
-    private actions$: Actions,
-    private profileService: ProfileService,
+    private readonly actions$: Actions,
+    private readonly profileService: ProfileService,
   ) {}
 }

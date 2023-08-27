@@ -17,8 +17,8 @@ export class ProfileComponent {
   profile$: Observable<Profile>;
 
   constructor(
-    private store: Store,
-    private authService: AuthService,
+    private readonly store: Store,
+    private readonly authService: AuthService,
   ) {
     this.loading$ = this.store.select(selectProfileLoading);
     this.profile$ = this.store.select(selectProfile);

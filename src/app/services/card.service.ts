@@ -12,8 +12,8 @@ export class CardService {
   private readonly cardsEndpoint = `${environment.backendUri}/cards`;
 
   constructor(
-    private http: HttpClient,
-    private imageService: ImageService,
+    private readonly http: HttpClient,
+    private readonly imageService: ImageService,
   ) {}
 
   getCards(): Observable<Card[]> {

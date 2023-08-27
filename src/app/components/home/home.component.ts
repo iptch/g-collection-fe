@@ -16,7 +16,7 @@ type Joke = {
 export class HomeComponent implements OnInit {
   joke$!: Observable<Joke>;
 
-  constructor(private http: HttpClient) {}
+  constructor(private readonly http: HttpClient) {}
 
   ngOnInit(): void {
     this.getJoke();

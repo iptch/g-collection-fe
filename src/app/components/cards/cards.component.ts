@@ -16,7 +16,7 @@ export class CardsComponent {
   loading$?: Observable<boolean>;
   cards$?: Observable<Card[]>;
 
-  constructor(private store: Store) {
+  constructor(private readonly store: Store) {
     this.store.dispatch(loadCards());
     this.loading$ = this.store.select(selectCardLoading);
     this.cards$ = this.store.select(selectAllCards);

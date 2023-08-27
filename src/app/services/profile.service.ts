@@ -8,7 +8,7 @@ import { environment } from './../../environments/environment';
   providedIn: 'root',
 })
 export class ProfileService {
-  constructor(private http: HttpClient) {}
+  constructor(private readonly http: HttpClient) {}
 
   getProfile(): Observable<Profile> {
     return this.http.get<Profile>(environment.msGraphUri);

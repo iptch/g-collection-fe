@@ -31,7 +31,7 @@ export class CardEffects {
   });
 
   constructor(
-    private actions$: Actions,
-    private cardService: CardService,
+    private readonly actions$: Actions,
+    private readonly cardService: CardService,
   ) {}
 }
