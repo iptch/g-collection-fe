@@ -1,11 +1,11 @@
 <app-title>QR Scanner</app-title>
-<div [hidden]="message" id="qr-scanner"></div>
+<div class="mt-2" id="qr-scanner"></div>
 <ng-container *ngIf="message">
   <app-panel>
     {{ message }}
   </app-panel>
   <app-button
-    (click)="clearMessage()"
+    (click)="resumeScanning()"
     [text]="'Scan again'"
     [symbol]="'qr_code_scanner'"
   ></app-button>

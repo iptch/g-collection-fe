@@ -22,12 +22,25 @@ export class QrScannerComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.qrScanner = new Html5Qrcode('qr-scanner');
+    this.startScanning();
+  }
+
+  ngOnDestroy(): void {
+    if (this.qrScanner.getState() !== Html5QrcodeScannerState.NOT_STARTED) {
+      this.qrScanner
+        .stop()
+        .catch((err) => console.log('Error stopping the scanner', err));
+    }
+  }
+
+  startScanning(): void {
     this.qrScanner
       .start(
         cameraConfig,
         qrScannerConfig,
         (qrCodeMessage) => {
           this.message = qrCodeMessage;
+          this.stopScanning();
         },
         () => {
           // QR Code no longer in front of camera
@@ -38,15 +51,12 @@ export class QrScannerComponent implements OnInit, OnDestroy {
       });
   }
 
-  clearMessage(): void {
-    this.message = '';
+  stopScanning(): void {
+    this.qrScanner.stop();
   }
 
-  ngOnDestroy(): void {
-    if (this.qrScanner.getState() !== Html5QrcodeScannerState.NOT_STARTED) {
-      this.qrScanner
-        .stop()
-        .catch((err) => console.log('Error stopping the scanner', err));
-    }
+  resumeScanning(): void {
+    this.message = '';
+    this.startScanning();
   }
 }
