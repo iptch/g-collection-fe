@@ -4,6 +4,7 @@ import {
   Html5QrcodeCameraScanConfig,
   Html5QrcodeScannerState,
 } from 'html5-qrcode';
+import { Code } from 'src/app/models/code.model';
 
 const cameraConfig = { facingMode: 'environment' };
 
@@ -18,7 +19,7 @@ const qrScannerConfig: Html5QrcodeCameraScanConfig = {
 })
 export class QrScannerComponent implements OnInit, OnDestroy {
   private qrScanner!: Html5Qrcode;
-  message?: string;
+  code?: Code;
 
   ngOnInit(): void {
     this.qrScanner = new Html5Qrcode('qr-scanner');
@@ -38,13 +39,8 @@ export class QrScannerComponent implements OnInit, OnDestroy {
       .start(
         cameraConfig,
         qrScannerConfig,
-        (qrCodeMessage) => {
-          this.message = qrCodeMessage;
-          this.stopScanning();
-        },
-        () => {
-          // QR Code no longer in front of camera
-        },
+        (qrText) => this.parseCode(qrText),
+        undefined, // QR Code no longer in front of camera
       )
       .catch((err) => {
         console.log(`Unable to start scanning, error: ${err}`);
@@ -56,7 +52,26 @@ export class QrScannerComponent implements OnInit, OnDestroy {
   }
 
   resumeScanning(): void {
-    this.message = '';
+    this.code = undefined;
     this.startScanning();
+  }
+
+  parseCode(qrText: string): void {
+    const parsedObject = JSON.parse(qrText);
+    if (this.isCode(parsedObject)) {
+      this.code = parsedObject;
+      this.stopScanning();
+    } else {
+      console.error('Parsed object is not of type Code', parsedObject);
+    }
+  }
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  isCode(obj: any): obj is Code {
+    return (
+      typeof obj.id === 'number' &&
+      typeof obj.userPrincipalName === 'string' &&
+      typeof obj.otp === 'string'
+    );
   }
 }
