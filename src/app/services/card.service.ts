@@ -19,11 +19,10 @@ export class CardService {
   getCards(): Observable<Card[]> {
     return this.http.get<Cards>(this.cardsEndpoint).pipe(
       switchMap((cards) => {
-        const imageObservables = cards.results.map(
-          (card) =>
-            this.imageService
-              .getImageUrl(card.acronym)
-              .then((url) => ({ ...card, imageUrl: url, id: 1 })), //TODO: get id from backend
+        const imageObservables = cards.results.map((card) =>
+          this.imageService
+            .getImageUrl(card.acronym)
+            .then((url) => ({ ...card, imageUrl: url })),
         );
         return forkJoin(imageObservables);
       }),
@@ -34,7 +33,7 @@ export class CardService {
     return this.http.get<Card>(`${this.cardsEndpoint}/${id}`).pipe(
       switchMap(async (card) => {
         const url = await this.imageService.getImageUrl(card.acronym);
-        return { ...card, imageUrl: url, id: 1 }; //TODO: get id from backend
+        return { ...card, imageUrl: url };
       }),
     );
   }
