@@ -7,7 +7,7 @@ export interface Card {
   name: string;
   superpower: string;
   team: string;
-  imageUrl?: string;
+  image_url: string;
 }
 
 export interface Cards {

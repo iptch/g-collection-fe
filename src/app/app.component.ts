@@ -36,6 +36,7 @@ export class AppComponent implements OnInit, OnDestroy {
       )
       .subscribe(() => {
         this.setLoginDisplay();
+        // TODO: Create user if not exists via BE call
       });
   }
 

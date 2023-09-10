@@ -20,8 +20,7 @@
         </div>
         <img
           #image
-          *ngIf="card.imageUrl"
-          [src]="card.imageUrl"
+          [src]="card.image_url"
           alt="{{ card.name }}"
           class="w-full h-full object-cover absolute transition-all ease-out duration-200"
           [ngClass]="{

@@ -25,7 +25,6 @@
     "@angular/service-worker": "^16.1.0",
     "@azure/msal-angular": "^3.0.0-beta.1",
     "@azure/msal-browser": "^3.0.0-beta.1",
-    "@azure/storage-blob": "^12.15.0",
     "@ngrx/effects": "^16.2.0",
     "@ngrx/entity": "^16.2.0",
     "@ngrx/store": "^16.2.0",
