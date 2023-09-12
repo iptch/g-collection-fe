@@ -1,10 +1,17 @@
-# GCollectionFe
+# G-Collection FE
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.1.5.
+Thanks for contributing to the Genius Collection 2.0 app!
 
-## Development server
+## Running the app in a Dev Container
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+1. Open this project in VS Code.
+2. Install the extension _Dev Containers_.
+3. Open the command palette (`Cmd+Shift+P` or `Ctrl+Shift+P`).
+4. Run _Dev Containers: Rebuild Container_.
+5. In the terminal of the Dev Container execute `npm start`.
+6. Navigate to `http://localhost:4200/`.
+7. Log in to the app using your ipt account.
+8. Code away!
 
 ## Code scaffolding
 
