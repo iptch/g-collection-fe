@@ -4,14 +4,15 @@ Thanks for contributing to the Genius Collection 2.0 app!
 
 ## Running the app in a Dev Container
 
-1. Open this project in VS Code.
-2. Install the extension _Dev Containers_.
-3. Open the command palette (`Cmd+Shift+P` or `Ctrl+Shift+P`).
-4. Run _Dev Containers: Rebuild Container_.
-5. In the terminal of the Dev Container execute `npm start`.
-6. Navigate to `http://localhost:4200/`.
-7. Log in to the app using your ipt account.
-8. Code away!
+1. Install and run [Docker](https://www.docker.com/products/docker-desktop/).
+2. Open this project in [VS Code](https://code.visualstudio.com/).
+3. Install the VS Code extension _Dev Containers_.
+4. Open the command palette (`Cmd+Shift+P` or `Ctrl+Shift+P`).
+5. Run _Dev Containers: Rebuild Container_.
+6. In the terminal of the Dev Container execute `npm start`.
+7. Navigate to `http://localhost:4200/`.
+8. Log in to the app using your ipt account.
+9. Code away!
 
 ## Code scaffolding
 
