@@ -12,7 +12,7 @@ export class ProfileEffects {
       switchMap(() =>
         this.profileService.getProfile().pipe(
           map((profile) => ProfileActions.loadProfileSuccess({ profile })),
-          catchError(() => of(ProfileActions.loadProfileError)),
+          catchError(() => of(ProfileActions.loadProfileError())),
         ),
       ),
     );

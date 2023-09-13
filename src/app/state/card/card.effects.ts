@@ -12,7 +12,7 @@ export class CardEffects {
       switchMap(() =>
         this.cardService.getCards().pipe(
           map((cards) => CardActions.loadCardsSuccess({ cards })),
-          catchError(() => of(CardActions.loadCardsError)),
+          catchError(() => of(CardActions.loadCardsError())),
         ),
       ),
     );
@@ -24,7 +24,7 @@ export class CardEffects {
       switchMap(({ id }) =>
         this.cardService.getCardById(id).pipe(
           map((card) => CardActions.loadCardByIdSuccess({ card })),
-          catchError(() => of(CardActions.loadCardByIdError)),
+          catchError(() => of(CardActions.loadCardByIdError())),
         ),
       ),
     );
