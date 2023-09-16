@@ -15,7 +15,7 @@ Thanks for contributing to the Genius Collection 2.0 app!
 
 ## Running the app locally
 
-1. Install [Node.js](https://nodejs.org/en/).
+1. Install [Node.js](https://nodejs.org/en/) (this project uses v20.3.1).
 2. Install [Angular CLI](https://angular.io/cli) globally: `npm install -g @angular/cli`
 3. Install extensions for the IDE of your choice:
    - Prettier
