@@ -6,13 +6,27 @@ Thanks for contributing to the Genius Collection 2.0 app!
 
 1. Install and run [Docker](https://www.docker.com/products/docker-desktop/).
 2. Open this project in [VS Code](https://code.visualstudio.com/).
-3. Install the VS Code extension _Dev Containers_.
-4. Open the command palette (`Cmd+Shift+P` or `Ctrl+Shift+P`).
-5. Run _Dev Containers: Rebuild Container_.
-6. In the terminal of the Dev Container execute `npm start`.
-7. Navigate to `http://localhost:4200/`.
-8. Log in to the app using your ipt account.
-9. Code away!
+3. Install the VS Code extension _Dev Containers_ (`Cmd+Shift+X` or `Ctrl+Shift+X`).
+4. Run _Dev Containers: Rebuild Container_ (`Cmd+Shift+P` or `Ctrl+Shift+P`).
+5. Run `npm start` in the terminal of the Dev Container.
+6. Navigate to `http://localhost:4200/`.
+7. Log in to the app using your ipt account.
+8. Code away!
+
+## Running the app locally
+
+1. Install [Node.js](https://nodejs.org/en/).
+2. Install [Angular CLI](https://angular.io/cli) globally: `npm install -g @angular/cli`
+3. Install extensions for the IDE of your choice:
+   - Prettier
+   - ESLint
+   - Tailwind
+   - Angular Language Service
+4. Run `npm install` in the project directory.
+5. Run `npm start` in the project directory.
+6. Navigate to `http://localhost:4200/`.
+7. Log in to the app using your ipt account.
+8. Code away!
 
 ## Code scaffolding
 
