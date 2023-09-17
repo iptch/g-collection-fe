@@ -11,7 +11,7 @@ export interface Card {
 }
 
 export interface CardWithProfile extends Card {
-  userPrincipalName: string;
+  giver: string;
 }
 
 export interface Cards {

@@ -70,7 +70,7 @@ export class QrScannerComponent implements OnInit, OnDestroy {
   isCode(obj: any): obj is Code {
     return (
       typeof obj.id === 'number' &&
-      typeof obj.userPrincipalName === 'string' &&
+      typeof obj.giver === 'string' &&
       typeof obj.otp === 'string'
     );
   }

@@ -3,7 +3,7 @@
 <ng-container *ngIf="code">
   <app-panel>
     <app-field [label]="'Card ID'" [value]="code.id"></app-field>
-    <app-field [label]="'Giver'" [value]="code.userPrincipalName"></app-field>
+    <app-field [label]="'Giver'" [value]="code.giver"></app-field>
     <app-field [label]="'OTP'" [value]="code.otp"></app-field>
   </app-panel>
   <app-button

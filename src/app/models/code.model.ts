@@ -1,5 +1,5 @@
 export interface Code {
   id: number;
-  userPrincipalName: string;
+  giver: string;
   otp: string;
 }
