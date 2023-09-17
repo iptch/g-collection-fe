@@ -10,6 +10,10 @@ export interface Card {
   image_url: string;
 }
 
+export interface CardWithProfile extends Card {
+  userPrincipalName: string;
+}
+
 export interface Cards {
   results: Card[];
 }

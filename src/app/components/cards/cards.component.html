@@ -1,9 +1,11 @@
 <app-title>Chärtli</app-title>
 <app-panel>
-  <ng-container *ngIf="loading$ | async; else content"
-    ><app-loader></app-loader
-  ></ng-container>
-  <ng-template #content>
+  <app-loader *ngIf="loading$ | async"></app-loader>
+  <app-alert
+    *ngIf="error$ | async"
+    [message]="'Chärtli konnten nicht geladen werden.'"
+  ></app-alert>
+  <ng-container *ngIf="!((loading$ | async) || (error$ | async))">
     <div *ngIf="cards$ | async as cards">
       <div class="grid grid-cols-3 gap-4" *ngFor="let card of cards">
         <app-card-thumbnail
@@ -12,5 +14,5 @@
         ></app-card-thumbnail>
       </div>
     </div>
-  </ng-template>
+  </ng-container>
 </app-panel>

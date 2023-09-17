@@ -47,6 +47,7 @@ import { ProfileEffects } from './state/profile/profile.effects';
 import { reducers } from './state/reducers';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { CardEffects } from './state/card/card.effects';
+import { AlertComponent } from './components/alert/alert.component';
 
 const GRAPH_ENDPOINT = 'https://graph.microsoft.com/v1.0/me';
 
@@ -118,6 +119,7 @@ export function MSALGuardConfigFactory(): MsalGuardConfiguration {
     CardThumbnailComponent,
     CardDetailComponent,
     FieldComponent,
+    AlertComponent,
   ],
   imports: [
     BrowserModule,

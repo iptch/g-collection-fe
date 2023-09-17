@@ -7,19 +7,15 @@ import {
 } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { Observable, Subject, takeUntil } from 'rxjs';
-import { Card } from 'src/app/models/card.model';
+import { Observable, Subject } from 'rxjs';
+import { CardWithProfile } from 'src/app/models/card.model';
 import { Code } from 'src/app/models/code.model';
-import { Profile } from 'src/app/models/profile.model';
 import { loadCardById } from 'src/app/state/card/card.actions';
 import {
-  selectCardById,
-  selectCardLoading,
+  selectCardWithProfileById,
+  selectCardWithProfileError,
+  selectCardWithProfileLoading,
 } from 'src/app/state/card/card.selectors';
-import {
-  selectProfile,
-  selectProfileLoading,
-} from 'src/app/state/profile/profile.selectors';
 
 @Component({
   selector: 'app-card-detail',
@@ -28,12 +24,9 @@ import {
 export class CardDetailComponent implements OnInit, OnDestroy {
   @ViewChild('image') image!: ElementRef;
 
-  cardLoading$?: Observable<boolean>;
-  profileLoading$?: Observable<boolean>;
-  card$?: Observable<Card | undefined>;
-  profile$?: Observable<Profile | undefined>;
-  cardId!: number;
-  userPrincipalName!: string;
+  loading$?: Observable<boolean>;
+  error$?: Observable<boolean>;
+  card$?: Observable<CardWithProfile | undefined>;
   imageWidth!: number;
   initializedQrCode = false;
   showQrCode = false;
@@ -46,17 +39,11 @@ export class CardDetailComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    this.cardId = Number(this.route.snapshot.paramMap.get('id'));
-    this.store.dispatch(loadCardById({ id: this.cardId }));
-    this.cardLoading$ = this.store.select(selectCardLoading);
-    this.profileLoading$ = this.store.select(selectProfileLoading);
-    this.card$ = this.store.select(selectCardById(this.cardId));
-    this.profile$ = this.store.select(selectProfile);
-    this.profile$.pipe(takeUntil(this.destroy$)).subscribe((profile) => {
-      if (profile) {
-        this.userPrincipalName = profile.userPrincipalName;
-      }
-    });
+    const id = Number(this.route.snapshot.paramMap.get('id'));
+    this.store.dispatch(loadCardById({ id }));
+    this.loading$ = this.store.select(selectCardWithProfileLoading);
+    this.error$ = this.store.select(selectCardWithProfileError);
+    this.card$ = this.store.select(selectCardWithProfileById(id));
   }
 
   ngOnDestroy(): void {
@@ -73,11 +60,11 @@ export class CardDetailComponent implements OnInit, OnDestroy {
     window.scroll({ top: 0, left: 0, behavior: 'smooth' });
   }
 
-  getCode(): string {
+  getCode(card: CardWithProfile): string {
     const code: Code = {
-      id: this.cardId,
-      userPrincipalName: this.userPrincipalName,
-      otp: '123456',
+      id: card.id,
+      userPrincipalName: card.userPrincipalName,
+      otp: '123456', // TODO: use OTP from BE
     };
     return JSON.stringify(code);
   }

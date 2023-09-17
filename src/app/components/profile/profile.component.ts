@@ -5,6 +5,7 @@ import { Profile } from 'src/app/models/profile.model';
 import { Store } from '@ngrx/store';
 import {
   selectProfile,
+  selectProfileError,
   selectProfileLoading,
 } from 'src/app/state/profile/profile.selectors';
 
@@ -14,6 +15,7 @@ import {
 })
 export class ProfileComponent {
   loading$: Observable<boolean>;
+  error$: Observable<boolean>;
   profile$: Observable<Profile>;
 
   constructor(
@@ -21,6 +23,7 @@ export class ProfileComponent {
     private readonly authService: AuthService,
   ) {
     this.loading$ = this.store.select(selectProfileLoading);
+    this.error$ = this.store.select(selectProfileError);
     this.profile$ = this.store.select(selectProfile);
   }
 

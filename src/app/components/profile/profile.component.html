@@ -1,9 +1,11 @@
 <app-title>Profil</app-title>
 <app-panel>
-  <ng-container *ngIf="loading$ | async; else content">
-    <app-loader></app-loader>
-  </ng-container>
-  <ng-template #content>
+  <app-loader *ngIf="loading$ | async"></app-loader>
+  <app-alert
+    *ngIf="error$ | async"
+    [message]="'Profil konnte nicht geladen werden.'"
+  ></app-alert>
+  <ng-container *ngIf="!((loading$ | async) || (error$ | async))">
     <div *ngIf="profile$ | async as profile" class="space-y-2">
       <div>
         <app-field [label]="'Name'" [value]="profile.displayName"></app-field>
@@ -16,7 +18,7 @@
       </div>
       <div><app-field [label]="'ID'" [value]="profile.id"></app-field></div>
     </div>
-  </ng-template>
+  </ng-container>
 </app-panel>
 <app-button
   (click)="logout()"
