@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { Card } from 'src/app/models/card.model';
+import { Cards } from 'src/app/models/card.model';
 import { loadCards } from 'src/app/state/card/card.actions';
 import {
   selectAllCards,
@@ -16,7 +16,7 @@ import {
 export class CardsComponent {
   loading$?: Observable<boolean>;
   error$?: Observable<boolean>;
-  cards$?: Observable<Card[]>;
+  cards$?: Observable<Cards>;
 
   constructor(private readonly store: Store) {
     this.store.dispatch(loadCards());

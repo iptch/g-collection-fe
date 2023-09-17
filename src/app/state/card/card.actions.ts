@@ -1,11 +1,11 @@
 import { createAction, props } from '@ngrx/store';
-import { Card } from 'src/app/models/card.model';
+import { Card, Cards } from 'src/app/models/card.model';
 
 export const loadCards = createAction('[Cards] Load cards');
 
 export const loadCardsSuccess = createAction(
   '[Cards] Load cards success',
-  props<{ cards: Card[] }>(),
+  props<{ cards: Cards }>(),
 );
 
 export const loadCardsError = createAction('[Cards] Load cards error');

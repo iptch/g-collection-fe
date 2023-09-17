@@ -10,7 +10,12 @@ export const selectCardState = createFeatureSelector<CardState>('card');
 
 const { selectAll, selectEntities } = cardAdapter.getSelectors();
 
-export const selectAllCards = createSelector(selectCardState, selectAll);
+export const selectAllCards = createSelector(selectCardState, (state) => ({
+  results: selectAll(state),
+  count: state.count,
+  next: state.next,
+  previous: state.previous,
+}));
 
 export const selectCardEntities = createSelector(selectCardState, (state) =>
   selectEntities(state),

@@ -16,4 +16,7 @@ export interface CardWithProfile extends Card {
 
 export interface Cards {
   results: Card[];
+  count: number;
+  next: string | null;
+  previous: string | null;
 }
