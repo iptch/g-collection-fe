@@ -36,7 +36,7 @@ export const selectCardWithProfileById = (id: number) =>
     (card, profile) =>
       ({
         ...card,
-        userPrincipalName: profile.userPrincipalName,
+        userPrincipalName: profile?.userPrincipalName,
       }) as CardWithProfile,
   );
 

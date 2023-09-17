@@ -1,9 +1,5 @@
 import { createReducer, on } from '@ngrx/store';
-import {
-  ProfileState,
-  initialProfileState,
-  profileAdapter,
-} from './profile.state';
+import { ProfileState, initialProfileState } from './profile.state';
 import * as ProfileActions from './profile.actions';
 
 export const profileReducer = createReducer(
@@ -18,15 +14,15 @@ export const profileReducer = createReducer(
     }),
   ),
 
-  on(ProfileActions.loadProfileSuccess, (state, { profile }): ProfileState => {
-    const entityState = profileAdapter.setOne(profile, state);
-
-    return {
-      ...entityState,
+  on(
+    ProfileActions.loadProfileSuccess,
+    (state, { profile }): ProfileState => ({
+      ...state,
+      profile,
       loading: false,
       error: false,
-    };
-  }),
+    }),
+  ),
 
   on(
     ProfileActions.loadProfileError,

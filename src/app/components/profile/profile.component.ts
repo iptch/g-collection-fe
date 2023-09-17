@@ -16,7 +16,7 @@ import {
 export class ProfileComponent {
   loading$: Observable<boolean>;
   error$: Observable<boolean>;
-  profile$: Observable<Profile>;
+  profile$: Observable<Profile | null>;
 
   constructor(
     private readonly store: Store,

@@ -1,16 +1,13 @@
-import { EntityState, createEntityAdapter } from '@ngrx/entity';
 import { Profile } from 'src/app/models/profile.model';
 
-export interface ProfileState extends EntityState<Profile> {
+export interface ProfileState {
+  profile: Profile | null;
   loading: boolean;
   error: boolean;
 }
 
-export const profileAdapter = createEntityAdapter<Profile>();
-
-export const initialProfileState: ProfileState = profileAdapter.getInitialState(
-  {
-    loading: false,
-    error: false,
-  },
-);
+export const initialProfileState: ProfileState = {
+  profile: null,
+  loading: false,
+  error: false,
+};
