@@ -2,9 +2,7 @@
 <div class="mt-2" id="qr-scanner"></div>
 <ng-container *ngIf="code">
   <app-panel>
-    <app-field [label]="'Card ID'" [value]="code.id"></app-field>
-    <app-field [label]="'Giver'" [value]="code.giver"></app-field>
-    <app-field [label]="'OTP'" [value]="code.otp"></app-field>
+    <pre>{{ code | json }}</pre>
   </app-panel>
   <app-button
     (click)="resumeScanning()"
