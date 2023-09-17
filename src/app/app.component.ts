@@ -13,7 +13,7 @@ import { loadProfile } from './state/profile/profile.actions';
 })
 export class AppComponent implements OnInit, OnDestroy {
   isIframe = false;
-  loginDisplay = false;
+  authenticated = false;
 
   private readonly destroy$ = new Subject<void>();
 
@@ -35,8 +35,8 @@ export class AppComponent implements OnInit, OnDestroy {
         takeUntil(this.destroy$),
       )
       .subscribe(() => {
-        this.setLoginDisplay();
         // TODO: Create user if not exists via BE call
+        this.showApp();
       });
   }
 
@@ -45,7 +45,7 @@ export class AppComponent implements OnInit, OnDestroy {
     this.destroy$.complete();
   }
 
-  setLoginDisplay() {
-    this.loginDisplay = this.authService.isAuthenticated();
+  showApp() {
+    this.authenticated = this.authService.isAuthenticated();
   }
 }
