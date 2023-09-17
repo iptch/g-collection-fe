@@ -28,6 +28,10 @@ Thanks for contributing to the Genius Collection 2.0 app!
 7. Log in to the app using your ipt account.
 8. Code away!
 
+## State management
+
+This project uses [NgRx](https://ngrx.io/) for state management. Install the extension [Redux DevTools](https://github.com/reduxjs/redux-devtools/) for your browser of choice to debug the app's state changes.
+
 ## Code scaffolding
 
 Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
