@@ -7,8 +7,9 @@
   ></app-alert>
   <ng-container *ngIf="!((loading$ | async) || (error$ | async))">
     <div *ngIf="cards$ | async as cards">
-      <div class="grid grid-cols-3 gap-4" *ngFor="let card of cards.results">
+      <div class="grid grid-cols-3 gap-4">
         <app-card-thumbnail
+          *ngFor="let card of cards.results"
           [card]="card"
           [routerLink]="'' + card.id"
         ></app-card-thumbnail>
