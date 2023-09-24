@@ -18,6 +18,7 @@ const qrScannerConfig: Html5QrcodeCameraScanConfig = {
   templateUrl: './qr-scanner.component.html',
 })
 export class QrScannerComponent implements OnInit, OnDestroy {
+  private destroyed = false;
   private qrScanner!: Html5Qrcode;
   code?: Code;
 
@@ -27,10 +28,9 @@ export class QrScannerComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
+    this.destroyed = true;
     if (this.qrScanner.getState() !== Html5QrcodeScannerState.NOT_STARTED) {
-      this.qrScanner
-        .stop()
-        .catch((err) => console.log('Error stopping the scanner', err));
+      this.stopScanning();
     }
   }
 
@@ -42,13 +42,21 @@ export class QrScannerComponent implements OnInit, OnDestroy {
         (qrText) => this.parseCode(qrText),
         undefined, // QR Code no longer in front of camera
       )
+      .then(() => {
+        // If component is already destroyed by the time scanner starts, stop it immediately
+        if (this.destroyed) {
+          this.stopScanning();
+        }
+      })
       .catch((err) => {
         console.log(`Unable to start scanning, error: ${err}`);
       });
   }
 
   stopScanning(): void {
-    this.qrScanner.stop();
+    this.qrScanner
+      .stop()
+      .catch((err) => console.log('Error stopping the scanner', err));
   }
 
   resumeScanning(): void {
