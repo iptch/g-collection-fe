@@ -1,0 +1,21 @@
+// Angular Material
+
+// Select
+.g-collection-select.mat-mdc-form-field {
+  .mdc-text-field {
+    background: none !important;
+    border-radius: 0;
+  }
+
+  .mat-mdc-form-field-subscript-wrapper {
+    display: none;
+  }
+
+  .mat-mdc-form-field-focus-overlay {
+    background: none;
+  }
+}
+
+.cdk-overlay-container .mdc-menu-surface {
+  border-radius: 0;
+}

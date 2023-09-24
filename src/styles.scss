@@ -1,4 +1,12 @@
-@import 'material-symbols';
+@use '@angular/material' as mat;
+@include mat.core();
+@import 'styles/theme';
+@include mat.all-component-themes($g-collection-theme);
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@import 'material-symbols';
+
+@import 'styles/overrides';

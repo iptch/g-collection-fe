@@ -1,0 +1,71 @@
+@use '@angular/material' as mat;
+
+$contrast-color: #000000;
+$contrast: (
+  50: $contrast-color,
+  100: $contrast-color,
+  200: $contrast-color,
+  300: $contrast-color,
+  400: $contrast-color,
+  500: $contrast-color,
+  600: $contrast-color,
+  700: $contrast-color,
+  800: $contrast-color,
+  900: $contrast-color,
+  A100: $contrast-color,
+  A200: $contrast-color,
+  A400: $contrast-color,
+  A700: $contrast-color,
+);
+
+$primary-palette: (
+  50: #eaf6fc,
+  100: #cce9f6,
+  200: #aadaf1,
+  300: #87cbeb,
+  400: #6ebfe6,
+  500: #54b4e2,
+  600: #4daddf,
+  700: #43a4da,
+  800: #3a9cd6,
+  900: #298ccf,
+  A100: #ffffff,
+  A200: #daf0ff,
+  A400: #a7daff,
+  A700: #8ecfff,
+  contrast: $contrast,
+);
+
+$accent-palette: (
+  50: #ffeff7,
+  100: #ffd8eb,
+  200: #ffbedd,
+  300: #ffa4cf,
+  400: #ff91c5,
+  500: #ff7dbb,
+  600: #ff75b5,
+  700: #ff6aac,
+  800: #ff60a4,
+  900: #ff4d96,
+  A100: #ffffff,
+  A200: #ffffff,
+  A400: #fff3f8,
+  A700: #ffdae8,
+  contrast: $contrast,
+);
+
+$primary: mat.define-palette($primary-palette, 500);
+$accent: mat.define-palette($accent-palette, 500);
+$typography: mat.define-typography-config(
+  $font-family: 'Montserrat',
+);
+
+$g-collection-theme: mat.define-dark-theme(
+  (
+    color: (
+      primary: $primary,
+      accent: $accent,
+    ),
+    typography: $typography,
+  )
+);

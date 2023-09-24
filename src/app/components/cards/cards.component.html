@@ -1,4 +1,7 @@
-<app-title>Chärtli</app-title>
+<div class="flex justify-between items-center">
+  <app-title>Chärtli</app-title>
+  <mat-slide-toggle class="pr-2 pt-2">Alle</mat-slide-toggle>
+</div>
 <app-panel>
   <app-loader *ngIf="loading$ | async"></app-loader>
   <app-alert
@@ -6,6 +9,17 @@
     [message]="'Chärtli konnten nicht geladen werden.'"
   ></app-alert>
   <ng-container *ngIf="!((loading$ | async) || (error$ | async))">
+    <mat-form-field class="g-collection-select w-full mb-2 no-tap-highlight">
+      <mat-label>Sortieren nach</mat-label>
+      <mat-select [value]="'received'">
+        <mat-option
+          *ngFor="let sortCriterion of sortCriteria"
+          [value]="sortCriterion.value"
+        >
+          {{ sortCriterion.viewValue }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
     <div *ngIf="cards$ | async as cards">
       <div class="grid grid-cols-3 gap-4">
         <app-card-thumbnail
