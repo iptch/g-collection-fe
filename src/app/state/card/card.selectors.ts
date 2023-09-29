@@ -100,7 +100,7 @@ export const selectCardsFiltered = createSelector(
     if (showAll) {
       return allCards;
     } else {
-      return allCards.filter((card) => card.owned > 0);
+      return allCards.filter((card) => card.quantity > 0);
     }
   },
 );

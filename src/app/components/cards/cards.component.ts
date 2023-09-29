@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
-import { Store } from '@ngrx/store';
-import { first, Observable } from 'rxjs';
-import { Card } from 'src/app/models/card.model';
 import { PageEvent } from '@angular/material/paginator';
+import { Store } from '@ngrx/store';
+import { Observable, first } from 'rxjs';
+import { Card } from 'src/app/models/card.model';
 import {
   changeCardsFilter,
   changeCardsPage,
