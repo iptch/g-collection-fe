@@ -21,3 +21,13 @@ export const loadCardByIdSuccess = createAction(
 );
 
 export const loadCardByIdError = createAction('[Cards] Load card by id error');
+
+export const changeCardsFilter = createAction(
+  '[Cards] Change Filter',
+  props<{ showAll: boolean }>(),
+);
+
+export const changeCardsPage = createAction(
+  '[Cards] Change Page',
+  props<{ pageIndex: number; pageSize: number }>(),
+);

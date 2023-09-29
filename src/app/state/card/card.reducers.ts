@@ -47,4 +47,15 @@ export const cardReducer = createReducer(
       error: false,
     };
   }),
+
+  on(CardActions.changeCardsFilter, (state, { showAll }): CardState => {
+    return { ...state, showAll };
+  }),
+
+  on(
+    CardActions.changeCardsPage,
+    (state, { pageIndex, pageSize }): CardState => {
+      return { ...state, pageIndex, pageSize };
+    },
+  ),
 );
