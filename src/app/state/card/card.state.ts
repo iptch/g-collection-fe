@@ -11,6 +11,7 @@ export interface CardState extends EntityState<Card> {
   pageSize: number;
   pageIndex: number;
   sort: string;
+  ascendingDirection: boolean;
 }
 
 export const cardAdapter = createEntityAdapter<Card>();
@@ -25,4 +26,5 @@ export const initialCardState: CardState = cardAdapter.getInitialState({
   pageSize: 20,
   pageIndex: 0,
   sort: 'acronym',
+  ascendingDirection: true,
 });

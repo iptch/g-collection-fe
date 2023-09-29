@@ -36,3 +36,7 @@ export const changeCardsSort = createAction(
   '[Cards] Change Sort',
   props<{ sort: string }>(),
 );
+
+export const changeCardsSortDirection = createAction(
+  '[Cards] Change Sort Direction',
+);

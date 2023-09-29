@@ -14,18 +14,29 @@
     [message]="'Chärtli konnten nicht geladen werden.'"
   ></app-alert>
   <ng-container *ngIf="!((loading$ | async) || (error$ | async))">
-    <mat-form-field class="g-collection-select w-full mb-2 no-tap-highlight">
-      <mat-label>Sortieren nach</mat-label>
-      <mat-select (selectionChange)="onSort($event)" [value]="sort$">
-        <mat-option
-          *ngFor="let sortCriterion of sortCriteria"
-          [value]="sortCriterion.value"
-        >
-          {{ sortCriterion.viewValue }}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
+    <div class="flex items-center gap-2">
+      <mat-button-toggle
+        [checked]="(sortDirection$ | async) || false"
+        (click)="onSortDirectionChange()"
+      >
+        <span class="material-symbols-outlined">
+          {{ (sortDirection$ | async) ? 'north' : 'south' }}
+        </span>
+      </mat-button-toggle>
 
+      <mat-form-field class="g-collection-select w-full mb-2 no-tap-highlight">
+        <mat-label>Sortieren nach</mat-label>
+        <mat-select (selectionChange)="onSort($event)" [value]="sort$">
+          <mat-option
+            *ngFor="let sortCriterion of sortCriteria"
+            [value]="sortCriterion.value"
+          >
+            {{ sortCriterion.viewValue }}
+          </mat-option>
+        </mat-select>
+        <!-- Your new button with the Material UI swap_vert icon -->
+      </mat-form-field>
+    </div>
     <div *ngIf="cards$ | async as cards">
       <div class="grid grid-cols-3 gap-4 mb-2">
         <app-card-thumbnail

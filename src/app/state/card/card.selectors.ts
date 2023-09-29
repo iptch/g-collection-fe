@@ -73,24 +73,35 @@ export const selectCardsSorted = createSelector(
   selectCardState,
   (allCards, cardState) => {
     const getLastName = (obj: Card) => obj?.name?.split(' ')?.pop() || obj.name;
-    return allCards.sort((a: Card, b: Card) => {
+    const sortedCards = allCards.sort((a: Card, b: Card) => {
       switch (cardState.sort) {
         case 'acronym':
           return a.acronym > b.acronym ? 1 : -1;
         case 'name':
           return getLastName(a) > getLastName(b) ? 1 : -1;
         case 'received':
-        case 'doublicates':
+        case 'duplicates':
         default:
           return 0;
       }
     });
+
+    if (!cardState.ascendingDirection) {
+      return sortedCards.reverse();
+    }
+
+    return sortedCards;
   },
 );
 
 export const selectCardsSort = createSelector(
   selectCardState,
   (cardState) => cardState.sort,
+);
+
+export const selectCardsSortDirection = createSelector(
+  selectCardState,
+  (cardState) => cardState.ascendingDirection,
 );
 
 export const selectCardsFiltered = createSelector(

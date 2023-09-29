@@ -7,6 +7,7 @@ import {
   changeCardsFilter,
   changeCardsPage,
   changeCardsSort,
+  changeCardsSortDirection,
   loadCards,
 } from 'src/app/state/card/card.actions';
 
@@ -18,6 +19,7 @@ import {
   selectCardsPageInfo,
   selectCardsShowAll,
   selectCardsSort,
+  selectCardsSortDirection,
 } from 'src/app/state/card/card.selectors';
 import { MatSelectChange } from '@angular/material/select';
 
@@ -37,6 +39,7 @@ export class CardsComponent {
   cardsCount$: Observable<number>;
   showAll$: Observable<boolean>;
   sort$?: string;
+  sortDirection$?: Observable<boolean>;
   initialPageInfo$: Observable<{
     pageIndex: number;
     pageSize: number;
@@ -44,9 +47,9 @@ export class CardsComponent {
 
   readonly sortCriteria: SortCriterion[] = [
     { value: 'received', viewValue: 'Erhalt des Chärtlis' },
-    { value: 'doublicates', viewValue: 'Anzahl Dubletten' },
+    { value: 'duplicates', viewValue: 'Anzahl Dubletten' },
     { value: 'acronym', viewValue: 'Kürzel' },
-    { value: 'name', viewValue: 'Name' },
+    { value: 'name', viewValue: 'Nachname' },
   ];
 
   constructor(private readonly store: Store) {
@@ -56,6 +59,7 @@ export class CardsComponent {
     this.showAll$ = this.store.select(selectCardsShowAll);
     this.cardsCount$ = this.store.select(selectCardsFilteredCount);
     this.cards$ = this.store.select(selectCardsFilteredAndPaged);
+    this.sortDirection$ = this.store.select(selectCardsSortDirection);
     this.store
       .select(selectCardsSort)
       .pipe()
@@ -69,6 +73,10 @@ export class CardsComponent {
 
   onShowAllChange(value: boolean) {
     this.store.dispatch(changeCardsFilter({ showAll: value }));
+  }
+
+  onSortDirectionChange() {
+    this.store.dispatch(changeCardsSortDirection());
   }
 
   onPage(event: PageEvent) {
