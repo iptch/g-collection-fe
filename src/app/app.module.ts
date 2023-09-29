@@ -1,57 +1,57 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { NgModule, isDevMode } from '@angular/core';
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
-import { ServiceWorkerModule } from '@angular/service-worker';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
-import {
-  IPublicClientApplication,
-  PublicClientApplication,
-  BrowserCacheLocation,
-  LogLevel,
-  InteractionType,
-} from '@azure/msal-browser';
-import {
-  MSAL_INSTANCE,
-  MSAL_INTERCEPTOR_CONFIG,
-  MsalInterceptorConfiguration,
-  MSAL_GUARD_CONFIG,
-  MsalGuardConfiguration,
-  MsalBroadcastService,
-  MsalService,
-  MsalGuard,
-  MsalRedirectComponent,
-  MsalModule,
-  MsalInterceptor,
-} from '@azure/msal-angular';
-import { DashboardComponent } from './components/dashboard/dashboard.component';
-import { ProfileComponent } from './components/profile/profile.component';
-import { HeaderComponent } from './components/header/header.component';
-import { environment } from './../environments/environment';
-import { QrScannerComponent } from './components/qr-scanner/qr-scanner.component';
-import { QRCodeModule } from 'angularx-qrcode';
-import { QrCodeComponent } from './components/qr-code/qr-code.component';
-import { NavigationComponent } from './components/navigation/navigation.component';
-import { LoaderComponent } from './components/loader/loader.component';
-import { TitleComponent } from './components/title/title.component';
-import { PanelComponent } from './components/panel/panel.component';
-import { ButtonComponent } from './components/button/button.component';
-import { CardsComponent } from './components/cards/cards.component';
-import { CardThumbnailComponent } from './components/card-thumbnail/card-thumbnail.component';
-import { CardDetailComponent } from './components/card-detail/card-detail.component';
-import { FieldComponent } from './components/field/field.component';
-import { StoreModule } from '@ngrx/store';
-import { EffectsModule } from '@ngrx/effects';
-import { ProfileEffects } from './state/profile/profile.effects';
-import { reducers } from './state/reducers';
-import { StoreDevtoolsModule } from '@ngrx/store-devtools';
-import { CardEffects } from './state/card/card.effects';
-import { AlertComponent } from './components/alert/alert.component';
-import { MatSlideToggleModule } from '@angular/material/slide-toggle';
-import { MatSelectModule } from '@angular/material/select';
+import { NgModule, isDevMode } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatSelectModule } from '@angular/material/select';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import {
+  MSAL_GUARD_CONFIG,
+  MSAL_INSTANCE,
+  MSAL_INTERCEPTOR_CONFIG,
+  MsalBroadcastService,
+  MsalGuard,
+  MsalGuardConfiguration,
+  MsalInterceptor,
+  MsalInterceptorConfiguration,
+  MsalModule,
+  MsalRedirectComponent,
+  MsalService,
+} from '@azure/msal-angular';
+import {
+  BrowserCacheLocation,
+  IPublicClientApplication,
+  InteractionType,
+  LogLevel,
+  PublicClientApplication,
+} from '@azure/msal-browser';
+import { EffectsModule } from '@ngrx/effects';
+import { StoreModule } from '@ngrx/store';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { QRCodeModule } from 'angularx-qrcode';
+import { environment } from './../environments/environment';
+import { AppRoutingModule } from './app-routing.module';
+import { AppComponent } from './app.component';
+import { AlertComponent } from './components/alert/alert.component';
+import { ButtonComponent } from './components/button/button.component';
+import { CardDetailComponent } from './components/card-detail/card-detail.component';
+import { CardThumbnailComponent } from './components/card-thumbnail/card-thumbnail.component';
+import { CardsComponent } from './components/cards/cards.component';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { FieldComponent } from './components/field/field.component';
+import { HeaderComponent } from './components/header/header.component';
+import { LoaderComponent } from './components/loader/loader.component';
+import { NavigationComponent } from './components/navigation/navigation.component';
+import { PanelComponent } from './components/panel/panel.component';
+import { ProfileComponent } from './components/profile/profile.component';
+import { QrCodeComponent } from './components/qr-code/qr-code.component';
+import { QrScannerComponent } from './components/qr-scanner/qr-scanner.component';
+import { TitleComponent } from './components/title/title.component';
+import { CardEffects } from './state/card/card.effects';
+import { ProfileEffects } from './state/profile/profile.effects';
+import { reducers } from './state/reducers';
 
 const GRAPH_ENDPOINT = 'https://graph.microsoft.com/v1.0/me';
 

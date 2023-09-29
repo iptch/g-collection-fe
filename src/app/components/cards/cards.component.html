@@ -40,9 +40,9 @@
         [length]="cardsCount$ | async"
         [pageIndex]="pageInfo.pageIndex"
         [pageSize]="pageInfo.pageSize"
-        [pageSizeOptions]="[5, 10, 20, 50]"
+        [pageSizeOptions]="[6, 12, 24, 48]"
         [showFirstLastButtons]="true"
-        class="p-1"
+        class="!bg-transparent"
         (page)="onPage($event)"
       >
       </mat-paginator>
