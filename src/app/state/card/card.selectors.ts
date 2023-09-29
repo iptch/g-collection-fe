@@ -73,7 +73,8 @@ export const selectCardsSorted = createSelector(
   selectCardState,
   (allCards, cardState) => {
     const getLastName = (obj: Card) => obj?.name?.split(' ')?.pop() || obj.name;
-    const sortedCards = allCards.sort((a: Card, b: Card) => {
+    const cardsCopy = [...allCards];
+    cardsCopy.sort((a: Card, b: Card) => {
       switch (cardState.sort) {
         case 'acronym':
           return a.acronym > b.acronym ? 1 : -1;
@@ -88,10 +89,10 @@ export const selectCardsSorted = createSelector(
     });
 
     if (!cardState.ascendingDirection) {
-      return sortedCards.reverse();
+      return cardsCopy.reverse();
     }
 
-    return sortedCards;
+    return cardsCopy;
   },
 );
 

@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { PageEvent } from '@angular/material/paginator';
 import { Store } from '@ngrx/store';
-import { Observable, first } from 'rxjs';
+import { first, Observable } from 'rxjs';
 import { Card } from 'src/app/models/card.model';
 import {
   changeCardsFilter,
@@ -38,7 +38,7 @@ export class CardsComponent {
   cards$?: Observable<Card[]>;
   cardsCount$: Observable<number>;
   showAll$: Observable<boolean>;
-  sort$?: string;
+  sort$?: Observable<string>;
   sortDirection$?: Observable<boolean>;
   initialPageInfo$: Observable<{
     pageIndex: number;
@@ -60,12 +60,7 @@ export class CardsComponent {
     this.cardsCount$ = this.store.select(selectCardsFilteredCount);
     this.cards$ = this.store.select(selectCardsFilteredAndPaged);
     this.sortDirection$ = this.store.select(selectCardsSortDirection);
-    this.store
-      .select(selectCardsSort)
-      .pipe()
-      .subscribe((sort) => {
-        this.sort$ = sort;
-      });
+    this.sort$ = this.store.select(selectCardsSort);
     this.initialPageInfo$ = this.store
       .select(selectCardsPageInfo)
       .pipe(first());
