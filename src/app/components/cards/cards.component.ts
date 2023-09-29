@@ -1,13 +1,20 @@
 import { Component } from '@angular/core';
+import { PageEvent } from '@angular/material/paginator';
 import { Store } from '@ngrx/store';
-import { BehaviorSubject, Observable, switchMap } from 'rxjs';
+import { Observable, first } from 'rxjs';
 import { Card } from 'src/app/models/card.model';
-import { loadCards } from 'src/app/state/card/card.actions';
 import {
-  selectAllCards,
+  changeCardsFilter,
+  changeCardsPage,
+  loadCards,
+} from 'src/app/state/card/card.actions';
+import {
   selectCardError,
   selectCardLoading,
-  selectOwnedCards,
+  selectCardsFilteredAndPaged,
+  selectCardsFilteredCount,
+  selectCardsPageInfo,
+  selectCardsShowAll,
 } from 'src/app/state/card/card.selectors';
 
 interface SortCriterion {
@@ -23,8 +30,9 @@ export class CardsComponent {
   loading$?: Observable<boolean>;
   error$?: Observable<boolean>;
   cards$?: Observable<Card[]>;
-
-  showAll$ = new BehaviorSubject<boolean>(false);
+  cardsCount$: Observable<number>;
+  showAll$: Observable<boolean>;
+  initialPageInfo$: Observable<{ pageIndex: number; pageSize: number }>;
 
   readonly sortCriteria: SortCriterion[] = [
     { value: 'received', viewValue: 'Erhalt des Chärtlis' },
@@ -37,11 +45,21 @@ export class CardsComponent {
     this.store.dispatch(loadCards());
     this.loading$ = this.store.select(selectCardLoading);
     this.error$ = this.store.select(selectCardError);
+    this.showAll$ = this.store.select(selectCardsShowAll);
+    this.cardsCount$ = this.store.select(selectCardsFilteredCount);
+    this.cards$ = this.store.select(selectCardsFilteredAndPaged);
+    this.initialPageInfo$ = this.store
+      .select(selectCardsPageInfo)
+      .pipe(first());
+  }
 
-    const allCards$ = this.store.select(selectAllCards);
-    const ownedCards$ = this.store.select(selectOwnedCards);
-    this.cards$ = this.showAll$.pipe(
-      switchMap((showAll) => (showAll ? allCards$ : ownedCards$)),
+  onShowAllChange(value: boolean) {
+    this.store.dispatch(changeCardsFilter({ showAll: value }));
+  }
+
+  onPage(event: PageEvent) {
+    this.store.dispatch(
+      changeCardsPage({ pageSize: event.pageSize, pageIndex: event.pageIndex }),
     );
   }
 }
