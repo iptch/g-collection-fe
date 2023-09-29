@@ -3,11 +3,15 @@
     [src]="card.image_url"
     alt="{{ card.name }}"
     class="w-full aspect-square object-cover"
+    [class.grayscale]="!card.quantity"
   />
   <div class="absolute bottom-0 w-full text-center bg-black bg-opacity-50">
     {{ card.acronym }}
   </div>
-  <span class="absolute top-0 right-0 bg-dark-pink text-xs font-medium px-1"
-    >2</span
+  <div
+    class="absolute top-0 right-0 bg-dark-pink text-xs font-medium px-1"
+    *ngIf="!!card.quantity && card.quantity > 1"
   >
+    {{ card.quantity }}
+  </div>
 </div>
