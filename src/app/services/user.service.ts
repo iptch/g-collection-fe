@@ -11,10 +11,7 @@ export class UserService {
 
   constructor(private readonly http: HttpClient) {}
 
-  initUser(email: string, name: string): Observable<void> {
-    return this.http.post<void>(this.userEndpoint + '/init', {
-      email,
-      name,
-    });
+  initUser(): Observable<void> {
+    return this.http.post<void>(this.userEndpoint + '/init', {});
   }
 }

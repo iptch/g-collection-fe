@@ -36,14 +36,7 @@ export class AppComponent implements OnInit, OnDestroy {
           (status: InteractionStatus) => status === InteractionStatus.None,
         ),
         first(),
-        switchMap(() => this.store.select(selectProfile)),
-        filter((profile) => !!profile),
-        switchMap((profile) =>
-          this.userService.initUser(
-            profile?.userPrincipalName ?? 'Unknown',
-            profile?.displayName ?? 'Unknown',
-          ),
-        ),
+        switchMap(() => this.userService.initUser()),
         first(),
         takeUntil(this.destroy$),
       )
