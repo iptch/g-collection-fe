@@ -1,12 +1,13 @@
 import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { Observable } from 'rxjs';
-import { Cards } from 'src/app/models/card.model';
+import { BehaviorSubject, Observable, switchMap } from 'rxjs';
+import { Card } from 'src/app/models/card.model';
 import { loadCards } from 'src/app/state/card/card.actions';
 import {
   selectAllCards,
   selectCardError,
   selectCardLoading,
+  selectOwnedCards,
 } from 'src/app/state/card/card.selectors';
 
 interface SortCriterion {
@@ -21,7 +22,9 @@ interface SortCriterion {
 export class CardsComponent {
   loading$?: Observable<boolean>;
   error$?: Observable<boolean>;
-  cards$?: Observable<Cards>;
+  cards$?: Observable<Card[]>;
+
+  showAll$ = new BehaviorSubject<boolean>(false);
 
   readonly sortCriteria: SortCriterion[] = [
     { value: 'received', viewValue: 'Erhalt des Chärtlis' },
@@ -34,6 +37,11 @@ export class CardsComponent {
     this.store.dispatch(loadCards());
     this.loading$ = this.store.select(selectCardLoading);
     this.error$ = this.store.select(selectCardError);
-    this.cards$ = this.store.select(selectAllCards);
+
+    const allCards$ = this.store.select(selectAllCards);
+    const ownedCards$ = this.store.select(selectOwnedCards);
+    this.cards$ = this.showAll$.pipe(
+      switchMap((showAll) => (showAll ? allCards$ : ownedCards$)),
+    );
   }
 }
