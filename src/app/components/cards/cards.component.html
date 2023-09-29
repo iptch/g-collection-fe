@@ -4,8 +4,8 @@
     class="pr-2 pt-2"
     [ngModel]="showAll$ | async"
     (ngModelChange)="onShowAllChange($event)"
-    >Alle</mat-slide-toggle
-  >
+    >Alle
+  </mat-slide-toggle>
 </div>
 <app-panel>
   <app-loader *ngIf="loading$ | async"></app-loader>
@@ -16,10 +16,7 @@
   <ng-container *ngIf="!((loading$ | async) || (error$ | async))">
     <mat-form-field class="g-collection-select w-full mb-2 no-tap-highlight">
       <mat-label>Sortieren nach</mat-label>
-      <mat-select
-        (selectionChange)="onSelectionChange($event)"
-        [value]="'received'"
-      >
+      <mat-select (selectionChange)="onSort($event)" [value]="sort$">
         <mat-option
           *ngFor="let sortCriterion of sortCriteria"
           [value]="sortCriterion.value"

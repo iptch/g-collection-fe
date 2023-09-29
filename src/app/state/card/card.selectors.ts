@@ -1,10 +1,10 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
-import { CardState, cardAdapter } from './card.state';
+import { cardAdapter, CardState } from './card.state';
 import {
   selectProfile,
   selectProfileState,
 } from '../profile/profile.selectors';
-import { CardWithProfile } from 'src/app/models/card.model';
+import { Card, CardWithProfile } from 'src/app/models/card.model';
 
 export const selectCardState = createFeatureSelector<CardState>('card');
 
@@ -68,9 +68,33 @@ export const selectCardsPageInfo = createSelector(
     pageIndex: cardState.pageIndex,
   }),
 );
+export const selectCardsSorted = createSelector(
+  selectAllCards,
+  selectCardState,
+  (allCards, cardState) => {
+    const getLastName = (obj: Card) => obj?.name?.split(' ')?.pop() || obj.name;
+    return allCards.sort((a: Card, b: Card) => {
+      switch (cardState.sort) {
+        case 'acronym':
+          return a.acronym > b.acronym ? 1 : -1;
+        case 'name':
+          return getLastName(a) > getLastName(b) ? 1 : -1;
+        case 'received':
+        case 'doublicates':
+        default:
+          return 0;
+      }
+    });
+  },
+);
+
+export const selectCardsSort = createSelector(
+  selectCardState,
+  (cardState) => cardState.sort,
+);
 
 export const selectCardsFiltered = createSelector(
-  selectAllCards,
+  selectCardsSorted,
   selectCardsShowAll,
   (allCards, showAll) => {
     if (showAll) {

@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
-import { MatSelectChange } from '@angular/material/select';
 import { Store } from '@ngrx/store';
-import { Observable, first, map } from 'rxjs';
+import { first, Observable } from 'rxjs';
 import { Card } from 'src/app/models/card.model';
 import { PageEvent } from '@angular/material/paginator';
 import {
   changeCardsFilter,
   changeCardsPage,
+  changeCardsSort,
   loadCards,
 } from 'src/app/state/card/card.actions';
 
@@ -17,7 +17,9 @@ import {
   selectCardsFilteredCount,
   selectCardsPageInfo,
   selectCardsShowAll,
+  selectCardsSort,
 } from 'src/app/state/card/card.selectors';
+import { MatSelectChange } from '@angular/material/select';
 
 interface SortCriterion {
   value: string;
@@ -34,7 +36,11 @@ export class CardsComponent {
   cards$?: Observable<Card[]>;
   cardsCount$: Observable<number>;
   showAll$: Observable<boolean>;
-  initialPageInfo$: Observable<{ pageIndex: number; pageSize: number }>;
+  sort$?: string;
+  initialPageInfo$: Observable<{
+    pageIndex: number;
+    pageSize: number;
+  }>;
 
   readonly sortCriteria: SortCriterion[] = [
     { value: 'received', viewValue: 'Erhalt des Chärtlis' },
@@ -50,6 +56,12 @@ export class CardsComponent {
     this.showAll$ = this.store.select(selectCardsShowAll);
     this.cardsCount$ = this.store.select(selectCardsFilteredCount);
     this.cards$ = this.store.select(selectCardsFilteredAndPaged);
+    this.store
+      .select(selectCardsSort)
+      .pipe()
+      .subscribe((sort) => {
+        this.sort$ = sort;
+      });
     this.initialPageInfo$ = this.store
       .select(selectCardsPageInfo)
       .pipe(first());
@@ -65,23 +77,7 @@ export class CardsComponent {
     );
   }
 
-  onSelectionChange(event: MatSelectChange) {
-    const getLastName = (obj: Card) => obj?.name?.split(' ')?.pop() || obj.name;
-    this.cards$ = this.cards$?.pipe(
-      map((cards: Card[]) =>
-        cards.sort((a: Card, b: Card) => {
-          switch (event.value) {
-            case 'acronym':
-              return a.acronym > b.acronym ? 1 : -1;
-            case 'name':
-              return getLastName(a) > getLastName(b) ? 1 : -1;
-            case 'received':
-            case 'doublicates':
-            default:
-              return 0;
-          }
-        }),
-      ),
-    );
+  onSort(event: MatSelectChange) {
+    this.store.dispatch(changeCardsSort({ sort: event.value }));
   }
 }

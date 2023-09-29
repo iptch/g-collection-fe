@@ -31,3 +31,8 @@ export const changeCardsPage = createAction(
   '[Cards] Change Page',
   props<{ pageIndex: number; pageSize: number }>(),
 );
+
+export const changeCardsSort = createAction(
+  '[Cards] Change Sort',
+  props<{ sort: string }>(),
+);
