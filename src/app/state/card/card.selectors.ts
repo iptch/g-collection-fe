@@ -82,6 +82,7 @@ export const selectCardsSorted = createSelector(
         case 'doublicates':
           return a.quantity > b.quantity ? -1 : 1;
         case 'received':
+          return a.last_received > b.last_received ? -1 : 1;
         default:
           return 0;
       }
