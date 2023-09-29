@@ -63,6 +63,7 @@
       </div>
     </app-panel>
     <button
+      *ngIf="!!card.quantity"
       (click)="toggleQrCode()"
       class="fixed bottom-14 right-0 m-4 w-14 h-14 bg-dark-pink rounded-full align-middle no-tap-highlight active:bg-light-pink shadow"
     >
