@@ -26,9 +26,16 @@
             'w-full h-full': !showQrCode,
             'w-20 h-20 border-2 border-light-pink': showQrCode
           }"
+          [class.grayscale]="!card.quantity"
         />
+        <div
+          *ngIf="!showQrCode && card.quantity !== null && card.quantity > 1"
+          class="absolute bg-dark-pink top-0 right-0 text-4xl font-medium px-2"
+        >
+          {{ card.quantity }}
+        </div>
       </div>
-      <div class="pt-4 space-y-2">
+      <div class="pt-4 space-y-2" *ngIf="card.quantity !== 0; else askMe">
         <div>
           <app-field
             [label]="'Als Kind wollte ich immer ... werden'"
@@ -65,3 +72,12 @@
     </button>
   </div>
 </ng-container>
+
+<ng-template #askMe>
+  <div class="pt-4 space-y-2">
+    <app-field
+      [label]="'Meine Infos'"
+      [value]="'Sammle meine Karte - oder frag mich in Person'"
+    ></app-field>
+  </div>
+</ng-template>
