@@ -32,7 +32,7 @@ export class DashboardService {
 
   getRankOf(userEmail: string, rankingList: Ranking[]): number {
     return (
-      rankingList.find((ranking) => ranking.userEmail === userEmail)?.rank || 0
+      rankingList.find((ranking) => ranking.userEmail === userEmail)?.rank ?? 0
     );
   }
 }
