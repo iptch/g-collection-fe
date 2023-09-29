@@ -5,7 +5,6 @@ export interface Card {
   job: string;
   must_have: string;
   name: string;
-  quantity: number;
   superpower: string;
   team: string;
   image_url: string;
