@@ -9,7 +9,6 @@ import { environment } from './../../environments/environment';
 })
 export class CardService {
   private readonly cardsEndpoint = `${environment.backendUri}/cards`;
-
   constructor(private readonly http: HttpClient) {}
 
   getCards(): Observable<Cards> {

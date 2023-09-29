@@ -7,6 +7,9 @@ export interface CardState extends EntityState<Card> {
   previous: string | null;
   loading: boolean;
   error: boolean;
+  showAll: boolean;
+  pageSize: number;
+  pageIndex: number;
 }
 
 export const cardAdapter = createEntityAdapter<Card>();
@@ -17,4 +20,7 @@ export const initialCardState: CardState = cardAdapter.getInitialState({
   previous: null,
   loading: false,
   error: false,
+  showAll: false,
+  pageSize: 20,
+  pageIndex: 0,
 });

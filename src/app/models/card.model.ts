@@ -8,6 +8,7 @@ export interface Card {
   superpower: string;
   team: string;
   image_url: string;
+  owned: number;
 }
 
 export interface CardWithProfile extends Card {

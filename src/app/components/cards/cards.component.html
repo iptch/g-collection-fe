@@ -1,6 +1,11 @@
 <div class="flex justify-between items-center">
   <app-title>Chärtli</app-title>
-  <mat-slide-toggle class="pr-2 pt-2">Alle</mat-slide-toggle>
+  <mat-slide-toggle
+    class="pr-2 pt-2"
+    [ngModel]="showAll$ | async"
+    (ngModelChange)="onShowAllChange($event)"
+    >Alle</mat-slide-toggle
+  >
 </div>
 <app-panel>
   <app-loader *ngIf="loading$ | async"></app-loader>
@@ -23,14 +28,27 @@
         </mat-option>
       </mat-select>
     </mat-form-field>
+
     <div *ngIf="cards$ | async as cards">
-      <div class="grid grid-cols-3 gap-4">
+      <div class="grid grid-cols-3 gap-4 mb-2">
         <app-card-thumbnail
-          *ngFor="let card of cards.results"
+          *ngFor="let card of cards"
           [card]="card"
           [routerLink]="'' + card.id"
         ></app-card-thumbnail>
       </div>
+
+      <mat-paginator
+        *ngIf="initialPageInfo$ | async as pageInfo"
+        [length]="cardsCount$ | async"
+        [pageIndex]="pageInfo.pageIndex"
+        [pageSize]="pageInfo.pageSize"
+        [pageSizeOptions]="[5, 10, 20, 50]"
+        [showFirstLastButtons]="true"
+        class="p-1"
+        (page)="onPage($event)"
+      >
+      </mat-paginator>
     </div>
   </ng-container>
 </app-panel>
