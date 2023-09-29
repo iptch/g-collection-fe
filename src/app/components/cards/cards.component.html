@@ -11,7 +11,10 @@
   <ng-container *ngIf="!((loading$ | async) || (error$ | async))">
     <mat-form-field class="g-collection-select w-full mb-2 no-tap-highlight">
       <mat-label>Sortieren nach</mat-label>
-      <mat-select [value]="'received'">
+      <mat-select
+        (selectionChange)="onSelectionChange($event)"
+        [value]="'received'"
+      >
         <mat-option
           *ngFor="let sortCriterion of sortCriteria"
           [value]="sortCriterion.value"
