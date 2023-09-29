@@ -15,7 +15,11 @@
 <app-panel>
   <div class="text-light-pink">Top 5</div>
   <ol class="list-decimal list-inside">
-    <li *ngFor="let ranking of (this.dashboardData$ | async)?.rankingList">
+    <li
+      *ngFor="
+        let ranking of (this.dashboardData$ | async)?.rankingList | slice: 0 : 5
+      "
+    >
       {{ ranking.displayName }}
     </li>
   </ol>
