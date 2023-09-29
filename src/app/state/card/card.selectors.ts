@@ -1,10 +1,10 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
-import { CardState, cardAdapter } from './card.state';
+import { cardAdapter, CardState } from './card.state';
 import {
   selectProfile,
   selectProfileState,
 } from '../profile/profile.selectors';
-import { CardWithProfile, Card } from 'src/app/models/card.model';
+import { Card, CardWithProfile } from 'src/app/models/card.model';
 
 export const selectCardState = createFeatureSelector<CardState>('card');
 
@@ -80,7 +80,7 @@ export const selectCardsSorted = createSelector(
           return a.acronym > b.acronym ? 1 : -1;
         case 'name':
           return getLastName(a) > getLastName(b) ? 1 : -1;
-        case 'doublicates':
+        case 'duplicates':
           return a.quantity > b.quantity ? -1 : 1;
         case 'received':
           return a.last_received > b.last_received ? -1 : 1;
