@@ -1,4 +1,4 @@
-import { createEntityAdapter, EntityState } from '@ngrx/entity';
+import { EntityState, createEntityAdapter } from '@ngrx/entity';
 import { Card } from 'src/app/models/card.model';
 
 export interface CardState extends EntityState<Card> {

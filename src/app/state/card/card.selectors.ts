@@ -1,10 +1,10 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
-import { cardAdapter, CardState } from './card.state';
+import { CardState, cardAdapter } from './card.state';
 import {
   selectProfile,
   selectProfileState,
 } from '../profile/profile.selectors';
-import { Card, CardWithProfile } from 'src/app/models/card.model';
+import { CardWithProfile, Card } from 'src/app/models/card.model';
 
 export const selectCardState = createFeatureSelector<CardState>('card');
 

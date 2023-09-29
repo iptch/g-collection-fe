@@ -1,5 +1,5 @@
 import { createReducer, on } from '@ngrx/store';
-import { cardAdapter, CardState, initialCardState } from './card.state';
+import { CardState, cardAdapter, initialCardState } from './card.state';
 import * as CardActions from './card.actions';
 
 export const cardReducer = createReducer(
