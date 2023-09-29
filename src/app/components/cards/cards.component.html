@@ -26,7 +26,7 @@
 
       <mat-form-field class="g-collection-select w-full mb-2 no-tap-highlight">
         <mat-label>Sortieren nach</mat-label>
-        <mat-select (selectionChange)="onSort($event)" [value]="sort$">
+        <mat-select (selectionChange)="onSort($event)" [value]="sort$ | async">
           <mat-option
             *ngFor="let sortCriterion of sortCriteria"
             [value]="sortCriterion.value"
