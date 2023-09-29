@@ -1,6 +1,8 @@
 <div class="flex justify-between items-center">
   <app-title>Chärtli</app-title>
-  <mat-slide-toggle class="pr-2 pt-2">Alle</mat-slide-toggle>
+  <mat-slide-toggle class="pr-2 pt-2" [(ngModel)]="showAll"
+    >Alle</mat-slide-toggle
+  >
 </div>
 <app-panel>
   <app-loader *ngIf="loading$ | async"></app-loader>
@@ -20,14 +22,27 @@
         </mat-option>
       </mat-select>
     </mat-form-field>
-    <div *ngIf="cards$ | async as cards">
-      <div class="grid grid-cols-3 gap-4">
-        <app-card-thumbnail
-          *ngFor="let card of cards.results"
-          [card]="card"
-          [routerLink]="'' + card.id"
-        ></app-card-thumbnail>
+    <ng-container *ngIf="showAll">
+      <div *ngIf="allCards$ | async as cards">
+        <div class="grid grid-cols-3 gap-4">
+          <app-card-thumbnail
+            *ngFor="let card of cards"
+            [card]="card"
+            [routerLink]="'' + card.id"
+          ></app-card-thumbnail>
+        </div>
       </div>
-    </div>
+    </ng-container>
+    <ng-container *ngIf="!showAll">
+      <div *ngIf="ownedCards$ | async as cards">
+        <div class="grid grid-cols-3 gap-4">
+          <app-card-thumbnail
+            *ngFor="let card of cards"
+            [card]="card"
+            [routerLink]="'' + card.id"
+          ></app-card-thumbnail>
+        </div>
+      </div>
+    </ng-container>
   </ng-container>
 </app-panel>
