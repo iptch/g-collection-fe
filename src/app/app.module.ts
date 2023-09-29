@@ -153,6 +153,7 @@ export function MSALGuardConfigFactory(): MsalGuardConfiguration {
       logOnly: environment.production,
     }),
     EffectsModule.forRoot([ProfileEffects, CardEffects]),
+    FormsModule,
   ],
   providers: [
     {

@@ -1,10 +1,14 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import {
   Html5Qrcode,
   Html5QrcodeCameraScanConfig,
   Html5QrcodeScannerState,
 } from 'html5-qrcode';
+import { Subscription } from 'rxjs';
 import { Code } from 'src/app/models/code.model';
+import { CardService } from 'src/app/services/card.service';
+import { environment } from 'src/environments/environment';
 
 const cameraConfig = { facingMode: 'environment' };
 
@@ -21,17 +25,33 @@ export class QrScannerComponent implements OnInit, OnDestroy {
   private destroyed = false;
   private qrScanner!: Html5Qrcode;
   code?: Code;
+  bypassCodeValue = '';
+  bypassEnabled = false;
+  private tradeSubscription: Subscription | null = null;
+
+  constructor(
+    private cardService: CardService,
+    private router: Router,
+  ) {}
 
   ngOnInit(): void {
-    this.qrScanner = new Html5Qrcode('qr-scanner');
-    this.startScanning();
+    this.bypassEnabled = environment.scannerBypass === true;
+
+    if (this.bypassEnabled === false) {
+      this.qrScanner = new Html5Qrcode('qr-scanner');
+      this.startScanning();
+    }
   }
 
   ngOnDestroy(): void {
     this.destroyed = true;
-    if (this.qrScanner.getState() !== Html5QrcodeScannerState.NOT_STARTED) {
+    if (
+      this.qrScanner &&
+      this.qrScanner.getState() !== Html5QrcodeScannerState.NOT_STARTED
+    ) {
       this.stopScanning();
     }
+    this.tradeSubscription?.unsubscribe();
   }
 
   startScanning(): void {
@@ -54,9 +74,11 @@ export class QrScannerComponent implements OnInit, OnDestroy {
   }
 
   stopScanning(): void {
-    this.qrScanner
-      .stop()
-      .catch((err) => console.log('Error stopping the scanner', err));
+    if (this.qrScanner) {
+      this.qrScanner
+        .stop()
+        .catch((err) => console.log('Error stopping the scanner', err));
+    }
   }
 
   resumeScanning(): void {
@@ -69,6 +91,20 @@ export class QrScannerComponent implements OnInit, OnDestroy {
     if (this.isCode(parsedObject)) {
       this.code = parsedObject;
       this.stopScanning();
+
+      this.tradeSubscription = this.cardService
+        .transferCard(this.code)
+        .subscribe({
+          next: () => {
+            console.info(
+              `trade successful! redirecting to card ${parsedObject.id}`,
+            );
+            this.router.navigate(['/cards', `${parsedObject.id}`]);
+          },
+          error: (error) => {
+            console.error(`Trading cards failed: ${error.error.status}`);
+          },
+        });
     } else {
       console.error('Parsed object is not of type Code', parsedObject);
     }
@@ -81,5 +117,9 @@ export class QrScannerComponent implements OnInit, OnDestroy {
       typeof obj.giver === 'string' &&
       typeof obj.otp === 'string'
     );
+  }
+
+  bypassCodeValueChanged() {
+    this.parseCode(this.bypassCodeValue);
   }
 }

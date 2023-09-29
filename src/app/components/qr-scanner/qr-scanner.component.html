@@ -8,5 +8,15 @@
     (click)="resumeScanning()"
     [text]="'Scan again'"
     [symbol]="'qr_code_scanner'"
+    *ngIf="!bypassEnabled"
   ></app-button>
 </ng-container>
+<input
+  *ngIf="bypassEnabled"
+  class="text-black"
+  type="text"
+  placeholder="Code JSON"
+  name="debug"
+  [(ngModel)]="bypassCodeValue"
+  (keydown.enter)="bypassCodeValueChanged()"
+/>

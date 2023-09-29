@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Card, Cards } from '../models/card.model';
+import { Code } from '../models/code.model';
 import { Observable } from 'rxjs';
 import { environment } from './../../environments/environment';
 
@@ -17,5 +18,9 @@ export class CardService {
 
   getCardById(id: number): Observable<Card> {
     return this.http.get<Card>(`${this.cardsEndpoint}/${id}`);
+  }
+
+  transferCard(code: Code): Observable<Response> {
+    return this.http.post<Response>(`${this.cardsEndpoint}/transfer/`, code);
   }
 }
