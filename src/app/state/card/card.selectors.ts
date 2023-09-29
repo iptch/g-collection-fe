@@ -79,8 +79,9 @@ export const selectCardsSorted = createSelector(
           return a.acronym > b.acronym ? 1 : -1;
         case 'name':
           return getLastName(a) > getLastName(b) ? 1 : -1;
-        case 'received':
         case 'doublicates':
+          return a.quantity > b.quantity ? -1 : 1;
+        case 'received':
         default:
           return 0;
       }
