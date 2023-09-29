@@ -25,18 +25,14 @@ export class DashboardService {
           });
         }
 
-        const endpoint = `overview/${user.id}`;
-
-        return this.http.get<Dashboard>(
-          `${environment.backendUri}/${endpoint}`,
-        );
+        return this.http.get<Dashboard>(`${environment.backendUri}/overview`);
       }),
     );
   }
 
   getRankOf(userEmail: string, rankingList: Ranking[]): number {
     return (
-      rankingList.findIndex((ranking) => ranking.userEmail === userEmail) + 1
+      rankingList.find((ranking) => ranking.userEmail === userEmail)?.rank || 0
     );
   }
 }
