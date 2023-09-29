@@ -79,8 +79,9 @@ export const selectCardsSorted = createSelector(
           return a.acronym > b.acronym ? 1 : -1;
         case 'name':
           return getLastName(a) > getLastName(b) ? 1 : -1;
+        case 'doublicates':
+          return a.quantity > b.quantity ? -1 : 1;
         case 'received':
-        case 'duplicates':
         default:
           return 0;
       }
@@ -111,7 +112,7 @@ export const selectCardsFiltered = createSelector(
     if (showAll) {
       return allCards;
     } else {
-      return allCards.filter((card) => card.owned > 0);
+      return allCards.filter((card) => card.quantity > 0);
     }
   },
 );
