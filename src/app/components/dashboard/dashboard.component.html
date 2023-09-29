@@ -2,20 +2,25 @@
 <div class="grid grid-cols-2">
   <app-panel>
     <div class="text-light-pink">Chärtli</div>
-    <div class="text-4xl">1/420</div>
+    <div class="text-4xl">
+      {{ (this.dashboardData$ | async)?.myUniqueCardsCount }} /
+      {{ (this.dashboardData$ | async)?.allCardsCount }}
+    </div>
   </app-panel>
   <app-panel>
     <div class="text-light-pink">Rang</div>
-    <div class="text-4xl">69</div>
+    <div class="text-4xl">{{ this.myRank }}</div>
   </app-panel>
 </div>
 <app-panel>
   <div class="text-light-pink">Top 5</div>
   <ol class="list-decimal list-inside">
-    <li>Big P</li>
-    <li>Stefan Hüsemann</li>
-    <li>Larissa Zollinger</li>
-    <li>Christoph Weber</li>
-    <li>Kevin Duss</li>
+    <li
+      *ngFor="
+        let ranking of (this.dashboardData$ | async)?.rankingList | slice: 0 : 5
+      "
+    >
+      {{ ranking.displayName }}
+    </li>
   </ol>
 </app-panel>
