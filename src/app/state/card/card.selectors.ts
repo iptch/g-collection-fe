@@ -5,6 +5,7 @@ import {
   selectProfileState,
 } from '../profile/profile.selectors';
 import { Card, CardWithProfile } from 'src/app/models/card.model';
+import { CardSort } from 'src/app/models/card-sort.enum';
 
 export const selectCardState = createFeatureSelector<CardState>('card');
 
@@ -72,17 +73,16 @@ export const selectCardsSorted = createSelector(
   selectAllCards,
   selectCardState,
   (allCards, cardState) => {
-    const getLastName = (obj: Card) => obj?.name?.split(' ')?.pop() || obj.name;
     const cardsCopy = [...allCards];
     cardsCopy.sort((a: Card, b: Card) => {
       switch (cardState.sort) {
-        case 'acronym':
+        case CardSort.Acronym:
           return a.acronym > b.acronym ? 1 : -1;
-        case 'name':
-          return getLastName(a) > getLastName(b) ? 1 : -1;
-        case 'duplicates':
+        case CardSort.Name:
+          return a.name > b.name ? 1 : -1;
+        case CardSort.Duplicates:
           return a.quantity > b.quantity ? -1 : 1;
-        case 'received':
+        case CardSort.Received:
           return a.last_received > b.last_received ? -1 : 1;
         default:
           return 0;

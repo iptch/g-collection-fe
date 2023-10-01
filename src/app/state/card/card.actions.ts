@@ -1,4 +1,5 @@
 import { createAction, props } from '@ngrx/store';
+import { CardSort } from 'src/app/models/card-sort.enum';
 import { Card, Cards } from 'src/app/models/card.model';
 
 export const loadCards = createAction('[Cards] Load cards');
@@ -34,7 +35,7 @@ export const changeCardsPage = createAction(
 
 export const changeCardsSort = createAction(
   '[Cards] Change Sort',
-  props<{ sort: string }>(),
+  props<{ sort: CardSort }>(),
 );
 
 export const changeCardsSortDirection = createAction(

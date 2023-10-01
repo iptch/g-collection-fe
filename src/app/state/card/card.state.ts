@@ -1,4 +1,5 @@
 import { EntityState, createEntityAdapter } from '@ngrx/entity';
+import { CardSort } from 'src/app/models/card-sort.enum';
 import { Card } from 'src/app/models/card.model';
 
 export interface CardState extends EntityState<Card> {
@@ -10,7 +11,7 @@ export interface CardState extends EntityState<Card> {
   showAll: boolean;
   pageSize: number;
   pageIndex: number;
-  sort: string;
+  sort: CardSort;
   ascendingDirection: boolean;
 }
 
@@ -25,6 +26,6 @@ export const initialCardState: CardState = cardAdapter.getInitialState({
   showAll: false,
   pageSize: 20,
   pageIndex: 0,
-  sort: 'acronym',
+  sort: CardSort.Acronym,
   ascendingDirection: true,
 });

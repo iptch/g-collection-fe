@@ -3,6 +3,7 @@ import { PageEvent } from '@angular/material/paginator';
 import { Store } from '@ngrx/store';
 import { first, Observable } from 'rxjs';
 import { Card } from 'src/app/models/card.model';
+import { CardSort } from 'src/app/models/card-sort.enum';
 import {
   changeCardsFilter,
   changeCardsPage,
@@ -10,7 +11,6 @@ import {
   changeCardsSortDirection,
   loadCards,
 } from 'src/app/state/card/card.actions';
-
 import {
   selectCardError,
   selectCardLoading,
@@ -24,7 +24,7 @@ import {
 import { MatSelectChange } from '@angular/material/select';
 
 interface SortCriterion {
-  value: string;
+  value: CardSort;
   viewValue: string;
 }
 
@@ -46,10 +46,10 @@ export class CardsComponent {
   }>;
 
   readonly sortCriteria: SortCriterion[] = [
-    { value: 'received', viewValue: 'Erhalt des Chärtlis' },
-    { value: 'duplicates', viewValue: 'Anzahl Dubletten' },
-    { value: 'acronym', viewValue: 'Kürzel' },
-    { value: 'name', viewValue: 'Nachname' },
+    { value: CardSort.Received, viewValue: 'Erhalt des Chärtlis' },
+    { value: CardSort.Duplicates, viewValue: 'Anzahl Dubletten' },
+    { value: CardSort.Acronym, viewValue: 'Kürzel' },
+    { value: CardSort.Name, viewValue: 'Name' },
   ];
 
   constructor(private readonly store: Store) {
