@@ -1,10 +1,11 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
-import { CardState, cardAdapter } from './card.state';
+import { cardAdapter, CardState } from './card.state';
 import {
   selectProfile,
   selectProfileState,
 } from '../profile/profile.selectors';
-import { CardWithProfile } from 'src/app/models/card.model';
+import { Card, CardWithProfile } from 'src/app/models/card.model';
+import { CardSort } from 'src/app/models/card-sort.enum';
 
 export const selectCardState = createFeatureSelector<CardState>('card');
 
@@ -68,9 +69,48 @@ export const selectCardsPageInfo = createSelector(
     pageIndex: cardState.pageIndex,
   }),
 );
+export const selectCardsSorted = createSelector(
+  selectAllCards,
+  selectCardState,
+  (allCards, cardState) => {
+    const cardsCopy = [...allCards];
+    cardsCopy.sort((a: Card, b: Card) => {
+      switch (cardState.sort) {
+        case CardSort.Acronym:
+          return a.acronym > b.acronym ? 1 : -1;
+        case CardSort.Name:
+          return a.name > b.name ? 1 : -1;
+        case CardSort.Duplicates:
+          return a.quantity > b.quantity ? -1 : 1;
+        case CardSort.Received:
+          if (!a.last_received) return 1;
+          if (!b.last_received) return -1;
+          return a.last_received.localeCompare(b.last_received);
+        default:
+          return 0;
+      }
+    });
+
+    if (!cardState.ascendingDirection) {
+      return cardsCopy.reverse();
+    }
+
+    return cardsCopy;
+  },
+);
+
+export const selectCardsSort = createSelector(
+  selectCardState,
+  (cardState) => cardState.sort,
+);
+
+export const selectCardsSortDirection = createSelector(
+  selectCardState,
+  (cardState) => cardState.ascendingDirection,
+);
 
 export const selectCardsFiltered = createSelector(
-  selectAllCards,
+  selectCardsSorted,
   selectCardsShowAll,
   (allCards, showAll) => {
     if (showAll) {

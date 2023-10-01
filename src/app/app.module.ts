@@ -1,29 +1,29 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { NgModule, isDevMode } from '@angular/core';
+import { isDevMode, NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import {
-  IPublicClientApplication,
-  PublicClientApplication,
   BrowserCacheLocation,
-  LogLevel,
   InteractionType,
+  IPublicClientApplication,
+  LogLevel,
+  PublicClientApplication,
 } from '@azure/msal-browser';
 import {
+  MSAL_GUARD_CONFIG,
   MSAL_INSTANCE,
   MSAL_INTERCEPTOR_CONFIG,
-  MsalInterceptorConfiguration,
-  MSAL_GUARD_CONFIG,
-  MsalGuardConfiguration,
   MsalBroadcastService,
-  MsalService,
   MsalGuard,
-  MsalRedirectComponent,
-  MsalModule,
+  MsalGuardConfiguration,
   MsalInterceptor,
+  MsalInterceptorConfiguration,
+  MsalModule,
+  MsalRedirectComponent,
+  MsalService,
 } from '@azure/msal-angular';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { ProfileComponent } from './components/profile/profile.component';
@@ -52,6 +52,7 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatSelectModule } from '@angular/material/select';
 import { FormsModule } from '@angular/forms';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
 
 const GRAPH_ENDPOINT = 'https://graph.microsoft.com/v1.0/me';
 
@@ -153,6 +154,7 @@ export function MSALGuardConfigFactory(): MsalGuardConfiguration {
       logOnly: environment.production,
     }),
     EffectsModule.forRoot([ProfileEffects, CardEffects]),
+    MatButtonToggleModule,
   ],
   providers: [
     {

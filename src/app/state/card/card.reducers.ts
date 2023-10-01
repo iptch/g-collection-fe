@@ -58,4 +58,12 @@ export const cardReducer = createReducer(
       return { ...state, pageIndex, pageSize };
     },
   ),
+
+  on(CardActions.changeCardsSort, (state, { sort }): CardState => {
+    return { ...state, sort };
+  }),
+
+  on(CardActions.changeCardsSortDirection, (state): CardState => {
+    return { ...state, ascendingDirection: !state.ascendingDirection };
+  }),
 );

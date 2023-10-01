@@ -1,11 +1,14 @@
 import { Component } from '@angular/core';
 import { PageEvent } from '@angular/material/paginator';
 import { Store } from '@ngrx/store';
-import { Observable, first } from 'rxjs';
+import { first, Observable } from 'rxjs';
 import { Card } from 'src/app/models/card.model';
+import { CardSort } from 'src/app/models/card-sort.enum';
 import {
   changeCardsFilter,
   changeCardsPage,
+  changeCardsSort,
+  changeCardsSortDirection,
   loadCards,
 } from 'src/app/state/card/card.actions';
 import {
@@ -15,10 +18,13 @@ import {
   selectCardsFilteredCount,
   selectCardsPageInfo,
   selectCardsShowAll,
+  selectCardsSort,
+  selectCardsSortDirection,
 } from 'src/app/state/card/card.selectors';
+import { MatSelectChange } from '@angular/material/select';
 
 interface SortCriterion {
-  value: string;
+  value: CardSort;
   viewValue: string;
 }
 
@@ -32,13 +38,18 @@ export class CardsComponent {
   cards$?: Observable<Card[]>;
   cardsCount$: Observable<number>;
   showAll$: Observable<boolean>;
-  initialPageInfo$: Observable<{ pageIndex: number; pageSize: number }>;
+  sort$?: Observable<string>;
+  sortDirection$?: Observable<boolean>;
+  initialPageInfo$: Observable<{
+    pageIndex: number;
+    pageSize: number;
+  }>;
 
   readonly sortCriteria: SortCriterion[] = [
-    { value: 'received', viewValue: 'Erhalt des Chärtlis' },
-    { value: 'doublicates', viewValue: 'Anzahl Dubletten' },
-    { value: 'acronym', viewValue: 'Kürzel' },
-    { value: 'name', viewValue: 'Name' },
+    { value: CardSort.Received, viewValue: 'Erhalt des Chärtlis' },
+    { value: CardSort.Duplicates, viewValue: 'Anzahl Dubletten' },
+    { value: CardSort.Acronym, viewValue: 'Kürzel' },
+    { value: CardSort.Name, viewValue: 'Name' },
   ];
 
   constructor(private readonly store: Store) {
@@ -48,6 +59,8 @@ export class CardsComponent {
     this.showAll$ = this.store.select(selectCardsShowAll);
     this.cardsCount$ = this.store.select(selectCardsFilteredCount);
     this.cards$ = this.store.select(selectCardsFilteredAndPaged);
+    this.sortDirection$ = this.store.select(selectCardsSortDirection);
+    this.sort$ = this.store.select(selectCardsSort);
     this.initialPageInfo$ = this.store
       .select(selectCardsPageInfo)
       .pipe(first());
@@ -57,9 +70,17 @@ export class CardsComponent {
     this.store.dispatch(changeCardsFilter({ showAll: value }));
   }
 
+  onSortDirectionChange() {
+    this.store.dispatch(changeCardsSortDirection());
+  }
+
   onPage(event: PageEvent) {
     this.store.dispatch(
       changeCardsPage({ pageSize: event.pageSize, pageIndex: event.pageIndex }),
     );
+  }
+
+  onSort(event: MatSelectChange) {
+    this.store.dispatch(changeCardsSort({ sort: event.value }));
   }
 }

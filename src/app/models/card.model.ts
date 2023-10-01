@@ -9,6 +9,7 @@ export interface Card {
   team: string;
   image_url: string;
   quantity: number;
+  last_received: string;
 }
 
 export interface CardWithProfile extends Card {
