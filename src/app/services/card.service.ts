@@ -4,6 +4,7 @@ import { Card, Cards } from '../models/card.model';
 import { Code } from '../models/code.model';
 import { Observable } from 'rxjs';
 import { environment } from './../../environments/environment';
+import { StatusResponse } from '../models/status-response.model';
 
 @Injectable({
   providedIn: 'root',
@@ -20,7 +21,10 @@ export class CardService {
     return this.http.get<Card>(`${this.cardsEndpoint}/${id}`);
   }
 
-  transferCard(code: Code): Observable<Response> {
-    return this.http.post<Response>(`${this.cardsEndpoint}/transfer/`, code);
+  transferCard(code: Code): Observable<StatusResponse> {
+    return this.http.post<StatusResponse>(
+      `${this.cardsEndpoint}/transfer/`,
+      code,
+    );
   }
 }

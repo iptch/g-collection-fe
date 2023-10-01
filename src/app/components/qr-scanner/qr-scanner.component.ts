@@ -22,11 +22,12 @@ const qrScannerConfig: Html5QrcodeCameraScanConfig = {
   templateUrl: './qr-scanner.component.html',
 })
 export class QrScannerComponent implements OnInit, OnDestroy {
+  code?: Code;
+  error?: string;
+  bypassEnabled = environment.scannerBypass;
+  bypassCodeValue = '';
   private destroyed = false;
   private qrScanner!: Html5Qrcode;
-  code?: Code;
-  bypassCodeValue = '';
-  bypassEnabled = false;
   private tradeSubscription: Subscription | null = null;
 
   constructor(
@@ -35,26 +36,20 @@ export class QrScannerComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    this.bypassEnabled = environment.scannerBypass === true;
-
-    if (this.bypassEnabled === false) {
-      this.qrScanner = new Html5Qrcode('qr-scanner');
-      this.startScanning();
-    }
+    this.qrScanner = new Html5Qrcode('qr-scanner');
+    this.startScanning();
   }
 
   ngOnDestroy(): void {
     this.destroyed = true;
-    if (
-      this.qrScanner &&
-      this.qrScanner.getState() !== Html5QrcodeScannerState.NOT_STARTED
-    ) {
+    if (this.qrScanner.getState() !== Html5QrcodeScannerState.NOT_STARTED) {
       this.stopScanning();
     }
     this.tradeSubscription?.unsubscribe();
   }
 
   startScanning(): void {
+    if (this.bypassEnabled) return;
     this.qrScanner
       .start(
         cameraConfig,
@@ -74,15 +69,15 @@ export class QrScannerComponent implements OnInit, OnDestroy {
   }
 
   stopScanning(): void {
-    if (this.qrScanner) {
-      this.qrScanner
-        .stop()
-        .catch((err) => console.log('Error stopping the scanner', err));
-    }
+    if (this.bypassEnabled) return;
+    this.qrScanner
+      .stop()
+      .catch((err) => console.log('Error stopping the scanner', err));
   }
 
   resumeScanning(): void {
     this.code = undefined;
+    this.error = undefined;
     this.startScanning();
   }
 
@@ -95,15 +90,11 @@ export class QrScannerComponent implements OnInit, OnDestroy {
       this.tradeSubscription = this.cardService
         .transferCard(this.code)
         .subscribe({
-          next: () => {
-            console.info(
-              `trade successful! redirecting to card ${parsedObject.id}`,
-            );
+          next: (response) => {
+            console.info(response.status);
             this.router.navigate(['/cards', `${parsedObject.id}`]);
           },
-          error: (error) => {
-            console.error(`Trading cards failed: ${error.error.status}`);
-          },
+          error: (error) => (this.error = error.error.status),
         });
     } else {
       console.error('Parsed object is not of type Code', parsedObject);
