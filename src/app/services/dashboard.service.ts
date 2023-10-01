@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Dashboard, Ranking } from '../models/dashboard.model';
 import { environment } from 'src/environments/environment';
 import { Profile } from '../models/profile.model';
-import { Observable, of, switchMap, defaultIfEmpty } from 'rxjs';
+import { Observable, of, switchMap } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
