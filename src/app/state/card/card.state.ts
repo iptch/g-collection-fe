@@ -26,6 +26,6 @@ export const initialCardState: CardState = cardAdapter.getInitialState({
   showAll: false,
   pageSize: 20,
   pageIndex: 0,
-  sort: CardSort.Acronym,
+  sort: CardSort.Received,
   ascendingDirection: true,
 });

@@ -83,7 +83,9 @@ export const selectCardsSorted = createSelector(
         case CardSort.Duplicates:
           return a.quantity > b.quantity ? -1 : 1;
         case CardSort.Received:
-          return a.last_received > b.last_received ? -1 : 1;
+          if (!a.last_received) return 1;
+          if (!b.last_received) return -1;
+          return a.last_received.localeCompare(b.last_received);
         default:
           return 0;
       }
