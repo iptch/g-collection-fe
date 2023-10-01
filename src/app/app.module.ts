@@ -53,6 +53,9 @@ import { MatSelectModule } from '@angular/material/select';
 import { FormsModule } from '@angular/forms';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
+import { AdminComponent } from './components/admin/admin.component';
+import { DistributionEffects } from './state/distribution/distribution.effects';
+import { MatSliderModule } from '@angular/material/slider';
 
 const GRAPH_ENDPOINT = 'https://graph.microsoft.com/v1.0/me';
 
@@ -125,6 +128,7 @@ export function MSALGuardConfigFactory(): MsalGuardConfiguration {
     CardDetailComponent,
     FieldComponent,
     AlertComponent,
+    AdminComponent,
   ],
   imports: [
     BrowserModule,
@@ -153,8 +157,9 @@ export function MSALGuardConfigFactory(): MsalGuardConfiguration {
       maxAge: 25,
       logOnly: environment.production,
     }),
-    EffectsModule.forRoot([ProfileEffects, CardEffects]),
+    EffectsModule.forRoot([ProfileEffects, CardEffects, DistributionEffects]),
     MatButtonToggleModule,
+    MatSliderModule,
   ],
   providers: [
     {

@@ -1,0 +1,24 @@
+<app-title>VIP Section</app-title>
+<app-panel>
+  <app-loader *ngIf="loading$ | async"></app-loader>
+  <app-alert
+    *ngIf="error$ | async"
+    [message]="'Chärtli konnten nicht ausgeschüttet werden.'"
+  ></app-alert>
+  <ng-container *ngIf="!((loading$ | async) || (error$ | async))">
+    <div>Neue Chärtli an alle Spieler ausschütten.</div>
+    <div>
+      <mat-slider discrete min="1" max="10" step="1">
+        <input matSliderThumb value="5" #slider />
+      </mat-slider>
+    </div>
+    <div class="flex mt-2">
+      <app-button
+        (click)="distributeCards(slider.value)"
+        [text]="'Make it rain!'"
+        [symbol]="'rainy_light'"
+        [color]="'pink'"
+      ></app-button>
+    </div>
+  </ng-container>
+</app-panel>

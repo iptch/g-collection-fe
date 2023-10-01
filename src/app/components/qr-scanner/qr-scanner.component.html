@@ -1,17 +1,21 @@
 <app-title>QR Scanner</app-title>
 <div class="mt-2" id="qr-scanner"></div>
-<ng-container *ngIf="error">
-  <app-panel>
+<app-panel *ngIf="error">
+  <div class="space-y-2">
     <div class="text-light-pink">Tausch fehlgeschlagen</div>
-    <p class="pt-2 pb-2">{{ error }}</p>
-    <pre>{{ code | json }}</pre>
-  </app-panel>
-  <app-button
-    (click)="resumeScanning()"
-    [text]="'Scan again'"
-    [symbol]="'qr_code_scanner'"
-  ></app-button>
-</ng-container>
+    <div>{{ error }}</div>
+    <div>
+      <pre>{{ code | json }}</pre>
+    </div>
+    <div class="flex">
+      <app-button
+        (click)="resumeScanning()"
+        [text]="'Scan again'"
+        [symbol]="'qr_code_scanner'"
+      ></app-button>
+    </div>
+  </div>
+</app-panel>
 <app-panel *ngIf="bypassEnabled">
   <input
     #bypassCodeInput

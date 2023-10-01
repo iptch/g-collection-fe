@@ -17,12 +17,14 @@
         ></app-field>
       </div>
       <div><app-field [label]="'ID'" [value]="profile.id"></app-field></div>
+      <div class="flex">
+        <app-button
+          (click)="logout()"
+          [text]="'Logout'"
+          [symbol]="'logout'"
+          [color]="'pink'"
+        ></app-button>
+      </div>
     </div>
   </ng-container>
 </app-panel>
-<app-button
-  (click)="logout()"
-  [text]="'Logout'"
-  [symbol]="'logout'"
-  [color]="'pink'"
-></app-button>

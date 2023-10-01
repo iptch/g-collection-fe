@@ -7,6 +7,7 @@ import { MsalGuard } from '@azure/msal-angular';
 import { QrScannerComponent } from './components/qr-scanner/qr-scanner.component';
 import { CardsComponent } from './components/cards/cards.component';
 import { CardDetailComponent } from './components/card-detail/card-detail.component';
+import { AdminComponent } from './components/admin/admin.component';
 
 const routes: Routes = [
   {
@@ -18,6 +19,10 @@ const routes: Routes = [
         path: '',
         redirectTo: '/dashboard',
         pathMatch: 'full',
+      },
+      {
+        path: 'admin',
+        component: AdminComponent,
       },
       {
         path: 'cards',
