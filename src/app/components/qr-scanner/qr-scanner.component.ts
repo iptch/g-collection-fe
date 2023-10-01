@@ -25,7 +25,6 @@ export class QrScannerComponent implements OnInit, OnDestroy {
   code?: Code;
   error?: string;
   bypassEnabled = environment.scannerBypass;
-  bypassCodeValue = '';
   private destroyed = false;
   private qrScanner!: Html5Qrcode;
   private tradeSubscription: Subscription | null = null;
@@ -110,7 +109,7 @@ export class QrScannerComponent implements OnInit, OnDestroy {
     );
   }
 
-  bypassCodeValueChanged() {
-    this.parseCode(this.bypassCodeValue);
+  bypassCodeValueChanged(value: string) {
+    this.parseCode(value);
   }
 }

@@ -14,10 +14,10 @@
 </ng-container>
 <app-panel *ngIf="bypassEnabled">
   <input
+    #bypassCodeInput
     class="text-black w-full"
     placeholder="Code JSON"
     name="debug"
-    [(ngModel)]="bypassCodeValue"
-    (keydown.enter)="bypassCodeValueChanged()"
+    (keydown.enter)="bypassCodeValueChanged(bypassCodeInput.value)"
   />
 </app-panel>
