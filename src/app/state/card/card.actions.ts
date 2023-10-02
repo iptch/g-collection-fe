@@ -1,12 +1,12 @@
 import { createAction, props } from '@ngrx/store';
 import { CardSort } from 'src/app/models/card-sort.enum';
-import { Card, Cards } from 'src/app/models/card.model';
+import { Card } from 'src/app/models/card.model';
 
 export const loadCards = createAction('[Cards] Load cards');
 
 export const loadCardsSuccess = createAction(
   '[Cards] Load cards success',
-  props<{ cards: Cards }>(),
+  props<{ cards: Card[] }>(),
 );
 
 export const loadCardsError = createAction('[Cards] Load cards error');

@@ -15,10 +15,3 @@ export interface Card {
 export interface CardWithProfile extends Card {
   giver: string;
 }
-
-export interface Cards {
-  results: Card[];
-  count: number;
-  next: string | null;
-  previous: string | null;
-}

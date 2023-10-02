@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Card, Cards } from '../models/card.model';
+import { Card } from '../models/card.model';
 import { Code } from '../models/code.model';
 import { Observable } from 'rxjs';
 import { environment } from './../../environments/environment';
@@ -14,8 +14,8 @@ export class CardService {
 
   constructor(private readonly http: HttpClient) {}
 
-  getCards(): Observable<Cards> {
-    return this.http.get<Cards>(this.cardsEndpoint);
+  getCards(): Observable<Card[]> {
+    return this.http.get<Card[]>(this.cardsEndpoint);
   }
 
   getCardById(id: number): Observable<Card> {
