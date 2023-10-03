@@ -26,13 +26,10 @@ export const cardReducer = createReducer(
   ),
 
   on(CardActions.loadCardsSuccess, (state, { cards }): CardState => {
-    const entityState = cardAdapter.upsertMany(cards.results, state);
+    const entityState = cardAdapter.upsertMany(cards, state);
 
     return {
       ...entityState,
-      count: cards.count,
-      next: cards.next,
-      previous: cards.previous,
       loading: false,
       error: false,
     };
