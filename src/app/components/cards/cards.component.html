@@ -14,7 +14,7 @@
     [message]="'Chärtli konnten nicht geladen werden.'"
   ></app-alert>
   <ng-container *ngIf="!((loading$ | async) || (error$ | async))">
-    <div class="flex items-center gap-2">
+    <div class="flex gap-2 mb-2">
       <mat-button-toggle
         [checked]="(sortDirection$ | async) || false"
         (click)="onSortDirectionChange()"
@@ -24,7 +24,7 @@
         </span>
       </mat-button-toggle>
 
-      <mat-form-field class="g-collection-select w-full mb-2 no-tap-highlight">
+      <mat-form-field class="g-collection-select grow no-tap-highlight">
         <mat-label>Sortieren nach</mat-label>
         <mat-select (selectionChange)="onSort($event)" [value]="sort$ | async">
           <mat-option
