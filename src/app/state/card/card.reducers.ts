@@ -46,7 +46,7 @@ export const cardReducer = createReducer(
   }),
 
   on(CardActions.changeCardsFilter, (state, { showAll }): CardState => {
-    return { ...state, showAll };
+    return { ...state, showAll, pageIndex: initialCardState.pageIndex };
   }),
 
   on(
@@ -57,10 +57,14 @@ export const cardReducer = createReducer(
   ),
 
   on(CardActions.changeCardsSort, (state, { sort }): CardState => {
-    return { ...state, sort };
+    return { ...state, sort, pageIndex: initialCardState.pageIndex };
   }),
 
   on(CardActions.changeCardsSortDirection, (state): CardState => {
-    return { ...state, ascendingDirection: !state.ascendingDirection };
+    return {
+      ...state,
+      ascendingDirection: !state.ascendingDirection,
+      pageIndex: initialCardState.pageIndex,
+    };
   }),
 );
