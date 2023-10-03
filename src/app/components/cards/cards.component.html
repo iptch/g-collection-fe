@@ -14,8 +14,9 @@
     [message]="'Chärtli konnten nicht geladen werden.'"
   ></app-alert>
   <ng-container *ngIf="!((loading$ | async) || (error$ | async))">
-    <div class="flex gap-2 mb-2">
+    <div class="flex gap-4 mb-4">
       <mat-button-toggle
+        class="!rounded-none"
         [checked]="(sortDirection$ | async) || false"
         (click)="onSortDirectionChange()"
       >
@@ -37,7 +38,7 @@
       </mat-form-field>
     </div>
     <div *ngIf="cards$ | async as cards">
-      <div class="grid grid-cols-3 gap-4 mb-2">
+      <div class="grid grid-cols-3 gap-2 mb-2">
         <app-card-thumbnail
           *ngFor="let card of cards"
           [card]="card"

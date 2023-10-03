@@ -1,5 +1,10 @@
 // Angular Material
 
+// Overlay
+.cdk-overlay-container .mdc-menu-surface {
+  border-radius: 0;
+}
+
 // Select
 .g-collection-select.mat-mdc-form-field {
   .mdc-text-field {
@@ -16,6 +21,8 @@
   }
 }
 
-.cdk-overlay-container .mdc-menu-surface {
-  border-radius: 0;
+// Paginator
+.mdc-notched-outline__leading,
+.mdc-notched-outline__trailing {
+  border-radius: 0 !important;
 }
