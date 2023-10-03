@@ -1,7 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { environment } from './../../environments/environment';
+import { environment } from '../../environments/environment';
+import { User } from '../models/user.model';
 
 @Injectable({
   providedIn: 'root',
@@ -11,7 +12,7 @@ export class UserService {
 
   constructor(private readonly http: HttpClient) {}
 
-  initUser(): Observable<void> {
-    return this.http.post<void>(this.usersEndpoint + '/init/', {});
+  initUser(): Observable<User> {
+    return this.http.post<User>(this.usersEndpoint + '/init/', {});
   }
 }
