@@ -24,7 +24,7 @@ export const initialCardState: CardState = cardAdapter.getInitialState({
   loading: false,
   error: false,
   showAll: false,
-  pageSize: 20,
+  pageSize: 12,
   pageIndex: 0,
   sort: CardSort.Received,
   ascendingDirection: true,

@@ -1,10 +1,11 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MsalBroadcastService } from '@azure/msal-angular';
 import { InteractionStatus } from '@azure/msal-browser';
-import { Subject } from 'rxjs';
-import { filter, takeUntil } from 'rxjs/operators';
-import { AuthService } from './services/auth.service';
 import { Store } from '@ngrx/store';
+import { Subject } from 'rxjs';
+import { filter, first, switchMap, takeUntil } from 'rxjs/operators';
+import { AuthService } from './services/auth.service';
+import { UserService } from './services/user.service';
 import { loadProfile } from './state/profile/profile.actions';
 
 @Component({
@@ -21,6 +22,7 @@ export class AppComponent implements OnInit, OnDestroy {
     private readonly store: Store,
     private readonly msalBroadcastService: MsalBroadcastService,
     private readonly authService: AuthService,
+    private readonly userService: UserService,
   ) {
     this.store.dispatch(loadProfile());
   }
@@ -32,10 +34,12 @@ export class AppComponent implements OnInit, OnDestroy {
         filter(
           (status: InteractionStatus) => status === InteractionStatus.None,
         ),
+        first(),
+        switchMap(() => this.userService.initUser()),
+        first(),
         takeUntil(this.destroy$),
       )
       .subscribe(() => {
-        // TODO: Create user if not exists via BE call
         this.showApp();
       });
   }
