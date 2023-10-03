@@ -7,11 +7,11 @@ import { environment } from './../../environments/environment';
   providedIn: 'root',
 })
 export class UserService {
-  private readonly userEndpoint = `${environment.backendUri}/user`;
+  private readonly usersEndpoint = `${environment.backendUri}/users`;
 
   constructor(private readonly http: HttpClient) {}
 
   initUser(): Observable<void> {
-    return this.http.post<void>(this.userEndpoint + '/init', {});
+    return this.http.post<void>(this.usersEndpoint + '/init/', {});
   }
 }

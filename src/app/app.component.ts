@@ -7,7 +7,6 @@ import { filter, first, switchMap, takeUntil } from 'rxjs/operators';
 import { AuthService } from './services/auth.service';
 import { UserService } from './services/user.service';
 import { loadProfile } from './state/profile/profile.actions';
-import { selectProfile } from './state/profile/profile.selectors';
 
 @Component({
   selector: 'app-root',
