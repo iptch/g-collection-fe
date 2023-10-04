@@ -57,6 +57,7 @@ import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { AdminComponent } from './components/admin/admin.component';
 import { DistributionEffects } from './state/distribution/distribution.effects';
 import { MatSliderModule } from '@angular/material/slider';
+import { UserEffects } from './state/user/user.effects';
 
 const GRAPH_ENDPOINT = 'https://graph.microsoft.com/v1.0/me';
 
@@ -164,6 +165,7 @@ export function MSALGuardConfigFactory(): MsalGuardConfiguration {
       CardEffects,
       DistributionEffects,
       DashboardEffects,
+      UserEffects,
     ]),
     MatButtonToggleModule,
     MatSliderModule,

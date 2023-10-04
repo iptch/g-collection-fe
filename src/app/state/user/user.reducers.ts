@@ -6,7 +6,7 @@ export const userReducer = createReducer(
   initialUserState,
 
   on(
-    UserActions.loadUser,
+    UserActions.initUser,
     (state: UserState): UserState => ({
       ...state,
       loading: true,
@@ -15,7 +15,7 @@ export const userReducer = createReducer(
   ),
 
   on(
-    UserActions.loadUserSuccess,
+    UserActions.initUserSuccess,
     (state, { user }): UserState => ({
       ...state,
       user,
@@ -25,8 +25,8 @@ export const userReducer = createReducer(
   ),
 
   on(
-    UserActions.loadUserError,
-    (state): UserState => ({
+    UserActions.initUserFailed,
+    (state: UserState): UserState => ({
       ...state,
       loading: false,
       error: true,
