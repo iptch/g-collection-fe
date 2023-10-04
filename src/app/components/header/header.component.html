@@ -3,8 +3,8 @@
 >
   <span [routerLink]="'dashboard'">Genius Collection 2.0</span>
   <div class="h-full pr-2">
-    <!-- TODO: only show for admins -->
     <button
+      *ngIf="(user$ | async)?.isAdmin"
       [routerLink]="'admin'"
       routerLinkActive="text-light-blue filled-symbol"
       class="material-symbols-outlined h-full px-2"
