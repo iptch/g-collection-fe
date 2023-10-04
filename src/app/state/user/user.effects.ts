@@ -4,7 +4,6 @@ import { catchError, map, mergeMap } from 'rxjs/operators';
 import * as userActions from './user.actions';
 import { UserService } from '../../services/user.service';
 import { of } from 'rxjs';
-import { User } from '../../models/user.model';
 
 @Injectable()
 export class UserEffects {
@@ -13,13 +12,7 @@ export class UserEffects {
       ofType(userActions.initUser),
       mergeMap(() =>
         this.userService.initUser().pipe(
-          map((data) => {
-            const user: User = {
-              firstName: data.user.first_name,
-              lastName: data.user.last_name,
-              email: data.user.email,
-              isAdmin: data.user.is_admin,
-            };
+          map((user) => {
             return userActions.initUserSuccess({ user });
           }),
           catchError(() => of(userActions.initUserFailed())),

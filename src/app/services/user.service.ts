@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
+import { User } from '../models/user.model';
 
 @Injectable({
   providedIn: 'root',
@@ -11,18 +12,7 @@ export class UserService {
 
   constructor(private readonly http: HttpClient) {}
 
-  initUser(): Observable<UserApiResponse> {
-    return this.http.post<UserApiResponse>(this.usersEndpoint + '/init/', {});
+  initUser(): Observable<User> {
+    return this.http.post<User>(this.usersEndpoint + '/init/', {});
   }
-}
-
-interface UserApiResponse {
-  status: string;
-  user: {
-    email: string;
-    first_name: string;
-    last_name: string;
-    is_admin: boolean;
-  };
-  last_login: string;
 }

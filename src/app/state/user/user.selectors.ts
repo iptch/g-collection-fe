@@ -10,5 +10,5 @@ export const selectUser = createSelector(
 
 export const selectUserIsAdmin = createSelector(
   selectUser,
-  (user) => user?.isAdmin,
+  (user) => user?.user?.is_admin,
 );
