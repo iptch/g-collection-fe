@@ -1,17 +1,16 @@
 import { Component } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
-import { selectUser } from '../../state/user/user.selectors';
-import { User } from '../../models/user.model';
+import { selectUserIsAdmin } from '../../state/user/user.selectors';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
 })
 export class HeaderComponent {
-  user$: Observable<User | null>;
+  isAdmin$: Observable<boolean | undefined>;
 
   constructor(private readonly store: Store) {
-    this.user$ = this.store.select(selectUser);
+    this.isAdmin$ = this.store.select(selectUserIsAdmin);
   }
 }
