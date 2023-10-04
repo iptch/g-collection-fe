@@ -29,7 +29,7 @@ export class UserEffects {
   });
 
   constructor(
-    private actions$: Actions,
-    private userService: UserService,
+    private readonly actions$: Actions,
+    private readonly userService: UserService,
   ) {}
 }
