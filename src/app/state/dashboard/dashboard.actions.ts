@@ -10,4 +10,5 @@ export const loadDashboardSuccess = createAction(
 
 export const loadDashboardError = createAction(
   '[Dashboard] Load Dashboard Error',
+  props<{ error: string }>(),
 );

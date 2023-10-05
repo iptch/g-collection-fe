@@ -10,7 +10,7 @@ export const dashboardReducer = createReducer(
     (state): DashboardState => ({
       ...state,
       loading: true,
-      error: false,
+      error: null,
     }),
   ),
 
@@ -20,16 +20,16 @@ export const dashboardReducer = createReducer(
       ...state,
       dashboard,
       loading: false,
-      error: false,
+      error: null,
     }),
   ),
 
   on(
     DashboardActions.loadDashboardError,
-    (state): DashboardState => ({
+    (state, { error }): DashboardState => ({
       ...state,
       loading: false,
-      error: true,
+      error: error,
     }),
   ),
 );

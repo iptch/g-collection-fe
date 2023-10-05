@@ -16,7 +16,7 @@ import { loadDashboard } from '../../state/dashboard/dashboard.actions';
 })
 export class DashboardComponent implements OnInit {
   dashboard$: Observable<Dashboard | null>;
-  error$: Observable<boolean>;
+  error$: Observable<string | null>;
   loading$: Observable<boolean>;
   myRank$: Observable<number>;
 
