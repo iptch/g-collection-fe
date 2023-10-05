@@ -10,14 +10,14 @@ export class DashboardEffects {
   readonly loadDashboard$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(DashboardActions.loadDashboard),
-      switchMap((profile) =>
-        this.dashboardService.getDashboardData().pipe(
+      switchMap(() => {
+        return this.dashboardService.getDashboardData().pipe(
           map((dashboard) =>
             DashboardActions.loadDashboardSuccess({ dashboard }),
           ),
           catchError(() => of(DashboardActions.loadDashboardError())),
-        ),
-      ),
+        );
+      }),
     );
   });
 

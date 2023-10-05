@@ -3,13 +3,13 @@
   <app-panel>
     <div class="text-light-pink">Chärtli</div>
     <div class="text-4xl">
-      {{ (this.dashboardData$ | async)?.myUniqueCardsCount }} /
-      {{ (this.dashboardData$ | async)?.allCardsCount }}
+      {{ (this.dashboard$ | async)?.myUniqueCardsCount }} /
+      {{ (this.dashboard$ | async)?.allCardsCount }}
     </div>
   </app-panel>
   <app-panel>
     <div class="text-light-pink">Rang</div>
-    <div class="text-4xl">{{ this.myRank }}</div>
+    <div class="text-4xl">{{ this.myRank$ | async }}</div>
   </app-panel>
 </div>
 <app-panel>
@@ -17,7 +17,7 @@
   <ol class="list-decimal list-inside">
     <li
       *ngFor="
-        let ranking of (this.dashboardData$ | async)?.rankingList | slice: 0 : 5
+        let ranking of (this.dashboard$ | async)?.rankingList | slice: 0 : 5
       "
     >
       {{ ranking.displayName }}
