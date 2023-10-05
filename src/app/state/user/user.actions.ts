@@ -7,4 +7,7 @@ export const initUserSuccess = createAction(
   props<{ user: User }>(),
 );
 
-export const initUserFailed = createAction('[User] Init User Failed');
+export const initUserFailed = createAction(
+  '[User] Init User Failed',
+  props<{ error: string }>(),
+);

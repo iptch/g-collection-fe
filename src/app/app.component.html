@@ -2,12 +2,10 @@
   <div *ngIf="loading$ | async" class="p-16">
     <app-loader></app-loader>
   </div>
-  <div *ngIf="error$ | async" class="p-16">
-    <app-alert
-      [message]="(status$ | async) || 'Unbekannter Fehler'"
-    ></app-alert>
+  <div *ngIf="error$ | async" class="p-16 text-center">
+    <app-alert [message]="(error$ | async) || 'Unbekannter Fehler'"></app-alert>
   </div>
-  <div *ngIf="(loading$ | async) === false && (error$ | async) === false">
+  <div *ngIf="(loading$ | async) === false && (error$ | async) === null">
     <app-header></app-header>
     <div class="mb-16">
       <!--This is to avoid reload during acquireTokenSilent() because of hidden iframe -->

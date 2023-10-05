@@ -10,7 +10,6 @@ import * as UserActions from './state/user/user.actions';
 import {
   selectUserError,
   selectUserLoading,
-  selectUserStatus,
 } from './state/user/user.selectors';
 
 @Component({
@@ -22,8 +21,7 @@ export class AppComponent implements OnInit, OnDestroy {
   authenticated = false;
 
   loading$: Observable<boolean>;
-  error$: Observable<boolean>;
-  status$: Observable<string | undefined>;
+  error$: Observable<string | null>;
 
   private readonly destroy$ = new Subject<void>();
 
@@ -35,7 +33,6 @@ export class AppComponent implements OnInit, OnDestroy {
     this.store.dispatch(loadProfile());
     this.loading$ = this.store.select(selectUserLoading);
     this.error$ = this.store.select(selectUserError);
-    this.status$ = this.store.select(selectUserStatus);
   }
 
   ngOnInit(): void {

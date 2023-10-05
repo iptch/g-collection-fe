@@ -10,7 +10,7 @@ export const userReducer = createReducer(
     (state: UserState): UserState => ({
       ...state,
       loading: true,
-      error: false,
+      error: null,
     }),
   ),
 
@@ -20,16 +20,16 @@ export const userReducer = createReducer(
       ...state,
       user,
       loading: false,
-      error: false,
+      error: null,
     }),
   ),
 
   on(
     UserActions.initUserFailed,
-    (state: UserState): UserState => ({
+    (state, { error }): UserState => ({
       ...state,
       loading: false,
-      error: true,
+      error: error,
     }),
   ),
 );
