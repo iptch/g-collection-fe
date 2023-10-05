@@ -1,9 +1,8 @@
 <ng-container>
-  <p>{{ loading$ | async }}</p>
-  <div *ngIf="loading$ | async" class="p-2">
+  <div *ngIf="loading$ | async" class="p-16">
     <app-loader></app-loader>
   </div>
-  <div *ngIf="error$ | async" class="p-2">
+  <div *ngIf="error$ | async" class="p-16">
     <app-alert
       [message]="(status$ | async) || 'Unbekannter Fehler'"
     ></app-alert>
