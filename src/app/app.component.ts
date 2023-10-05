@@ -2,11 +2,10 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MsalBroadcastService } from '@azure/msal-angular';
 import { InteractionStatus } from '@azure/msal-browser';
 import { Store } from '@ngrx/store';
-import { Observable, Subject, switchMap, tap } from 'rxjs';
+import { Observable, Subject, tap } from 'rxjs';
 import { filter, first, takeUntil } from 'rxjs/operators';
 import { AuthService } from './services/auth.service';
 import { loadProfile } from './state/profile/profile.actions';
-import { UserService } from './services/user.service';
 import * as UserActions from './state/user/user.actions';
 import {
   selectUserError,
@@ -31,7 +30,6 @@ export class AppComponent implements OnInit, OnDestroy {
     private readonly store: Store,
     private readonly msalBroadcastService: MsalBroadcastService,
     private readonly authService: AuthService,
-    private readonly userService: UserService,
   ) {
     this.store.dispatch(loadProfile());
     this.loading$ = this.store.select(selectUserLoading);
@@ -48,7 +46,6 @@ export class AppComponent implements OnInit, OnDestroy {
         ),
         first(),
         tap(() => this.store.dispatch(UserActions.initUser())),
-        switchMap(() => this.userService.initUser()),
         takeUntil(this.destroy$),
       )
       .subscribe(() => {
