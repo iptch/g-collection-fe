@@ -1,8 +1,19 @@
-<ng-container *ngIf="authenticated">
-  <app-header></app-header>
-  <div class="mb-16">
-    <!--This is to avoid reload during acquireTokenSilent() because of hidden iframe -->
-    <router-outlet *ngIf="!isIframe"></router-outlet>
+<ng-container>
+  <p>{{ loading$ | async }}</p>
+  <div *ngIf="loading$ | async" class="p-2">
+    <app-loader></app-loader>
   </div>
-  <app-navigation></app-navigation>
+  <div *ngIf="error$ | async" class="p-2">
+    <app-alert
+      [message]="(status$ | async) || 'Unbekannter Fehler'"
+    ></app-alert>
+  </div>
+  <div *ngIf="(loading$ | async) === false && (error$ | async) === false">
+    <app-header></app-header>
+    <div class="mb-16">
+      <!--This is to avoid reload during acquireTokenSilent() because of hidden iframe -->
+      <router-outlet *ngIf="!isIframe"></router-outlet>
+    </div>
+    <app-navigation></app-navigation>
+  </div>
 </ng-container>

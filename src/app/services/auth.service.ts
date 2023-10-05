@@ -1,9 +1,8 @@
-import { Injectable } from '@angular/core';
-import { Inject } from '@angular/core';
+import { Inject, Injectable } from '@angular/core';
 import {
-  MsalService,
   MSAL_GUARD_CONFIG,
   MsalGuardConfiguration,
+  MsalService,
 } from '@azure/msal-angular';
 import { InteractionType } from '@azure/msal-browser';
 
@@ -17,8 +16,8 @@ export class AuthService {
     private readonly msalService: MsalService,
   ) {}
 
-  isAuthenticated() {
-    return this.msalService.instance.getAllAccounts().length > 0;
+  isAuthenticated(): void {
+    this.msalService.instance.getAllAccounts();
   }
 
   logout() {

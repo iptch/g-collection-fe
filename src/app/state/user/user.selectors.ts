@@ -8,7 +8,22 @@ export const selectUser = createSelector(
   (state) => state.user,
 );
 
+export const selectUserLoading = createSelector(
+  selectUserState,
+  (state) => state.loading,
+);
+
+export const selectUserError = createSelector(
+  selectUserState,
+  (state) => state.error,
+);
+
 export const selectUserIsAdmin = createSelector(
   selectUser,
   (user) => user?.user?.is_admin,
+);
+
+export const selectUserStatus = createSelector(
+  selectUser,
+  (user) => user?.status,
 );
