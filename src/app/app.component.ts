@@ -19,6 +19,7 @@ import {
 })
 export class AppComponent implements OnInit, OnDestroy {
   isIframe = false;
+  authenticated = false;
 
   loading$: Observable<boolean>;
   error$: Observable<boolean>;
@@ -59,6 +60,6 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   showApp() {
-    this.authService.isAuthenticated();
+    this.authenticated = this.authService.isAuthenticated();
   }
 }

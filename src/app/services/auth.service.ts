@@ -16,8 +16,8 @@ export class AuthService {
     private readonly msalService: MsalService,
   ) {}
 
-  isAuthenticated(): void {
-    this.msalService.instance.getAllAccounts();
+  isAuthenticated() {
+    return this.msalService.instance.getAllAccounts().length > 0;
   }
 
   logout() {
