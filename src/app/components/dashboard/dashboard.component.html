@@ -1,26 +1,30 @@
 <app-title>Dashboard</app-title>
-<div class="grid grid-cols-2">
+<div *ngIf="loading$ | async" class="p-16">
+  <app-loader></app-loader>
+</div>
+<div *ngIf="error$ | async" class="p-16 text-center">
+  <app-alert [message]="(error$ | async) || 'Unbekannter Fehler'"></app-alert>
+</div>
+<div *ngIf="(loading$ | async) === false && (error$ | async) === null">
+  <div class="grid grid-cols-2">
+    <app-panel *ngIf="dashboard$ | async as dashboard">
+      <div class="text-light-pink">Chärtli</div>
+      <div class="text-4xl">
+        {{ dashboard.myUniqueCardsCount }} /
+        {{ dashboard.allCardsCount }}
+      </div>
+    </app-panel>
+    <app-panel>
+      <div class="text-light-pink">Rang</div>
+      <div class="text-4xl">{{ this.myRank$ | async }}</div>
+    </app-panel>
+  </div>
   <app-panel>
-    <div class="text-light-pink">Chärtli</div>
-    <div class="text-4xl">
-      {{ (this.dashboardData$ | async)?.myUniqueCardsCount }} /
-      {{ (this.dashboardData$ | async)?.allCardsCount }}
-    </div>
-  </app-panel>
-  <app-panel>
-    <div class="text-light-pink">Rang</div>
-    <div class="text-4xl">{{ this.myRank }}</div>
+    <div class="text-light-pink">Top 5</div>
+    <ol class="list-decimal list-inside">
+      <li *ngFor="let ranking of this.topRanking$ | async">
+        {{ ranking.displayName }}
+      </li>
+    </ol>
   </app-panel>
 </div>
-<app-panel>
-  <div class="text-light-pink">Top 5</div>
-  <ol class="list-decimal list-inside">
-    <li
-      *ngFor="
-        let ranking of (this.dashboardData$ | async)?.rankingList | slice: 0 : 5
-      "
-    >
-      {{ ranking.displayName }}
-    </li>
-  </ol>
-</app-panel>

@@ -44,6 +44,7 @@ import { FieldComponent } from './components/field/field.component';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { ProfileEffects } from './state/profile/profile.effects';
+import { DashboardEffects } from './state/dashboard/dashboard.effects';
 import { reducers } from './state/reducers';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { CardEffects } from './state/card/card.effects';
@@ -110,6 +111,7 @@ export function MSALGuardConfigFactory(): MsalGuardConfiguration {
     },
   };
 }
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -157,7 +159,12 @@ export function MSALGuardConfigFactory(): MsalGuardConfiguration {
       maxAge: 25,
       logOnly: environment.production,
     }),
-    EffectsModule.forRoot([ProfileEffects, CardEffects, DistributionEffects]),
+    EffectsModule.forRoot([
+      ProfileEffects,
+      CardEffects,
+      DistributionEffects,
+      DashboardEffects,
+    ]),
     MatButtonToggleModule,
     MatSliderModule,
   ],
