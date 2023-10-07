@@ -10,6 +10,7 @@ export interface Card {
   image_url: string;
   quantity: number;
   last_received: string;
+  otp_value: string;
 }
 
 export interface CardWithProfile extends Card {

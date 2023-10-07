@@ -64,7 +64,7 @@ export class CardDetailComponent implements OnInit, OnDestroy {
     const code: Code = {
       id: card.id,
       giver: card.giver,
-      otp: '123456', // TODO: use OTP from BE
+      otp: card.otp_value,
     };
     return JSON.stringify(code);
   }
