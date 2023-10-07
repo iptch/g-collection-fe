@@ -30,3 +30,7 @@ export const selectMyRank = createSelector(
     );
   },
 );
+
+export const selectTopRanking = createSelector(selectDashboard, (dashboard) =>
+  dashboard?.rankingList ? dashboard.rankingList.slice(0, 5) : [],
+);
