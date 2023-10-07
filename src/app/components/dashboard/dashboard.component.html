@@ -7,11 +7,11 @@
 </div>
 <div *ngIf="(loading$ | async) === false && (error$ | async) === null">
   <div class="grid grid-cols-2">
-    <app-panel>
+    <app-panel *ngIf="dashboard$ | async as dashboard">
       <div class="text-light-pink">Chärtli</div>
       <div class="text-4xl">
-        {{ (this.dashboard$ | async)?.myUniqueCardsCount }} /
-        {{ (this.dashboard$ | async)?.allCardsCount }}
+        {{ dashboard.myUniqueCardsCount }} /
+        {{ dashboard.allCardsCount }}
       </div>
     </app-panel>
     <app-panel>
