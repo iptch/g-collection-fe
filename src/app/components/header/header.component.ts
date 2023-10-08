@@ -8,7 +8,7 @@ import { selectUserIsAdmin } from '../../state/user/user.selectors';
   templateUrl: './header.component.html',
 })
 export class HeaderComponent {
-  isAdmin$: Observable<boolean | undefined>;
+  isAdmin$: Observable<boolean | null>;
 
   constructor(private readonly store: Store) {
     this.isAdmin$ = this.store.select(selectUserIsAdmin);

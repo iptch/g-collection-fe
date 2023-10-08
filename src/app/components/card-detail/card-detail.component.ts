@@ -8,13 +8,13 @@ import {
 import { ActivatedRoute } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Observable, Subject } from 'rxjs';
-import { CardWithProfile } from 'src/app/models/card.model';
+import { CardWithUser } from 'src/app/models/card.model';
 import { Code } from 'src/app/models/code.model';
 import { loadCardById } from 'src/app/state/card/card.actions';
 import {
-  selectCardWithProfileById,
-  selectCardWithProfileError,
-  selectCardWithProfileLoading,
+  selectCardError,
+  selectCardLoading,
+  selectCardWithUserById,
 } from 'src/app/state/card/card.selectors';
 
 @Component({
@@ -26,7 +26,7 @@ export class CardDetailComponent implements OnInit, OnDestroy {
 
   loading$?: Observable<boolean>;
   error$?: Observable<boolean>;
-  card$?: Observable<CardWithProfile | undefined>;
+  card$?: Observable<CardWithUser | null>;
   imageWidth!: number;
   initializedQrCode = false;
   showQrCode = false;
@@ -41,9 +41,9 @@ export class CardDetailComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     const id = Number(this.route.snapshot.paramMap.get('id'));
     this.store.dispatch(loadCardById({ id }));
-    this.loading$ = this.store.select(selectCardWithProfileLoading);
-    this.error$ = this.store.select(selectCardWithProfileError);
-    this.card$ = this.store.select(selectCardWithProfileById(id));
+    this.loading$ = this.store.select(selectCardLoading);
+    this.error$ = this.store.select(selectCardError);
+    this.card$ = this.store.select(selectCardWithUserById(id));
   }
 
   ngOnDestroy(): void {
@@ -60,7 +60,7 @@ export class CardDetailComponent implements OnInit, OnDestroy {
     window.scroll({ top: 0, left: 0, behavior: 'smooth' });
   }
 
-  getCode(card: CardWithProfile): string {
+  getCode(card: CardWithUser): string {
     const code: Code = {
       id: card.id,
       giver: card.giver,
