@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { BrowserUtils } from '@azure/msal-browser';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
-import { ProfileComponent } from './components/profile/profile.component';
+import { UserComponent } from './components/user/user.component';
 import { MsalGuard } from '@azure/msal-angular';
 import { QrScannerComponent } from './components/qr-scanner/qr-scanner.component';
 import { CardsComponent } from './components/cards/cards.component';
@@ -37,12 +37,12 @@ const routes: Routes = [
         component: DashboardComponent,
       },
       {
-        path: 'profile',
-        component: ProfileComponent,
-      },
-      {
         path: 'qr-scanner',
         component: QrScannerComponent,
+      },
+      {
+        path: 'user',
+        component: UserComponent,
       },
       {
         // Needed for Error routing

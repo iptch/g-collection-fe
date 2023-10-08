@@ -26,7 +26,7 @@ import {
   MsalService,
 } from '@azure/msal-angular';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
-import { ProfileComponent } from './components/profile/profile.component';
+import { UserComponent } from './components/user/user.component';
 import { HeaderComponent } from './components/header/header.component';
 import { environment } from './../environments/environment';
 import { QrScannerComponent } from './components/qr-scanner/qr-scanner.component';
@@ -43,7 +43,6 @@ import { CardDetailComponent } from './components/card-detail/card-detail.compon
 import { FieldComponent } from './components/field/field.component';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
-import { ProfileEffects } from './state/profile/profile.effects';
 import { DashboardEffects } from './state/dashboard/dashboard.effects';
 import { reducers } from './state/reducers';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
@@ -118,7 +117,7 @@ export function MSALGuardConfigFactory(): MsalGuardConfiguration {
     AppComponent,
     HeaderComponent,
     DashboardComponent,
-    ProfileComponent,
+    UserComponent,
     QrScannerComponent,
     QrCodeComponent,
     NavigationComponent,
@@ -161,7 +160,6 @@ export function MSALGuardConfigFactory(): MsalGuardConfiguration {
       logOnly: environment.production,
     }),
     EffectsModule.forRoot([
-      ProfileEffects,
       CardEffects,
       DistributionEffects,
       DashboardEffects,

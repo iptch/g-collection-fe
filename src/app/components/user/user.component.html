@@ -1,0 +1,28 @@
+<app-title>Benutzer</app-title>
+<app-panel>
+  <div *ngIf="user$ | async as user" class="space-y-2">
+    <div>
+      <app-field
+        [label]="'Name'"
+        [value]="user.user.first_name + ' ' + user.user.last_name"
+      ></app-field>
+    </div>
+    <div>
+      <app-field [label]="'E-Mail'" [value]="user.user.email"></app-field>
+    </div>
+    <div>
+      <app-field
+        [label]="'Admin'"
+        [value]="user.user.is_admin + ''"
+      ></app-field>
+    </div>
+    <div class="flex">
+      <app-button
+        (click)="logout()"
+        [text]="'Logout'"
+        [symbol]="'logout'"
+        [color]="'pink'"
+      ></app-button>
+    </div>
+  </div>
+</app-panel>
