@@ -23,6 +23,8 @@
 
 // Paginator
 .mdc-notched-outline__leading,
-.mdc-notched-outline__trailing {
+.mdc-notched-outline__trailing,
+// Snackbar
+.mdc-snackbar__surface {
   border-radius: 0 !important;
 }

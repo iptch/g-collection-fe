@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { catchError, map, of, switchMap, tap } from 'rxjs';
 import { DistributionService } from 'src/app/services/distribution.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import * as DistributionActions from './distribution.actions';
 
 @Injectable()
@@ -24,9 +25,7 @@ export class DistributionEffects {
     () => {
       return this.actions$.pipe(
         ofType(DistributionActions.distributeCardsSuccess),
-        tap((response) => {
-          alert(response.response.status);
-        }),
+        tap((response) => this.snackBar.open(response.response.status)),
       );
     },
     { dispatch: false },
@@ -35,5 +34,6 @@ export class DistributionEffects {
   constructor(
     private readonly actions$: Actions,
     private readonly distributionService: DistributionService,
+    private readonly snackBar: MatSnackBar,
   ) {}
 }

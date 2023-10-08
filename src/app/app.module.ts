@@ -57,6 +57,10 @@ import { AdminComponent } from './components/admin/admin.component';
 import { DistributionEffects } from './state/distribution/distribution.effects';
 import { MatSliderModule } from '@angular/material/slider';
 import { UserEffects } from './state/user/user.effects';
+import {
+  MAT_SNACK_BAR_DEFAULT_OPTIONS,
+  MatSnackBarModule,
+} from '@angular/material/snack-bar';
 
 const GRAPH_ENDPOINT = 'https://graph.microsoft.com/v1.0/me';
 
@@ -167,6 +171,7 @@ export function MSALGuardConfigFactory(): MsalGuardConfiguration {
     ]),
     MatButtonToggleModule,
     MatSliderModule,
+    MatSnackBarModule,
   ],
   providers: [
     {
@@ -189,6 +194,13 @@ export function MSALGuardConfigFactory(): MsalGuardConfiguration {
     MsalService,
     MsalGuard,
     MsalBroadcastService,
+    {
+      provide: MAT_SNACK_BAR_DEFAULT_OPTIONS,
+      useValue: {
+        duration: 2000,
+        panelClass: '!mb-16',
+      },
+    },
   ],
   bootstrap: [AppComponent, MsalRedirectComponent],
 })
