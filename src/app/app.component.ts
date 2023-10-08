@@ -2,10 +2,9 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MsalBroadcastService } from '@azure/msal-angular';
 import { InteractionStatus } from '@azure/msal-browser';
 import { Store } from '@ngrx/store';
-import { Observable, Subject, tap } from 'rxjs';
-import { filter, first, takeUntil } from 'rxjs/operators';
+import { Observable, Subject } from 'rxjs';
+import { filter, takeUntil } from 'rxjs/operators';
 import { AuthService } from './services/auth.service';
-import { loadProfile } from './state/profile/profile.actions';
 import * as UserActions from './state/user/user.actions';
 import {
   selectUserError,
@@ -19,7 +18,6 @@ import {
 export class AppComponent implements OnInit, OnDestroy {
   isIframe = false;
   authenticated = false;
-
   loading$: Observable<boolean>;
   error$: Observable<string | null>;
 
@@ -30,7 +28,6 @@ export class AppComponent implements OnInit, OnDestroy {
     private readonly msalBroadcastService: MsalBroadcastService,
     private readonly authService: AuthService,
   ) {
-    this.store.dispatch(loadProfile());
     this.loading$ = this.store.select(selectUserLoading);
     this.error$ = this.store.select(selectUserError);
   }
@@ -42,21 +39,18 @@ export class AppComponent implements OnInit, OnDestroy {
         filter(
           (status: InteractionStatus) => status === InteractionStatus.None,
         ),
-        first(),
-        tap(() => this.store.dispatch(UserActions.initUser())),
         takeUntil(this.destroy$),
       )
       .subscribe(() => {
-        this.showApp();
+        if (this.authService.isAuthenticated()) {
+          this.authenticated = true;
+          this.store.dispatch(UserActions.initUser());
+        }
       });
   }
 
   ngOnDestroy(): void {
     this.destroy$.next(undefined);
     this.destroy$.complete();
-  }
-
-  showApp() {
-    this.authenticated = this.authService.isAuthenticated();
   }
 }
