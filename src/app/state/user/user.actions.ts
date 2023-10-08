@@ -1,13 +1,13 @@
 import { createAction, props } from '@ngrx/store';
 import { User } from '../../models/user.model';
 
-export const initUser = createAction('[User] Init User');
+export const initUser = createAction('[User] Init user');
 export const initUserSuccess = createAction(
-  '[User] Init User Success',
+  '[User] Init user success',
   props<{ user: User }>(),
 );
 
 export const initUserFailed = createAction(
-  '[User] Init User Failed',
+  '[User] Init user failed',
   props<{ error: string }>(),
 );
