@@ -27,6 +27,7 @@
             'w-20 h-20 border-2 border-light-pink': showQrCode
           }"
           [class.grayscale]="!card.quantity"
+          onerror="this.src='assets/icon.png'"
         />
         <div
           *ngIf="!showQrCode && card.quantity > 1"
