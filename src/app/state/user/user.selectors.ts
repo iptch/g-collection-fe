@@ -22,8 +22,3 @@ export const selectUserIsAdmin = createSelector(
   selectUser,
   (user) => user?.user?.is_admin ?? null,
 );
-
-export const selectUserStatus = createSelector(
-  selectUser,
-  (user) => user?.status,
-);
