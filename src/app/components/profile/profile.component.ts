@@ -3,6 +3,7 @@ import { Observable } from 'rxjs';
 import { AuthService } from 'src/app/services/auth.service';
 import { Profile } from 'src/app/models/profile.model';
 import { Store } from '@ngrx/store';
+import { loadProfile } from 'src/app/state/profile/profile.actions';
 import {
   selectProfile,
   selectProfileError,
@@ -22,6 +23,7 @@ export class ProfileComponent {
     private readonly store: Store,
     private readonly authService: AuthService,
   ) {
+    this.store.dispatch(loadProfile());
     this.loading$ = this.store.select(selectProfileLoading);
     this.error$ = this.store.select(selectProfileError);
     this.profile$ = this.store.select(selectProfile);

@@ -18,8 +18,3 @@ export const selectProfileError = createSelector(
   selectProfileState,
   (state) => state.error,
 );
-
-export const selectProfileUserPrincipalName = createSelector(
-  selectProfile,
-  (profile) => profile?.userPrincipalName,
-);

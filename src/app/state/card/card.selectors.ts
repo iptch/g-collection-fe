@@ -1,11 +1,8 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 import { cardAdapter, CardState } from './card.state';
-import {
-  selectProfile,
-  selectProfileState,
-} from '../profile/profile.selectors';
-import { Card, CardWithProfile } from 'src/app/models/card.model';
+import { Card, CardWithUser } from 'src/app/models/card.model';
 import { CardSort } from 'src/app/models/card-sort.enum';
+import { selectUser } from '../user/user.selectors';
 
 export const selectCardState = createFeatureSelector<CardState>('card');
 
@@ -32,30 +29,16 @@ export const selectCardError = createSelector(
   (state) => state.error,
 );
 
-export const selectCardWithProfileById = (id: number) =>
+export const selectCardWithUserById = (id: number) =>
   createSelector(
     selectCardById(id),
-    selectProfile,
-    (card, profile) =>
+    selectUser,
+    (card, user) =>
       ({
         ...card,
-        giver: profile?.userPrincipalName,
-      }) as CardWithProfile,
+        giver: user?.user.email,
+      }) as CardWithUser,
   );
-
-export const selectCardWithProfileLoading = createSelector(
-  selectCardState,
-  selectProfileState,
-  (cardState, profileState) =>
-    (cardState.loading || profileState.loading) &&
-    !(cardState.error || profileState.error),
-);
-
-export const selectCardWithProfileError = createSelector(
-  selectCardState,
-  selectProfileState,
-  (cardState, profileState) => cardState.error || profileState.error,
-);
 
 export const selectCardsShowAll = createSelector(
   selectCardState,

@@ -1,4 +1,13 @@
-<ng-container *ngIf="authenticated">
+<div *ngIf="loading$ | async" class="flex h-screen justify-center items-center">
+  <app-loader></app-loader>
+</div>
+<div
+  *ngIf="error$ | async"
+  class="flex h-screen justify-center items-center text-center"
+>
+  <app-alert [message]="(error$ | async)!"></app-alert>
+</div>
+<ng-container *ngIf="!((loading$ | async) || (error$ | async))">
   <app-header></app-header>
   <div class="mb-16">
     <!--This is to avoid reload during acquireTokenSilent() because of hidden iframe -->

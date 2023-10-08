@@ -1,6 +1,6 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 import { DashboardState } from './dashboard.state';
-import { selectProfileUserPrincipalName } from '../profile/profile.selectors';
+import { selectUser } from '../user/user.selectors';
 
 export const selectDashboardState =
   createFeatureSelector<DashboardState>('dashboard');
@@ -22,11 +22,12 @@ export const selectDashboardError = createSelector(
 
 export const selectMyRank = createSelector(
   selectDashboard,
-  selectProfileUserPrincipalName,
-  (dashboard, userEmail) => {
+  selectUser,
+  (dashboard, user) => {
     return (
-      dashboard?.rankingList.find((ranking) => ranking.userEmail === userEmail)
-        ?.rank ?? 0
+      dashboard?.rankingList.find(
+        (ranking) => ranking.userEmail === user?.user.email,
+      )?.rank ?? 0
     );
   },
 );

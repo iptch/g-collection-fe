@@ -1,9 +1,8 @@
-import { Injectable } from '@angular/core';
-import { Inject } from '@angular/core';
+import { Inject, Injectable } from '@angular/core';
 import {
-  MsalService,
   MSAL_GUARD_CONFIG,
   MsalGuardConfiguration,
+  MsalService,
 } from '@azure/msal-angular';
 import { InteractionType } from '@azure/msal-browser';
 

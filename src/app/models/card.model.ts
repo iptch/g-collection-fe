@@ -13,6 +13,6 @@ export interface Card {
   otp_value: string;
 }
 
-export interface CardWithProfile extends Card {
+export interface CardWithUser extends Card {
   giver: string;
 }
