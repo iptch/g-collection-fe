@@ -1,30 +1,30 @@
 <app-title>Dashboard</app-title>
-<div *ngIf="loading$ | async" class="p-16">
+<div *ngIf="loading$ | async" class="p-4">
   <app-loader></app-loader>
 </div>
-<div *ngIf="error$ | async" class="p-16 text-center">
-  <app-alert [message]="(error$ | async) || 'Unbekannter Fehler'"></app-alert>
-</div>
-<div *ngIf="(loading$ | async) === false && (error$ | async) === null">
-  <div class="grid grid-cols-2">
-    <app-panel *ngIf="dashboard$ | async as dashboard">
+<app-panel *ngIf="error$ | async">
+  <app-alert [message]="(error$ | async)!"></app-alert>
+</app-panel>
+<div *ngIf="!((loading$ | async) || (error$ | async))" class="m-2">
+  <div class="grid grid-cols-2 gap-2">
+    <div *ngIf="dashboard$ | async as dashboard" class="bg-dark-gray p-2">
       <div class="text-light-pink">Chärtli</div>
       <div class="text-4xl">
         {{ dashboard.myUniqueCardsCount }} /
         {{ dashboard.allCardsCount }}
       </div>
-    </app-panel>
-    <app-panel>
+    </div>
+    <div class="bg-dark-gray p-2">
       <div class="text-light-pink">Rang</div>
-      <div class="text-4xl">{{ this.myRank$ | async }}</div>
-    </app-panel>
+      <div class="text-4xl">{{ myRank$ | async }}</div>
+    </div>
   </div>
-  <app-panel>
+  <div class="bg-dark-gray mt-2 p-2 break-words">
     <div class="text-light-pink">Top 5</div>
     <ol class="list-decimal list-inside">
-      <li *ngFor="let ranking of this.topRanking$ | async">
+      <li *ngFor="let ranking of topRanking$ | async">
         {{ ranking.displayName }}
       </li>
     </ol>
-  </app-panel>
+  </div>
 </div>
