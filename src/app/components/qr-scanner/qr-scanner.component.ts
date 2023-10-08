@@ -93,7 +93,10 @@ export class QrScannerComponent implements OnInit, OnDestroy {
             console.info(response.status);
             this.router.navigate(['/cards', `${parsedObject.id}`]);
           },
-          error: (error) => (this.error = error.error.status),
+          error: (error) =>
+            (this.error = error.error.status
+              ? error.error.status
+              : error.message),
         });
     } else {
       console.error('Parsed object is not of type Code', parsedObject);

@@ -15,9 +15,8 @@ export class UserEffects {
           map((user) => {
             return userActions.initUserSuccess({ user });
           }),
-          catchError((err) => {
-            const errorMessage = err.status + ': ' + err.statusText;
-            return of(userActions.initUserFailed({ error: errorMessage }));
+          catchError((error) => {
+            return of(userActions.initUserFailed({ error: error.message }));
           }),
         ),
       ),
