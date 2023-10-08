@@ -20,5 +20,5 @@ export const selectUserError = createSelector(
 
 export const selectUserIsAdmin = createSelector(
   selectUser,
-  (user) => user?.user?.is_admin ?? null,
+  (user) => user?.user.is_admin ?? null,
 );
