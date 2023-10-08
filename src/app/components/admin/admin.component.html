@@ -7,10 +7,13 @@
   ></app-alert>
   <ng-container *ngIf="!((loading$ | async) || (error$ | async))">
     <div>Neue Chärtli an alle Spieler ausschütten.</div>
-    <div>
-      <mat-slider discrete min="1" max="10" step="1">
-        <input matSliderThumb value="5" #slider />
+    <div class="grid grid-cols-2 items-center gap-4">
+      <mat-slider discrete min="1" max="20" step="1">
+        <input matSliderThumb value="10" #slider />
       </mat-slider>
+      <div>
+        Anzahl: <span class="text-light-blue">{{ slider.value }}</span>
+      </div>
     </div>
     <div class="flex mt-2">
       <app-button
