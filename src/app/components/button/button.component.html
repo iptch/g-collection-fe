@@ -9,6 +9,6 @@
       !outlined && color === 'pink'
   }"
 >
-  <span *ngIf="symbol" class="material-symbols-outlined">{{ symbol }}</span>
+  <mat-icon *ngIf="symbol">{{ symbol }}</mat-icon>
   <span *ngIf="text">{{ text }}</span>
 </button>
