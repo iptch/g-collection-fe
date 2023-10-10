@@ -21,7 +21,6 @@ import {
   selectCardsSort,
   selectCardsSortDirection,
 } from 'src/app/state/card/card.selectors';
-import { MatSelectChange } from '@angular/material/select';
 
 interface SortCriterion {
   value: CardSort;
@@ -78,7 +77,7 @@ export class CardsComponent {
     );
   }
 
-  onSort(event: MatSelectChange) {
-    this.store.dispatch(changeCardsSort({ sort: event.value }));
+  onSort(sort: CardSort) {
+    this.store.dispatch(changeCardsSort({ sort: sort }));
   }
 }

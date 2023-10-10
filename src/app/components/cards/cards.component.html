@@ -14,28 +14,27 @@
     [message]="'Chärtli konnten nicht geladen werden.'"
   ></app-alert>
   <ng-container *ngIf="!((loading$ | async) || (error$ | async))">
-    <div class="flex gap-4 mb-4">
-      <mat-button-toggle
-        class="!rounded-none"
-        [checked]="(sortDirection$ | async) || false"
-        (click)="onSortDirectionChange()"
-      >
+    <div class="flex gap-1 mb-4">
+      <mat-menu #sortMenu="matMenu">
+        <ng-template matMenuContent>
+          <button
+            mat-menu-item
+            *ngFor="let sortCriterion of sortCriteria"
+            (click)="onSort(sortCriterion.value)"
+          >
+            <span>{{ sortCriterion.viewValue }}</span>
+          </button>
+        </ng-template>
+      </mat-menu>
+
+      <button mat-icon-button [matMenuTriggerFor]="sortMenu">
+        <span class="material-symbols-outlined">sort</span>
+      </button>
+      <button mat-icon-button (click)="onSortDirectionChange()">
         <span class="material-symbols-outlined">
           {{ (sortDirection$ | async) ? 'south' : 'north' }}
         </span>
-      </mat-button-toggle>
-
-      <mat-form-field class="g-collection-select grow no-tap-highlight">
-        <mat-label>Sortieren nach</mat-label>
-        <mat-select (selectionChange)="onSort($event)" [value]="sort$ | async">
-          <mat-option
-            *ngFor="let sortCriterion of sortCriteria"
-            [value]="sortCriterion.value"
-          >
-            {{ sortCriterion.viewValue }}
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
+      </button>
     </div>
     <div *ngIf="cards$ | async as cards">
       <div class="grid grid-cols-3 gap-2 mb-2">
