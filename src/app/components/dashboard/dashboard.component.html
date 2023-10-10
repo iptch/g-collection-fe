@@ -13,6 +13,13 @@
         {{ dashboard.myUniqueCardsCount }} /
         {{ dashboard.allCardsCount }}
       </div>
+      <div class="pt-2">
+        <mat-progress-bar
+          mode="determinate"
+          value="{{ progress$ | async }}"
+          color="primary"
+        ></mat-progress-bar>
+      </div>
     </div>
     <div class="bg-dark-gray p-2">
       <div class="text-light-pink">Rang</div>

@@ -61,6 +61,7 @@ import {
   MAT_SNACK_BAR_DEFAULT_OPTIONS,
   MatSnackBarModule,
 } from '@angular/material/snack-bar';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 
 const GRAPH_ENDPOINT = 'https://graph.microsoft.com/v1.0/me';
 
@@ -172,6 +173,7 @@ export function MSALGuardConfigFactory(): MsalGuardConfiguration {
     MatButtonToggleModule,
     MatSliderModule,
     MatSnackBarModule,
+    MatProgressBarModule,
   ],
   providers: [
     {
