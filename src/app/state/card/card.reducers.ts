@@ -1,5 +1,5 @@
 import { createReducer, on } from '@ngrx/store';
-import { CardState, cardAdapter, initialCardState } from './card.state';
+import { cardAdapter, CardState, initialCardState } from './card.state';
 import * as CardActions from './card.actions';
 
 export const cardReducer = createReducer(
@@ -58,6 +58,10 @@ export const cardReducer = createReducer(
 
   on(CardActions.changeCardsSort, (state, { sort }): CardState => {
     return { ...state, sort, pageIndex: initialCardState.pageIndex };
+  }),
+
+  on(CardActions.changeCardsSearchTerm, (state, { searchTerm }): CardState => {
+    return { ...state, searchTerm, pageIndex: initialCardState.pageIndex };
   }),
 
   on(CardActions.changeCardsSortDirection, (state): CardState => {

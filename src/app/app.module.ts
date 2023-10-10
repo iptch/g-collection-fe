@@ -63,6 +63,7 @@ import {
 } from '@angular/material/snack-bar';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatButtonModule } from '@angular/material/button';
+import { MatInputModule } from '@angular/material/input';
 
 const GRAPH_ENDPOINT = 'https://graph.microsoft.com/v1.0/me';
 
@@ -176,6 +177,7 @@ export function MSALGuardConfigFactory(): MsalGuardConfiguration {
     MatSnackBarModule,
     MatMenuModule,
     MatButtonModule,
+    MatInputModule,
   ],
   providers: [
     {

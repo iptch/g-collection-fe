@@ -28,6 +28,11 @@ export const changeCardsFilter = createAction(
   props<{ showAll: boolean }>(),
 );
 
+export const changeCardsSearchTerm = createAction(
+  '[Cards] Change Search Term',
+  props<{ searchTerm: string }>(),
+);
+
 export const changeCardsPage = createAction(
   '[Cards] Change Page',
   props<{ pageIndex: number; pageSize: number }>(),
