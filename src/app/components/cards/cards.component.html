@@ -49,25 +49,34 @@
       </button>
     </div>
     <div *ngIf="cards$ | async as cards">
-      <div class="grid grid-cols-3 gap-2 mb-2">
-        <app-card-thumbnail
-          *ngFor="let card of cards"
-          [card]="card"
-          [routerLink]="'' + card.id"
-        ></app-card-thumbnail>
-      </div>
+      <div *ngIf="cards.length > 0; else noCards">
+        <div class="grid grid-cols-3 gap-2 mb-2">
+          <app-card-thumbnail
+            *ngFor="let card of cards"
+            [card]="card"
+            [routerLink]="'' + card.id"
+          ></app-card-thumbnail>
+        </div>
 
-      <mat-paginator
-        *ngIf="pageInfo$ | async as pageInfo"
-        [length]="cardsCount$ | async"
-        [pageIndex]="pageInfo.pageIndex"
-        [pageSize]="pageInfo.pageSize"
-        [pageSizeOptions]="[6, 12, 24, 48]"
-        [showFirstLastButtons]="true"
-        class="!bg-transparent"
-        (page)="onPage($event)"
-      >
-      </mat-paginator>
+        <mat-paginator
+          *ngIf="pageInfo$ | async as pageInfo"
+          [length]="cardsCount$ | async"
+          [pageIndex]="pageInfo.pageIndex"
+          [pageSize]="pageInfo.pageSize"
+          [pageSizeOptions]="[6, 12, 24, 48]"
+          [showFirstLastButtons]="true"
+          class="!bg-transparent"
+          (page)="onPage($event)"
+        >
+        </mat-paginator>
+      </div>
     </div>
+    <ng-template #noCards>
+      <!-- Content to display when there are no cards -->
+      <app-alert
+        class="w-full text-center"
+        [message]="'Keine Chärtli gefunden.'"
+      ></app-alert>
+    </ng-template>
   </ng-container>
 </app-panel>
