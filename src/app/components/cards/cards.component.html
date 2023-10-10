@@ -26,15 +26,17 @@
         />
       </mat-form-field>
       <mat-menu #sortMenu="matMenu">
-        <ng-template matMenuContent>
-          <button
-            mat-menu-item
-            *ngFor="let sortCriterion of sortCriteria"
-            (click)="onSort(sortCriterion.value)"
-          >
-            <span>{{ sortCriterion.viewValue }}</span>
-          </button>
-        </ng-template>
+        <button
+          mat-menu-item
+          *ngFor="let sortCriterion of sortCriteria"
+          (click)="onSort(sortCriterion.value)"
+        >
+          <mat-icon
+            *ngIf="(sort$ | async) === sortCriterion.value"
+            fontIcon="check"
+          ></mat-icon>
+          <span>{{ sortCriterion.viewValue }}</span>
+        </button>
       </mat-menu>
 
       <button mat-icon-button [matMenuTriggerFor]="sortMenu">

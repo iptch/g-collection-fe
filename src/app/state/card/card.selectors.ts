@@ -62,9 +62,8 @@ export const selectCardsInSearch = createSelector(
   selectAllCards,
   selectSearchTerm,
   (allCards, searchTerm) => {
-    const trimmedSearchTerm = searchTerm.trim().toLowerCase();
-
     if (searchTerm) {
+      const trimmedSearchTerm = searchTerm.trim().toLowerCase();
       return allCards.filter(
         (card) =>
           card.name.toLowerCase().includes(trimmedSearchTerm) ||
