@@ -31,21 +31,20 @@
           *ngFor="let sortCriterion of sortCriteria"
           (click)="onSort(sortCriterion.value)"
         >
-          <span>{{ sortCriterion.viewValue }}</span>
-          <mat-icon
-            *ngIf="(sort$ | async) === sortCriterion.value"
-            fontIcon="check"
-          ></mat-icon>
+          <span
+            [class.text-light-blue]="(sort$ | async) === sortCriterion.value"
+            >{{ sortCriterion.viewValue }}</span
+          >
         </button>
       </mat-menu>
 
       <button mat-icon-button [matMenuTriggerFor]="sortMenu">
-        <mat-icon>sort</mat-icon>
+        <span class="material-symbols-outlined">sort</span>
       </button>
       <button mat-icon-button (click)="onSortDirectionChange()">
-        <mat-icon>
+        <span class="material-symbols-outlined">
           {{ (sortDirection$ | async) ? 'south' : 'north' }}
-        </mat-icon>
+        </span>
       </button>
     </div>
     <div *ngIf="cards$ | async as cards">
