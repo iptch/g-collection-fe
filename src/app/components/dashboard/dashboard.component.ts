@@ -6,6 +6,7 @@ import {
   selectDashboard,
   selectDashboardError,
   selectDashboardLoading,
+  selectDashboardProgress,
   selectMyRank,
   selectTopRanking,
 } from '../../state/dashboard/dashboard.selectors';
@@ -21,6 +22,7 @@ export class DashboardComponent implements OnInit {
   loading$: Observable<boolean>;
   myRank$: Observable<number>;
   topRanking$: Observable<Ranking[]>;
+  progress$: Observable<number>;
 
   constructor(private readonly store: Store) {
     this.dashboard$ = this.store.select(selectDashboard);
@@ -28,6 +30,7 @@ export class DashboardComponent implements OnInit {
     this.loading$ = this.store.select(selectDashboardLoading);
     this.myRank$ = this.store.select(selectMyRank);
     this.topRanking$ = this.store.select(selectTopRanking);
+    this.progress$ = this.store.select(selectDashboardProgress);
   }
 
   ngOnInit(): void {

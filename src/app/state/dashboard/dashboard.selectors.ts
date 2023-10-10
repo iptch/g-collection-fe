@@ -35,3 +35,13 @@ export const selectMyRank = createSelector(
 export const selectTopRanking = createSelector(selectDashboard, (dashboard) =>
   dashboard?.rankingList ? dashboard.rankingList.slice(0, 5) : [],
 );
+
+export const selectDashboardProgress = createSelector(
+  selectDashboard,
+  (dashboard) => {
+    if (!dashboard) {
+      return 0;
+    }
+    return (dashboard.myUniqueCardsCount / dashboard.allCardsCount) * 100 || 0;
+  },
+);
