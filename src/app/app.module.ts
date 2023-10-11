@@ -52,7 +52,6 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatSelectModule } from '@angular/material/select';
 import { FormsModule } from '@angular/forms';
 import { MatPaginatorModule } from '@angular/material/paginator';
-import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { AdminComponent } from './components/admin/admin.component';
 import { DistributionEffects } from './state/distribution/distribution.effects';
 import { MatSliderModule } from '@angular/material/slider';
@@ -173,7 +172,6 @@ export function MSALGuardConfigFactory(): MsalGuardConfiguration {
       DashboardEffects,
       UserEffects,
     ]),
-    MatButtonToggleModule,
     MatSliderModule,
     MatSnackBarModule,
     MatMenuModule,
