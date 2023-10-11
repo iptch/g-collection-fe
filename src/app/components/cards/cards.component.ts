@@ -7,6 +7,7 @@ import { CardSort } from 'src/app/models/card-sort.enum';
 import {
   changeCardsFilter,
   changeCardsPage,
+  changeCardsSearchTerm,
   changeCardsSort,
   changeCardsSortDirection,
   loadCards,
@@ -20,8 +21,8 @@ import {
   selectCardsShowAll,
   selectCardsSort,
   selectCardsSortDirection,
+  selectSearchTerm,
 } from 'src/app/state/card/card.selectors';
-import { MatSelectChange } from '@angular/material/select';
 
 interface SortCriterion {
   value: CardSort;
@@ -44,6 +45,7 @@ export class CardsComponent {
     pageIndex: number;
     pageSize: number;
   }>;
+  searchTerm$?: Observable<string>;
 
   readonly sortCriteria: SortCriterion[] = [
     { value: CardSort.Received, viewValue: 'Erhalt des Chärtlis' },
@@ -62,6 +64,7 @@ export class CardsComponent {
     this.sortDirection$ = this.store.select(selectCardsSortDirection);
     this.sort$ = this.store.select(selectCardsSort);
     this.pageInfo$ = this.store.select(selectCardsPageInfo);
+    this.searchTerm$ = this.store.select(selectSearchTerm);
   }
 
   onShowAllChange(value: boolean) {
@@ -78,7 +81,15 @@ export class CardsComponent {
     );
   }
 
-  onSort(event: MatSelectChange) {
-    this.store.dispatch(changeCardsSort({ sort: event.value }));
+  onSort(sort: CardSort) {
+    this.store.dispatch(changeCardsSort({ sort: sort }));
+  }
+
+  onSearchTermChange(searchTerm: string) {
+    this.store.dispatch(
+      changeCardsSearchTerm({
+        searchTerm: searchTerm,
+      }),
+    );
   }
 }

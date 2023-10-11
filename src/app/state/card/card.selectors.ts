@@ -52,8 +52,30 @@ export const selectCardsPageInfo = createSelector(
     pageIndex: cardState.pageIndex,
   }),
 );
-export const selectCardsSorted = createSelector(
+
+export const selectSearchTerm = createSelector(
+  selectCardState,
+  (cardState) => cardState.searchTerm,
+);
+
+export const selectCardsInSearch = createSelector(
   selectAllCards,
+  selectSearchTerm,
+  (allCards, searchTerm) => {
+    if (searchTerm) {
+      const trimmedSearchTerm = searchTerm.trim().toLowerCase();
+      return allCards.filter(
+        (card) =>
+          card.name.toLowerCase().includes(trimmedSearchTerm) ||
+          card.acronym.toLowerCase().includes(trimmedSearchTerm),
+      );
+    }
+    return allCards;
+  },
+);
+
+export const selectCardsSorted = createSelector(
+  selectCardsInSearch,
   selectCardState,
   (allCards, cardState) => {
     const cardsCopy = [...allCards];

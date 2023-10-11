@@ -52,7 +52,6 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatSelectModule } from '@angular/material/select';
 import { FormsModule } from '@angular/forms';
 import { MatPaginatorModule } from '@angular/material/paginator';
-import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { AdminComponent } from './components/admin/admin.component';
 import { DistributionEffects } from './state/distribution/distribution.effects';
 import { MatSliderModule } from '@angular/material/slider';
@@ -61,6 +60,9 @@ import {
   MAT_SNACK_BAR_DEFAULT_OPTIONS,
   MatSnackBarModule,
 } from '@angular/material/snack-bar';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatButtonModule } from '@angular/material/button';
+import { MatInputModule } from '@angular/material/input';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 
 const GRAPH_ENDPOINT = 'https://graph.microsoft.com/v1.0/me';
@@ -170,9 +172,11 @@ export function MSALGuardConfigFactory(): MsalGuardConfiguration {
       DashboardEffects,
       UserEffects,
     ]),
-    MatButtonToggleModule,
     MatSliderModule,
     MatSnackBarModule,
+    MatMenuModule,
+    MatButtonModule,
+    MatInputModule,
     MatProgressBarModule,
   ],
   providers: [
