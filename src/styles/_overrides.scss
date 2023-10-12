@@ -5,8 +5,8 @@
   border-radius: 0;
 }
 
-// Select
-.g-collection-select.mat-mdc-form-field {
+// Form field
+.g-collection.mat-mdc-form-field {
   .mdc-text-field {
     background: none !important;
     border-radius: 0;
@@ -21,6 +21,10 @@
   }
 }
 
+// Menu, paginator
+.mat-mdc-menu-panel,
+.mat-mdc-button-persistent-ripple,
+.mat-ripple,
 // Paginator
 .mdc-notched-outline__leading,
 .mdc-notched-outline__trailing,
