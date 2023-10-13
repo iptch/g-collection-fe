@@ -63,6 +63,9 @@
         </div>
       </div>
     </app-panel>
+    <div class="px-2 text-sm text-light-gray">
+      Erhalten am: {{ card.last_received | date: 'dd.MM.yyyy, HH:mm' }}
+    </div>
     <button
       *ngIf="card.quantity > 1"
       (click)="toggleQrCode()"
