@@ -63,7 +63,10 @@
         </div>
       </div>
     </app-panel>
-    <div *ngIf="card.last_received" class="px-2 text-sm text-light-gray">
+    <div
+      *ngIf="card.last_received"
+      class="px-2 text-sm text-light-grey opacity-40"
+    >
       Erhalten am: {{ card.last_received | date: 'dd.MM.yyyy, HH:mm' }}
     </div>
     <button

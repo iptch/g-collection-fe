@@ -90,7 +90,7 @@ export const selectCardsSorted = createSelector(
         case CardSort.Received:
           if (!a.last_received) return 1;
           if (!b.last_received) return -1;
-          return a.last_received.localeCompare(b.last_received);
+          return b.last_received.localeCompare(a.last_received);
         default:
           return 0;
       }
