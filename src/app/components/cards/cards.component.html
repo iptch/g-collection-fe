@@ -14,7 +14,7 @@
     [message]="'Chärtli konnten nicht geladen werden.'"
   ></app-alert>
   <ng-container *ngIf="!((loading$ | async) || (error$ | async))">
-    <div class="flex gap-1 mb-4">
+    <div class="flex gap-1 mb-3">
       <mat-form-field class="g-collection w-full">
         <mat-label>
           <div class="flex items-center gap-1">
@@ -54,7 +54,7 @@
     </div>
     <div *ngIf="cards$ | async as cards">
       <div *ngIf="cards.length > 0; else noCards">
-        <div class="grid grid-cols-3 gap-2 mb-2">
+        <div class="grid grid-cols-3 gap-1 mb-1">
           <app-card-thumbnail
             *ngFor="let card of cards"
             [card]="card"
