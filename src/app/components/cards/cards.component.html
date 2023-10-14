@@ -16,7 +16,12 @@
   <ng-container *ngIf="!((loading$ | async) || (error$ | async))">
     <div class="flex gap-1 mb-4">
       <mat-form-field class="g-collection w-full">
-        <mat-label>Suche</mat-label>
+        <mat-label>
+          <div class="flex items-center gap-1">
+            <span class="material-symbols-outlined">person_search</span>
+            Suche
+          </div>
+        </mat-label>
         <input
           matInput
           type="text"
@@ -39,11 +44,11 @@
       </mat-menu>
 
       <button mat-icon-button [matMenuTriggerFor]="sortMenu">
-        <span class="material-symbols-outlined">sort</span>
+        <span class="material-symbols-outlined text-light-gray">sort</span>
       </button>
       <button mat-icon-button (click)="onSortDirectionChange()">
-        <span class="material-symbols-outlined">
-          {{ (sortDirection$ | async) ? 'south' : 'north' }}
+        <span class="material-symbols-outlined text-light-gray">
+          {{ (sortDirection$ | async) ? 'arrow_downward' : 'arrow_upward' }}
         </span>
       </button>
     </div>
