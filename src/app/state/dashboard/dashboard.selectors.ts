@@ -33,7 +33,7 @@ export const selectMyRank = createSelector(
 );
 
 export const selectTopRanking = createSelector(selectDashboard, (dashboard) =>
-  dashboard?.rankingList ? dashboard.rankingList.slice(0, 5) : [],
+  dashboard?.rankingList ? dashboard.rankingList.slice(0, 10) : [],
 );
 
 export const selectDashboardProgress = createSelector(
