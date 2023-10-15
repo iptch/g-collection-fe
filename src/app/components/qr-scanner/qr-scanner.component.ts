@@ -1,13 +1,21 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Store } from '@ngrx/store';
 import {
   Html5Qrcode,
   Html5QrcodeCameraScanConfig,
   Html5QrcodeScannerState,
 } from 'html5-qrcode';
-import { Subscription } from 'rxjs';
+import { Observable } from 'rxjs';
 import { Code } from 'src/app/models/code.model';
-import { CardService } from 'src/app/services/card.service';
+import {
+  transferCard,
+  resetTransferCode,
+} from 'src/app/state/transfer/transfer.actions';
+import {
+  selectTransferLoading,
+  selectTransferError,
+  selectTransferCode,
+} from 'src/app/state/transfer/transfer.selectors';
 import { environment } from 'src/environments/environment';
 
 const cameraConfig = { facingMode: 'environment' };
@@ -22,17 +30,18 @@ const qrScannerConfig: Html5QrcodeCameraScanConfig = {
   templateUrl: './qr-scanner.component.html',
 })
 export class QrScannerComponent implements OnInit, OnDestroy {
-  code?: Code;
-  error?: string;
+  code$: Observable<Code | null>;
+  loading$: Observable<boolean>;
+  error$: Observable<string | null>;
   bypassEnabled = environment.scannerBypass;
-  private destroyed = false;
   private qrScanner!: Html5Qrcode;
-  private tradeSubscription: Subscription | null = null;
+  private destroyed = false;
 
-  constructor(
-    private cardService: CardService,
-    private router: Router,
-  ) {}
+  constructor(private readonly store: Store) {
+    this.code$ = this.store.select(selectTransferCode);
+    this.loading$ = this.store.select(selectTransferLoading);
+    this.error$ = this.store.select(selectTransferError);
+  }
 
   ngOnInit(): void {
     this.qrScanner = new Html5Qrcode('qr-scanner');
@@ -44,7 +53,6 @@ export class QrScannerComponent implements OnInit, OnDestroy {
     if (this.qrScanner.getState() !== Html5QrcodeScannerState.NOT_STARTED) {
       this.stopScanning();
     }
-    this.tradeSubscription?.unsubscribe();
   }
 
   startScanning(): void {
@@ -75,29 +83,15 @@ export class QrScannerComponent implements OnInit, OnDestroy {
   }
 
   resumeScanning(): void {
-    this.code = undefined;
-    this.error = undefined;
+    this.store.dispatch(resetTransferCode());
     this.startScanning();
   }
 
   parseCode(qrText: string): void {
     const parsedObject = JSON.parse(qrText);
     if (this.isCode(parsedObject)) {
-      this.code = parsedObject;
       this.stopScanning();
-
-      this.tradeSubscription = this.cardService
-        .transferCard(this.code)
-        .subscribe({
-          next: (response) => {
-            console.info(response.status);
-            this.router.navigate(['/cards', `${parsedObject.id}`]);
-          },
-          error: (error) =>
-            (this.error = error.error.status
-              ? error.error.status
-              : error.message),
-        });
+      this.store.dispatch(transferCard({ code: parsedObject }));
     } else {
       console.error('Parsed object is not of type Code', parsedObject);
     }
