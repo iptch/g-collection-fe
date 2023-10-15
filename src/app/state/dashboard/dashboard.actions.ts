@@ -1,14 +1,14 @@
 import { createAction, props } from '@ngrx/store';
 import { Dashboard } from '../../models/dashboard.model';
 
-export const loadDashboard = createAction('[Dashboard] Load Dashboard');
+export const loadDashboard = createAction('[Dashboard] Load dashboard');
 
 export const loadDashboardSuccess = createAction(
-  '[Dashboard] Load Dashboard Success',
+  '[Dashboard] Load dashboard success',
   props<{ dashboard: Dashboard }>(),
 );
 
 export const loadDashboardError = createAction(
-  '[Dashboard] Load Dashboard Error',
+  '[Dashboard] Load dashboard error',
   props<{ error: string }>(),
 );
