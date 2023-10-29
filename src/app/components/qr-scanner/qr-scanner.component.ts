@@ -18,7 +18,10 @@ import {
 } from 'src/app/state/transfer/transfer.selectors';
 import { environment } from 'src/environments/environment';
 
-const cameraConfig = { facingMode: 'environment' };
+const cameraConfig = {
+  facingMode: 'environment',
+  focusMode: 'continuous',
+};
 
 const qrScannerConfig: Html5QrcodeCameraScanConfig = {
   fps: 10,
