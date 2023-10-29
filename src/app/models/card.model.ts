@@ -1,12 +1,13 @@
 export interface Card {
   id: number;
-  acronym: string;
-  highlight: string;
-  job: string;
-  must_have: string;
   name: string;
-  superpower: string;
-  team: string;
+  acronym: string;
+  job: string;
+  start_at_ipt: string;
+  wish_destination: string;
+  wish_person: string;
+  wish_skill: string;
+  best_advice: string;
   image_url: string;
   quantity: number;
   last_received: string;
