@@ -20,13 +20,18 @@ import { environment } from 'src/environments/environment';
 
 const cameraConfig = {
   facingMode: 'environment',
-  focusMode: 'continuous',
 };
 
 const qrScannerConfig: Html5QrcodeCameraScanConfig = {
   fps: 10,
   qrbox: 250,
   aspectRatio: 1,
+  videoConstraints: {
+    facingMode: 'environment',
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
+    focusMode: 'continuous',
+  },
 };
 
 @Component({
@@ -69,6 +74,7 @@ export class QrScannerComponent implements OnInit, OnDestroy {
         undefined, // QR Code no longer in front of camera
       )
       .then(() => {
+        console.log(this.qrScanner.getRunningTrackCameraCapabilities());
         // If component is already destroyed by the time scanner starts, stop it immediately
         if (this.destroyed) {
           this.stopScanning();
