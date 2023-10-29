@@ -10,6 +10,8 @@ import { Code } from 'src/app/models/code.model';
 import {
   transferCard,
   resetTransferCode,
+  startScanner,
+  startScannerSuccess,
 } from 'src/app/state/transfer/transfer.actions';
 import {
   selectTransferLoading,
@@ -58,6 +60,7 @@ export class QrScannerComponent implements OnInit, OnDestroy {
 
   startScanning(): void {
     if (this.bypassEnabled) return;
+    this.store.dispatch(startScanner());
     this.qrScanner
       .start(
         cameraConfig,
@@ -69,6 +72,8 @@ export class QrScannerComponent implements OnInit, OnDestroy {
         // If component is already destroyed by the time scanner starts, stop it immediately
         if (this.destroyed) {
           this.stopScanning();
+        } else {
+          this.store.dispatch(startScannerSuccess());
         }
       })
       .catch((err) => {
