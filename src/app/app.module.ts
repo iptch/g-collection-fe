@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { isDevMode, NgModule } from '@angular/core';
+import { isDevMode, LOCALE_ID, NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ServiceWorkerModule } from '@angular/service-worker';
@@ -65,6 +65,10 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { TransferEffects } from './state/transfer/transfer.effects';
+import { registerLocaleData } from '@angular/common';
+import localeDeCh from '@angular/common/locales/de-CH';
+
+registerLocaleData(localeDeCh);
 
 const GRAPH_ENDPOINT = 'https://graph.microsoft.com/v1.0/me';
 
@@ -209,6 +213,7 @@ export function MSALGuardConfigFactory(): MsalGuardConfiguration {
         panelClass: '!mb-16',
       },
     },
+    { provide: LOCALE_ID, useValue: 'de-CH' },
   ],
   bootstrap: [AppComponent, MsalRedirectComponent],
 })
