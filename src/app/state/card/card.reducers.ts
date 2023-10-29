@@ -46,7 +46,11 @@ export const cardReducer = createReducer(
   }),
 
   on(CardActions.changeCardsFilter, (state, { showAll }): CardState => {
-    return { ...state, showAll, pageIndex: initialCardState.pageIndex };
+    return {
+      ...state,
+      showAll,
+      pageIndex: showAll ? state.pageIndex : initialCardState.pageIndex,
+    };
   }),
 
   on(
