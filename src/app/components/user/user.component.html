@@ -5,15 +5,21 @@
       <app-field
         [label]="'Name'"
         [value]="user.user.first_name + ' ' + user.user.last_name"
+        [symbol]="'badge'"
       ></app-field>
     </div>
     <div>
-      <app-field [label]="'E-Mail'" [value]="user.user.email"></app-field>
+      <app-field
+        [label]="'E-Mail'"
+        [value]="user.user.email"
+        [symbol]="'mail'"
+      ></app-field>
     </div>
     <div>
       <app-field
         [label]="'Admin'"
         [value]="user.user.is_admin + ''"
+        [symbol]="'admin_panel_settings'"
       ></app-field>
     </div>
     <div class="flex">

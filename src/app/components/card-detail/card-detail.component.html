@@ -41,30 +41,35 @@
           <app-field
             [label]="'Ich bin bei der ipt seit'"
             [value]="card.start_at_ipt | date: 'dd. LLLL yyyy'"
+            [symbol]="'event'"
           ></app-field>
         </div>
         <div>
           <app-field
             [label]="'Da würde ich am liebsten mal hinreisen'"
             [value]="card.wish_destination"
+            [symbol]="'travel_explore'"
           ></app-field>
         </div>
         <div>
           <app-field
             [label]="'Für einen Tag tauschen würde ich mit'"
             [value]="card.wish_person"
+            [symbol]="'supervised_user_circle'"
           ></app-field>
         </div>
         <div>
           <app-field
             [label]="'Das wollte ich schon immer mal erlernen'"
             [value]="card.wish_skill"
+            [symbol]="'local_library'"
           ></app-field>
         </div>
         <div>
           <app-field
-            [label]="'Der beste Ratschlag, den ich je erhalten habe'"
+            [label]="'Der beste erhaltene Ratschlag'"
             [value]="card.best_advice"
+            [symbol]="'lightbulb'"
           ></app-field>
         </div>
       </div>

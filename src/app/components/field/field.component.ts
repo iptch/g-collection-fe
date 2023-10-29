@@ -7,4 +7,5 @@ import { Component, Input } from '@angular/core';
 export class FieldComponent {
   @Input() label!: string;
   @Input() value?: string | number | null;
+  @Input() symbol?: string;
 }
