@@ -23,6 +23,7 @@ const cameraConfig = { facingMode: 'environment' };
 const qrScannerConfig: Html5QrcodeCameraScanConfig = {
   fps: 10,
   qrbox: 250,
+  aspectRatio: 1,
 };
 
 @Component({
