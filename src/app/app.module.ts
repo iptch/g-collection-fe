@@ -70,8 +70,6 @@ import localeDeCh from '@angular/common/locales/de-CH';
 
 registerLocaleData(localeDeCh);
 
-const GRAPH_ENDPOINT = 'https://graph.microsoft.com/v1.0/me';
-
 const isIE =
   window.navigator.userAgent.indexOf('MSIE ') > -1 ||
   window.navigator.userAgent.indexOf('Trident/') > -1;
@@ -104,7 +102,6 @@ export function MSALInstanceFactory(): IPublicClientApplication {
 
 export function MSALInterceptorConfigFactory(): MsalInterceptorConfiguration {
   const protectedResourceMap = new Map<string, Array<string>>();
-  protectedResourceMap.set(GRAPH_ENDPOINT, ['user.read']);
   protectedResourceMap.set(environment.backendUri, [
     'api://ae04e6aa-6cb5-4c16-9d3b-45bd6a79845c/user_impersonation',
   ]);
