@@ -16,8 +16,18 @@ export const transferReducer = createReducer(
   ),
 
   on(
+    TransferActions.startScanner,
+    (state): TransferState => ({
+      ...state,
+      loading: true,
+      error: null,
+    }),
+  ),
+
+  on(
     TransferActions.transferCardSuccess,
     TransferActions.resetTransferCode,
+    TransferActions.startScannerSuccess,
     (): TransferState => initialTransferState,
   ),
 
