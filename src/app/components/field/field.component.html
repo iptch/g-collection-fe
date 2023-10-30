@@ -1,2 +1,12 @@
-<span class="text-light-pink text-sm">{{ label }}</span>
-<div>{{ value }}</div>
+<div class="flex space-x-2 items-center">
+  <div
+    *ngIf="symbol"
+    class="material-symbols-outlined text-light-gray opacity-60"
+  >
+    {{ symbol }}
+  </div>
+  <div>
+    <span class="text-light-pink text-sm">{{ label }}</span>
+    <div>{{ value ? value : '🤷‍♀️ 🤷‍♂️' }}</div>
+  </div>
+</div>

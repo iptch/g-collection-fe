@@ -29,6 +29,17 @@
           [ngModel]="searchTerm$ | async"
           (ngModelChange)="onSearchTermChange($event)"
         />
+        <button
+          matSuffix
+          mat-icon-button
+          *ngIf="searchTerm$ | async"
+          (click)="onSearchTermChange('')"
+          class="-mt-2"
+        >
+          <span class="material-symbols-outlined text-light-grey opacity-60">
+            close
+          </span>
+        </button>
       </mat-form-field>
       <mat-menu #sortMenu="matMenu">
         <button
@@ -42,9 +53,10 @@
           >
         </button>
       </mat-menu>
-
       <button mat-icon-button [matMenuTriggerFor]="sortMenu">
-        <span class="material-symbols-outlined text-light-gray">sort</span>
+        <span class="material-symbols-outlined text-light-gray -translate-y-0.5"
+          >sort</span
+        >
       </button>
       <button mat-icon-button (click)="onSortDirectionChange()">
         <span class="material-symbols-outlined text-light-gray">
@@ -61,7 +73,6 @@
             [routerLink]="'' + card.id"
           ></app-card-thumbnail>
         </div>
-
         <mat-paginator
           *ngIf="pageInfo$ | async as pageInfo"
           [length]="cardsCount$ | async"

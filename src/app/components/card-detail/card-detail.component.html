@@ -6,7 +6,7 @@
 </div>
 <ng-container *ngIf="!((loading$ | async) || (error$ | async))">
   <div *ngIf="card$ | async as card">
-    <app-title [subtitle]="card.team">{{ card.name }}</app-title>
+    <app-title [subtitle]="card.job">{{ card.name }}</app-title>
     <app-panel>
       <div
         class="w-full aspect-square flex items-center justify-center relative"
@@ -37,28 +37,39 @@
         </div>
       </div>
       <div class="pt-4 space-y-2" *ngIf="card.quantity > 0; else askMe">
-        <div>
+        <div *ngIf="card.start_at_ipt">
           <app-field
-            [label]="'Als Kind wollte ich immer ... werden'"
-            [value]="card.job"
+            [label]="'Ich bin bei der ipt seit'"
+            [value]="card.start_at_ipt | date: 'dd. LLLL yyyy'"
+            [symbol]="'event'"
           ></app-field>
         </div>
         <div>
           <app-field
-            [label]="'Meine Superpower'"
-            [value]="card.superpower"
+            [label]="'Da würde ich am liebsten mal hinreisen'"
+            [value]="card.wish_destination"
+            [symbol]="'travel_explore'"
           ></app-field>
         </div>
         <div>
           <app-field
-            [label]="'Gefällt mir an ipt besonders gut'"
-            [value]="card.highlight"
+            [label]="'Für einen Tag tauschen würde ich mit'"
+            [value]="card.wish_person"
+            [symbol]="'supervised_user_circle'"
           ></app-field>
         </div>
         <div>
           <app-field
-            [label]="'Ohne ... könnte ich niemals leben'"
-            [value]="card.must_have"
+            [label]="'Das wollte ich schon immer mal erlernen'"
+            [value]="card.wish_skill"
+            [symbol]="'local_library'"
+          ></app-field>
+        </div>
+        <div>
+          <app-field
+            [label]="'Der beste erhaltene Ratschlag'"
+            [value]="card.best_advice"
+            [symbol]="'lightbulb'"
           ></app-field>
         </div>
       </div>
@@ -67,7 +78,7 @@
       *ngIf="card.last_received"
       class="px-2 text-sm text-light-grey opacity-40"
     >
-      Erhalten am: {{ card.last_received | date: 'dd.MM.yyyy, HH:mm' }}
+      Erhalten am {{ card.last_received | date: 'dd. LLLL yyyy, HH:mm' }} Uhr
     </div>
     <button
       *ngIf="card.quantity > 1"

@@ -5,33 +5,39 @@
 <app-panel *ngIf="error$ | async">
   <app-alert [message]="(error$ | async)!"></app-alert>
 </app-panel>
-<div *ngIf="!((loading$ | async) || (error$ | async))" class="m-2">
-  <div class="grid grid-cols-2 gap-2">
-    <div *ngIf="dashboard$ | async as dashboard" class="bg-dark-gray p-2">
-      <div class="text-light-pink">Chärtli</div>
-      <div class="text-4xl">
-        {{ dashboard.myUniqueCardsCount }} /
-        {{ dashboard.allCardsCount }}
+<ng-container *ngIf="!((loading$ | async) || (error$ | async))">
+  <div *ngIf="dashboard$ | async as dashboard" class="m-2 space-y-2">
+    <div class="grid grid-cols-2 gap-2">
+      <div class="bg-dark-gray p-2">
+        <div class="text-light-pink">Meine Chärtli</div>
+        <div class="text-4xl">
+          {{ dashboard.myUniqueCardsCount }} /
+          {{ dashboard.allCardsCount }}
+        </div>
+        <div class="pt-2">
+          <mat-progress-bar
+            mode="determinate"
+            value="{{ progress$ | async }}"
+            color="primary"
+          ></mat-progress-bar>
+        </div>
       </div>
-      <div class="pt-2">
-        <mat-progress-bar
-          mode="determinate"
-          value="{{ progress$ | async }}"
-          color="primary"
-        ></mat-progress-bar>
+      <div class="bg-dark-gray p-2">
+        <div class="text-light-pink">Mein Rang</div>
+        <div class="text-4xl">{{ myRank$ | async }}</div>
       </div>
     </div>
     <div class="bg-dark-gray p-2">
-      <div class="text-light-pink">Rang</div>
-      <div class="text-4xl">{{ myRank$ | async }}</div>
+      <div class="text-light-pink">Top 10</div>
+      <ol class="list-decimal list-inside">
+        <li *ngFor="let ranking of topRanking$ | async">
+          {{ ranking.displayName }}
+        </li>
+      </ol>
+    </div>
+    <div class="bg-dark-gray p-2">
+      <div class="text-light-pink">Total ausgeschüttete Chärtli</div>
+      <div class="text-4xl">{{ dashboard.totalCardQuantity | number }}</div>
     </div>
   </div>
-  <div class="bg-dark-gray mt-2 p-2 break-words">
-    <div class="text-light-pink">Top 10</div>
-    <ol class="list-decimal list-inside">
-      <li *ngFor="let ranking of topRanking$ | async">
-        {{ ranking.displayName }}
-      </li>
-    </ol>
-  </div>
-</div>
+</ng-container>
