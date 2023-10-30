@@ -9,7 +9,7 @@ export interface Dashboard {
 
 export interface Ranking {
   rank: number;
-  cardsCount: number;
+  uniqueCardsCount: number;
   displayName: string;
   userEmail: string;
 }

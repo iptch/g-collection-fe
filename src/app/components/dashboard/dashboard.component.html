@@ -32,6 +32,7 @@
       <ol class="list-decimal list-inside">
         <li *ngFor="let ranking of topRanking$ | async">
           {{ ranking.displayName }}
+          <span class="text-light-blue">[{{ ranking.uniqueCardsCount }}]</span>
         </li>
       </ol>
     </div>
