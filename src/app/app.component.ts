@@ -42,6 +42,7 @@ export class AppComponent implements OnInit, OnDestroy {
       )
       .subscribe(() => {
         if (this.authService.isAuthenticated()) {
+          console.info('GC2.0: user is authenticated');
           this.store.dispatch(UserActions.initUser());
         }
       });
