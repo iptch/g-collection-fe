@@ -5,7 +5,7 @@ import { Store } from '@ngrx/store';
 import { Observable, Subject } from 'rxjs';
 import { filter, takeUntil } from 'rxjs/operators';
 import { AuthService } from './services/auth.service';
-import * as UserActions from './state/user/user.actions';
+import { initUser } from './state/user/user.actions';
 import {
   selectUserError,
   selectUserLoading,
@@ -43,7 +43,7 @@ export class AppComponent implements OnInit, OnDestroy {
       .subscribe(() => {
         if (this.authService.isAuthenticated()) {
           console.info('GC2.0: user is authenticated');
-          this.store.dispatch(UserActions.initUser());
+          this.store.dispatch(initUser());
         }
       });
   }
