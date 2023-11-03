@@ -1,8 +1,11 @@
 <header
-  class="sticky top-0 h-12 pl-2 flex justify-between items-center bg-dark-gray text-xl font-medium text-light-gray z-10"
+  class="sticky top-0 h-10 pl-2 flex justify-between items-center bg-dark-gray text-lg font-medium text-light-gray z-10"
 >
-  <span [routerLink]="'dashboard'">Genius Collection 2.0</span>
-  <div class="h-full pr-2">
+  <div [routerLink]="'dashboard'" class="flex items-center">
+    <img src="assets/icon-small.png" alt="icon" class="h-6 mr-2" />
+    Genius Collection 2.0
+  </div>
+  <div class="h-full">
     <button
       *ngIf="isAdmin$ | async"
       [routerLink]="'admin'"
