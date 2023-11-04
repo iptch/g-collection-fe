@@ -6,18 +6,20 @@
 }
 
 // Form field
-.g-collection.mat-mdc-form-field {
+.mat-mdc-form-field {
   .mdc-text-field {
     background: none !important;
     border-radius: 0;
   }
 
-  .mat-mdc-form-field-subscript-wrapper {
-    display: none;
-  }
-
   .mat-mdc-form-field-focus-overlay {
     background: none;
+  }
+}
+
+.no-subscript {
+  .mat-mdc-form-field-subscript-wrapper {
+    display: none;
   }
 }
 
