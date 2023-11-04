@@ -36,9 +36,15 @@
         </li>
       </ol>
     </div>
-    <div class="bg-dark-gray p-2">
+    <div *ngIf="dashboard.totalCardQuantity" class="bg-dark-gray p-2">
       <div class="text-light-pink">Total ausgeschüttete Chärtli</div>
       <div class="text-4xl">{{ dashboard.totalCardQuantity | number }}</div>
+    </div>
+    <div *ngIf="dashboard.lastDistribution" class="bg-dark-gray p-2">
+      <div class="text-light-pink">Jüngste Ausschüttung</div>
+      <div class="text-lg">
+        {{ dashboard.lastDistribution | date: 'dd. LLLL yyyy, HH:mm' }} Uhr
+      </div>
     </div>
   </div>
 </ng-container>

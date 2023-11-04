@@ -5,6 +5,7 @@ export interface Dashboard {
   allCardsCount: number;
   duplicateCardsCount: number;
   rankingList: Ranking[];
+  lastDistribution: string;
 }
 
 export interface Ranking {
