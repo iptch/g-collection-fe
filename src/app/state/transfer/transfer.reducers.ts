@@ -33,6 +33,7 @@ export const transferReducer = createReducer(
 
   on(
     TransferActions.transferCardError,
+    TransferActions.startScannerError,
     (state, { error }): TransferState => ({
       ...state,
       loading: false,

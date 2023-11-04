@@ -5,7 +5,7 @@
 <div class="mt-2" id="qr-scanner"></div>
 <app-panel *ngIf="error$ | async as error">
   <div class="space-y-2">
-    <div class="text-light-pink">Tausch fehlgeschlagen</div>
+    <div class="text-light-pink">Das ging in die Hose!</div>
     <div>{{ error }}</div>
     <div *ngIf="code$ | async as code">
       <pre>{{ code | json }}</pre>

@@ -27,3 +27,8 @@ export const startScanner = createAction('[Transfer] Start scanner');
 export const startScannerSuccess = createAction(
   '[Transfer] Start scanner success',
 );
+
+export const startScannerError = createAction(
+  '[Transfer] Start scanner error',
+  props<{ error: string }>(),
+);

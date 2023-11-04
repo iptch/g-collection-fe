@@ -12,6 +12,7 @@ import {
   resetTransferCode,
   startScanner,
   startScannerSuccess,
+  startScannerError,
 } from 'src/app/state/transfer/transfer.actions';
 import {
   selectTransferLoading,
@@ -76,16 +77,14 @@ export class QrScannerComponent implements OnInit, OnDestroy {
           this.store.dispatch(startScannerSuccess());
         }
       })
-      .catch((err) => {
-        console.log(`Unable to start scanning, error: ${err}`);
-      });
+      .catch((error) => this.store.dispatch(startScannerError({ error })));
   }
 
   stopScanning(): void {
     if (this.bypassEnabled) return;
     this.qrScanner
       .stop()
-      .catch((err) => console.log('Error stopping the scanner', err));
+      .catch((error) => console.log('Error stopping the scanner', error));
   }
 
   resumeScanning(): void {
