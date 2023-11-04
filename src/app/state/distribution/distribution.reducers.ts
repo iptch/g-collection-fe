@@ -13,25 +13,15 @@ export const distributionReducer = createReducer(
     (state: DistributionState): DistributionState => ({
       ...state,
       loading: true,
-      error: false,
     }),
   ),
 
   on(
     DistributionActions.distributeCardsSuccess,
-    (state): DistributionState => ({
-      ...state,
-      loading: false,
-      error: false,
-    }),
-  ),
-
-  on(
     DistributionActions.distributeCardsError,
     (state): DistributionState => ({
       ...state,
       loading: false,
-      error: true,
     }),
   ),
 );

@@ -8,8 +8,3 @@ export const selectDistributionLoading = createSelector(
   selectDistributionState,
   (state) => state.loading,
 );
-
-export const selectDistributionError = createSelector(
-  selectDistributionState,
-  (state) => state.error,
-);

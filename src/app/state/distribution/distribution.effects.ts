@@ -15,7 +15,13 @@ export class DistributionEffects {
           map((response) =>
             DistributionActions.distributeCardsSuccess({ response }),
           ),
-          catchError(() => of(DistributionActions.distributeCardsError())),
+          catchError((error) =>
+            of(
+              DistributionActions.distributeCardsError({
+                error: error.error.status ? error.error.status : error.message,
+              }),
+            ),
+          ),
         ),
       ),
     );
@@ -26,6 +32,16 @@ export class DistributionEffects {
       return this.actions$.pipe(
         ofType(DistributionActions.distributeCardsSuccess),
         tap((response) => this.snackBar.open(response.response.status)),
+      );
+    },
+    { dispatch: false },
+  );
+
+  readonly distributeCardsError = createEffect(
+    () => {
+      return this.actions$.pipe(
+        ofType(DistributionActions.distributeCardsError),
+        tap((error) => this.snackBar.open(error.error)),
       );
     },
     { dispatch: false },

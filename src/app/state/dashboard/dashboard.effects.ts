@@ -15,12 +15,13 @@ export class DashboardEffects {
           map((dashboard) =>
             DashboardActions.loadDashboardSuccess({ dashboard }),
           ),
-          catchError((err) => {
-            const errorMessage = err.status + ': ' + err.statusText;
-            return of(
-              DashboardActions.loadDashboardError({ error: errorMessage }),
-            );
-          }),
+          catchError((error) =>
+            of(
+              DashboardActions.loadDashboardError({
+                error: error.error.status ? error.error.status : error.message,
+              }),
+            ),
+          ),
         );
       }),
     );

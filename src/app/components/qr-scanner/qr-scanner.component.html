@@ -4,19 +4,16 @@
 </div>
 <div class="mt-2" id="qr-scanner"></div>
 <app-panel *ngIf="error$ | async as error">
-  <div class="space-y-2">
-    <div class="text-light-pink">Das ging in die Hose!</div>
-    <div>{{ error }}</div>
-    <div *ngIf="code$ | async as code">
-      <pre>{{ code | json }}</pre>
-    </div>
-    <div class="flex">
-      <app-button
-        (click)="resumeScanning()"
-        [text]="'Scan again'"
-        [symbol]="'qr_code_scanner'"
-      ></app-button>
-    </div>
+  <app-alert [message]="error"></app-alert>
+  <div *ngIf="code$ | async as code">
+    <pre>{{ code | json }}</pre>
+  </div>
+  <div class="flex mt-4">
+    <app-button
+      (click)="resumeScanning()"
+      [text]="'Scan again'"
+      [symbol]="'qr_code_scanner'"
+    ></app-button>
   </div>
 </app-panel>
 <app-panel *ngIf="bypassEnabled && !((loading$ | async) || (error$ | async))">

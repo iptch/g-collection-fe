@@ -14,4 +14,5 @@ export const distributeCardsSuccess = createAction(
 
 export const distributeCardsError = createAction(
   '[Distribution] Distribute cards error',
+  props<{ error: string }>(),
 );
