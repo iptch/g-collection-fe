@@ -9,6 +9,7 @@ import {
   selectDashboardProgress,
   selectMyRank,
   selectTopRanking,
+  selectTotalUsers,
 } from '../../state/dashboard/dashboard.selectors';
 import { loadDashboard } from '../../state/dashboard/dashboard.actions';
 
@@ -21,6 +22,7 @@ export class DashboardComponent implements OnInit {
   error$: Observable<string | null>;
   loading$: Observable<boolean>;
   myRank$: Observable<number>;
+  totalUsers$: Observable<number>;
   topRanking$: Observable<Ranking[]>;
   progress$: Observable<number>;
 
@@ -29,6 +31,7 @@ export class DashboardComponent implements OnInit {
     this.error$ = this.store.select(selectDashboardError);
     this.loading$ = this.store.select(selectDashboardLoading);
     this.myRank$ = this.store.select(selectMyRank);
+    this.totalUsers$ = this.store.select(selectTotalUsers);
     this.topRanking$ = this.store.select(selectTopRanking);
     this.progress$ = this.store.select(selectDashboardProgress);
   }

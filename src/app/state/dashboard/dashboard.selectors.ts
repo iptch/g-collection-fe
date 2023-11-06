@@ -32,6 +32,11 @@ export const selectMyRank = createSelector(
   },
 );
 
+export const selectTotalUsers = createSelector(
+  selectDashboard,
+  (dashboard) => dashboard?.rankingList.length ?? 0,
+);
+
 export const selectTopRanking = createSelector(selectDashboard, (dashboard) =>
   dashboard?.rankingList ? dashboard.rankingList.slice(0, 10) : [],
 );

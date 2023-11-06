@@ -24,7 +24,9 @@
       </div>
       <div class="bg-dark-gray p-2">
         <div class="text-light-pink">Mein Rang</div>
-        <div class="text-4xl">{{ myRank$ | async }}</div>
+        <div class="text-4xl">
+          {{ myRank$ | async }} / {{ totalUsers$ | async }}
+        </div>
       </div>
     </div>
     <div class="bg-dark-gray p-2">
