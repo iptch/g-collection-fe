@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { selectUser } from 'src/app/state/user/user.selectors';
 import { map } from 'rxjs';
@@ -10,6 +10,7 @@ import { modifyCard } from 'src/app/state/card/card.actions';
 @Component({
   selector: 'app-initial-card-creation',
   templateUrl: 'initial-card-creation.dialog.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class InitialCardCreationDialogComponent {
   private readonly store = inject(Store);

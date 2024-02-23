@@ -1,4 +1,5 @@
 import {
+  ChangeDetectionStrategy,
   Component,
   DestroyRef,
   EventEmitter,
@@ -22,11 +23,12 @@ import {
 import { selectUser } from 'src/app/state/user/user.selectors';
 
 @Component({
-  selector: 'app-initial-user-creation',
+  selector: 'app-edit-user-card',
   templateUrl: 'initial.user.creation.component.html',
   styleUrls: ['initial.user.creation.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class InitialUserCreationComponent implements OnInit {
+export class EditUserCardComponent implements OnInit {
   @Input() cardId: number | null = null;
   @Output() save = new EventEmitter<UserCard>();
 

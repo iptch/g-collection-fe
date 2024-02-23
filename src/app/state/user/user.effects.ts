@@ -16,7 +16,6 @@ export class UserEffects {
       mergeMap(() =>
         this.userService.initUser().pipe(
           map((user: User) => {
-            // TODO check for first time registration
             if (!user?.['card_id']) {
               this.showDialog();
             }

@@ -1,7 +1,7 @@
 <div mat-dialog-content>
   <app-title>Chärtli erstellen</app-title>
-  <app-initial-user-creation
+  <app-edit-user-card
     [cardId]="(userCardId$ | async) ?? null"
     (save)="saveUserCard($event)"
-  ></app-initial-user-creation>
+  ></app-edit-user-card>
 </div>
