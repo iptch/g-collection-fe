@@ -11,8 +11,8 @@
             <ng-container *ngSwitchCase="'image'">
               <img
                 #image
-                *ngIf="imageQuestion?.imageUrl; else noImage"
-                [src]="imageQuestion?.imageUrl"
+                *ngIf="imageQuestion?.image_url; else noImage"
+                [src]="imageQuestion?.image_url"
                 alt="questionImage"
                 class="max-h-48 w-fit object-cover transition-all ease-out duration-200"
                 onerror="this.src='assets/icon.png'"
@@ -34,6 +34,7 @@
             [centerText]="true"
             [fullWidth]="true"
             [text]="answer.answer"
+            (click)="onSelectAnswer(answer.id)"
           ></app-button>
         </ng-container>
       </div>

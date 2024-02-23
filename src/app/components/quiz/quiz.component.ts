@@ -36,4 +36,8 @@ export class QuizComponent implements OnDestroy {
   onGetNewQuestion() {
     this.store.dispatch(QuizActions.getQuestion());
   }
+
+  onSelectAnswer(answerId: string) {
+    // TODO
+  }
 }

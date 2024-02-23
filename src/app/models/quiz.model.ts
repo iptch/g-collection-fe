@@ -3,17 +3,18 @@ interface QuizQuestionBase {
   type: QuizQuestionType;
   question: string;
   answers: QuizAnswer[];
+  correctAnswerId?: string;
 }
 
-export type QuizQuestionType = 'image' | 'text';
+export type QuizQuestionType = 'IMAGE' | 'TEXT';
 
 export interface ImageQuizQuestion extends QuizQuestionBase {
-  type: 'image';
-  imageUrl: string;
+  type: 'IMAGE';
+  image_url: string;
 }
 
 export interface TextQuizQuestion extends QuizQuestionBase {
-  type: 'text';
+  type: 'TEXT';
 }
 
 export type QuizQuestion = ImageQuizQuestion | TextQuizQuestion;

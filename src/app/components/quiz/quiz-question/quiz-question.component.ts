@@ -1,4 +1,10 @@
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  Input,
+  Output,
+} from '@angular/core';
 import { ImageQuizQuestion, QuizQuestion } from 'src/app/models/quiz.model';
 
 @Component({
@@ -9,8 +15,13 @@ import { ImageQuizQuestion, QuizQuestion } from 'src/app/models/quiz.model';
 export class QuizQuestionComponent {
   @Input() loading!: boolean;
   @Input() question!: QuizQuestion | null;
+  @Output() selectAnswer = new EventEmitter<string>();
 
   get imageQuestion(): ImageQuizQuestion | null {
-    return this.question?.type === 'image' ? this.question : null;
+    return this.question?.type === 'IMAGE' ? this.question : null;
+  }
+
+  onSelectAnswer(answerId: string) {
+    this.selectAnswer.emit(answerId);
   }
 }
