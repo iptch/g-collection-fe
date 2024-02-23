@@ -9,4 +9,6 @@ export class ButtonComponent {
   @Input() symbol?: string;
   @Input() color = 'blue';
   @Input() outlined = false;
+  @Input() fullWidth = false;
+  @Input() centerText = false;
 }

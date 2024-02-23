@@ -6,9 +6,12 @@
       !outlined && color === 'blue',
     'border-light-pink text-light-pink': outlined && color === 'pink',
     'border-dark-pink bg-dark-pink active:bg-light-pink':
-      !outlined && color === 'pink'
+      !outlined && color === 'pink',
+    'w-full': fullWidth
   }"
 >
   <span *ngIf="symbol" class="material-symbols-outlined">{{ symbol }}</span>
-  <span *ngIf="text">{{ text }}</span>
+  <span *ngIf="text" class="w-full" [ngClass]="{ 'text-center': centerText }">{{
+    text
+  }}</span>
 </button>
