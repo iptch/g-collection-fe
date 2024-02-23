@@ -5,6 +5,8 @@ import { selectUser } from 'src/app/state/user/user.selectors';
 import { User } from 'src/app/models/user.model';
 import { inject } from '@angular/core';
 import { map } from 'rxjs';
+import { modifyCard } from 'src/app/state/card/card.actions';
+import { UserCard } from 'src/app/models/card.model';
 
 @Component({
   selector: 'app-user',
@@ -19,5 +21,9 @@ export class UserComponent {
 
   logout() {
     this.authService.logout();
+  }
+
+  saveUserCard(userCard: UserCard): void {
+    this.store.dispatch(modifyCard({ userCard }));
   }
 }

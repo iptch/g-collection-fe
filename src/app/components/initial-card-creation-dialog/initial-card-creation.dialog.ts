@@ -1,11 +1,10 @@
 import { Component, inject } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { selectUser } from 'src/app/state/user/user.selectors';
-import { map, switchMap } from 'rxjs';
+import { map } from 'rxjs';
 import { User } from 'src/app/models/user.model';
 import { MatDialogRef } from '@angular/material/dialog';
-import { selectCardById } from 'src/app/state/card/card.selectors';
-import { Card, UserCard } from 'src/app/models/card.model';
+import { UserCard } from 'src/app/models/card.model';
 import { modifyCard } from 'src/app/state/card/card.actions';
 
 @Component({

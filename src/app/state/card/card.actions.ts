@@ -1,4 +1,3 @@
-import { EventEmitter } from '@angular/core';
 import { createAction, props } from '@ngrx/store';
 import { CardSort } from 'src/app/models/card-sort.enum';
 import { Card, UserCard } from 'src/app/models/card.model';

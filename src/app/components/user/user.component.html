@@ -36,4 +36,5 @@
 <app-title>Meine Karte</app-title>
 <app-initial-user-creation
   [cardId]="(userCardId$ | async) ?? null"
+  (save)="saveUserCard($event)"
 ></app-initial-user-creation>

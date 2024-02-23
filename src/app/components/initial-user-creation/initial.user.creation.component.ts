@@ -14,7 +14,7 @@ import { take, tap, map, switchMap, filter } from 'rxjs';
 import { Card, UserCard } from 'src/app/models/card.model';
 import { User } from 'src/app/models/user.model';
 import { UserService } from 'src/app/services/user.service';
-import { loadCardById, modifyCard } from 'src/app/state/card/card.actions';
+import { loadCardById } from 'src/app/state/card/card.actions';
 import {
   selectCardById,
   selectCardWithUserById,
