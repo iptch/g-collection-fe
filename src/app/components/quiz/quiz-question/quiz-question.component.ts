@@ -21,7 +21,7 @@ export class QuizQuestionComponent {
   @Output() selectAnswer = new EventEmitter<string>();
 
   get imageQuestion(): ImageQuizQuestion | null {
-    return this.question?.type === 'IMAGE' ? this.question : null;
+    return this.question?.questionType === 'IMAGE' ? this.question : null;
   }
 
   onSelectAnswer(answerId: string) {

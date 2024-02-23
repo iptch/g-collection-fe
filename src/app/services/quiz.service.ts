@@ -31,5 +31,5 @@ export class QuizService {
 
 interface SendAnswerResponse {
   is_correct: boolean;
-  correct_answer: string;
+  correctAnswer: string;
 }

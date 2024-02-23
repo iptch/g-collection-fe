@@ -38,8 +38,8 @@ export class QuizEffects {
       switchMap(([{ answerId }, currentQuestion]) => {
         // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
         return this.quizService.sendAnswer(currentQuestion!.id, answerId).pipe(
-          map(({ correct_answer }) =>
-            QuizActions.sendAnswerSuccess({ correctAnswerId: correct_answer }),
+          map(({ correctAnswer }) =>
+            QuizActions.sendAnswerSuccess({ correctAnswerId: correctAnswer }),
           ),
           catchError((error) =>
             of(

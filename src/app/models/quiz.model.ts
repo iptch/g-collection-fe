@@ -1,26 +1,27 @@
 interface QuizQuestionBase {
   id: string;
-  type: QuizQuestionType;
+  questionType: QuizQuestionType;
+  answerType: QuizAnswerType;
   question: string;
   answers: QuizAnswer[];
   correctAnswerId?: string;
 }
 
 export type QuizQuestionType = 'IMAGE' | 'TEXT';
+export type QuizAnswerType = 'NAME'; // add more
 
 export interface ImageQuizQuestion extends QuizQuestionBase {
-  type: 'IMAGE';
-  image_url: string;
+  questionType: 'IMAGE';
+  imageUrl: string;
 }
 
 export interface TextQuizQuestion extends QuizQuestionBase {
-  type: 'TEXT';
+  questionType: 'TEXT';
 }
 
 export type QuizQuestion = ImageQuizQuestion | TextQuizQuestion;
 
 export interface QuizAnswer {
   id: string;
-  // TODO: QuizAnswerType;
   answer: string;
 }
