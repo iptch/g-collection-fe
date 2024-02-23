@@ -24,8 +24,8 @@ import { selectUser } from 'src/app/state/user/user.selectors';
 
 @Component({
   selector: 'app-edit-user-card',
-  templateUrl: 'initial.user.creation.component.html',
-  styleUrls: ['initial.user.creation.component.scss'],
+  templateUrl: 'edit-user-card.component.html',
+  styleUrls: ['edit-user-card.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class EditUserCardComponent implements OnInit {
