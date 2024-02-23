@@ -1,7 +1,5 @@
 import { EventEmitter } from '@angular/core';
-import { MatDialogRef } from '@angular/material/dialog';
 import { createAction, props } from '@ngrx/store';
-import { InitialUserCreationComponent } from 'src/app/components/initial-user-creation/initial.user.creation.component';
 import { CardSort } from 'src/app/models/card-sort.enum';
 import { Card, UserCard } from 'src/app/models/card.model';
 import { StatusResponse } from 'src/app/models/status-response.model';

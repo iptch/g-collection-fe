@@ -42,7 +42,7 @@ export class UserEffects {
   ) {}
 
   showDialog() {
-    const dialogRef = this.dialog.open(InitialCardCreationDialogComponent, {
+    this.dialog.open(InitialCardCreationDialogComponent, {
       disableClose: true,
       minWidth: '75%',
     });
