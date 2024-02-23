@@ -1,8 +1,9 @@
 import { CardState } from './card/card.state';
-import { DistributionState } from './distribution/distribution.state';
 import { DashboardState } from './dashboard/dashboard.state';
-import { UserState } from './user/user.state';
+import { DistributionState } from './distribution/distribution.state';
+import { QuizState } from './quiz/quiz.state';
 import { TransferState } from './transfer/transfer.state';
+import { UserState } from './user/user.state';
 
 export interface AppState {
   readonly user: UserState;
@@ -10,4 +11,5 @@ export interface AppState {
   readonly distribution: DistributionState;
   readonly dashboard: DashboardState;
   readonly transfer: TransferState;
+  readonly quiz: QuizState;
 }

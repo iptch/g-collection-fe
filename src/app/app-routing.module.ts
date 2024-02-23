@@ -1,13 +1,14 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { BrowserUtils } from '@azure/msal-browser';
-import { DashboardComponent } from './components/dashboard/dashboard.component';
-import { UserComponent } from './components/user/user.component';
 import { MsalGuard } from '@azure/msal-angular';
-import { QrScannerComponent } from './components/qr-scanner/qr-scanner.component';
-import { CardsComponent } from './components/cards/cards.component';
-import { CardDetailComponent } from './components/card-detail/card-detail.component';
+import { BrowserUtils } from '@azure/msal-browser';
 import { AdminComponent } from './components/admin/admin.component';
+import { CardDetailComponent } from './components/card-detail/card-detail.component';
+import { CardsComponent } from './components/cards/cards.component';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { QrScannerComponent } from './components/qr-scanner/qr-scanner.component';
+import { QuizComponent } from './components/quiz/quiz.component';
+import { UserComponent } from './components/user/user.component';
 
 const routes: Routes = [
   {
@@ -39,6 +40,10 @@ const routes: Routes = [
       {
         path: 'qr-scanner',
         component: QrScannerComponent,
+      },
+      {
+        path: 'quiz',
+        component: QuizComponent,
       },
       {
         path: 'user',

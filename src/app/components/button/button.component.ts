@@ -5,8 +5,11 @@ import { Component, Input } from '@angular/core';
   templateUrl: './button.component.html',
 })
 export class ButtonComponent {
+  @Input() disabled = false;
   @Input() text?: string;
   @Input() symbol?: string;
-  @Input() color = 'blue';
+  @Input() color: 'blue' | 'green' | 'pink' | 'red' = 'blue';
   @Input() outlined = false;
+  @Input() fullWidth = false;
+  @Input() centerText = false;
 }

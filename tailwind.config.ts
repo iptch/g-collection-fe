@@ -13,8 +13,12 @@ export default {
       colors: {
         'light-blue': '#54b4e2',
         'dark-blue': '#0093d9',
+        'light-green': '#7eff7e',
+        'dark-green': '#00cc00',
         'light-pink': '#ff7dbb',
         'dark-pink': '#ff5caa',
+        'light-red': '#ff8c8c',
+        'dark-red': '#cc0000',
         'light-gray': '#d7d6d9',
         'dark-gray': '#1e1e1e',
       },
