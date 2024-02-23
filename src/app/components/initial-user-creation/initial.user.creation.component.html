@@ -15,18 +15,6 @@
   />
 
   <div class="w-full aspect-square flex items-center justify-center relative">
-    <!--<div [hidden]="!initializedQrCode">
-      <app-qr-generator
-        [qrData]="getCode(card)"
-        [width]="imageWidth"
-      ></app-qr-generator>
-    </div>-->
-    <!-- [ngClass]="{
-        'w-full h-full': !showQrCode,
-        'w-20 h-20 border-2 border-light-pink': showQrCode
-      }"
-      [class.grayscale]="!card.quantity"
-    alt="{{ card.name }}"-->
     <img
       #image
       src="https://picsum.photos/200/300"
@@ -41,12 +29,6 @@
     >
       <span class="material-symbols-outlined align-middle">edit</span>
     </button>
-    <!--<div
-      *ngIf="!showQrCode && card.quantity > 1"
-      class="absolute bg-dark-pink top-0 right-0 text-2xl font-medium px-2"
-    >
-      {{ card.quantity }}
-    </div>-->
   </div>
 
   <mat-form-field>
