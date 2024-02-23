@@ -1,8 +1,59 @@
-<form class="flex flex-col p-10" [formGroup]="userForm" (ngSubmit)="onSubmit()">
+<form
+  class="flex flex-col p-10"
+  [formGroup]="userForm"
+  (ngSubmit)="updateUser()"
+>
+  <input
+    style="display: none"
+    type="file"
+    id="chooseImage"
+    accept="image"
+    capture
+    height="100%"
+    #chooseImage
+    (change)="uploadPicture($event.target)"
+  />
+
+  <div class="w-full aspect-square flex items-center justify-center relative">
+    <!--<div [hidden]="!initializedQrCode">
+      <app-qr-generator
+        [qrData]="getCode(card)"
+        [width]="imageWidth"
+      ></app-qr-generator>
+    </div>-->
+    <!-- [ngClass]="{
+        'w-full h-full': !showQrCode,
+        'w-20 h-20 border-2 border-light-pink': showQrCode
+      }"
+      [class.grayscale]="!card.quantity"
+    alt="{{ card.name }}"-->
+    <img
+      #image
+      src="https://picsum.photos/200/300"
+      alt="test"
+      class="w-full h-full object-cover absolute transition-all ease-out duration-200"
+      onerror="this.src='assets/icon.png'"
+    />
+
+    <button
+      class="absolute right-0 bottom-0 m-4 w-14 h-14 bg-dark-pink rounded-full no-tap-highlight active:bg-light-pink shadow"
+      (click)="chooseImage.click()"
+    >
+      <span class="material-symbols-outlined align-middle">edit</span>
+    </button>
+    <!--<div
+      *ngIf="!showQrCode && card.quantity > 1"
+      class="absolute bg-dark-pink top-0 right-0 text-2xl font-medium px-2"
+    >
+      {{ card.quantity }}
+    </div>-->
+  </div>
+
   <mat-form-field>
     <input matInput placeholder="Mein Kürzel" formControlName="acronymInput" />
   </mat-form-field>
-  <mat-form-field>
+
+  <mat-form-field class="w-full">
     <input
       matInput
       type="date"
@@ -10,9 +61,11 @@
       formControlName="startDateInput"
     />
   </mat-form-field>
+
   <mat-form-field>
     <input matInput placeholder="Ich arbeit als" formControlName="jobInput" />
   </mat-form-field>
+
   <mat-form-field>
     <input
       matInput
@@ -20,21 +73,24 @@
       formControlName="wishDestinationInput"
     />
   </mat-form-field>
-  <mat-form-field>
+
+  <mat-form-field class="w-full">
     <input
       matInput
       placeholder="Für einen Tag tauschen würde ich mit"
       formControlName="wishPersonInput"
     />
   </mat-form-field>
-  <mat-form-field>
+
+  <mat-form-field class="w-full">
     <input
       matInput
       placeholder="Das wollte ich schon immer mal erlernen"
       formControlName="wishSkillInput"
     />
   </mat-form-field>
-  <mat-form-field>
+
+  <mat-form-field class="w-full">
     <input
       matInput
       placeholder="Der beste Ratschlag"

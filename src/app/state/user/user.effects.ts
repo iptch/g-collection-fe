@@ -55,7 +55,7 @@ export class UserEffects {
     });
 
     dialogRef.afterClosed().subscribe((result) => {
-      console.log(result);
+      console.log('The dialog was closed', result);
     });
   }
 }
