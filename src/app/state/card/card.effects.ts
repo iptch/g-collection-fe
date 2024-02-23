@@ -3,6 +3,7 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { catchError, map, of, switchMap } from 'rxjs';
 import { CardService } from 'src/app/services/card.service';
 import * as CardActions from './card.actions';
+import { MatDialog } from '@angular/material/dialog';
 
 @Injectable()
 export class CardEffects {
@@ -33,11 +34,12 @@ export class CardEffects {
   readonly modifyCard$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(CardActions.modifyCard),
-      switchMap(({ userCard, emitter }) =>
+      switchMap(({ userCard, dialogId }) =>
         this.cardService.modifyCard(userCard).pipe(
           map((response) => {
-            if (emitter) {
-              emitter.emit();
+            if (dialogId) {
+              const dialog = this.matDialog.getDialogById(dialogId);
+              dialog?.close();
             }
 
             return CardActions.modifyCardSuccess({ statusResponse: response });
@@ -51,5 +53,6 @@ export class CardEffects {
   constructor(
     private readonly actions$: Actions,
     private readonly cardService: CardService,
+    private matDialog: MatDialog,
   ) {}
 }

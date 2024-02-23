@@ -1,18 +1,25 @@
 import {
   Component,
+  DestroyRef,
   EventEmitter,
   Input,
   OnInit,
   Output,
   inject,
 } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormBuilder, FormControl } from '@angular/forms';
 import { Store } from '@ngrx/store';
-import { take, tap } from 'rxjs';
+import { take, tap, map, switchMap, filter } from 'rxjs';
 import { Card, UserCard } from 'src/app/models/card.model';
+import { User } from 'src/app/models/user.model';
 import { UserService } from 'src/app/services/user.service';
 import { loadCardById, modifyCard } from 'src/app/state/card/card.actions';
-import { selectCardWithUserById } from 'src/app/state/card/card.selectors';
+import {
+  selectCardById,
+  selectCardWithUserById,
+} from 'src/app/state/card/card.selectors';
+import { selectUser } from 'src/app/state/user/user.selectors';
 
 @Component({
   selector: 'app-initial-user-creation',
@@ -21,7 +28,7 @@ import { selectCardWithUserById } from 'src/app/state/card/card.selectors';
 })
 export class InitialUserCreationComponent implements OnInit {
   @Input() cardId: number | null = null;
-  @Output() save = new EventEmitter();
+  @Output() save = new EventEmitter<UserCard>();
 
   userForm = this.formBuilder.group({
     acronymInput: new FormControl(),
@@ -35,13 +42,20 @@ export class InitialUserCreationComponent implements OnInit {
 
   private readonly store = inject(Store);
   private readonly userService = inject(UserService);
+  private readonly destroyRef = inject(DestroyRef);
+
+  userImage$ = this.store.select(selectUser).pipe(
+    filter(Boolean),
+    switchMap((user: User) => this.store.select(selectCardById(user.card_id))),
+    filter(Boolean),
+    map((card: Card) => card.image_url),
+  );
 
   constructor(private formBuilder: FormBuilder) {}
 
   ngOnInit() {
     if (this.cardId) {
       this.store.dispatch(loadCardById({ id: this.cardId }));
-      //TODO: takeUntilDestroy
       this.store
         .select(selectCardWithUserById(this.cardId))
         .pipe(
@@ -56,6 +70,7 @@ export class InitialUserCreationComponent implements OnInit {
               bestAdviceInput: cardData.best_advice,
             });
           }),
+          takeUntilDestroyed(this.destroyRef),
         )
         .subscribe();
     }
@@ -73,9 +88,7 @@ export class InitialUserCreationComponent implements OnInit {
   }
 
   updateUser(): void {
-    this.store.dispatch(
-      modifyCard({ userCard: this.mapFormToUser(), emitter: this.save }),
-    );
+    this.save.emit(this.mapFormToUser());
   }
 
   mapFormToUser(): UserCard {

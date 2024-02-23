@@ -53,7 +53,7 @@ export const modifyCard = createAction(
   '[Cards] Modify Card',
   props<{
     userCard: UserCard;
-    emitter?: EventEmitter<void>;
+    dialogId?: string;
   }>(),
 );
 
