@@ -12,8 +12,16 @@ export class QuizService {
 
   constructor(private readonly http: HttpClient) {}
 
-  // TODO: Question request params
   getQuestion(): Observable<QuizQuestion> {
     return this.http.get<QuizQuestion>(`${this.quizEndpoint}/question`);
+  }
+
+  sendAnswer(questionId: string, answerId: string): Observable<string> {
+    return this.http.post<string>(
+      `${this.quizEndpoint}/question/${questionId}/answer`,
+      {
+        answerId,
+      },
+    );
   }
 }

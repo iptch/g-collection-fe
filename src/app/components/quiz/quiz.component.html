@@ -12,6 +12,7 @@
       <app-quiz-question
         [loading]="(loadingQuestion$ | async) === true"
         [question]="currentQuestion$ | async"
+        (selectAnswer)="onSelectAnswer($event)"
       ></app-quiz-question>
     </ng-template>
   </div>
