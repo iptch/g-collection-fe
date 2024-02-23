@@ -1,5 +1,5 @@
 <form
-  class="flex flex-col p-10"
+  class="flex flex-col p-1"
   [formGroup]="userForm"
   (ngSubmit)="updateUser()"
 >
@@ -79,5 +79,11 @@
       formControlName="bestAdviceInput"
     />
   </mat-form-field>
-  <button type="submit" (click)="updateUser()">Update</button>
+
+  <app-button
+    (click)="updateUser()"
+    text="Update"
+    symbol="save"
+    color="pink"
+  ></app-button>
 </form>

@@ -6,6 +6,8 @@ import { catchError, map, mergeMap } from 'rxjs/operators';
 import { InitialUserCreationComponent } from 'src/app/components/initial-user-creation/initial.user.creation.component';
 import { UserService } from '../../services/user.service';
 import * as UserActions from './user.actions';
+import { User } from 'src/app/models/user.model';
+import { InitialCardCreationDialog } from 'src/app/components/initial-card-creation-dialog/initial-card-creation.dialog';
 
 @Injectable()
 export class UserEffects {
@@ -14,11 +16,11 @@ export class UserEffects {
       ofType(UserActions.initUser),
       mergeMap(() =>
         this.userService.initUser().pipe(
-          map((user) => {
+          map((user: User) => {
             // TODO check for first time registration
-            // if (true) {
-            //   this.showDialog();
-            // }
+            if (!user?.['card_id']) {
+              this.showDialog();
+            }
 
             return UserActions.initUserSuccess({ user });
           }),
@@ -41,9 +43,9 @@ export class UserEffects {
   ) {}
 
   showDialog() {
-    const dialogRef = this.dialog.open(InitialUserCreationComponent, {
+    const dialogRef = this.dialog.open(InitialCardCreationDialog, {
       disableClose: true,
-      minWidth: '250px',
+      minWidth: '75%',
     });
 
     dialogRef.afterClosed().subscribe((result) => {

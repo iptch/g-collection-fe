@@ -69,6 +69,7 @@ import { DistributionEffects } from './state/distribution/distribution.effects';
 import { reducers } from './state/reducers';
 import { TransferEffects } from './state/transfer/transfer.effects';
 import { UserEffects } from './state/user/user.effects';
+import { InitialCardCreationDialog } from './components/initial-card-creation-dialog/initial-card-creation.dialog';
 
 registerLocaleData(localeDeCh);
 
@@ -143,6 +144,7 @@ export function MSALGuardConfigFactory(): MsalGuardConfiguration {
     AlertComponent,
     AdminComponent,
     InitialUserCreationComponent,
+    InitialCardCreationDialog,
   ],
   imports: [
     BrowserModule,
