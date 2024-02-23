@@ -73,5 +73,8 @@
   },
   "lint-staged": {
     "**/*": "prettier --write --ignore-unknown"
-  }
+  },
+  "engines": {
+    "node": ">=18.13.0"
+   }
 }
