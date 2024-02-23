@@ -77,5 +77,11 @@
       formControlName="textInput3"
     />
   </mat-form-field>
-  <button type="submit">Submit</button>
+
+  <app-button
+    (click)="onSubmit()"
+    [text]="'Speichern'"
+    [symbol]="'save'"
+    [color]="'pink'"
+  ></app-button>
 </form>
