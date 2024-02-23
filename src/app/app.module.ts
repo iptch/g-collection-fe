@@ -1,7 +1,7 @@
 import { registerLocaleData } from '@angular/common';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import localeDeCh from '@angular/common/locales/de-CH';
-import { isDevMode, LOCALE_ID, NgModule } from '@angular/core';
+import { LOCALE_ID, NgModule, isDevMode } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
@@ -33,8 +33,8 @@ import {
 } from '@azure/msal-angular';
 import {
   BrowserCacheLocation,
-  InteractionType,
   IPublicClientApplication,
+  InteractionType,
   LogLevel,
   PublicClientApplication,
 } from '@azure/msal-browser';
@@ -59,6 +59,8 @@ import { NavigationComponent } from './components/navigation/navigation.componen
 import { PanelComponent } from './components/panel/panel.component';
 import { QrCodeComponent } from './components/qr-code/qr-code.component';
 import { QrScannerComponent } from './components/qr-scanner/qr-scanner.component';
+import { QuizQuestionComponent } from './components/quiz/quiz-question/quiz-question.component';
+import { QuizComponent } from './components/quiz/quiz.component';
 import { TitleComponent } from './components/title/title.component';
 import { UserComponent } from './components/user/user.component';
 import { CardEffects } from './state/card/card.effects';
@@ -141,6 +143,8 @@ export function MSALGuardConfigFactory(): MsalGuardConfiguration {
     FieldComponent,
     AlertComponent,
     AdminComponent,
+    QuizComponent,
+    QuizQuestionComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,1 +1,26 @@
-Quiz Component works
+<div class="mb-8">
+  <app-title>Quiz</app-title>
+</div>
+
+<div class="flex flex-col items-center">
+  <div class="flex flex-col">
+    <app-panel *ngIf="loadingQuestionError$ | async; else questionContainer">
+      <app-alert [message]="(loadingQuestionError$ | async)!"></app-alert>
+    </app-panel>
+
+    <ng-template #questionContainer>
+      <app-quiz-question
+        [loading]="(loadingQuestion$ | async) === true"
+        [question]="currentQuestion$ | async"
+      ></app-quiz-question>
+    </ng-template>
+  </div>
+
+  <app-button
+    class="mt-8"
+    color="pink"
+    symbol="next_plan"
+    text="Neue Frage"
+    (click)="onGetNewQuestion()"
+  ></app-button>
+</div>
