@@ -1,4 +1,6 @@
+import { MatDialogRef } from '@angular/material/dialog';
 import { createAction, props } from '@ngrx/store';
+import { InitialUserCreationComponent } from 'src/app/components/initial-user-creation/initial.user.creation.component';
 import { CardSort } from 'src/app/models/card-sort.enum';
 import { Card, UserCard } from 'src/app/models/card.model';
 import { StatusResponse } from 'src/app/models/status-response.model';
@@ -50,7 +52,10 @@ export const changeCardsSortDirection = createAction(
 
 export const modifyCard = createAction(
   '[Cards] Modify Card',
-  props<{ userCard: UserCard }>(),
+  props<{
+    userCard: UserCard;
+    dialogRef?: MatDialogRef<InitialUserCreationComponent>;
+  }>(),
 );
 
 export const modifyCardSuccess = createAction(

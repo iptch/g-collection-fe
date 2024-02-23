@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, inject } from '@angular/core';
+import { Component, Input, OnInit, Optional, inject } from '@angular/core';
 import { FormBuilder, FormControl } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
@@ -31,7 +31,7 @@ export class InitialUserCreationComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    public dialogRef: MatDialogRef<InitialUserCreationComponent>,
+    @Optional() public dialogRef: MatDialogRef<InitialUserCreationComponent>,
   ) {}
 
   ngOnInit() {
@@ -62,7 +62,9 @@ export class InitialUserCreationComponent implements OnInit {
   }
 
   updateUser(): void {
-    this.store.dispatch(modifyCard({ userCard: this.mapFormToUser() }));
+    this.store.dispatch(
+      modifyCard({ userCard: this.mapFormToUser(), dialogRef: this.dialogRef }),
+    );
   }
 
   mapFormToUser(): UserCard {

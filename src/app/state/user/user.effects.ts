@@ -2,10 +2,9 @@ import { Injectable } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { of } from 'rxjs';
-import { catchError, map, mergeMap, tap } from 'rxjs/operators';
+import { catchError, map, mergeMap } from 'rxjs/operators';
 import { InitialUserCreationComponent } from 'src/app/components/initial-user-creation/initial.user.creation.component';
 import { UserService } from '../../services/user.service';
-import * as CardActions from '../card/card.actions';
 import * as UserActions from './user.actions';
 
 @Injectable()
@@ -45,13 +44,6 @@ export class UserEffects {
     const dialogRef = this.dialog.open(InitialUserCreationComponent, {
       disableClose: true,
       minWidth: '250px',
-    });
-
-    dialogRef.beforeClosed().subscribe(() => {
-      this.actions$.pipe(
-        ofType(CardActions.loadCardByIdSuccess),
-        tap(() => dialogRef.close()),
-      );
     });
 
     dialogRef.afterClosed().subscribe((result) => {

@@ -33,11 +33,15 @@ export class CardEffects {
   readonly modifyCard$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(CardActions.modifyCard),
-      switchMap(({ userCard }) =>
+      switchMap(({ userCard, dialogRef }) =>
         this.cardService.modifyCard(userCard).pipe(
-          map((response) =>
-            CardActions.modifyCardSuccess({ statusResponse: response }),
-          ),
+          map((response) => {
+            if (dialogRef) {
+              dialogRef.close();
+            }
+
+            return CardActions.modifyCardSuccess({ statusResponse: response });
+          }),
           catchError(() => of(CardActions.modifyCardError())),
         ),
       ),
