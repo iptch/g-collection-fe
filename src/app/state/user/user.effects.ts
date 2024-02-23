@@ -3,11 +3,10 @@ import { MatDialog } from '@angular/material/dialog';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { of } from 'rxjs';
 import { catchError, map, mergeMap } from 'rxjs/operators';
-import { InitialUserCreationComponent } from 'src/app/components/initial-user-creation/initial.user.creation.component';
 import { UserService } from '../../services/user.service';
 import * as UserActions from './user.actions';
 import { User } from 'src/app/models/user.model';
-import { InitialCardCreationDialog } from 'src/app/components/initial-card-creation-dialog/initial-card-creation.dialog';
+import { InitialCardCreationDialogComponent } from 'src/app/components/initial-card-creation-dialog/initial-card-creation.dialog';
 
 @Injectable()
 export class UserEffects {
@@ -43,7 +42,7 @@ export class UserEffects {
   ) {}
 
   showDialog() {
-    const dialogRef = this.dialog.open(InitialCardCreationDialog, {
+    const dialogRef = this.dialog.open(InitialCardCreationDialogComponent, {
       disableClose: true,
       minWidth: '75%',
     });
