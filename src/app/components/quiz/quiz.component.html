@@ -10,7 +10,9 @@
 
     <ng-template #questionContainer>
       <app-quiz-question
-        [loading]="(loadingQuestion$ | async) === true"
+        [answerId]="currentAnswerId$ | async"
+        [loadingQuestion]="(loadingQuestion$ | async) === true"
+        [loadingAnswer]="(loadingAnswer$ | async) === true"
         [question]="currentQuestion$ | async"
         (selectAnswer)="onSelectAnswer($event)"
       ></app-quiz-question>
@@ -18,7 +20,7 @@
   </div>
 
   <app-button
-    class="mt-8"
+    class="absolute bottom-0 mb-24"
     color="pink"
     symbol="next_plan"
     text="Neue Frage"

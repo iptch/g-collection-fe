@@ -31,7 +31,10 @@ export class QuizEffects {
     return this.actions$.pipe(
       ofType(QuizActions.sendAnswer),
       concatLatestFrom(() => this.store.select(selectCurrentQuestion)),
-      filter(([_, currentQuestion]) => !!currentQuestion?.id),
+      filter(
+        ([_, currentQuestion]) =>
+          !!currentQuestion?.id && !currentQuestion.correctAnswerId,
+      ),
       switchMap(([{ answerId }, currentQuestion]) => {
         // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
         return this.quizService.sendAnswer(currentQuestion!.id, answerId).pipe(

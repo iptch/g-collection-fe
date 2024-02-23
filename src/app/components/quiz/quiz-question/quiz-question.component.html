@@ -1,5 +1,5 @@
 <div class="flex flex-col flex-auto items-center">
-  <ng-container *ngIf="loading; else questionContainer">
+  <ng-container *ngIf="loadingQuestion; else questionContainer">
     <app-loader></app-loader>
   </ng-container>
 
@@ -32,11 +32,43 @@
             class="w-full"
             [class.mb-2]="!last"
             [centerText]="true"
+            [color]="
+              !answerId ||
+              loadingAnswer ||
+              (answer.id !== answerId && answer.id !== question.correctAnswerId)
+                ? 'blue'
+                : answer.id === question.correctAnswerId
+                ? 'green'
+                : 'red'
+            "
+            [disabled]="!!answerId || loadingAnswer"
+            [outlined]="!!answerId || loadingAnswer"
             [fullWidth]="true"
             [text]="answer.answer"
             (click)="onSelectAnswer(answer.id)"
           ></app-button>
         </ng-container>
+
+        <ng-container *ngIf="loadingAnswer; else answerValidation">
+          <app-loader></app-loader>
+        </ng-container>
+
+        <ng-template #answerValidation>
+          <div
+            *ngIf="!!question.correctAnswerId && !!answerId"
+            class="mt-4"
+            [ngClass]="{
+              'text-light-green': question.correctAnswerId === answerId,
+              'text-light-red': question.correctAnswerId !== answerId
+            }"
+          >
+            {{
+              question.correctAnswerId === answerId
+                ? 'Das ist korrekt!'
+                : 'Leider falsch'
+            }}
+          </div>
+        </ng-template>
       </div>
     </ng-container>
 

@@ -13,8 +13,11 @@ import { ImageQuizQuestion, QuizQuestion } from 'src/app/models/quiz.model';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class QuizQuestionComponent {
-  @Input() loading!: boolean;
+  @Input() loadingQuestion!: boolean;
+  @Input() loadingAnswer!: boolean;
   @Input() question!: QuizQuestion | null;
+  @Input() answerId!: string | null;
+
   @Output() selectAnswer = new EventEmitter<string>();
 
   get imageQuestion(): ImageQuizQuestion | null {

@@ -18,12 +18,17 @@ export const selectLoadingQuestionError = createSelector(
   (state) => state.loadingQuestionError,
 );
 
-export const selectLoadingAnswer = createSelector(
+export const selectCurrentAnswerId = createSelector(
   selectQuizState,
-  (state) => state.loadingQuestion,
+  (state) => state.currentAnswerId,
 );
 
-export const selectLoadingAnswerrror = createSelector(
+export const selectLoadingAnswer = createSelector(
+  selectQuizState,
+  (state) => state.loadingAnswer,
+);
+
+export const selectLoadingAnswerError = createSelector(
   selectQuizState,
   (state) => state.loadingAnswerError,
 );

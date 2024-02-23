@@ -11,6 +11,9 @@ export const quizReducer = createReducer(
       ...state,
       loadingQuestion: true,
       loadingQuestionError: null,
+      loadingAnswer: false,
+      loadingAnswerError: null,
+      currentAnswerId: null,
     }),
   ),
 
@@ -35,7 +38,7 @@ export const quizReducer = createReducer(
 
   on(
     QuizActions.sendAnswer,
-    (state): QuizState => ({
+    (state, { answerId }): QuizState => ({
       ...state,
       currentQuestion: state.currentQuestion
         ? {
@@ -43,6 +46,7 @@ export const quizReducer = createReducer(
             correctAnswerId: undefined,
           }
         : null,
+      currentAnswerId: answerId,
       loadingAnswer: true,
       loadingAnswerError: null,
     }),
