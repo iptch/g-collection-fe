@@ -33,4 +33,7 @@
   </div>
 </app-panel>
 
-<app-initial-user-creation></app-initial-user-creation>
+<app-title>Meine Karte</app-title>
+<app-initial-user-creation
+  [cardId]="(userCardId$ | async) ?? null"
+></app-initial-user-creation>

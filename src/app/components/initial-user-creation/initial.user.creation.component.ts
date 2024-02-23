@@ -9,7 +9,7 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { loadCardById } from 'src/app/state/card/card.actions';
 import { Store } from '@ngrx/store';
 import { selectCardWithUserById } from 'src/app/state/card/card.selectors';
-import { tap, take, catchError, EMPTY } from 'rxjs';
+import { tap, take } from 'rxjs';
 import { Card } from 'src/app/models/card.model';
 import { UserService } from 'src/app/services/user.service';
 
@@ -19,8 +19,7 @@ import { UserService } from 'src/app/services/user.service';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class InitialUserCreationComponent implements OnInit {
-  //TODO: Must be provided by the init information
-  @Input() cardId = 217;
+  @Input() cardId: number | null = null;
 
   userCardForm!: FormGroup;
 
@@ -36,17 +35,19 @@ export class InitialUserCreationComponent implements OnInit {
       textInput3: new FormControl(''), // Third text input
     });
 
-    this.store.dispatch(loadCardById({ id: this.cardId }));
-    //TODO: takeUntilDestroyed
-    this.store
-      .select(selectCardWithUserById(this.cardId))
-      .pipe(
-        tap((cardData: Card) => {
-          console.log('Got card data', cardData);
-          //TODO: Fill form values
-        }),
-      )
-      .subscribe();
+    if (this.cardId) {
+      this.store.dispatch(loadCardById({ id: this.cardId }));
+      //TODO: takeUntilDestroy
+      this.store
+        .select(selectCardWithUserById(this.cardId))
+        .pipe(
+          tap((cardData: Card) => {
+            console.log('Got card data', cardData);
+            //TODO: Fill form values
+          }),
+        )
+        .subscribe();
+    }
   }
 
   onSubmit() {
@@ -54,7 +55,6 @@ export class InitialUserCreationComponent implements OnInit {
   }
 
   uploadPicture(data: EventTarget | null): void {
-    console.log('Upload picture');
     if (!(data instanceof HTMLInputElement)) return;
 
     const file = data.files?.[0];
