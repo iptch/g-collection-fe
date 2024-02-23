@@ -71,10 +71,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "g-collection-fe:build:production"
+              "buildTarget": "g-collection-fe:build:production"
             },
             "development": {
-              "browserTarget": "g-collection-fe:build:development"
+              "buildTarget": "g-collection-fe:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -82,7 +82,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "g-collection-fe:build"
+            "buildTarget": "g-collection-fe:build"
           }
         },
         "test": {
