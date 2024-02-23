@@ -1,0 +1,19 @@
+<form [formGroup]="user" (ngSubmit)="onSubmit()">
+  <mat-form-field>
+    <label>Date:</label>
+    <input matInput type="date" formControlName="dateInput" />
+  </mat-form-field>
+  <mat-form-field>
+    <label>Text Input 1:</label>
+    <input matInput type="text" formControlName="textInput1" />
+  </mat-form-field>
+  <mat-form-field>
+    <label>Text Input 2:</label>
+    <input matInput type="text" formControlName="textInput2" />
+  </mat-form-field>
+  <mat-form-field>
+    <label>Text Input 3:</label>
+    <input matInput type="text" formControlName="textInput3" />
+  </mat-form-field>
+  <button type="submit">Submit</button>
+</form>
