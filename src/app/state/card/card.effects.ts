@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { CardService } from 'src/app/services/card.service';
 import { catchError, map, of, switchMap } from 'rxjs';
+import { CardService } from 'src/app/services/card.service';
 import * as CardActions from './card.actions';
 
 @Injectable()
@@ -25,6 +25,20 @@ export class CardEffects {
         this.cardService.getCardById(id).pipe(
           map((card) => CardActions.loadCardByIdSuccess({ card })),
           catchError(() => of(CardActions.loadCardByIdError())),
+        ),
+      ),
+    );
+  });
+
+  readonly modifyCard$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(CardActions.modifyCard),
+      switchMap(({ userCard }) =>
+        this.cardService.modifyCard(userCard).pipe(
+          map((response) =>
+            CardActions.modifyCardSuccess({ statusResponse: response }),
+          ),
+          catchError(() => of(CardActions.modifyCardError())),
         ),
       ),
     );

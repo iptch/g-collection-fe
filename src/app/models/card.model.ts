@@ -14,6 +14,17 @@ export interface Card {
   otp_value: string;
 }
 
+// TODO rename
+export interface UserCard {
+  acronym: string;
+  job: string;
+  start_at_ipt: string;
+  wish_destination: string;
+  wish_person: string;
+  wish_skill: string;
+  best_advice: string;
+}
+
 export interface CardWithUser extends Card {
   giver: string;
 }

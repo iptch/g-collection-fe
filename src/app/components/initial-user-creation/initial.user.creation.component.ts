@@ -1,23 +1,51 @@
 import { Component } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormBuilder, FormControl } from '@angular/forms';
+import { MatDialogRef } from '@angular/material/dialog';
+import { Store } from '@ngrx/store';
+import { UserCard } from 'src/app/models/card.model';
+import { modifyCard } from 'src/app/state/card/card.actions';
 
 @Component({
   selector: 'app-initial-user-creation',
   templateUrl: 'initial.user.creation.component.html',
+  styleUrls: ['initial.user.creation.component.scss'],
 })
 export class InitialUserCreationComponent {
-  user!: FormGroup;
+  userForm = this.formBuilder.group({
+    acronymInput: new FormControl(),
+    startDateInput: new FormControl(),
+    jobInput: new FormControl(),
+    wishDestinationInput: new FormControl(),
+    wishPersonInput: new FormControl(),
+    wishSkillInput: new FormControl(),
+    bestAdviceInput: new FormControl(),
+  });
 
-  ngOnInit() {
-    this.user = new FormGroup({
-      dateInput: new FormControl(''), // Date input
-      textInput1: new FormControl(''), // First text input
-      textInput2: new FormControl(''), // Second text input
-      textInput3: new FormControl(''), // Third text input
-    });
-  }
+  constructor(
+    private store: Store,
+    private formBuilder: FormBuilder,
+    public dialogRef: MatDialogRef<InitialUserCreationComponent>,
+  ) {}
 
   onSubmit() {
-    console.log('Form Value:', this.user.value);
+    console.log('Form Value:', this.userForm.value);
+  }
+
+  updateUser(): void {
+    this.store.dispatch(modifyCard({ userCard: this.mapFormToUser() }));
+  }
+
+  mapFormToUser(): UserCard {
+    const userFormControls = this.userForm.controls;
+
+    return {
+      acronym: userFormControls.acronymInput.value,
+      job: userFormControls.jobInput.value,
+      start_at_ipt: userFormControls.startDateInput.value,
+      wish_destination: userFormControls.wishDestinationInput.value,
+      wish_person: userFormControls.wishPersonInput.value,
+      wish_skill: userFormControls.wishSkillInput.value,
+      best_advice: userFormControls.bestAdviceInput.value,
+    };
   }
 }

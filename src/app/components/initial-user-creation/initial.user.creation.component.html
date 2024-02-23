@@ -1,35 +1,45 @@
-<form [formGroup]="user" (ngSubmit)="onSubmit()">
+<form class="flex flex-col p-10" [formGroup]="userForm" (ngSubmit)="onSubmit()">
+  <mat-form-field>
+    <input matInput placeholder="Mein Kürzel" formControlName="acronymInput" />
+  </mat-form-field>
   <mat-form-field>
     <input
       matInput
       type="date"
-      placeholder="Date"
-      formControlName="dateInput"
+      placeholder="Ich bin bei der ipt seit"
+      formControlName="startDateInput"
+    />
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput placeholder="Ich arbeit als" formControlName="jobInput" />
+  </mat-form-field>
+  <mat-form-field>
+    <input
+      matInput
+      placeholder="Da würde ich am liebsten mal hinreisen"
+      formControlName="wishDestinationInput"
     />
   </mat-form-field>
   <mat-form-field>
     <input
       matInput
-      type="text"
-      placeholder="Text Input 1"
-      formControlName="textInput1"
+      placeholder="Für einen Tag tauschen würde ich mit"
+      formControlName="wishPersonInput"
     />
   </mat-form-field>
   <mat-form-field>
     <input
       matInput
-      type="text"
-      placeholder="Text Input 2"
-      formControlName="textInput2"
+      placeholder="Das wollte ich schon immer mal erlernen"
+      formControlName="wishSkillInput"
     />
   </mat-form-field>
   <mat-form-field>
     <input
       matInput
-      type="text"
-      placeholder="Text Input 3"
-      formControlName="textInput3"
+      placeholder="Der beste Ratschlag"
+      formControlName="bestAdviceInput"
     />
   </mat-form-field>
-  <button type="submit">Submit</button>
+  <button type="submit" (click)="updateUser()">Update</button>
 </form>
