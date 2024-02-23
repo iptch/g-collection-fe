@@ -15,5 +15,6 @@ export class NavigationComponent {
     { routerLink: 'qr-scanner', symbol: 'qr_code_scanner', text: 'Scanner' },
     { routerLink: 'dashboard', symbol: 'speed', text: 'Dashboard' },
     { routerLink: 'cards', symbol: 'diversity_1', text: 'Chärtli' },
+    { routerLink: 'quiz', symbol: 'quiz', text: 'Quiz' },
   ];
 }

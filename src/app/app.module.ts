@@ -1,10 +1,10 @@
-import { registerLocaleData } from '@angular/common';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import localeDeCh from '@angular/common/locales/de-CH';
 import { LOCALE_ID, NgModule, isDevMode } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
+import { NgOptimizedImage, registerLocaleData } from '@angular/common';
 import { MatInputModule } from '@angular/material/input';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatPaginatorModule } from '@angular/material/paginator';
@@ -61,6 +61,8 @@ import { NavigationComponent } from './components/navigation/navigation.componen
 import { PanelComponent } from './components/panel/panel.component';
 import { QrCodeComponent } from './components/qr-code/qr-code.component';
 import { QrScannerComponent } from './components/qr-scanner/qr-scanner.component';
+import { QuizQuestionComponent } from './components/quiz/quiz-question/quiz-question.component';
+import { QuizComponent } from './components/quiz/quiz.component';
 import { TitleComponent } from './components/title/title.component';
 import { UserComponent } from './components/user/user.component';
 import { CardEffects } from './state/card/card.effects';
@@ -70,6 +72,7 @@ import { reducers } from './state/reducers';
 import { TransferEffects } from './state/transfer/transfer.effects';
 import { UserEffects } from './state/user/user.effects';
 import { InitialCardCreationDialogComponent } from './components/initial-card-creation-dialog/initial-card-creation.dialog';
+import { QuizEffects } from './state/quiz/quiz.effects';
 
 registerLocaleData(localeDeCh);
 
@@ -145,6 +148,8 @@ export function MSALGuardConfigFactory(): MsalGuardConfiguration {
     AdminComponent,
     InitialUserCreationComponent,
     InitialCardCreationDialogComponent,
+    QuizComponent,
+    QuizQuestionComponent,
   ],
   imports: [
     BrowserModule,
@@ -182,6 +187,7 @@ export function MSALGuardConfigFactory(): MsalGuardConfiguration {
       DashboardEffects,
       UserEffects,
       TransferEffects,
+      QuizEffects,
     ]),
     MatSliderModule,
     MatSnackBarModule,
@@ -189,6 +195,7 @@ export function MSALGuardConfigFactory(): MsalGuardConfiguration {
     MatButtonModule,
     MatInputModule,
     MatProgressBarModule,
+    NgOptimizedImage,
   ],
   providers: [
     {
