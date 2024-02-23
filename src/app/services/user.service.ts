@@ -15,4 +15,13 @@ export class UserService {
   initUser(): Observable<User> {
     return this.http.post<User>(this.usersEndpoint + '/init/', {});
   }
+
+  uploadUserPicture(file: File): Observable<void> {
+    const formData = new FormData();
+    formData.append('file', file);
+    return this.http.post<void>(
+      `${environment.backendUri}/upload-picture/`,
+      formData,
+    );
+  }
 }

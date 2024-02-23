@@ -9,8 +9,9 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { loadCardById } from 'src/app/state/card/card.actions';
 import { Store } from '@ngrx/store';
 import { selectCardWithUserById } from 'src/app/state/card/card.selectors';
-import { tap, take } from 'rxjs';
+import { tap, take, catchError, EMPTY } from 'rxjs';
 import { Card } from 'src/app/models/card.model';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-initial-user-creation',
@@ -24,6 +25,7 @@ export class InitialUserCreationComponent implements OnInit {
   userCardForm!: FormGroup;
 
   private readonly store = inject(Store);
+  private readonly userService = inject(UserService);
 
   ngOnInit() {
     //TODO: Add data from init call ?
@@ -49,5 +51,17 @@ export class InitialUserCreationComponent implements OnInit {
 
   onSubmit() {
     console.log('Form Value:', this.userCardForm.value);
+  }
+
+  uploadPicture(data: EventTarget | null): void {
+    console.log('Upload picture');
+    if (!(data instanceof HTMLInputElement)) return;
+
+    const file = data.files?.[0];
+    if (!file) {
+      console.error('No images to upload given!');
+      return;
+    }
+    this.userService.uploadUserPicture(file).pipe(take(1)).subscribe();
   }
 }
