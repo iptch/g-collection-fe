@@ -32,4 +32,43 @@ export const quizReducer = createReducer(
       loadingQuestionError: error,
     }),
   ),
+
+  on(
+    QuizActions.sendAnswer,
+    (state): QuizState => ({
+      ...state,
+      currentQuestion: state.currentQuestion
+        ? {
+            ...state.currentQuestion,
+            correctAnswerId: undefined,
+          }
+        : null,
+      loadingAnswer: true,
+      loadingAnswerError: null,
+    }),
+  ),
+
+  on(
+    QuizActions.sendAnswerSuccess,
+    (state, { correctAnswerId }): QuizState => ({
+      ...state,
+      currentQuestion: state.currentQuestion
+        ? {
+            ...state.currentQuestion,
+            correctAnswerId,
+          }
+        : null,
+      loadingAnswer: false,
+      loadingAnswerError: null,
+    }),
+  ),
+
+  on(
+    QuizActions.sendAnswerError,
+    (state, { error }): QuizState => ({
+      ...state,
+      loadingAnswer: false,
+      loadingAnswerError: error,
+    }),
+  ),
 );

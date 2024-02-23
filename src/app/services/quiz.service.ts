@@ -16,12 +16,18 @@ export class QuizService {
     return this.http.get<QuizQuestion>(`${this.quizEndpoint}/question`);
   }
 
-  sendAnswer(questionId: string, answerId: string): Observable<string> {
-    return this.http.post<string>(
-      `${this.quizEndpoint}/question/${questionId}/answer`,
-      {
-        answerId,
-      },
-    );
+  sendAnswer(
+    questionId: string,
+    answerId: string,
+  ): Observable<SendAnswerResponse> {
+    return this.http.post<SendAnswerResponse>(`${this.quizEndpoint}/answer/`, {
+      question: questionId,
+      answer: answerId,
+    });
   }
+}
+
+interface SendAnswerResponse {
+  is_correct: boolean;
+  correct_answer: string;
 }

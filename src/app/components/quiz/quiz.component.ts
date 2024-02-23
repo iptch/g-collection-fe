@@ -38,6 +38,6 @@ export class QuizComponent implements OnDestroy {
   }
 
   onSelectAnswer(answerId: string) {
-    // TODO
+    this.store.dispatch(QuizActions.sendAnswer({ answerId }));
   }
 }

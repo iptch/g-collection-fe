@@ -17,3 +17,13 @@ export const selectLoadingQuestionError = createSelector(
   selectQuizState,
   (state) => state.loadingQuestionError,
 );
+
+export const selectLoadingAnswer = createSelector(
+  selectQuizState,
+  (state) => state.loadingQuestion,
+);
+
+export const selectLoadingAnswerrror = createSelector(
+  selectQuizState,
+  (state) => state.loadingAnswerError,
+);
