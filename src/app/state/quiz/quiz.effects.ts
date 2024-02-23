@@ -32,7 +32,7 @@ export class QuizEffects {
       ofType(QuizActions.sendAnswer),
       concatLatestFrom(() => this.store.select(selectCurrentQuestion)),
       filter(
-        ([_, currentQuestion]) =>
+        ([, currentQuestion]) =>
           !!currentQuestion?.id && !currentQuestion.correctAnswerId,
       ),
       switchMap(([{ answerId }, currentQuestion]) => {
