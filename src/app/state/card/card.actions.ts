@@ -1,3 +1,4 @@
+import { EventEmitter } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
 import { createAction, props } from '@ngrx/store';
 import { InitialUserCreationComponent } from 'src/app/components/initial-user-creation/initial.user.creation.component';
@@ -54,7 +55,7 @@ export const modifyCard = createAction(
   '[Cards] Modify Card',
   props<{
     userCard: UserCard;
-    dialogRef?: MatDialogRef<InitialUserCreationComponent>;
+    emitter?: EventEmitter<void>;
   }>(),
 );
 

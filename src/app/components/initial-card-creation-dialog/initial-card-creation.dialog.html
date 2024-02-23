@@ -1,5 +1,6 @@
 <div mat-dialog-content>
   <app-initial-user-creation
     [cardId]="(userCardId$ | async) ?? null"
+    (save)="closeDialog()"
   ></app-initial-user-creation>
 </div>

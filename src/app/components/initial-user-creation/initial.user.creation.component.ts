@@ -1,6 +1,12 @@
-import { Component, Input, OnInit, Optional, inject } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnInit,
+  Output,
+  inject,
+} from '@angular/core';
 import { FormBuilder, FormControl } from '@angular/forms';
-import { MatDialogRef } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
 import { take, tap } from 'rxjs';
 import { Card, UserCard } from 'src/app/models/card.model';
@@ -15,6 +21,7 @@ import { selectCardWithUserById } from 'src/app/state/card/card.selectors';
 })
 export class InitialUserCreationComponent implements OnInit {
   @Input() cardId: number | null = null;
+  @Output() save = new EventEmitter();
 
   userForm = this.formBuilder.group({
     acronymInput: new FormControl(),
@@ -29,10 +36,7 @@ export class InitialUserCreationComponent implements OnInit {
   private readonly store = inject(Store);
   private readonly userService = inject(UserService);
 
-  constructor(
-    private formBuilder: FormBuilder,
-    @Optional() public dialogRef: MatDialogRef<InitialUserCreationComponent>,
-  ) {}
+  constructor(private formBuilder: FormBuilder) {}
 
   ngOnInit() {
     if (this.cardId) {
@@ -42,8 +46,15 @@ export class InitialUserCreationComponent implements OnInit {
         .select(selectCardWithUserById(this.cardId))
         .pipe(
           tap((cardData: Card) => {
-            console.log('Got card data', cardData);
-            //TODO: Fill form values
+            this.userForm.patchValue({
+              acronymInput: cardData.acronym,
+              startDateInput: cardData.start_at_ipt,
+              jobInput: cardData.job,
+              wishDestinationInput: cardData.wish_destination,
+              wishPersonInput: cardData.wish_person,
+              wishSkillInput: cardData.wish_skill,
+              bestAdviceInput: cardData.best_advice,
+            });
           }),
         )
         .subscribe();
@@ -63,7 +74,7 @@ export class InitialUserCreationComponent implements OnInit {
 
   updateUser(): void {
     this.store.dispatch(
-      modifyCard({ userCard: this.mapFormToUser(), dialogRef: this.dialogRef }),
+      modifyCard({ userCard: this.mapFormToUser(), emitter: this.save }),
     );
   }
 

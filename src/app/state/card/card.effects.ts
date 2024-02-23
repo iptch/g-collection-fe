@@ -33,11 +33,11 @@ export class CardEffects {
   readonly modifyCard$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(CardActions.modifyCard),
-      switchMap(({ userCard, dialogRef }) =>
+      switchMap(({ userCard, emitter }) =>
         this.cardService.modifyCard(userCard).pipe(
           map((response) => {
-            if (dialogRef) {
-              dialogRef.close();
+            if (emitter) {
+              emitter.emit();
             }
 
             return CardActions.modifyCardSuccess({ statusResponse: response });

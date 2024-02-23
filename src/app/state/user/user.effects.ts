@@ -46,9 +46,5 @@ export class UserEffects {
       disableClose: true,
       minWidth: '75%',
     });
-
-    dialogRef.afterClosed().subscribe((result) => {
-      console.log('The dialog was closed', result);
-    });
   }
 }
