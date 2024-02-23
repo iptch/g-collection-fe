@@ -15,10 +15,10 @@ export class UserEffects {
       mergeMap(() =>
         this.userService.initUser().pipe(
           map((user) => {
-            if (true) {
-              //first time registration
-              this.showDialog();
-            }
+            // TODO check for first time registration
+            // if (true) {
+            //   this.showDialog();
+            // }
 
             return UserActions.initUserSuccess({ user });
           }),

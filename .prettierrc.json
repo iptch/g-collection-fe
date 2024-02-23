@@ -4,6 +4,7 @@
   "singleQuote": true,
   "printWidth": 80,
   "tabWidth": 2,
+  "endOfLine": "auto",
   "overrides": [
     { "files": "*.html", "options": { "parser": "html" } },
     { "files": "*.component.html", "options": { "parser": "angular" } }

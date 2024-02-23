@@ -1,19 +1,35 @@
 <form [formGroup]="user" (ngSubmit)="onSubmit()">
   <mat-form-field>
-    <label>Date:</label>
-    <input matInput type="date" formControlName="dateInput" />
+    <input
+      matInput
+      type="date"
+      placeholder="Date"
+      formControlName="dateInput"
+    />
   </mat-form-field>
   <mat-form-field>
-    <label>Text Input 1:</label>
-    <input matInput type="text" formControlName="textInput1" />
+    <input
+      matInput
+      type="text"
+      placeholder="Text Input 1"
+      formControlName="textInput1"
+    />
   </mat-form-field>
   <mat-form-field>
-    <label>Text Input 2:</label>
-    <input matInput type="text" formControlName="textInput2" />
+    <input
+      matInput
+      type="text"
+      placeholder="Text Input 2"
+      formControlName="textInput2"
+    />
   </mat-form-field>
   <mat-form-field>
-    <label>Text Input 3:</label>
-    <input matInput type="text" formControlName="textInput3" />
+    <input
+      matInput
+      type="text"
+      placeholder="Text Input 3"
+      formControlName="textInput3"
+    />
   </mat-form-field>
   <button type="submit">Submit</button>
 </form>

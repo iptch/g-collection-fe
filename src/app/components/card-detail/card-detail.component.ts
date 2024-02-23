@@ -23,7 +23,7 @@ import {
   templateUrl: './card-detail.component.html',
 })
 export class CardDetailComponent implements OnInit, OnDestroy {
-  @Input() isInitialUserCreation: boolean = false;
+  @Input() isInitialUserCreation = false;
 
   @ViewChild('image') image!: ElementRef;
 

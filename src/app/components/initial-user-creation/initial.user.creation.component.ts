@@ -8,8 +8,6 @@ import { FormControl, FormGroup } from '@angular/forms';
 export class InitialUserCreationComponent {
   user!: FormGroup;
 
-  constructor() {}
-
   ngOnInit() {
     this.user = new FormGroup({
       dateInput: new FormControl(''), // Date input
