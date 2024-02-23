@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, delay } from 'rxjs';
 import { QuizQuestion } from '../models/quiz.model';
 import { environment } from './../../environments/environment';
 
@@ -20,10 +20,12 @@ export class QuizService {
     questionId: string,
     answerId: string,
   ): Observable<SendAnswerResponse> {
-    return this.http.post<SendAnswerResponse>(`${this.quizEndpoint}/answer/`, {
-      question: questionId,
-      answer: answerId,
-    });
+    return this.http
+      .post<SendAnswerResponse>(`${this.quizEndpoint}/answer/`, {
+        question: questionId,
+        answer: answerId,
+      })
+      .pipe(delay(500));
   }
 }
 
