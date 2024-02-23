@@ -9,7 +9,7 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { loadCardById } from 'src/app/state/card/card.actions';
 import { Store } from '@ngrx/store';
 import { selectCardWithUserById } from 'src/app/state/card/card.selectors';
-import { tap } from 'rxjs';
+import { tap, take } from 'rxjs';
 import { Card } from 'src/app/models/card.model';
 
 @Component({
@@ -21,13 +21,13 @@ export class InitialUserCreationComponent implements OnInit {
   //TODO: Must be provided by the init information
   @Input() cardId = 217;
 
-  user!: FormGroup;
+  userCardForm!: FormGroup;
 
   private readonly store = inject(Store);
 
   ngOnInit() {
     //TODO: Add data from init call ?
-    this.user = new FormGroup({
+    this.userCardForm = new FormGroup({
       dateInput: new FormControl(''), // Date input
       textInput1: new FormControl(''), // First text input
       textInput2: new FormControl(''), // Second text input
@@ -48,6 +48,6 @@ export class InitialUserCreationComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log('Form Value:', this.user.value);
+    console.log('Form Value:', this.userCardForm.value);
   }
 }
