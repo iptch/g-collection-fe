@@ -13,7 +13,7 @@ export class QuizService {
   constructor(private readonly http: HttpClient) {}
 
   // TODO: Question request params
-  getQuestion(): Observable<QuizQuestion[]> {
-    return this.http.get<QuizQuestion[]>(`${this.quizEndpoint}/question`);
+  getQuestion(): Observable<QuizQuestion> {
+    return this.http.get<QuizQuestion>(`${this.quizEndpoint}/question`);
   }
 }
