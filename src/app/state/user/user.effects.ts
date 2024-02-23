@@ -16,9 +16,9 @@ export class UserEffects {
         this.userService.initUser().pipe(
           map((user) => {
             // TODO check for first time registration
-            if (true) {
-              this.showDialog();
-            }
+            // if (true) {
+            //   this.showDialog();
+            // }
 
             return UserActions.initUserSuccess({ user });
           }),
