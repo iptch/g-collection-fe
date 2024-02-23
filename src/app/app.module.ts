@@ -67,6 +67,7 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { TransferEffects } from './state/transfer/transfer.effects';
 import { registerLocaleData } from '@angular/common';
 import localeDeCh from '@angular/common/locales/de-CH';
+import { NgOptimizedImage } from '@angular/common';
 
 registerLocaleData(localeDeCh);
 
@@ -181,6 +182,7 @@ export function MSALGuardConfigFactory(): MsalGuardConfiguration {
     MatButtonModule,
     MatInputModule,
     MatProgressBarModule,
+    NgOptimizedImage,
   ],
   providers: [
     {
