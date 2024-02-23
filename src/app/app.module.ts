@@ -1,4 +1,4 @@
-import { registerLocaleData } from '@angular/common';
+import { NgOptimizedImage, registerLocaleData } from '@angular/common';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import localeDeCh from '@angular/common/locales/de-CH';
 import { LOCALE_ID, NgModule, isDevMode } from '@angular/core';
@@ -187,6 +187,7 @@ export function MSALGuardConfigFactory(): MsalGuardConfiguration {
     MatButtonModule,
     MatInputModule,
     MatProgressBarModule,
+    NgOptimizedImage,
   ],
   providers: [
     {

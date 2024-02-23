@@ -1,6 +1,8 @@
 <div class="relative">
   <img
-    [src]="card.image_url"
+    [ngSrc]="card.image_url"
+    [height]="400"
+    [width]="400"
     alt="{{ card.name }}"
     class="w-full aspect-square object-cover"
     [class.grayscale]="!card.quantity"
