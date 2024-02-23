@@ -1,6 +1,6 @@
-import { ChangeDetectionStrategy, Component, OnDestroy } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { Observable, Subject } from 'rxjs';
+import { Observable } from 'rxjs';
 import { QuizQuestion } from 'src/app/models/quiz.model';
 import * as QuizActions from 'src/app/state/quiz/quiz.actions';
 import {
@@ -17,7 +17,7 @@ import {
   templateUrl: './quiz.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class QuizComponent implements OnDestroy {
+export class QuizComponent {
   currentQuestion$?: Observable<QuizQuestion | null>;
   currentAnswerId$?: Observable<string | null>;
   isCurrentQuestionAnswered$?: Observable<boolean>;
@@ -26,8 +26,6 @@ export class QuizComponent implements OnDestroy {
   loadingAnswer$?: Observable<boolean>;
   loadingAnswerError$?: Observable<string | null>;
 
-  private readonly destroy$ = new Subject<void>();
-
   constructor(private readonly store: Store) {
     this.currentQuestion$ = this.store.select(selectCurrentQuestion);
     this.currentAnswerId$ = this.store.select(selectCurrentAnswerId);
@@ -35,11 +33,6 @@ export class QuizComponent implements OnDestroy {
     this.loadingQuestionError$ = this.store.select(selectLoadingQuestionError);
     this.loadingAnswer$ = this.store.select(selectLoadingAnswer);
     this.loadingAnswerError$ = this.store.select(selectLoadingAnswerError);
-  }
-
-  ngOnDestroy() {
-    this.destroy$.next();
-    this.destroy$.complete();
   }
 
   onGetNewQuestion() {
