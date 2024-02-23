@@ -40,6 +40,7 @@ export class InitialUserCreationComponent implements OnInit {
       .select(selectCardWithUserById(this.cardId))
       .pipe(
         tap((cardData: Card) => {
+          console.log('Got card data', cardData);
           //TODO: Fill form values
         }),
       )
