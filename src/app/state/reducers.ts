@@ -1,10 +1,11 @@
 import { ActionReducerMap } from '@ngrx/store';
-import { AppState } from './state';
 import { cardReducer } from './card/card.reducers';
-import { distributionReducer } from './distribution/distribution.reducers';
 import { dashboardReducer } from './dashboard/dashboard.reducers';
-import { userReducer } from './user/user.reducers';
+import { distributionReducer } from './distribution/distribution.reducers';
+import { quizReducer } from './quiz/quiz.reducers';
+import { AppState } from './state';
 import { transferReducer } from './transfer/transfer.reducers';
+import { userReducer } from './user/user.reducers';
 
 export const reducers: ActionReducerMap<AppState> = {
   user: userReducer,
@@ -12,4 +13,5 @@ export const reducers: ActionReducerMap<AppState> = {
   distribution: distributionReducer,
   dashboard: dashboardReducer,
   transfer: transferReducer,
+  quiz: quizReducer,
 };

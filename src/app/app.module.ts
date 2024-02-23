@@ -1,17 +1,23 @@
+import { registerLocaleData } from '@angular/common';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import localeDeCh from '@angular/common/locales/de-CH';
+import { isDevMode, LOCALE_ID, NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
+import { MatInputModule } from '@angular/material/input';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MatSelectModule } from '@angular/material/select';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MatSliderModule } from '@angular/material/slider';
+import {
+  MAT_SNACK_BAR_DEFAULT_OPTIONS,
+  MatSnackBarModule,
+} from '@angular/material/snack-bar';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { isDevMode, LOCALE_ID, NgModule } from '@angular/core';
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
 import { ServiceWorkerModule } from '@angular/service-worker';
-import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
-import {
-  BrowserCacheLocation,
-  InteractionType,
-  IPublicClientApplication,
-  LogLevel,
-  PublicClientApplication,
-} from '@azure/msal-browser';
 import {
   MSAL_GUARD_CONFIG,
   MSAL_INSTANCE,
@@ -25,48 +31,43 @@ import {
   MsalRedirectComponent,
   MsalService,
 } from '@azure/msal-angular';
-import { DashboardComponent } from './components/dashboard/dashboard.component';
-import { UserComponent } from './components/user/user.component';
-import { HeaderComponent } from './components/header/header.component';
-import { environment } from './../environments/environment';
-import { QrScannerComponent } from './components/qr-scanner/qr-scanner.component';
-import { QRCodeModule } from 'angularx-qrcode';
-import { QrCodeComponent } from './components/qr-code/qr-code.component';
-import { NavigationComponent } from './components/navigation/navigation.component';
-import { LoaderComponent } from './components/loader/loader.component';
-import { TitleComponent } from './components/title/title.component';
-import { PanelComponent } from './components/panel/panel.component';
-import { ButtonComponent } from './components/button/button.component';
-import { CardsComponent } from './components/cards/cards.component';
-import { CardThumbnailComponent } from './components/card-thumbnail/card-thumbnail.component';
-import { CardDetailComponent } from './components/card-detail/card-detail.component';
-import { FieldComponent } from './components/field/field.component';
-import { StoreModule } from '@ngrx/store';
-import { EffectsModule } from '@ngrx/effects';
-import { DashboardEffects } from './state/dashboard/dashboard.effects';
-import { reducers } from './state/reducers';
-import { StoreDevtoolsModule } from '@ngrx/store-devtools';
-import { CardEffects } from './state/card/card.effects';
-import { AlertComponent } from './components/alert/alert.component';
-import { MatSlideToggleModule } from '@angular/material/slide-toggle';
-import { MatSelectModule } from '@angular/material/select';
-import { FormsModule } from '@angular/forms';
-import { MatPaginatorModule } from '@angular/material/paginator';
-import { AdminComponent } from './components/admin/admin.component';
-import { DistributionEffects } from './state/distribution/distribution.effects';
-import { MatSliderModule } from '@angular/material/slider';
-import { UserEffects } from './state/user/user.effects';
 import {
-  MAT_SNACK_BAR_DEFAULT_OPTIONS,
-  MatSnackBarModule,
-} from '@angular/material/snack-bar';
-import { MatMenuModule } from '@angular/material/menu';
-import { MatButtonModule } from '@angular/material/button';
-import { MatInputModule } from '@angular/material/input';
-import { MatProgressBarModule } from '@angular/material/progress-bar';
+  BrowserCacheLocation,
+  InteractionType,
+  IPublicClientApplication,
+  LogLevel,
+  PublicClientApplication,
+} from '@azure/msal-browser';
+import { EffectsModule } from '@ngrx/effects';
+import { StoreModule } from '@ngrx/store';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { QRCodeModule } from 'angularx-qrcode';
+import { environment } from './../environments/environment';
+import { AppRoutingModule } from './app-routing.module';
+import { AppComponent } from './app.component';
+import { AdminComponent } from './components/admin/admin.component';
+import { AlertComponent } from './components/alert/alert.component';
+import { ButtonComponent } from './components/button/button.component';
+import { CardDetailComponent } from './components/card-detail/card-detail.component';
+import { CardThumbnailComponent } from './components/card-thumbnail/card-thumbnail.component';
+import { CardsComponent } from './components/cards/cards.component';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { FieldComponent } from './components/field/field.component';
+import { HeaderComponent } from './components/header/header.component';
+import { LoaderComponent } from './components/loader/loader.component';
+import { NavigationComponent } from './components/navigation/navigation.component';
+import { PanelComponent } from './components/panel/panel.component';
+import { QrCodeComponent } from './components/qr-code/qr-code.component';
+import { QrScannerComponent } from './components/qr-scanner/qr-scanner.component';
+import { TitleComponent } from './components/title/title.component';
+import { UserComponent } from './components/user/user.component';
+import { CardEffects } from './state/card/card.effects';
+import { DashboardEffects } from './state/dashboard/dashboard.effects';
+import { DistributionEffects } from './state/distribution/distribution.effects';
+import { QuizEffects } from './state/quiz/quiz.effects';
+import { reducers } from './state/reducers';
 import { TransferEffects } from './state/transfer/transfer.effects';
-import { registerLocaleData } from '@angular/common';
-import localeDeCh from '@angular/common/locales/de-CH';
+import { UserEffects } from './state/user/user.effects';
 
 registerLocaleData(localeDeCh);
 
@@ -174,6 +175,7 @@ export function MSALGuardConfigFactory(): MsalGuardConfiguration {
       DashboardEffects,
       UserEffects,
       TransferEffects,
+      QuizEffects,
     ]),
     MatSliderModule,
     MatSnackBarModule,
