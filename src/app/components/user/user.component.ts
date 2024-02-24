@@ -2,11 +2,7 @@ import { Component } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
 import { Store } from '@ngrx/store';
 import { selectUser } from 'src/app/state/user/user.selectors';
-import { User } from 'src/app/models/user.model';
 import { inject } from '@angular/core';
-import { map } from 'rxjs';
-import { modifyCard } from 'src/app/state/card/card.actions';
-import { UserCard } from 'src/app/models/card.model';
 
 @Component({
   selector: 'app-user',
@@ -17,13 +13,8 @@ export class UserComponent {
   private readonly authService = inject(AuthService);
 
   user$ = this.store.select(selectUser);
-  userCardId$ = this.user$.pipe(map((user: User | null) => user?.['card_id']));
 
   logout() {
     this.authService.logout();
-  }
-
-  saveUserCard(userCard: UserCard): void {
-    this.store.dispatch(modifyCard({ userCard }));
   }
 }

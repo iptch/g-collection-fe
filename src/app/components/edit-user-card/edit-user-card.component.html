@@ -1,8 +1,4 @@
-<form
-  class="flex flex-col p-1"
-  [formGroup]="userForm"
-  (ngSubmit)="updateUser()"
->
+<form class="flex flex-col" [formGroup]="userForm" (ngSubmit)="updateUser()">
   <input
     style="display: none"
     type="file"

@@ -56,6 +56,7 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { FieldComponent } from './components/field/field.component';
 import { HeaderComponent } from './components/header/header.component';
 import { EditUserCardComponent } from './components/edit-user-card/edit-user-card.component';
+import { UserCardComponent } from './components/user-card/user-card.component';
 import { LoaderComponent } from './components/loader/loader.component';
 import { NavigationComponent } from './components/navigation/navigation.component';
 import { PanelComponent } from './components/panel/panel.component';
@@ -147,6 +148,7 @@ export function MSALGuardConfigFactory(): MsalGuardConfiguration {
     AlertComponent,
     AdminComponent,
     EditUserCardComponent,
+    UserCardComponent,
     InitialCardCreationDialogComponent,
     QuizComponent,
     QuizQuestionComponent,

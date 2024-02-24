@@ -9,6 +9,7 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { QrScannerComponent } from './components/qr-scanner/qr-scanner.component';
 import { QuizComponent } from './components/quiz/quiz.component';
 import { UserComponent } from './components/user/user.component';
+import { UserCardComponent } from './components/user-card/user-card.component';
 
 const routes: Routes = [
   {
@@ -24,6 +25,10 @@ const routes: Routes = [
       {
         path: 'admin',
         component: AdminComponent,
+      },
+      {
+        path: 'card',
+        component: UserCardComponent,
       },
       {
         path: 'cards',

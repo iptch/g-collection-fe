@@ -32,9 +32,3 @@
     </div>
   </div>
 </app-panel>
-
-<app-title>Meine Karte</app-title>
-<app-edit-user-card
-  [cardId]="(userCardId$ | async) ?? null"
-  (save)="saveUserCard($event)"
-></app-edit-user-card>
