@@ -11,7 +11,7 @@ import {
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormBuilder, FormControl } from '@angular/forms';
 import { Store } from '@ngrx/store';
-import { take, tap, map, switchMap, filter } from 'rxjs';
+import { tap, map, switchMap, filter, Observable } from 'rxjs';
 import { Card, UserCard } from 'src/app/models/card.model';
 import { User } from 'src/app/models/user.model';
 import { UserService } from 'src/app/services/user.service';
@@ -45,6 +45,7 @@ export class EditUserCardComponent implements OnInit {
   private readonly userService = inject(UserService);
   private readonly destroyRef = inject(DestroyRef);
 
+  updatedUserImage$: Observable<string> | undefined;
   userImage$ = this.store.select(selectUser).pipe(
     filter(Boolean),
     switchMap((user: User) => this.store.select(selectCardById(user.card_id))),
@@ -85,7 +86,7 @@ export class EditUserCardComponent implements OnInit {
       console.error('No images to upload given!');
       return;
     }
-    this.userService.uploadUserPicture(file).pipe(take(1)).subscribe();
+    this.updatedUserImage$ = this.userService.uploadUserPicture(file);
   }
 
   updateUser(): void {

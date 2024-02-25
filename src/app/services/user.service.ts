@@ -16,10 +16,10 @@ export class UserService {
     return this.http.post<User>(this.usersEndpoint + '/init/', {});
   }
 
-  uploadUserPicture(file: File): Observable<void> {
+  uploadUserPicture(file: File): Observable<string> {
     const formData = new FormData();
     formData.append('file', file);
-    return this.http.post<void>(
+    return this.http.post<string>(
       `${environment.backendUri}/upload-picture/`,
       formData,
     );

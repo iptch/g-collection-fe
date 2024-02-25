@@ -14,7 +14,7 @@
 >
   <img
     #image
-    [src]="userImage$ | async"
+    [src]="(updatedUserImage$ | async) || (userImage$ | async)"
     alt="test"
     class="w-full h-full object-cover absolute"
     onerror="this.src='assets/icon.png'"
