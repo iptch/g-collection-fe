@@ -10,12 +10,14 @@
     (change)="uploadPicture($event.target)"
   />
 
-  <div class="w-full aspect-square flex items-center justify-center relative">
+  <div
+    class="w-full aspect-square flex items-center justify-center relative mt-2 mb-2"
+  >
     <img
       #image
       [src]="userImage$ | async"
       alt="test"
-      class="w-full h-full object-cover absolute transition-all ease-out duration-200"
+      class="w-full h-full object-cover absolute"
       onerror="this.src='assets/icon.png'"
     />
 

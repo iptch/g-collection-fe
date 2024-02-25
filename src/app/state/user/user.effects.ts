@@ -43,7 +43,9 @@ export class UserEffects {
   showDialog() {
     this.dialog.open(InitialCardCreationDialogComponent, {
       disableClose: true,
-      minWidth: '75%',
+      maxWidth: '100%',
+      width: '90%',
+      height: '90%',
     });
   }
 }

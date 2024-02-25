@@ -1,5 +1,8 @@
 <div mat-dialog-content>
   <app-title>Chärtli erstellen</app-title>
+  <p class="text-sm p-2">
+    Bevor du loslegen kannst, musst du dir ein Chärtli erstellen.
+  </p>
   <app-edit-user-card
     [cardId]="(userCardId$ | async) ?? null"
     (save)="saveUserCard($event)"
