@@ -6,6 +6,7 @@ export const pictureReducer = createReducer(
   initialPictureState,
 
   on(
+    PictureActions.getPicture,
     PictureActions.uploadPicture,
     (state: PictureState): PictureState => ({
       ...state,
@@ -15,6 +16,7 @@ export const pictureReducer = createReducer(
   ),
 
   on(
+    PictureActions.getPictureSuccess,
     PictureActions.uploadPictureSuccess,
     (state, { image_url }): PictureState => {
       // Add timestamp to URL so that the browser reloads the image
@@ -30,6 +32,7 @@ export const pictureReducer = createReducer(
   ),
 
   on(
+    PictureActions.getPictureFailed,
     PictureActions.uploadPictureFailed,
     (state, { error }): PictureState => ({
       ...state,

@@ -9,12 +9,11 @@
   (change)="uploadPicture($event.target)"
 />
 
-<div
-  class="w-full aspect-square flex items-center justify-center relative mt-2 mb-2"
->
+<div class="w-full aspect-square flex items-center justify-center relative">
   <img
+    *ngIf="(pictureLoading$ | async) === false"
     #image
-    [src]="(picture$ | async) || (userImage$ | async)"
+    [src]="picture$ | async"
     alt="test"
     class="w-full h-full object-cover absolute"
     onerror="this.src='assets/icon.png'"
@@ -41,6 +40,9 @@
     <app-alert [message]="(pictureError$ | async)!"></app-alert>
   </div>
 </div>
+<p class="text-xs text-light-gray opacity-60 p-2">
+  Es kann ein paar Minütchen dauern bis das Bild auf dem Chärtli erscheint.
+</p>
 
 <form class="flex flex-col" [formGroup]="userForm" (ngSubmit)="updateUser()">
   <mat-form-field>
@@ -84,6 +86,7 @@
       text="Update"
       symbol="save"
       color="pink"
+      class="text-white"
     ></app-button>
   </div>
 </form>

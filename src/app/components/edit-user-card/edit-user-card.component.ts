@@ -11,21 +11,19 @@ import {
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormBuilder, FormControl } from '@angular/forms';
 import { Store } from '@ngrx/store';
-import { tap, map, switchMap, filter } from 'rxjs';
+import { tap } from 'rxjs';
 import { Card, UserCard } from 'src/app/models/card.model';
-import { User } from 'src/app/models/user.model';
 import { loadCardById } from 'src/app/state/card/card.actions';
+import { selectCardWithUserById } from 'src/app/state/card/card.selectors';
 import {
-  selectCardById,
-  selectCardWithUserById,
-} from 'src/app/state/card/card.selectors';
-import { uploadPicture } from 'src/app/state/picture/picture.actions';
+  getPicture,
+  uploadPicture,
+} from 'src/app/state/picture/picture.actions';
 import {
   selectPicture,
   selectPictureError,
   selectPictureLoading,
 } from 'src/app/state/picture/picture.selectors';
-import { selectUser } from 'src/app/state/user/user.selectors';
 
 @Component({
   selector: 'app-edit-user-card',
@@ -53,14 +51,9 @@ export class EditUserCardComponent implements OnInit {
   pictureError$ = this.store.select(selectPictureError);
   picture$ = this.store.select(selectPicture);
 
-  userImage$ = this.store.select(selectUser).pipe(
-    filter(Boolean),
-    switchMap((user: User) => this.store.select(selectCardById(user.card_id))),
-    filter(Boolean),
-    map((card: Card) => card.image_url),
-  );
-
-  constructor(private formBuilder: FormBuilder) {}
+  constructor(private formBuilder: FormBuilder) {
+    this.store.dispatch(getPicture());
+  }
 
   ngOnInit() {
     if (this.cardId) {

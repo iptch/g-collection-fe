@@ -7,6 +7,26 @@ import { of } from 'rxjs';
 
 @Injectable()
 export class PictureEffects {
+  readonly getPicture$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(PictureActions.getPicture),
+      switchMap(() =>
+        this.pictureService.getUserPicture().pipe(
+          map((image_url) =>
+            PictureActions.uploadPictureSuccess({ image_url }),
+          ),
+          catchError((error) =>
+            of(
+              PictureActions.uploadPictureFailed({
+                error: error.error.status ? error.error.status : error.message,
+              }),
+            ),
+          ),
+        ),
+      ),
+    );
+  });
+
   readonly uploadPicture$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(PictureActions.uploadPicture),

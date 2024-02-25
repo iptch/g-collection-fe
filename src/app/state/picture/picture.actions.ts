@@ -14,3 +14,15 @@ export const uploadPictureFailed = createAction(
   '[Picture] Upload picture failed',
   props<{ error: string }>(),
 );
+
+export const getPicture = createAction('[Picture] Get picture');
+
+export const getPictureSuccess = createAction(
+  '[Picture] Get picture success',
+  props<{ image_url: string }>(),
+);
+
+export const getPictureFailed = createAction(
+  '[Picture] Get picture failed',
+  props<{ error: string }>(),
+);

@@ -7,9 +7,13 @@ import { environment } from '../../environments/environment';
   providedIn: 'root',
 })
 export class PictureService {
-  private readonly pictureEndpoint = `${environment.backendUri}/upload-picture/`;
+  private readonly pictureEndpoint = `${environment.backendUri}/picture/`;
 
   constructor(private readonly http: HttpClient) {}
+
+  getUserPicture(): Observable<string> {
+    return this.http.get<string>(this.pictureEndpoint);
+  }
 
   uploadUserPicture(file: File): Observable<string> {
     const formData = new FormData();
