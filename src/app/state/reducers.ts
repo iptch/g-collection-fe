@@ -6,6 +6,7 @@ import { quizReducer } from './quiz/quiz.reducers';
 import { AppState } from './state';
 import { transferReducer } from './transfer/transfer.reducers';
 import { userReducer } from './user/user.reducers';
+import { pictureReducer } from './picture/picture.reducers';
 
 export const reducers: ActionReducerMap<AppState> = {
   user: userReducer,
@@ -14,4 +15,5 @@ export const reducers: ActionReducerMap<AppState> = {
   dashboard: dashboardReducer,
   transfer: transferReducer,
   quiz: quizReducer,
+  picture: pictureReducer,
 };

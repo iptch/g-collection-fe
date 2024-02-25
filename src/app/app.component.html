@@ -1,7 +1,10 @@
 <div *ngIf="loading$ | async" class="flex h-screen justify-center items-center">
   <app-loader></app-loader>
 </div>
-<div *ngIf="error$ | async" class="flex h-screen items-center p-2">
+<div
+  *ngIf="error$ | async"
+  class="flex h-screen items-center justify-center p-2"
+>
   <app-alert [message]="(error$ | async)!"></app-alert>
 </div>
 <ng-container *ngIf="!((loading$ | async) || (error$ | async))">

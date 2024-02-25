@@ -14,18 +14,32 @@
 >
   <img
     #image
-    [src]="(updatedUserImage$ | async) || (userImage$ | async)"
+    [src]="(picture$ | async) || (userImage$ | async)"
     alt="test"
     class="w-full h-full object-cover absolute"
     onerror="this.src='assets/icon.png'"
   />
 
   <button
-    class="absolute right-0 bottom-0 m-4 w-14 h-14 bg-dark-pink rounded-full no-tap-highlight active:bg-light-pink shadow"
+    class="absolute right-0 bottom-0 m-4 w-14 h-14 bg-dark-pink rounded-full no-tap-highlight active:bg-light-pink shadow z-20"
     (click)="chooseImage.click()"
   >
-    <span class="material-symbols-outlined align-middle">edit</span>
+    <span class="material-symbols-outlined align-middle text-white">edit</span>
   </button>
+
+  <div
+    *ngIf="pictureLoading$ | async"
+    class="flex w-full h-full items-center justify-center bg-black bg-opacity-70 z-30"
+  >
+    <app-loader></app-loader>
+  </div>
+
+  <div
+    *ngIf="pictureError$ | async"
+    class="flex w-full h-full items-center justify-center bg-black bg-opacity-70 z-10"
+  >
+    <app-alert [message]="(pictureError$ | async)!"></app-alert>
+  </div>
 </div>
 
 <form class="flex flex-col" [formGroup]="userForm" (ngSubmit)="updateUser()">

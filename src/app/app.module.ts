@@ -74,6 +74,7 @@ import { TransferEffects } from './state/transfer/transfer.effects';
 import { UserEffects } from './state/user/user.effects';
 import { InitialCardCreationDialogComponent } from './components/initial-card-creation-dialog/initial-card-creation.dialog';
 import { QuizEffects } from './state/quiz/quiz.effects';
+import { PictureEffects } from './state/picture/picture.effects';
 
 registerLocaleData(localeDeCh);
 
@@ -190,6 +191,7 @@ export function MSALGuardConfigFactory(): MsalGuardConfiguration {
       UserEffects,
       TransferEffects,
       QuizEffects,
+      PictureEffects,
     ]),
     MatSliderModule,
     MatSnackBarModule,

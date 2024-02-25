@@ -11,15 +11,20 @@ import {
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormBuilder, FormControl } from '@angular/forms';
 import { Store } from '@ngrx/store';
-import { tap, map, switchMap, filter, Observable } from 'rxjs';
+import { tap, map, switchMap, filter } from 'rxjs';
 import { Card, UserCard } from 'src/app/models/card.model';
 import { User } from 'src/app/models/user.model';
-import { UserService } from 'src/app/services/user.service';
 import { loadCardById } from 'src/app/state/card/card.actions';
 import {
   selectCardById,
   selectCardWithUserById,
 } from 'src/app/state/card/card.selectors';
+import { uploadPicture } from 'src/app/state/picture/picture.actions';
+import {
+  selectPicture,
+  selectPictureError,
+  selectPictureLoading,
+} from 'src/app/state/picture/picture.selectors';
 import { selectUser } from 'src/app/state/user/user.selectors';
 
 @Component({
@@ -42,10 +47,12 @@ export class EditUserCardComponent implements OnInit {
   });
 
   private readonly store = inject(Store);
-  private readonly userService = inject(UserService);
   private readonly destroyRef = inject(DestroyRef);
 
-  updatedUserImage$: Observable<string> | undefined;
+  pictureLoading$ = this.store.select(selectPictureLoading);
+  pictureError$ = this.store.select(selectPictureError);
+  picture$ = this.store.select(selectPicture);
+
   userImage$ = this.store.select(selectUser).pipe(
     filter(Boolean),
     switchMap((user: User) => this.store.select(selectCardById(user.card_id))),
@@ -86,7 +93,7 @@ export class EditUserCardComponent implements OnInit {
       console.error('No images to upload given!');
       return;
     }
-    this.updatedUserImage$ = this.userService.uploadUserPicture(file);
+    this.store.dispatch(uploadPicture({ file }));
   }
 
   updateUser(): void {
