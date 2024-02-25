@@ -1,34 +1,34 @@
-<form class="flex flex-col" [formGroup]="userForm" (ngSubmit)="updateUser()">
-  <input
-    style="display: none"
-    type="file"
-    id="chooseImage"
-    accept="image"
-    capture
-    height="100%"
-    #chooseImage
-    (change)="uploadPicture($event.target)"
+<input
+  style="display: none"
+  type="file"
+  id="chooseImage"
+  accept="image"
+  capture
+  height="100%"
+  #chooseImage
+  (change)="uploadPicture($event.target)"
+/>
+
+<div
+  class="w-full aspect-square flex items-center justify-center relative mt-2 mb-2"
+>
+  <img
+    #image
+    [src]="userImage$ | async"
+    alt="test"
+    class="w-full h-full object-cover absolute"
+    onerror="this.src='assets/icon.png'"
   />
 
-  <div
-    class="w-full aspect-square flex items-center justify-center relative mt-2 mb-2"
+  <button
+    class="absolute right-0 bottom-0 m-4 w-14 h-14 bg-dark-pink rounded-full no-tap-highlight active:bg-light-pink shadow"
+    (click)="chooseImage.click()"
   >
-    <img
-      #image
-      [src]="userImage$ | async"
-      alt="test"
-      class="w-full h-full object-cover absolute"
-      onerror="this.src='assets/icon.png'"
-    />
+    <span class="material-symbols-outlined align-middle">edit</span>
+  </button>
+</div>
 
-    <button
-      class="absolute right-0 bottom-0 m-4 w-14 h-14 bg-dark-pink rounded-full no-tap-highlight active:bg-light-pink shadow"
-      (click)="chooseImage.click()"
-    >
-      <span class="material-symbols-outlined align-middle">edit</span>
-    </button>
-  </div>
-
+<form class="flex flex-col" [formGroup]="userForm" (ngSubmit)="updateUser()">
   <mat-form-field>
     <mat-label>Mein Kürzel</mat-label>
     <input matInput formControlName="acronymInput" maxlength="3" />
