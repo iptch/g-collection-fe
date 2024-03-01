@@ -12,12 +12,10 @@ export class PictureEffects {
       ofType(PictureActions.getPicture),
       switchMap(() =>
         this.pictureService.getUserPicture().pipe(
-          map((image_url) =>
-            PictureActions.uploadPictureSuccess({ image_url }),
-          ),
+          map((image_url) => PictureActions.getPictureSuccess({ image_url })),
           catchError((error) =>
             of(
-              PictureActions.uploadPictureFailed({
+              PictureActions.getPictureFailed({
                 error: error.error.status ? error.error.status : error.message,
               }),
             ),
