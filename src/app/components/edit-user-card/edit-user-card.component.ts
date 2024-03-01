@@ -34,6 +34,27 @@ export class EditUserCardComponent implements OnInit {
   @Input() cardId: number | null = null;
   @Output() save = new EventEmitter<UserCard>();
 
+  jobs = [
+    'Assistant to the Chief of Staff',
+    'Associate Partner',
+    'Associate Partner, Backoffice',
+    'Backoffice',
+    'Board of Directors',
+    'Buisiness Operations',
+    'Chief of Staff',
+    'Consultant',
+    'IT Architect',
+    'Junior Software Engineer',
+    'Lead Consultant',
+    'Marketing',
+    'Partner',
+    'People & Development',
+    'Principal Architect',
+    'Principal Architect / Director',
+    'Principal Consultant / Director',
+    'Senior Consultant',
+  ];
+
   userForm = this.formBuilder.group({
     acronymInput: new FormControl(),
     startDateInput: new FormControl(),

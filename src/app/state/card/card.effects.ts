@@ -36,13 +36,12 @@ export class CardEffects {
       ofType(CardActions.modifyCard),
       switchMap(({ userCard, dialogId }) =>
         this.cardService.modifyCard(userCard).pipe(
-          map((response) => {
+          map((id) => {
             if (dialogId) {
               const dialog = this.matDialog.getDialogById(dialogId);
               dialog?.close();
             }
-
-            return CardActions.modifyCardSuccess({ statusResponse: response });
+            return CardActions.modifyCardSuccess({ id });
           }),
           catchError(() => of(CardActions.modifyCardError())),
         ),

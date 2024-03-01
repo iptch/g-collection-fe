@@ -7,6 +7,7 @@ import { UserService } from '../../services/user.service';
 import * as UserActions from './user.actions';
 import { User } from 'src/app/models/user.model';
 import { InitialCardCreationDialogComponent } from 'src/app/components/initial-card-creation-dialog/initial-card-creation.dialog';
+import { Router } from '@angular/router';
 
 @Injectable()
 export class UserEffects {
@@ -17,9 +18,9 @@ export class UserEffects {
         this.userService.initUser().pipe(
           map((user: User) => {
             if (!user?.['card_id']) {
+              this.router.navigate(['/dashboard']);
               this.showDialog();
             }
-
             return UserActions.initUserSuccess({ user });
           }),
           catchError((error) =>
@@ -38,6 +39,7 @@ export class UserEffects {
     private readonly actions$: Actions,
     private readonly userService: UserService,
     public dialog: MatDialog,
+    private readonly router: Router,
   ) {}
 
   showDialog() {

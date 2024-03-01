@@ -50,14 +50,19 @@
     <input matInput formControlName="acronymInput" maxlength="3" />
   </mat-form-field>
 
-  <mat-form-field class="w-full">
+  <mat-form-field>
     <mat-label>Ich bin bei der ipt seit</mat-label>
     <input matInput type="date" formControlName="startDateInput" />
   </mat-form-field>
 
   <mat-form-field>
-    <mat-label>Ich arbeit als</mat-label>
-    <input matInput formControlName="jobInput" />
+    <mat-label>Meine Rolle</mat-label>
+    <mat-select formControlName="jobInput">
+      <mat-option></mat-option>
+      @for (job of jobs; track job) {
+      <mat-option [value]="job">{{ job }}</mat-option>
+      }
+    </mat-select>
   </mat-form-field>
 
   <mat-form-field>
@@ -65,24 +70,23 @@
     <input matInput formControlName="wishDestinationInput" />
   </mat-form-field>
 
-  <mat-form-field class="w-full">
+  <mat-form-field>
     <mat-label>Für einen Tag tauschen würde ich mit</mat-label>
     <input matInput formControlName="wishPersonInput" />
   </mat-form-field>
 
-  <mat-form-field class="w-full">
+  <mat-form-field>
     <mat-label>Das wollte ich schon immer mal erlernen</mat-label>
     <input matInput formControlName="wishSkillInput" />
   </mat-form-field>
 
-  <mat-form-field class="w-full">
+  <mat-form-field>
     <mat-label>Der beste Ratschlag</mat-label>
     <input matInput formControlName="bestAdviceInput" />
   </mat-form-field>
 
   <div class="flex justify-center">
     <app-button
-      (click)="updateUser()"
       text="Update"
       symbol="save"
       color="pink"

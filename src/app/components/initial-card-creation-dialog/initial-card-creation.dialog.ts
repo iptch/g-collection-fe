@@ -1,11 +1,9 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { selectUser } from 'src/app/state/user/user.selectors';
-import { map } from 'rxjs';
-import { User } from 'src/app/models/user.model';
 import { MatDialogRef } from '@angular/material/dialog';
 import { UserCard } from 'src/app/models/card.model';
 import { modifyCard } from 'src/app/state/card/card.actions';
+import { selectUserCardId } from 'src/app/state/user/user.selectors';
 
 @Component({
   selector: 'app-initial-card-creation',
@@ -18,10 +16,10 @@ export class InitialCardCreationDialogComponent {
     MatDialogRef<InitialCardCreationDialogComponent>,
   );
 
-  private user$ = this.store.select(selectUser);
-  userCardId$ = this.user$.pipe(map((user: User | null) => user?.['card_id']));
+  userCardId$ = this.store.select(selectUserCardId);
 
   saveUserCard(userCard: UserCard): void {
     this.store.dispatch(modifyCard({ userCard, dialogId: this.dialogRef.id }));
+    this.dialogRef.componentRef?.destroy();
   }
 }

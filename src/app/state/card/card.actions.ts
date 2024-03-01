@@ -58,7 +58,7 @@ export const modifyCard = createAction(
 
 export const modifyCardSuccess = createAction(
   '[Cards] Modify Card Success',
-  props<{ statusResponse: StatusResponse }>(),
+  props<{ id: number }>(),
 );
 
 export const modifyCardError = createAction('[Cards] Modify Card error');

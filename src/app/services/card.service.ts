@@ -29,10 +29,7 @@ export class CardService {
     );
   }
 
-  modifyCard(userCard: UserCard): Observable<StatusResponse> {
-    return this.http.post<StatusResponse>(
-      `${this.cardsEndpoint}/modify/`,
-      userCard,
-    );
+  modifyCard(userCard: UserCard): Observable<number> {
+    return this.http.post<number>(`${this.cardsEndpoint}/modify/`, userCard);
   }
 }

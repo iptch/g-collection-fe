@@ -1,6 +1,7 @@
 import { createReducer, on } from '@ngrx/store';
 import { initialUserState, UserState } from './user.state';
 import * as UserActions from './user.actions';
+import { modifyCardSuccess } from '../card/card.actions';
 
 export const userReducer = createReducer(
   initialUserState,
@@ -30,6 +31,21 @@ export const userReducer = createReducer(
       ...state,
       loading: false,
       error: error,
+    }),
+  ),
+
+  on(
+    modifyCardSuccess,
+    (state, { id }): UserState => ({
+      ...state,
+      user: state.user
+        ? {
+            ...state.user,
+            card_id: id,
+          }
+        : null,
+      loading: false,
+      error: null,
     }),
   ),
 );
