@@ -44,7 +44,21 @@
   Es kann ein paar Minütchen dauern bis das Bild auf dem Chärtli erscheint.
 </p>
 
-<form class="flex flex-col" [formGroup]="userForm" (ngSubmit)="updateUser()">
+<div *ngIf="cardLoading$ | async" class="flex justify-center">
+  <app-loader></app-loader>
+</div>
+
+<app-alert
+  *ngIf="cardError$ | async"
+  [message]="'Infos konnten nicht geladen werden.'"
+></app-alert>
+
+<form
+  *ngIf="!((cardLoading$ | async) || (cardError$ | async))"
+  class="flex flex-col"
+  [formGroup]="userForm"
+  (ngSubmit)="updateUser()"
+>
   <mat-form-field>
     <mat-label>Mein Kürzel</mat-label>
     <input matInput formControlName="acronymInput" maxlength="3" />

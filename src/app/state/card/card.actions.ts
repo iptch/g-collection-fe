@@ -1,7 +1,6 @@
 import { createAction, props } from '@ngrx/store';
 import { CardSort } from 'src/app/models/card-sort.enum';
 import { Card, UserCard } from 'src/app/models/card.model';
-import { StatusResponse } from 'src/app/models/status-response.model';
 
 export const loadCards = createAction('[Cards] Load cards');
 
@@ -58,7 +57,10 @@ export const modifyCard = createAction(
 
 export const modifyCardSuccess = createAction(
   '[Cards] Modify Card Success',
-  props<{ id: number }>(),
+  props<{ card: Card }>(),
 );
 
-export const modifyCardError = createAction('[Cards] Modify Card error');
+export const modifyCardError = createAction(
+  '[Cards] Modify Card error',
+  props<{ error: string }>(),
+);

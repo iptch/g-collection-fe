@@ -36,12 +36,12 @@ export const userReducer = createReducer(
 
   on(
     modifyCardSuccess,
-    (state, { id }): UserState => ({
+    (state, { card }): UserState => ({
       ...state,
       user: state.user
         ? {
             ...state.user,
-            card_id: id,
+            card_id: card.id,
           }
         : null,
       loading: false,

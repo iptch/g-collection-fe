@@ -1,20 +1,17 @@
 <button
-  class="flex items-center px-2 py-1 space-x-2 border-2 no-tap-highlight"
+  class="flex items-center px-2 py-1 space-x-2 border-2 no-tap-highlight active:brightness-125"
   [disabled]="disabled"
   [ngClass]="{
     'border-light-blue text-light-blue': outlined && color === 'blue',
-    'border-dark-blue bg-dark-blue active:bg-light-blue':
-      !outlined && color === 'blue',
+    'border-dark-blue bg-dark-blue': !outlined && color === 'blue',
     'border-light-green text-light-green': outlined && color === 'green',
-    'border-dark-green bg-dark-green active:bg-light-green':
-      !outlined && color === 'green',
+    'border-dark-green bg-dark-green': !outlined && color === 'green',
     'border-light-pink text-light-pink': outlined && color === 'pink',
-    'border-dark-pink bg-dark-pink active:bg-light-pink':
-      !outlined && color === 'pink',
+    'border-dark-pink bg-dark-pink': !outlined && color === 'pink',
     'border-light-red text-light-red': outlined && color === 'red',
-    'border-dark-red bg-dark-red active:bg-light-red':
-      !outlined && color === 'red',
-    'w-full': fullWidth
+    'border-dark-red bg-dark-red': !outlined && color === 'red',
+    'w-full': fullWidth,
+    'active:brightness-100': disabled
   }"
 >
   <span *ngIf="symbol" class="material-symbols-outlined">{{ symbol }}</span>

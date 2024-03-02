@@ -14,7 +14,11 @@ import { Store } from '@ngrx/store';
 import { tap } from 'rxjs';
 import { Card, UserCard } from 'src/app/models/card.model';
 import { loadCardById } from 'src/app/state/card/card.actions';
-import { selectCardWithUserById } from 'src/app/state/card/card.selectors';
+import {
+  selectCardError,
+  selectCardLoading,
+  selectCardWithUserById,
+} from 'src/app/state/card/card.selectors';
 import {
   getPicture,
   uploadPicture,
@@ -68,6 +72,8 @@ export class EditUserCardComponent implements OnInit {
   private readonly store = inject(Store);
   private readonly destroyRef = inject(DestroyRef);
 
+  cardLoading$ = this.store.select(selectCardLoading);
+  cardError$ = this.store.select(selectCardError);
   pictureLoading$ = this.store.select(selectPictureLoading);
   pictureError$ = this.store.select(selectPictureError);
   picture$ = this.store.select(selectPicture);
