@@ -2,14 +2,16 @@ import {
   ChangeDetectionStrategy,
   Component,
   DestroyRef,
+  ElementRef,
   EventEmitter,
   Input,
   OnInit,
   Output,
+  ViewChild,
   inject,
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { FormBuilder, FormControl } from '@angular/forms';
+import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { tap } from 'rxjs';
 import { Card, UserCard } from 'src/app/models/card.model';
@@ -37,6 +39,7 @@ import {
 export class EditUserCardComponent implements OnInit {
   @Input() cardId: number | null = null;
   @Output() save = new EventEmitter<UserCard>();
+  @ViewChild('image') image: ElementRef | undefined;
 
   jobs = [
     'Assistant to the Chief of Staff',
@@ -60,15 +63,20 @@ export class EditUserCardComponent implements OnInit {
   ];
 
   userForm = this.formBuilder.group({
-    acronymInput: new FormControl(),
-    startDateInput: new FormControl(),
-    jobInput: new FormControl(),
-    wishDestinationInput: new FormControl(),
-    wishPersonInput: new FormControl(),
-    wishSkillInput: new FormControl(),
-    bestAdviceInput: new FormControl(),
+    acronymInput: new FormControl('', [
+      Validators.required,
+      Validators.minLength(3),
+      Validators.maxLength(3),
+    ]),
+    startDateInput: new FormControl('', Validators.required),
+    jobInput: new FormControl('', Validators.required),
+    wishDestinationInput: new FormControl('', Validators.required),
+    wishPersonInput: new FormControl('', Validators.required),
+    wishSkillInput: new FormControl('', Validators.required),
+    bestAdviceInput: new FormControl('', Validators.required),
   });
 
+  private readonly fallbackImageUrl = 'assets/icon.png';
   private readonly store = inject(Store);
   private readonly destroyRef = inject(DestroyRef);
 
@@ -105,6 +113,17 @@ export class EditUserCardComponent implements OnInit {
     }
   }
 
+  onImageMissing(image: HTMLImageElement): void {
+    image.src = this.fallbackImageUrl;
+  }
+
+  isCardInvalid(): boolean {
+    return !(
+      this.userForm.valid &&
+      !this.image?.nativeElement.src.endsWith(this.fallbackImageUrl)
+    );
+  }
+
   uploadPicture(data: EventTarget | null): void {
     if (!(data instanceof HTMLInputElement)) return;
 
@@ -124,13 +143,13 @@ export class EditUserCardComponent implements OnInit {
     const userFormControls = this.userForm.controls;
 
     return {
-      acronym: userFormControls.acronymInput.value,
-      job: userFormControls.jobInput.value,
-      start_at_ipt: userFormControls.startDateInput.value,
-      wish_destination: userFormControls.wishDestinationInput.value,
-      wish_person: userFormControls.wishPersonInput.value,
-      wish_skill: userFormControls.wishSkillInput.value,
-      best_advice: userFormControls.bestAdviceInput.value,
+      acronym: userFormControls.acronymInput.value!,
+      job: userFormControls.jobInput.value!,
+      start_at_ipt: userFormControls.startDateInput.value!,
+      wish_destination: userFormControls.wishDestinationInput.value!,
+      wish_person: userFormControls.wishPersonInput.value!,
+      wish_skill: userFormControls.wishSkillInput.value!,
+      best_advice: userFormControls.bestAdviceInput.value!,
     };
   }
 }

@@ -11,7 +11,8 @@
     'border-light-red text-light-red': outlined && color === 'red',
     'border-dark-red bg-dark-red': !outlined && color === 'red',
     'w-full': fullWidth,
-    'active:brightness-100': disabled
+    'active:brightness-100': disabled,
+    'opacity-60': transparent
   }"
 >
   <span *ngIf="symbol" class="material-symbols-outlined">{{ symbol }}</span>

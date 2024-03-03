@@ -11,12 +11,12 @@
 
 <div class="w-full aspect-square flex items-center justify-center relative">
   <img
-    *ngIf="(pictureLoading$ | async) === false"
     #image
+    [hidden]="pictureLoading$ | async"
     [src]="picture$ | async"
-    alt="test"
+    (error)="onImageMissing(image)"
     class="w-full h-full object-cover absolute"
-    onerror="this.src='assets/icon.png'"
+    alt="Card image"
   />
 
   <button
@@ -42,6 +42,7 @@
 </div>
 <p class="text-xs text-light-gray opacity-60 p-2">
   Es kann ein paar Minütchen dauern bis das Bild auf dem Chärtli erscheint.
+  Eventual consistency!
 </p>
 
 <div *ngIf="cardLoading$ | async" class="flex justify-center">
@@ -64,7 +65,6 @@
     <input
       matInput
       formControlName="acronymInput"
-      maxlength="3"
       oninput="this.value = this.value.toUpperCase()"
     />
   </mat-form-field>
@@ -106,6 +106,8 @@
 
   <div class="flex justify-center">
     <app-button
+      [disabled]="isCardInvalid()"
+      [transparent]="isCardInvalid()"
       text="Update"
       symbol="save"
       color="pink"
