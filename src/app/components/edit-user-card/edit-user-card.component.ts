@@ -2,12 +2,10 @@ import {
   ChangeDetectionStrategy,
   Component,
   DestroyRef,
-  ElementRef,
   EventEmitter,
   Input,
   OnInit,
   Output,
-  ViewChild,
   inject,
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
@@ -23,7 +21,7 @@ import {
 } from 'src/app/state/card/card.selectors';
 import {
   getPicture,
-  resetImageUrl,
+  setImageUrl,
   uploadPicture,
 } from 'src/app/state/picture/picture.actions';
 import {
@@ -31,6 +29,7 @@ import {
   selectPictureError,
   selectPictureLoading,
 } from 'src/app/state/picture/picture.selectors';
+import { forbiddenUrlValidator } from './forbidden-url.directive';
 
 @Component({
   selector: 'app-edit-user-card',
@@ -40,7 +39,6 @@ import {
 export class EditUserCardComponent implements OnInit {
   @Input() cardId: number | null = null;
   @Output() save = new EventEmitter<UserCard>();
-  @ViewChild('image') image: ElementRef | undefined;
 
   jobs = [
     'Assistant to the Chief of Staff',
@@ -63,8 +61,15 @@ export class EditUserCardComponent implements OnInit {
     'Senior Consultant',
   ];
 
+  private readonly imageFallbackUrl = 'assets/icon.png';
+  private readonly store = inject(Store);
+  private readonly destroyRef = inject(DestroyRef);
+
   userForm = this.formBuilder.group({
-    imageInput: new FormControl('', Validators.required),
+    imageInput: new FormControl('', [
+      Validators.required,
+      forbiddenUrlValidator(this.imageFallbackUrl),
+    ]),
     acronymInput: new FormControl('', [
       Validators.required,
       Validators.minLength(3),
@@ -77,9 +82,6 @@ export class EditUserCardComponent implements OnInit {
     wishSkillInput: new FormControl('', Validators.required),
     bestAdviceInput: new FormControl('', Validators.required),
   });
-
-  private readonly store = inject(Store);
-  private readonly destroyRef = inject(DestroyRef);
 
   cardLoading$ = this.store.select(selectCardLoading);
   cardError$ = this.store.select(selectCardError);
@@ -120,9 +122,8 @@ export class EditUserCardComponent implements OnInit {
       .subscribe();
   }
 
-  onImageMissing(image: HTMLImageElement): void {
-    image.src = 'assets/icon.png';
-    this.store.dispatch(resetImageUrl());
+  onImageMissing(): void {
+    this.store.dispatch(setImageUrl({ image_url: this.imageFallbackUrl }));
   }
 
   uploadPicture(data: EventTarget | null): void {

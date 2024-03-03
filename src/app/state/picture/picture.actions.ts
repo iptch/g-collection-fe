@@ -27,4 +27,7 @@ export const getPictureFailed = createAction(
   props<{ error: string }>(),
 );
 
-export const resetImageUrl = createAction('[Picture] Reset image URL');
+export const setImageUrl = createAction(
+  '[Picture] Set image URL',
+  props<{ image_url: string }>(),
+);

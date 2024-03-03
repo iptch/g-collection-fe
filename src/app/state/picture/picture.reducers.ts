@@ -42,10 +42,10 @@ export const pictureReducer = createReducer(
   ),
 
   on(
-    PictureActions.resetImageUrl,
-    (state: PictureState): PictureState => ({
+    PictureActions.setImageUrl,
+    (state, { image_url }): PictureState => ({
       ...state,
-      image_url: null,
+      image_url,
     }),
   ),
 );
