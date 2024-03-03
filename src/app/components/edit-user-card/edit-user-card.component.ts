@@ -23,6 +23,7 @@ import {
 } from 'src/app/state/card/card.selectors';
 import {
   getPicture,
+  resetImageUrl,
   uploadPicture,
 } from 'src/app/state/picture/picture.actions';
 import {
@@ -63,6 +64,7 @@ export class EditUserCardComponent implements OnInit {
   ];
 
   userForm = this.formBuilder.group({
+    imageInput: new FormControl('', Validators.required),
     acronymInput: new FormControl('', [
       Validators.required,
       Validators.minLength(3),
@@ -76,7 +78,6 @@ export class EditUserCardComponent implements OnInit {
     bestAdviceInput: new FormControl('', Validators.required),
   });
 
-  private readonly fallbackImageUrl = 'assets/icon.png';
   private readonly store = inject(Store);
   private readonly destroyRef = inject(DestroyRef);
 
@@ -111,17 +112,17 @@ export class EditUserCardComponent implements OnInit {
         )
         .subscribe();
     }
+    this.picture$
+      .pipe(
+        tap((image_url) => this.userForm.patchValue({ imageInput: image_url })),
+        takeUntilDestroyed(this.destroyRef),
+      )
+      .subscribe();
   }
 
   onImageMissing(image: HTMLImageElement): void {
-    image.src = this.fallbackImageUrl;
-  }
-
-  isCardInvalid(): boolean {
-    return !(
-      this.userForm.valid &&
-      !this.image?.nativeElement.src.endsWith(this.fallbackImageUrl)
-    );
+    image.src = 'assets/icon.png';
+    this.store.dispatch(resetImageUrl());
   }
 
   uploadPicture(data: EventTarget | null): void {

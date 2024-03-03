@@ -1,5 +1,5 @@
 <button
-  class="flex items-center px-2 py-1 space-x-2 border-2 no-tap-highlight active:brightness-125"
+  class="flex items-center px-2 py-1 space-x-2 border-2 no-tap-highlight"
   [disabled]="disabled"
   [ngClass]="{
     'border-light-blue text-light-blue': outlined && color === 'blue',
@@ -11,7 +11,7 @@
     'border-light-red text-light-red': outlined && color === 'red',
     'border-dark-red bg-dark-red': !outlined && color === 'red',
     'w-full': fullWidth,
-    'active:brightness-100': disabled,
+    'active:brightness-125': !disabled,
     'opacity-60': transparent
   }"
 >

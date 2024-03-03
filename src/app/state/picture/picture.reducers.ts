@@ -40,4 +40,12 @@ export const pictureReducer = createReducer(
       error: error,
     }),
   ),
+
+  on(
+    PictureActions.resetImageUrl,
+    (state: PictureState): PictureState => ({
+      ...state,
+      image_url: null,
+    }),
+  ),
 );

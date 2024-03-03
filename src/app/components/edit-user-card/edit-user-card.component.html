@@ -1,10 +1,9 @@
 <input
-  style="display: none"
+  hidden
   type="file"
   id="chooseImage"
   accept="image"
   capture
-  height="100%"
   #chooseImage
   (change)="uploadPicture($event.target)"
 />
@@ -14,9 +13,9 @@
     #image
     [hidden]="pictureLoading$ | async"
     [src]="picture$ | async"
-    (error)="onImageMissing(image)"
     class="w-full h-full object-cover absolute"
     alt="Card image"
+    (error)="onImageMissing(image)"
   />
 
   <button
@@ -60,6 +59,9 @@
   [formGroup]="userForm"
   (ngSubmit)="updateUser()"
 >
+  <!-- To validate that an image is selected before form submission -->
+  <input hidden formControlName="imageInput" />
+
   <mat-form-field>
     <mat-label>Mein Kürzel</mat-label>
     <input
@@ -106,8 +108,8 @@
 
   <div class="flex justify-center">
     <app-button
-      [disabled]="isCardInvalid()"
-      [transparent]="isCardInvalid()"
+      [disabled]="!this.userForm.valid"
+      [transparent]="!this.userForm.valid"
       text="Update"
       symbol="save"
       color="pink"
