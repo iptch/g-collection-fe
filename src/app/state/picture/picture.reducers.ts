@@ -19,12 +19,9 @@ export const pictureReducer = createReducer(
     PictureActions.getPictureSuccess,
     PictureActions.uploadPictureSuccess,
     (state, { image_url }): PictureState => {
-      // Add timestamp to URL so that the browser reloads the image
-      const url = new URL(image_url);
-      url.searchParams.append('timestamp', Date.now().toString());
       return {
         ...state,
-        image_url: url.toString(),
+        image_url,
         loading: false,
         error: null,
       };
