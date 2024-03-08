@@ -7,6 +7,7 @@ import { AppState } from './state';
 import { transferReducer } from './transfer/transfer.reducers';
 import { userReducer } from './user/user.reducers';
 import { pictureReducer } from './picture/picture.reducers';
+import { deletionReducer } from './deletion/deletion.reducers';
 
 export const reducers: ActionReducerMap<AppState> = {
   user: userReducer,
@@ -16,4 +17,5 @@ export const reducers: ActionReducerMap<AppState> = {
   transfer: transferReducer,
   quiz: quizReducer,
   picture: pictureReducer,
+  deletion: deletionReducer,
 };

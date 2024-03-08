@@ -1,5 +1,6 @@
 import { CardState } from './card/card.state';
 import { DashboardState } from './dashboard/dashboard.state';
+import { DeletionState } from './deletion/deletion.state';
 import { DistributionState } from './distribution/distribution.state';
 import { PictureState } from './picture/picture.state';
 import { QuizState } from './quiz/quiz.state';
@@ -14,4 +15,5 @@ export interface AppState {
   readonly transfer: TransferState;
   readonly quiz: QuizState;
   readonly picture: PictureState;
+  readonly deletion: DeletionState;
 }

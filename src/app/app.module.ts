@@ -75,6 +75,7 @@ import { UserEffects } from './state/user/user.effects';
 import { InitialCardCreationDialogComponent } from './components/initial-card-creation-dialog/initial-card-creation.dialog';
 import { QuizEffects } from './state/quiz/quiz.effects';
 import { PictureEffects } from './state/picture/picture.effects';
+import { DeletionEffects } from './state/deletion/deletion.effects';
 import { MAT_DATE_LOCALE } from '@angular/material/core';
 
 registerLocaleData(localeDeCh);
@@ -193,6 +194,7 @@ export function MSALGuardConfigFactory(): MsalGuardConfiguration {
       TransferEffects,
       QuizEffects,
       PictureEffects,
+      DeletionEffects,
     ]),
     MatSliderModule,
     MatSnackBarModule,

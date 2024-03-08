@@ -1,23 +1,51 @@
 <app-title>VIP Section</app-title>
+
 <app-panel>
-  <app-loader *ngIf="loading$ | async; else content"></app-loader>
-  <ng-template #content>
-    <div>Neue Chärtli an alle Spieler ausschütten.</div>
-    <div class="grid grid-cols-2 items-center gap-4">
-      <mat-slider discrete min="1" max="20" step="1">
-        <input matSliderThumb value="10" #slider />
-      </mat-slider>
-      <div>
-        Anzahl: <span class="text-light-blue">{{ slider.value }}</span>
-      </div>
+  <div class="text-light-pink mb-2">Gönnung</div>
+  <div>Neue Chärtli an alle Spieler ausschütten</div>
+  <div class="grid grid-cols-2 items-center gap-4">
+    <mat-slider discrete min="1" max="20" step="1">
+      <input matSliderThumb value="10" #slider />
+    </mat-slider>
+    <div>
+      Anzahl: <span class="text-light-blue">{{ slider.value }}</span>
     </div>
+  </div>
+  <div class="flex mt-2">
+    <app-button
+      [disabled]="(distributing$ | async) === true"
+      [transparent]="(distributing$ | async) === true"
+      [loading]="(distributing$ | async) === true"
+      (click)="distributeCards(slider.value)"
+      [text]="'Make it rain!'"
+      [symbol]="'rainy_light'"
+      [color]="'pink'"
+    ></app-button>
+  </div>
+</app-panel>
+
+<app-panel>
+  <div class="text-light-pink mb-2">Löschung</div>
+  <div>ipt-ler:in verabschieden</div>
+  <form
+    class="flex flex-col"
+    [formGroup]="deletionForm"
+    #formDirective="ngForm"
+    (ngSubmit)="deleteUser()"
+  >
+    <mat-form-field class="no-subscript">
+      <mat-label>E-Mail-Adresse</mat-label>
+      <input matInput formControlName="email" />
+    </mat-form-field>
     <div class="flex mt-2">
       <app-button
-        (click)="distributeCards(slider.value)"
-        [text]="'Make it rain!'"
-        [symbol]="'rainy_light'"
+        [disabled]="!this.deletionForm.valid"
+        [transparent]="!this.deletionForm.valid"
+        [text]="'Farewell!'"
+        [symbol]="'waving_hand'"
         [color]="'pink'"
+        [loading]="(deleting$ | async) === true"
       ></app-button>
     </div>
-  </ng-template>
+  </form>
 </app-panel>

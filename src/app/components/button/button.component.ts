@@ -13,4 +13,5 @@ export class ButtonComponent {
   @Input() fullWidth = false;
   @Input() centerText = false;
   @Input() transparent = false;
+  @Input() loading = false;
 }
