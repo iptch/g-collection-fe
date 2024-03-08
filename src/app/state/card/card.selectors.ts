@@ -24,6 +24,11 @@ export const selectCardLoading = createSelector(
   (state) => state.loading,
 );
 
+export const selectCardModifying = createSelector(
+  selectCardState,
+  (state) => state.modifying,
+);
+
 export const selectCardError = createSelector(
   selectCardState,
   (state) => state.error,

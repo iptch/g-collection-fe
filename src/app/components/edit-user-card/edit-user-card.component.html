@@ -105,10 +105,11 @@
     <input matInput formControlName="bestAdviceInput" />
   </mat-form-field>
 
-  <div class="flex justify-center">
+  <div class="flex">
     <app-button
-      [disabled]="!this.userForm.valid"
-      [transparent]="!this.userForm.valid"
+      [disabled]="!this.userForm.valid || (cardModifying$ | async) === true"
+      [transparent]="!this.userForm.valid || (cardModifying$ | async) === true"
+      [loading]="(cardModifying$ | async) === true"
       text="Update"
       symbol="save"
       color="pink"

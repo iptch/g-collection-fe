@@ -35,18 +35,31 @@ export const cardReducer = createReducer(
     };
   }),
 
-  on(
-    CardActions.loadCardByIdSuccess,
-    CardActions.modifyCardSuccess,
-    (state, { card }): CardState => {
-      const entityState = cardAdapter.upsertOne(card, state);
+  on(CardActions.loadCardByIdSuccess, (state, { card }): CardState => {
+    const entityState = cardAdapter.upsertOne(card, state);
 
-      return {
-        ...entityState,
-        loading: false,
-        error: false,
-      };
-    },
+    return {
+      ...entityState,
+      loading: false,
+      error: false,
+    };
+  }),
+
+  on(
+    CardActions.modifyCard,
+    (state: CardState): CardState => ({
+      ...state,
+      modifying: true,
+    }),
+  ),
+
+  on(
+    CardActions.modifyCardSuccess,
+    CardActions.modifyCardError,
+    (state): CardState => ({
+      ...state,
+      modifying: false,
+    }),
   ),
 
   on(CardActions.changeCardsFilter, (state, { showAll }): CardState => {

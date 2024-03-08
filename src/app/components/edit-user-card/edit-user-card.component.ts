@@ -17,6 +17,7 @@ import { loadCardById } from 'src/app/state/card/card.actions';
 import {
   selectCardError,
   selectCardLoading,
+  selectCardModifying,
   selectCardWithUserById,
 } from 'src/app/state/card/card.selectors';
 import {
@@ -83,6 +84,7 @@ export class EditUserCardComponent implements OnInit {
   });
 
   cardLoading$ = this.store.select(selectCardLoading);
+  cardModifying$ = this.store.select(selectCardModifying);
   cardError$ = this.store.select(selectCardError);
   pictureLoading$ = this.store.select(selectPictureLoading);
   pictureError$ = this.store.select(selectPictureError);
