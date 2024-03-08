@@ -41,7 +41,6 @@ export class EditUserCardComponent implements OnInit {
   @Output() save = new EventEmitter<UserCard>();
 
   jobs = [
-    'Assistant to the Chief of Staff',
     'Associate Partner',
     'Associate Partner, Backoffice',
     'Backoffice',
