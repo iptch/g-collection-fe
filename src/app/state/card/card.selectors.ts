@@ -91,6 +91,8 @@ export const selectCardsSorted = createSelector(
           if (!a.last_received) return 1;
           if (!b.last_received) return -1;
           return b.last_received.localeCompare(a.last_received);
+        case CardSort.Start:
+          return b.start_at_ipt.localeCompare(a.start_at_ipt);
         default:
           return 0;
       }

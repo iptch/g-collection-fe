@@ -52,6 +52,7 @@ export class CardsComponent {
     { value: CardSort.Duplicates, viewValue: 'Anzahl Dubletten' },
     { value: CardSort.Acronym, viewValue: 'Kürzel' },
     { value: CardSort.Name, viewValue: 'Name' },
+    { value: CardSort.Start, viewValue: 'Start bei ipt' },
   ];
 
   constructor(private readonly store: Store) {

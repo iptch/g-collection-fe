@@ -3,4 +3,5 @@ export enum CardSort {
   Duplicates = 'duplicates',
   Acronym = 'acronym',
   Name = 'name',
+  Start = 'start',
 }
