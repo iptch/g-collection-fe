@@ -226,7 +226,7 @@ export function MSALGuardConfigFactory(): MsalGuardConfiguration {
       provide: MAT_SNACK_BAR_DEFAULT_OPTIONS,
       useValue: {
         duration: 3000,
-        panelClass: '!mb-16',
+        panelClass: ['!absolute', '!bottom-14', '!m-0'],
       },
     },
     { provide: LOCALE_ID, useValue: 'de-CH' },
