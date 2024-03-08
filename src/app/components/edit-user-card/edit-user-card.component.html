@@ -1,0 +1,119 @@
+<input
+  hidden
+  type="file"
+  id="chooseImage"
+  accept="image"
+  capture
+  #chooseImage
+  (change)="uploadPicture($event.target)"
+/>
+
+<div class="w-full aspect-square flex items-center justify-center relative">
+  <img
+    #image
+    [hidden]="pictureLoading$ | async"
+    [src]="picture$ | async"
+    class="w-full h-full object-cover absolute"
+    alt="Card image"
+    (error)="onImageMissing()"
+  />
+
+  <button
+    class="absolute right-0 bottom-0 m-4 w-14 h-14 bg-dark-pink rounded-full no-tap-highlight active:bg-light-pink shadow z-20"
+    (click)="chooseImage.click()"
+  >
+    <span class="material-symbols-outlined align-middle text-white">edit</span>
+  </button>
+
+  <div
+    *ngIf="pictureLoading$ | async"
+    class="flex w-full h-full items-center justify-center bg-black bg-opacity-70 z-30"
+  >
+    <app-loader></app-loader>
+  </div>
+
+  <div
+    *ngIf="pictureError$ | async"
+    class="flex w-full h-full items-center justify-center bg-black bg-opacity-70 z-10"
+  >
+    <app-alert [message]="(pictureError$ | async)!"></app-alert>
+  </div>
+</div>
+<p class="text-xs text-light-gray opacity-60 p-2">
+  Es kann ein paar Minütchen dauern bis das Bild auf dem Chärtli erscheint.
+  Eventual consistency!
+</p>
+
+<div *ngIf="cardLoading$ | async" class="flex justify-center">
+  <app-loader></app-loader>
+</div>
+
+<app-alert
+  *ngIf="cardError$ | async"
+  [message]="'Infos konnten nicht geladen werden.'"
+></app-alert>
+
+<form
+  *ngIf="!((cardLoading$ | async) || (cardError$ | async))"
+  class="flex flex-col"
+  [formGroup]="userForm"
+  (ngSubmit)="updateUser()"
+>
+  <!-- To validate that an image is selected before form submission -->
+  <input hidden formControlName="imageInput" />
+
+  <mat-form-field>
+    <mat-label>Mein Kürzel</mat-label>
+    <input
+      matInput
+      formControlName="acronymInput"
+      oninput="this.value = this.value.toUpperCase()"
+    />
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Ich bin bei der ipt seit</mat-label>
+    <input matInput type="date" formControlName="startDateInput" />
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Meine Rolle</mat-label>
+    <mat-select formControlName="jobInput">
+      <mat-option></mat-option>
+      @for (job of jobs; track job) {
+      <mat-option [value]="job">{{ job }}</mat-option>
+      }
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Da würde ich am liebsten mal hinreisen</mat-label>
+    <input matInput formControlName="wishDestinationInput" />
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Für einen Tag tauschen würde ich mit</mat-label>
+    <input matInput formControlName="wishPersonInput" />
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Das wollte ich schon immer mal erlernen</mat-label>
+    <input matInput formControlName="wishSkillInput" />
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Der beste Ratschlag</mat-label>
+    <input matInput formControlName="bestAdviceInput" />
+  </mat-form-field>
+
+  <div class="flex justify-center">
+    <app-button
+      [disabled]="!this.userForm.valid"
+      [transparent]="!this.userForm.valid"
+      text="Update"
+      symbol="save"
+      color="pink"
+      class="text-white"
+    ></app-button>
+  </div>
+</form>

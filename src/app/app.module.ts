@@ -1,9 +1,10 @@
-import { NgOptimizedImage, registerLocaleData } from '@angular/common';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import localeDeCh from '@angular/common/locales/de-CH';
 import { LOCALE_ID, NgModule, isDevMode } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
+import { MatDialogModule } from '@angular/material/dialog';
+import { NgOptimizedImage, registerLocaleData } from '@angular/common';
 import { MatInputModule } from '@angular/material/input';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatPaginatorModule } from '@angular/material/paginator';
@@ -54,6 +55,8 @@ import { CardsComponent } from './components/cards/cards.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { FieldComponent } from './components/field/field.component';
 import { HeaderComponent } from './components/header/header.component';
+import { EditUserCardComponent } from './components/edit-user-card/edit-user-card.component';
+import { UserCardComponent } from './components/user-card/user-card.component';
 import { LoaderComponent } from './components/loader/loader.component';
 import { NavigationComponent } from './components/navigation/navigation.component';
 import { PanelComponent } from './components/panel/panel.component';
@@ -66,10 +69,12 @@ import { UserComponent } from './components/user/user.component';
 import { CardEffects } from './state/card/card.effects';
 import { DashboardEffects } from './state/dashboard/dashboard.effects';
 import { DistributionEffects } from './state/distribution/distribution.effects';
-import { QuizEffects } from './state/quiz/quiz.effects';
 import { reducers } from './state/reducers';
 import { TransferEffects } from './state/transfer/transfer.effects';
 import { UserEffects } from './state/user/user.effects';
+import { InitialCardCreationDialogComponent } from './components/initial-card-creation-dialog/initial-card-creation.dialog';
+import { QuizEffects } from './state/quiz/quiz.effects';
+import { PictureEffects } from './state/picture/picture.effects';
 
 registerLocaleData(localeDeCh);
 
@@ -143,6 +148,9 @@ export function MSALGuardConfigFactory(): MsalGuardConfiguration {
     FieldComponent,
     AlertComponent,
     AdminComponent,
+    EditUserCardComponent,
+    UserCardComponent,
+    InitialCardCreationDialogComponent,
     QuizComponent,
     QuizQuestionComponent,
   ],
@@ -157,6 +165,9 @@ export function MSALGuardConfigFactory(): MsalGuardConfiguration {
     MatSlideToggleModule,
     MatSelectModule,
     MatPaginatorModule,
+    MatDialogModule,
+    ReactiveFormsModule,
+    FormsModule,
     ServiceWorkerModule.register('ngsw-worker.js', {
       enabled: !isDevMode(),
       // Register the ServiceWorker as soon as the application is stable
@@ -180,6 +191,7 @@ export function MSALGuardConfigFactory(): MsalGuardConfiguration {
       UserEffects,
       TransferEffects,
       QuizEffects,
+      PictureEffects,
     ]),
     MatSliderModule,
     MatSnackBarModule,

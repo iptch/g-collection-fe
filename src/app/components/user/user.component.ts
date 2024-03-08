@@ -1,23 +1,18 @@
 import { Component } from '@angular/core';
-import { Observable } from 'rxjs';
 import { AuthService } from 'src/app/services/auth.service';
 import { Store } from '@ngrx/store';
 import { selectUser } from 'src/app/state/user/user.selectors';
-import { User } from 'src/app/models/user.model';
+import { inject } from '@angular/core';
 
 @Component({
   selector: 'app-user',
   templateUrl: './user.component.html',
 })
 export class UserComponent {
-  user$: Observable<User | null>;
+  private readonly store = inject(Store);
+  private readonly authService = inject(AuthService);
 
-  constructor(
-    private readonly store: Store,
-    private readonly authService: AuthService,
-  ) {
-    this.user$ = this.store.select(selectUser);
-  }
+  user$ = this.store.select(selectUser);
 
   logout() {
     this.authService.logout();

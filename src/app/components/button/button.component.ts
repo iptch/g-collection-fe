@@ -12,4 +12,5 @@ export class ButtonComponent {
   @Input() outlined = false;
   @Input() fullWidth = false;
   @Input() centerText = false;
+  @Input() transparent = false;
 }

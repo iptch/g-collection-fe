@@ -6,5 +6,6 @@ export interface User {
     last_name: string;
     is_admin: boolean;
   };
+  card_id: number;
   last_login: string;
 }

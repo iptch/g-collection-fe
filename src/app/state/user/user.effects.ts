@@ -1,9 +1,13 @@
 import { Injectable } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
+import { of } from 'rxjs';
 import { catchError, map, mergeMap } from 'rxjs/operators';
 import { UserService } from '../../services/user.service';
-import { of } from 'rxjs';
 import * as UserActions from './user.actions';
+import { User } from 'src/app/models/user.model';
+import { InitialCardCreationDialogComponent } from 'src/app/components/initial-card-creation-dialog/initial-card-creation.dialog';
+import { Router } from '@angular/router';
 
 @Injectable()
 export class UserEffects {
@@ -12,7 +16,11 @@ export class UserEffects {
       ofType(UserActions.initUser),
       mergeMap(() =>
         this.userService.initUser().pipe(
-          map((user) => {
+          map((user: User) => {
+            if (!user?.['card_id']) {
+              this.router.navigate(['/dashboard']);
+              this.showDialog();
+            }
             return UserActions.initUserSuccess({ user });
           }),
           catchError((error) =>
@@ -30,5 +38,16 @@ export class UserEffects {
   constructor(
     private readonly actions$: Actions,
     private readonly userService: UserService,
+    public dialog: MatDialog,
+    private readonly router: Router,
   ) {}
+
+  showDialog() {
+    this.dialog.open(InitialCardCreationDialogComponent, {
+      disableClose: true,
+      maxWidth: '100%',
+      width: '90%',
+      height: '90%',
+    });
+  }
 }

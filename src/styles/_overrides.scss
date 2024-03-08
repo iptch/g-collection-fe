@@ -31,6 +31,17 @@
 .mdc-notched-outline__leading,
 .mdc-notched-outline__trailing,
 // Snackbar
-.mdc-snackbar__surface {
+.mdc-snackbar__surface,
+// Dialog
+.mat-mdc-dialog-surface.mdc-dialog__surface {
   border-radius: 0 !important;
+}
+
+// Dialog
+.mat-mdc-dialog-content {
+  max-height: 100vh !important;
+}
+
+.mat-mdc-dialog-container .mat-mdc-dialog-content {
+  padding: 16px !important;
 }

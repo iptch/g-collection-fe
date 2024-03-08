@@ -22,3 +22,8 @@ export const selectUserIsAdmin = createSelector(
   selectUser,
   (user) => user?.user.is_admin ?? null,
 );
+
+export const selectUserCardId = createSelector(
+  selectUser,
+  (user) => user?.card_id ?? null,
+);

@@ -1,6 +1,7 @@
 import {
   Component,
   ElementRef,
+  Input,
   OnDestroy,
   OnInit,
   ViewChild,
@@ -22,6 +23,8 @@ import {
   templateUrl: './card-detail.component.html',
 })
 export class CardDetailComponent implements OnInit, OnDestroy {
+  @Input() isInitialUserCreation = false;
+
   @ViewChild('image') image!: ElementRef;
 
   loading$?: Observable<boolean>;

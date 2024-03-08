@@ -1,5 +1,5 @@
 <header
-  class="sticky top-0 h-10 pl-2 flex justify-between items-center bg-dark-gray text-lg font-medium text-light-gray z-10"
+  class="sticky top-0 h-10 pl-2 flex justify-between items-center bg-dark-gray text-lg font-medium text-light-gray z-50"
 >
   <div [routerLink]="'dashboard'" class="flex items-center">
     <img src="assets/icon-small.png" alt="icon" class="h-6 mr-2" />
@@ -13,6 +13,13 @@
       class="material-symbols-outlined h-full px-2"
     >
       admin_panel_settings
+    </button>
+    <button
+      [routerLink]="'card'"
+      routerLinkActive="text-light-blue filled-symbol"
+      class="material-symbols-outlined h-full px-2"
+    >
+      contact_page
     </button>
     <button
       [routerLink]="'user'"

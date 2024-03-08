@@ -1,10 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Card } from '../models/card.model';
-import { Code } from '../models/code.model';
 import { Observable } from 'rxjs';
-import { environment } from './../../environments/environment';
+import { Card, UserCard } from '../models/card.model';
+import { Code } from '../models/code.model';
 import { StatusResponse } from '../models/status-response.model';
+import { environment } from './../../environments/environment';
 
 @Injectable({
   providedIn: 'root',
@@ -27,5 +27,9 @@ export class CardService {
       `${this.cardsEndpoint}/transfer/`,
       code,
     );
+  }
+
+  modifyCard(userCard: UserCard): Observable<Card> {
+    return this.http.post<Card>(`${this.cardsEndpoint}/modify/`, userCard);
   }
 }

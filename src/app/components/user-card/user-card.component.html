@@ -1,0 +1,7 @@
+<app-title>Mein Chärtli</app-title>
+<app-panel>
+  <app-edit-user-card
+    [cardId]="(userCardId$ | async) ?? null"
+    (save)="saveUserCard($event)"
+  ></app-edit-user-card>
+</app-panel>
