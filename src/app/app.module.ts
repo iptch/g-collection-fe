@@ -75,6 +75,7 @@ import { UserEffects } from './state/user/user.effects';
 import { InitialCardCreationDialogComponent } from './components/initial-card-creation-dialog/initial-card-creation.dialog';
 import { QuizEffects } from './state/quiz/quiz.effects';
 import { PictureEffects } from './state/picture/picture.effects';
+import { MAT_DATE_LOCALE } from '@angular/material/core';
 
 registerLocaleData(localeDeCh);
 
@@ -230,6 +231,7 @@ export function MSALGuardConfigFactory(): MsalGuardConfiguration {
       },
     },
     { provide: LOCALE_ID, useValue: 'de-CH' },
+    { provide: MAT_DATE_LOCALE, useValue: 'de-CH' },
   ],
   bootstrap: [AppComponent, MsalRedirectComponent],
 })
