@@ -1,23 +1,21 @@
 import { Injectable } from '@angular/core';
-import { Actions, concatLatestFrom, createEffect, ofType } from '@ngrx/effects';
-import { Store } from '@ngrx/store';
+import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { catchError, map, of } from 'rxjs';
-import { filter, switchMap } from 'rxjs/operators';
+import { switchMap } from 'rxjs/operators';
 import { QuizService } from '../../services/quiz.service';
 import * as QuizActions from './quiz.actions';
-import { selectCurrentQuestion } from './quiz.selectors';
 
 @Injectable()
 export class QuizEffects {
-  readonly getQuestion$ = createEffect(() => {
+  readonly fetchQuestion$ = createEffect(() => {
     return this.actions$.pipe(
-      ofType(QuizActions.getQuestion),
-      switchMap(() => {
-        return this.quizService.getQuestion().pipe(
-          map((question) => QuizActions.getQuestionSuccess({ question })),
+      ofType(QuizActions.fetchQuestion),
+      switchMap(({ questionRequest }) => {
+        return this.quizService.fetchQuestion(questionRequest).pipe(
+          map((question) => QuizActions.fetchQuestionSuccess({ question })),
           catchError((error) =>
             of(
-              QuizActions.getQuestionError({
+              QuizActions.fetchQuestionError({
                 error: error.error.status ? error.error.status : error.message,
               }),
             ),
@@ -27,23 +25,15 @@ export class QuizEffects {
     );
   });
 
-  readonly sendAnswer$ = createEffect(() => {
+  readonly fetchAnswer$ = createEffect(() => {
     return this.actions$.pipe(
-      ofType(QuizActions.sendAnswer),
-      concatLatestFrom(() => this.store.select(selectCurrentQuestion)),
-      filter(
-        ([, currentQuestion]) =>
-          !!currentQuestion?.id && !currentQuestion.correctAnswerId,
-      ),
-      switchMap(([{ answerId }, currentQuestion]) => {
-        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-        return this.quizService.sendAnswer(currentQuestion!.id, answerId).pipe(
-          map(({ correctAnswer }) =>
-            QuizActions.sendAnswerSuccess({ correctAnswerId: correctAnswer }),
-          ),
+      ofType(QuizActions.fetchAnswer),
+      switchMap(({ answerRequest }) => {
+        return this.quizService.fetchAnswer(answerRequest).pipe(
+          map((answer) => QuizActions.fetchAnswerSuccess({ answer })),
           catchError((error) =>
             of(
-              QuizActions.sendAnswerError({
+              QuizActions.fetchAnswerError({
                 error: error.error.status ? error.error.status : error.message,
               }),
             ),
@@ -56,6 +46,5 @@ export class QuizEffects {
   constructor(
     private readonly actions$: Actions,
     private readonly quizService: QuizService,
-    private readonly store: Store,
   ) {}
 }

@@ -25,7 +25,7 @@ export const selectMyRank = createSelector(
   selectUser,
   (dashboard, user) => {
     return (
-      dashboard?.rankingList.find(
+      dashboard?.rankingCards.find(
         (ranking) => ranking.userEmail === user?.user.email,
       )?.rank ?? 0
     );
@@ -34,11 +34,11 @@ export const selectMyRank = createSelector(
 
 export const selectTotalUsers = createSelector(
   selectDashboard,
-  (dashboard) => dashboard?.rankingList.length ?? 0,
+  (dashboard) => dashboard?.rankingCards.length ?? 0,
 );
 
 export const selectTopRanking = createSelector(selectDashboard, (dashboard) =>
-  dashboard?.rankingList ? dashboard.rankingList.slice(0, 10) : [],
+  dashboard?.rankingCards ? dashboard.rankingCards.slice(0, 10) : [],
 );
 
 export const selectDashboardProgress = createSelector(

@@ -1,29 +1,37 @@
 import { createAction, props } from '@ngrx/store';
-import { QuizQuestion } from 'src/app/models/quiz.model';
+import {
+  Answer,
+  AnswerRequest,
+  Question,
+  QuestionRequest,
+} from 'src/app/models/quiz.model';
 
-export const getQuestion = createAction('[Quiz] Get question');
-
-export const getQuestionSuccess = createAction(
-  '[Quiz] Get question success',
-  props<{ question: QuizQuestion }>(),
+export const fetchQuestion = createAction(
+  '[Quiz] Fetch question',
+  props<{ questionRequest: QuestionRequest }>(),
 );
 
-export const getQuestionError = createAction(
-  '[Quiz] Get question error',
+export const fetchQuestionSuccess = createAction(
+  '[Quiz] Fetch question success',
+  props<{ question: Question }>(),
+);
+
+export const fetchQuestionError = createAction(
+  '[Quiz] Fetch question error',
   props<{ error: string }>(),
 );
 
-export const sendAnswer = createAction(
-  '[Quiz] Send answer',
-  props<{ answerId: string }>(),
+export const fetchAnswer = createAction(
+  '[Quiz] Fetch answer',
+  props<{ answerRequest: AnswerRequest }>(),
 );
 
-export const sendAnswerSuccess = createAction(
-  '[Quiz] Send answer success',
-  props<{ correctAnswerId: string }>(),
+export const fetchAnswerSuccess = createAction(
+  '[Quiz] Fetch answer success',
+  props<{ answer: Answer }>(),
 );
 
-export const sendAnswerError = createAction(
-  '[Quiz] Send answer error',
+export const fetchAnswerError = createAction(
+  '[Quiz] Fetch answer error',
   props<{ error: string }>(),
 );

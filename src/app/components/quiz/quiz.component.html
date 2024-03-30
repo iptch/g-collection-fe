@@ -10,10 +10,10 @@
 
     <ng-template #questionContainer>
       <app-quiz-question
-        [answerId]="currentAnswerId$ | async"
+        [question]="question$ | async"
+        [answer]="answer$ | async"
         [loadingQuestion]="(loadingQuestion$ | async) === true"
         [loadingAnswer]="(loadingAnswer$ | async) === true"
-        [question]="currentQuestion$ | async"
         (selectAnswer)="onSelectAnswer($event)"
       ></app-quiz-question>
     </ng-template>

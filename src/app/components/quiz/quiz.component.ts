@@ -1,15 +1,20 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { QuizQuestion } from 'src/app/models/quiz.model';
+import {
+  Answer,
+  AnswerRequest,
+  Question,
+  QuizType,
+} from 'src/app/models/quiz.model';
 import * as QuizActions from 'src/app/state/quiz/quiz.actions';
 import {
-  selectCurrentAnswerId,
-  selectCurrentQuestion,
+  selectAnswer,
   selectLoadingAnswer,
   selectLoadingAnswerError,
   selectLoadingQuestion,
   selectLoadingQuestionError,
+  selectQuestion,
 } from 'src/app/state/quiz/quiz.selectors';
 
 @Component({
@@ -18,17 +23,16 @@ import {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class QuizComponent {
-  currentQuestion$?: Observable<QuizQuestion | null>;
-  currentAnswerId$?: Observable<string | null>;
-  isCurrentQuestionAnswered$?: Observable<boolean>;
+  question$?: Observable<Question | null>;
+  answer$?: Observable<Answer | null>;
   loadingQuestion$?: Observable<boolean>;
   loadingQuestionError$?: Observable<string | null>;
   loadingAnswer$?: Observable<boolean>;
   loadingAnswerError$?: Observable<string | null>;
 
   constructor(private readonly store: Store) {
-    this.currentQuestion$ = this.store.select(selectCurrentQuestion);
-    this.currentAnswerId$ = this.store.select(selectCurrentAnswerId);
+    this.question$ = this.store.select(selectQuestion);
+    this.answer$ = this.store.select(selectAnswer);
     this.loadingQuestion$ = this.store.select(selectLoadingQuestion);
     this.loadingQuestionError$ = this.store.select(selectLoadingQuestionError);
     this.loadingAnswer$ = this.store.select(selectLoadingAnswer);
@@ -36,10 +40,18 @@ export class QuizComponent {
   }
 
   onGetNewQuestion() {
-    this.store.dispatch(QuizActions.getQuestion());
+    this.store.dispatch(
+      QuizActions.fetchQuestion({
+        questionRequest: {
+          question_type: QuizType.IMAGE,
+          answer_type: QuizType.NAME,
+          answer_options: 4,
+        },
+      }),
+    );
   }
 
-  onSelectAnswer(answerId: string) {
-    this.store.dispatch(QuizActions.sendAnswer({ answerId }));
+  onSelectAnswer(answerRequest: AnswerRequest) {
+    this.store.dispatch(QuizActions.fetchAnswer({ answerRequest }));
   }
 }

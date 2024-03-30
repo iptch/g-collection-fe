@@ -1,7 +1,12 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, delay } from 'rxjs';
-import { QuizQuestion } from '../models/quiz.model';
+import {
+  Answer,
+  AnswerRequest,
+  Question,
+  QuestionRequest,
+} from '../models/quiz.model';
 import { environment } from './../../environments/environment';
 
 @Injectable({
@@ -12,24 +17,13 @@ export class QuizService {
 
   constructor(private readonly http: HttpClient) {}
 
-  getQuestion(): Observable<QuizQuestion> {
-    return this.http.get<QuizQuestion>(`${this.quizEndpoint}/question`);
+  fetchQuestion(question: QuestionRequest): Observable<Question> {
+    return this.http.post<Question>(`${this.quizEndpoint}/question/`, question);
   }
 
-  sendAnswer(
-    questionId: string,
-    answerId: string,
-  ): Observable<SendAnswerResponse> {
+  fetchAnswer(answer: AnswerRequest): Observable<Answer> {
     return this.http
-      .post<SendAnswerResponse>(`${this.quizEndpoint}/answer/`, {
-        question: questionId,
-        answer: answerId,
-      })
+      .post<Answer>(`${this.quizEndpoint}/answer/`, answer)
       .pipe(delay(500));
   }
-}
-
-interface SendAnswerResponse {
-  is_correct: boolean;
-  correctAnswer: string;
 }

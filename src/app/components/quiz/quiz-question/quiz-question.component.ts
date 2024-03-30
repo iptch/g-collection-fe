@@ -5,7 +5,12 @@ import {
   Input,
   Output,
 } from '@angular/core';
-import { ImageQuizQuestion, QuizQuestion } from 'src/app/models/quiz.model';
+import {
+  Answer,
+  AnswerRequest,
+  Question,
+  QuizType,
+} from 'src/app/models/quiz.model';
 
 @Component({
   selector: 'app-quiz-question',
@@ -15,16 +20,17 @@ import { ImageQuizQuestion, QuizQuestion } from 'src/app/models/quiz.model';
 export class QuizQuestionComponent {
   @Input() loadingQuestion!: boolean;
   @Input() loadingAnswer!: boolean;
-  @Input() question!: QuizQuestion | null;
-  @Input() answerId!: string | null;
+  @Input() question!: Question | null;
+  @Input() answer!: Answer | null;
 
-  @Output() selectAnswer = new EventEmitter<string>();
+  @Output() selectAnswer = new EventEmitter<AnswerRequest>();
 
-  get imageQuestion(): ImageQuizQuestion | null {
-    return this.question?.questionType === 'IMAGE' ? this.question : null;
-  }
+  quizType = QuizType;
 
-  onSelectAnswer(answerId: string) {
-    this.selectAnswer.emit(answerId);
+  onSelectAnswer(questionId: number, answer: string) {
+    this.selectAnswer.emit({
+      question_id: questionId,
+      answer: answer,
+    });
   }
 }
