@@ -33,6 +33,9 @@ export default {
         '.filled-symbol': {
           'font-variation-settings': '"FILL" 1',
         },
+        '.fine-symbol': {
+          'font-variation-settings': '"wght" 250',
+        },
         '.no-tap-highlight': {
           '-webkit-tap-highlight-color': 'transparent',
         },

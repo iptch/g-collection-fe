@@ -7,6 +7,7 @@ export interface QuizState {
   loadingQuestionError: string | null;
   loadingAnswer: boolean;
   loadingAnswerError: string | null;
+  personInQuestion: boolean;
 }
 
 export const initialQuizState: QuizState = {
@@ -16,4 +17,5 @@ export const initialQuizState: QuizState = {
   loadingQuestionError: null,
   loadingAnswer: false,
   loadingAnswerError: null,
+  personInQuestion: false,
 };

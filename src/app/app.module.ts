@@ -11,6 +11,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatSelectModule } from '@angular/material/select';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatSliderModule } from '@angular/material/slider';
 import {
   MAT_SNACK_BAR_DEFAULT_OPTIONS,
@@ -62,7 +63,7 @@ import { NavigationComponent } from './components/navigation/navigation.componen
 import { PanelComponent } from './components/panel/panel.component';
 import { QrCodeComponent } from './components/qr-code/qr-code.component';
 import { QrScannerComponent } from './components/qr-scanner/qr-scanner.component';
-import { QuizQuestionComponent } from './components/quiz/quiz-question/quiz-question.component';
+import { QuizSelectorComponent } from './components/quiz-selector/quiz-selector.component';
 import { QuizComponent } from './components/quiz/quiz.component';
 import { TitleComponent } from './components/title/title.component';
 import { UserComponent } from './components/user/user.component';
@@ -154,7 +155,7 @@ export function MSALGuardConfigFactory(): MsalGuardConfiguration {
     UserCardComponent,
     InitialCardCreationDialogComponent,
     QuizComponent,
-    QuizQuestionComponent,
+    QuizSelectorComponent,
   ],
   imports: [
     BrowserModule,
@@ -165,6 +166,7 @@ export function MSALGuardConfigFactory(): MsalGuardConfiguration {
     MsalModule,
     QRCodeModule,
     MatSlideToggleModule,
+    MatButtonToggleModule,
     MatSelectModule,
     MatPaginatorModule,
     MatDialogModule,

@@ -64,4 +64,12 @@ export const quizReducer = createReducer(
       loadingAnswerError: error,
     }),
   ),
+
+  on(
+    QuizActions.setPersonInQuestion,
+    (state, { personInQuestion }): QuizState => ({
+      ...state,
+      personInQuestion,
+    }),
+  ),
 );

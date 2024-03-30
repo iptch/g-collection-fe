@@ -10,6 +10,12 @@ export enum QuizType {
   BEST_ADVICE = 'best_advice',
 }
 
+export function getQuizType(value: string | null): QuizType | undefined {
+  return value
+    ? QuizType[value.toUpperCase() as keyof typeof QuizType]
+    : undefined;
+}
+
 export interface QuestionRequest {
   question_type: QuizType;
   answer_type: QuizType;

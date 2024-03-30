@@ -1,12 +1,12 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { Store } from '@ngrx/store';
-import { Observable } from 'rxjs';
 import {
-  Answer,
-  AnswerRequest,
-  Question,
-  QuizType,
-} from 'src/app/models/quiz.model';
+  ChangeDetectionStrategy,
+  Component,
+  OnInit,
+  inject,
+} from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { Store } from '@ngrx/store';
+import { QuizType, getQuizType } from 'src/app/models/quiz.model';
 import * as QuizActions from 'src/app/state/quiz/quiz.actions';
 import {
   selectAnswer,
@@ -22,36 +22,53 @@ import {
   templateUrl: './quiz.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class QuizComponent {
-  question$?: Observable<Question | null>;
-  answer$?: Observable<Answer | null>;
-  loadingQuestion$?: Observable<boolean>;
-  loadingQuestionError$?: Observable<string | null>;
-  loadingAnswer$?: Observable<boolean>;
-  loadingAnswerError$?: Observable<string | null>;
+export class QuizComponent implements OnInit {
+  private readonly store = inject(Store);
+  private readonly route = inject(ActivatedRoute);
 
-  constructor(private readonly store: Store) {
-    this.question$ = this.store.select(selectQuestion);
-    this.answer$ = this.store.select(selectAnswer);
-    this.loadingQuestion$ = this.store.select(selectLoadingQuestion);
-    this.loadingQuestionError$ = this.store.select(selectLoadingQuestionError);
-    this.loadingAnswer$ = this.store.select(selectLoadingAnswer);
-    this.loadingAnswerError$ = this.store.select(selectLoadingAnswerError);
+  question$ = this.store.select(selectQuestion);
+  answer$ = this.store.select(selectAnswer);
+  loadingQuestion$ = this.store.select(selectLoadingQuestion);
+  loadingQuestionError$ = this.store.select(selectLoadingQuestionError);
+  loadingAnswer$ = this.store.select(selectLoadingAnswer);
+  loadingAnswerError$ = this.store.select(selectLoadingAnswerError);
+
+  quizType = QuizType;
+  questionType?: QuizType;
+  answerType?: QuizType;
+
+  ngOnInit(): void {
+    this.questionType = getQuizType(
+      this.route.snapshot.paramMap.get('question'),
+    );
+    this.answerType = getQuizType(this.route.snapshot.paramMap.get('answer'));
+    this.fetchQuestion();
   }
 
-  onGetNewQuestion() {
+  fetchQuestion() {
+    if (!this.questionType || !this.answerType) {
+      console.error('Invalid question or answer type.');
+      return;
+    }
     this.store.dispatch(
       QuizActions.fetchQuestion({
         questionRequest: {
-          question_type: QuizType.IMAGE,
-          answer_type: QuizType.NAME,
+          question_type: this.questionType,
+          answer_type: this.answerType,
           answer_options: 4,
         },
       }),
     );
   }
 
-  onSelectAnswer(answerRequest: AnswerRequest) {
-    this.store.dispatch(QuizActions.fetchAnswer({ answerRequest }));
+  onSelectAnswer(questionId: number, answer: string) {
+    this.store.dispatch(
+      QuizActions.fetchAnswer({
+        answerRequest: {
+          question_id: questionId,
+          answer: answer,
+        },
+      }),
+    );
   }
 }

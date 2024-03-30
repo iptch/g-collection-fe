@@ -35,3 +35,8 @@ export const fetchAnswerError = createAction(
   '[Quiz] Fetch answer error',
   props<{ error: string }>(),
 );
+
+export const setPersonInQuestion = createAction(
+  '[Quiz] Set person in question',
+  props<{ personInQuestion: boolean }>(),
+);

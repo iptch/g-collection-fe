@@ -32,3 +32,8 @@ export const selectLoadingAnswerError = createSelector(
   selectQuizState,
   (state) => state.loadingAnswerError,
 );
+
+export const selectPersonInQuestion = createSelector(
+  selectQuizState,
+  (state) => state.personInQuestion,
+);

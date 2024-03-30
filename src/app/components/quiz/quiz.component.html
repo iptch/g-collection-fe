@@ -1,29 +1,82 @@
-<div class="mb-8">
-  <app-title>Quiz</app-title>
-</div>
+<app-title>Quiz</app-title>
 
-<div class="flex flex-col items-center">
-  <div class="flex flex-col">
+<app-panel>
+  <div class="flex flex-col items-center">
     <app-panel *ngIf="loadingQuestionError$ | async; else questionContainer">
       <app-alert [message]="(loadingQuestionError$ | async)!"></app-alert>
     </app-panel>
 
     <ng-template #questionContainer>
-      <app-quiz-question
-        [question]="question$ | async"
-        [answer]="answer$ | async"
-        [loadingQuestion]="(loadingQuestion$ | async) === true"
-        [loadingAnswer]="(loadingAnswer$ | async) === true"
-        (selectAnswer)="onSelectAnswer($event)"
-      ></app-quiz-question>
+      <ng-container *ngIf="loadingQuestion$ | async; else questionContainer">
+        <app-loader></app-loader>
+      </ng-container>
+
+      <ng-template #questionContainer>
+        <ng-container *ngIf="question$ | async as question">
+          <div
+            *ngIf="question.question_type === quizType.IMAGE"
+            class="w-full aspect-[4/3] flex items-center justify-center relative mb-4"
+          >
+            <img
+              #image
+              [src]="question.question_value"
+              alt="Wer bin ich?"
+              class="w-full h-full object-cover absolute"
+              onerror="this.src='assets/icon.png'"
+            />
+          </div>
+
+          <div class="mb-4">{{ question.question_string }}</div>
+
+          <!-- For now only considers text answers; can later be distinguished by question.answerType -->
+          <ng-container
+            *ngFor="
+              let answerOption of question.answer_possible_values;
+              let last = last
+            "
+          >
+            <app-button
+              class="w-full"
+              [class.mb-2]="!last"
+              [centerText]="true"
+              [color]="
+                (answer$ | async)?.correct_answer === answerOption
+                  ? 'green'
+                  : (answer$ | async)?.correct_answer !== answerOption &&
+                    (answer$ | async)?.given_answer === answerOption
+                  ? 'red'
+                  : 'gray'
+              "
+              [disabled]="(loadingAnswer$ | async) || !!(answer$ | async)"
+              [outlined]="(loadingAnswer$ | async) || !!(answer$ | async)"
+              [fullWidth]="true"
+              [text]="answerOption"
+              (click)="onSelectAnswer(question.question_id, answerOption)"
+            ></app-button>
+          </ng-container>
+        </ng-container>
+      </ng-template>
     </ng-template>
   </div>
+</app-panel>
 
-  <app-button
-    class="absolute bottom-0 mb-24"
-    color="pink"
-    symbol="next_plan"
-    text="Neue Frage"
-    (click)="onGetNewQuestion()"
-  ></app-button>
-</div>
+<ng-container *ngIf="loadingAnswer$ | async; else answerValidation">
+  <app-loader></app-loader>
+</ng-container>
+
+<ng-template #answerValidation>
+  <div
+    *ngIf="answer$ | async as answer"
+    class="mt-4 flex justify-center"
+    [ngClass]="answer.is_correct ? 'text-light-green' : 'text-light-red'"
+  >
+    {{ answer.is_correct ? 'Das ist korrekt!' : 'Leider falsch' }}
+  </div>
+</ng-template>
+
+<button
+  class="fixed bottom-14 right-0 m-4 w-14 h-14 bg-dark-pink rounded-full align-middle no-tap-highlight active:bg-light-pink shadow"
+  (click)="fetchQuestion()"
+>
+  <span class="material-symbols-outlined align-middle">arrow_forward</span>
+</button>
