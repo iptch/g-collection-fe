@@ -2,9 +2,10 @@
 
 <app-panel>
   <div class="flex flex-col items-center">
-    <app-panel *ngIf="loadingQuestionError$ | async; else questionContainer">
-      <app-alert [message]="(loadingQuestionError$ | async)!"></app-alert>
-    </app-panel>
+    <app-alert
+      *ngIf="loadingQuestionError$ | async; else questionContainer"
+      [message]="(loadingQuestionError$ | async)!"
+    ></app-alert>
 
     <ng-template #questionContainer>
       <ng-container *ngIf="loadingQuestion$ | async; else questionContainer">

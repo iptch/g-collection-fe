@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { catchError, map, of } from 'rxjs';
-import { switchMap } from 'rxjs/operators';
+import { switchMap, tap } from 'rxjs/operators';
 import { QuizService } from '../../services/quiz.service';
 import * as QuizActions from './quiz.actions';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Injectable()
 export class QuizEffects {
@@ -43,8 +44,19 @@ export class QuizEffects {
     );
   });
 
+  readonly fetchAnswerError = createEffect(
+    () => {
+      return this.actions$.pipe(
+        ofType(QuizActions.fetchAnswerError),
+        tap((error) => this.snackBar.open(error.error)),
+      );
+    },
+    { dispatch: false },
+  );
+
   constructor(
     private readonly actions$: Actions,
     private readonly quizService: QuizService,
+    private readonly snackBar: MatSnackBar,
   ) {}
 }
