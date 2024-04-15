@@ -15,7 +15,7 @@
   <div
     *ngFor="let quiz of quizzes"
     routerLink="question/{{ quiz.questionType }}/answer/{{ quiz.answerType }}"
-    class="bg-dark-gray flex flex-col items-center p-2 active:bg-opacity-50"
+    class="bg-dark-gray flex flex-col items-center p-2 active:bg-white active:bg-opacity-30"
   >
     <div class="text-light-pink text-sm">{{ quiz.text }}</div>
     <span class="material-symbols-outlined fine-symbol !text-7xl">{{
