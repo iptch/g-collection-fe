@@ -1,4 +1,3 @@
-<app-title>Dashboard</app-title>
 <div *ngIf="loading$ | async" class="p-4">
   <app-loader></app-loader>
 </div>
@@ -7,6 +6,7 @@
 </app-panel>
 <ng-container *ngIf="!((loading$ | async) || (error$ | async))">
   <div *ngIf="dashboard$ | async as dashboard" class="m-2 space-y-2">
+    <app-title>Chärtli</app-title>
     <div class="grid grid-cols-2 gap-2">
       <div class="bg-dark-gray p-2">
         <div class="text-light-pink">Meine Chärtli</div>
@@ -47,6 +47,30 @@
       <div class="text-lg">
         {{ dashboard.lastDistribution | date: 'dd. LLLL yyyy, HH:mm' }} Uhr
       </div>
+    </div>
+    <app-title>Quiz</app-title>
+    <div class="grid grid-cols-2 gap-2">
+      <div class="bg-dark-gray p-2">
+        <div class="text-light-pink">Meine Punkte</div>
+        <div class="text-4xl">
+          {{ (userRankingQuiz$ | async)?.quizScore }}
+        </div>
+      </div>
+      <div class="bg-dark-gray p-2">
+        <div class="text-light-pink">Mein Rang</div>
+        <div class="text-4xl">
+          {{ (userRankingQuiz$ | async)?.rank }} / {{ totalUsers$ | async }}
+        </div>
+      </div>
+    </div>
+    <div class="bg-dark-gray p-2">
+      <div class="text-light-pink">Top 10</div>
+      <ol class="list-decimal list-inside">
+        <li *ngFor="let ranking of topRankingQuiz$ | async">
+          {{ ranking.displayName }}
+          <span class="text-light-blue">[{{ ranking.quizScore }}]</span>
+        </li>
+      </ol>
     </div>
   </div>
 </ng-container>

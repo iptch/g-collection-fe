@@ -9,7 +9,9 @@ import {
   selectDashboardProgress,
   selectMyRank,
   selectTopRanking,
+  selectTopRankingQuiz,
   selectTotalUsers,
+  selectUserRankingQuiz,
 } from '../../state/dashboard/dashboard.selectors';
 import { loadDashboard } from '../../state/dashboard/dashboard.actions';
 
@@ -25,6 +27,8 @@ export class DashboardComponent implements OnInit {
   totalUsers$: Observable<number>;
   topRanking$: Observable<Ranking[]>;
   progress$: Observable<number>;
+  userRankingQuiz$: Observable<Ranking | null>;
+  topRankingQuiz$: Observable<Ranking[]>;
 
   constructor(private readonly store: Store) {
     this.dashboard$ = this.store.select(selectDashboard);
@@ -34,6 +38,8 @@ export class DashboardComponent implements OnInit {
     this.totalUsers$ = this.store.select(selectTotalUsers);
     this.topRanking$ = this.store.select(selectTopRanking);
     this.progress$ = this.store.select(selectDashboardProgress);
+    this.userRankingQuiz$ = this.store.select(selectUserRankingQuiz);
+    this.topRankingQuiz$ = this.store.select(selectTopRankingQuiz);
   }
 
   ngOnInit(): void {

@@ -5,6 +5,7 @@ export interface Dashboard {
   allCardsCount: number;
   duplicateCardsCount: number;
   rankingCards: Ranking[];
+  rankingQuiz: Ranking[];
   lastDistribution: string;
 }
 
@@ -13,4 +14,5 @@ export interface Ranking {
   uniqueCardsCount: number;
   displayName: string;
   userEmail: string;
+  quizScore: number;
 }

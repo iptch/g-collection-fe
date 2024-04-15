@@ -50,3 +50,21 @@ export const selectDashboardProgress = createSelector(
     return (dashboard.myUniqueCardsCount / dashboard.allCardsCount) * 100 || 0;
   },
 );
+
+export const selectUserRankingQuiz = createSelector(
+  selectDashboard,
+  selectUser,
+  (dashboard, user) => {
+    return (
+      dashboard?.rankingQuiz.find(
+        (ranking) => ranking.userEmail === user?.user.email,
+      ) ?? null
+    );
+  },
+);
+
+export const selectTopRankingQuiz = createSelector(
+  selectDashboard,
+  (dashboard) =>
+    dashboard?.rankingCards ? dashboard.rankingQuiz.slice(0, 10) : [],
+);
