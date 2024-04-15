@@ -1,4 +1,22 @@
-<app-title>Quiz</app-title>
+<div class="flex justify-between items-center">
+  <app-title>Quiz</app-title>
+  <div class="mt-2 mx-2">
+    <div class="px-2">
+      <app-loader *ngIf="loadingAnswer$ | async" [small]="true"></app-loader>
+    </div>
+    <div
+      *ngIf="answer$ | async as answer"
+      class="pt-0.5 px-2 border-2"
+      [ngClass]="
+        answer.is_correct
+          ? 'border-light-green text-light-green'
+          : 'border-light-red text-light-red'
+      "
+    >
+      {{ answer.score_change > 0 ? '+' : '' }}{{ answer.score_change }}
+    </div>
+  </div>
+</div>
 
 <app-panel>
   <div class="flex flex-col items-center">
@@ -60,20 +78,6 @@
     </ng-template>
   </div>
 </app-panel>
-
-<ng-container *ngIf="loadingAnswer$ | async; else answerValidation">
-  <app-loader></app-loader>
-</ng-container>
-
-<ng-template #answerValidation>
-  <div
-    *ngIf="answer$ | async as answer"
-    class="mt-4 flex justify-center"
-    [ngClass]="answer.is_correct ? 'text-light-green' : 'text-light-red'"
-  >
-    {{ answer.is_correct ? 'Das ist korrekt!' : 'Leider falsch' }}
-  </div>
-</ng-template>
 
 <button
   class="fixed bottom-14 right-0 m-4 w-14 h-14 bg-dark-pink rounded-full align-middle no-tap-highlight active:bg-light-pink shadow"
