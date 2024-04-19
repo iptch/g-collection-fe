@@ -54,3 +54,8 @@
     background-color: #0093d9 !important;
   }
 }
+
+// Tab
+.mat-mdc-tab-body.mat-mdc-tab-body-active {
+  z-index: 0 !important;
+}
