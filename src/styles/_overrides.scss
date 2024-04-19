@@ -45,3 +45,12 @@
 .mat-mdc-dialog-container .mat-mdc-dialog-content {
   padding: 16px !important;
 }
+
+// Button toggle
+.mat-button-toggle-appearance-standard {
+  background-color: #1e1e1e !important;
+
+  &.mat-button-toggle-checked {
+    background-color: #0093d9 !important;
+  }
+}
