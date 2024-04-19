@@ -78,6 +78,7 @@ import { QuizEffects } from './state/quiz/quiz.effects';
 import { PictureEffects } from './state/picture/picture.effects';
 import { DeletionEffects } from './state/deletion/deletion.effects';
 import { MAT_DATE_LOCALE } from '@angular/material/core';
+import { MatTabsModule } from '@angular/material/tabs';
 
 registerLocaleData(localeDeCh);
 
@@ -205,6 +206,7 @@ export function MSALGuardConfigFactory(): MsalGuardConfiguration {
     MatInputModule,
     MatProgressBarModule,
     NgOptimizedImage,
+    MatTabsModule,
   ],
   providers: [
     {
