@@ -1,0 +1,25 @@
+<app-title>Quiz</app-title>
+<p>
+  <mat-button-toggle-group
+    [formControl]="personInQuestion"
+    class="m-2 h-10 flex items-center !rounded-none"
+  >
+    <mat-button-toggle [value]="true">Person in Frage</mat-button-toggle>
+    <mat-button-toggle [value]="false">Person in Antwort</mat-button-toggle>
+  </mat-button-toggle-group>
+</p>
+<p class="text-xs text-light-gray opacity-60 mb-4 mx-2">
+  Dieser Toggle hat keinen Einfluss auf das Quiz "Bild".
+</p>
+<div class="grid grid-cols-3 gap-2 m-2">
+  <div
+    *ngFor="let quiz of quizzes"
+    routerLink="question/{{ quiz.questionType }}/answer/{{ quiz.answerType }}"
+    class="bg-dark-gray flex flex-col items-center p-2 active:bg-white active:bg-opacity-30"
+  >
+    <div class="text-light-pink text-sm">{{ quiz.text }}</div>
+    <span class="material-symbols-outlined fine-symbol !text-7xl">{{
+      quiz.symbol
+    }}</span>
+  </div>
+</div>

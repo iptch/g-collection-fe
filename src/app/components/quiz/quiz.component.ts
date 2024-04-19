@@ -1,15 +1,20 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  OnInit,
+  inject,
+} from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { Observable } from 'rxjs';
-import { QuizQuestion } from 'src/app/models/quiz.model';
+import { QuizType, getQuizType } from 'src/app/models/quiz.model';
 import * as QuizActions from 'src/app/state/quiz/quiz.actions';
 import {
-  selectCurrentAnswerId,
-  selectCurrentQuestion,
+  selectAnswer,
   selectLoadingAnswer,
   selectLoadingAnswerError,
   selectLoadingQuestion,
   selectLoadingQuestionError,
+  selectQuestion,
 } from 'src/app/state/quiz/quiz.selectors';
 
 @Component({
@@ -17,29 +22,53 @@ import {
   templateUrl: './quiz.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class QuizComponent {
-  currentQuestion$?: Observable<QuizQuestion | null>;
-  currentAnswerId$?: Observable<string | null>;
-  isCurrentQuestionAnswered$?: Observable<boolean>;
-  loadingQuestion$?: Observable<boolean>;
-  loadingQuestionError$?: Observable<string | null>;
-  loadingAnswer$?: Observable<boolean>;
-  loadingAnswerError$?: Observable<string | null>;
+export class QuizComponent implements OnInit {
+  private readonly store = inject(Store);
+  private readonly route = inject(ActivatedRoute);
 
-  constructor(private readonly store: Store) {
-    this.currentQuestion$ = this.store.select(selectCurrentQuestion);
-    this.currentAnswerId$ = this.store.select(selectCurrentAnswerId);
-    this.loadingQuestion$ = this.store.select(selectLoadingQuestion);
-    this.loadingQuestionError$ = this.store.select(selectLoadingQuestionError);
-    this.loadingAnswer$ = this.store.select(selectLoadingAnswer);
-    this.loadingAnswerError$ = this.store.select(selectLoadingAnswerError);
+  question$ = this.store.select(selectQuestion);
+  answer$ = this.store.select(selectAnswer);
+  loadingQuestion$ = this.store.select(selectLoadingQuestion);
+  loadingQuestionError$ = this.store.select(selectLoadingQuestionError);
+  loadingAnswer$ = this.store.select(selectLoadingAnswer);
+  loadingAnswerError$ = this.store.select(selectLoadingAnswerError);
+
+  quizType = QuizType;
+  questionType?: QuizType;
+  answerType?: QuizType;
+
+  ngOnInit(): void {
+    this.questionType = getQuizType(
+      this.route.snapshot.paramMap.get('question'),
+    );
+    this.answerType = getQuizType(this.route.snapshot.paramMap.get('answer'));
+    this.fetchQuestion();
   }
 
-  onGetNewQuestion() {
-    this.store.dispatch(QuizActions.getQuestion());
+  fetchQuestion() {
+    if (!this.questionType || !this.answerType) {
+      console.error('Invalid question or answer type.');
+      return;
+    }
+    this.store.dispatch(
+      QuizActions.fetchQuestion({
+        questionRequest: {
+          question_type: this.questionType,
+          answer_type: this.answerType,
+          answer_options: 4,
+        },
+      }),
+    );
   }
 
-  onSelectAnswer(answerId: string) {
-    this.store.dispatch(QuizActions.sendAnswer({ answerId }));
+  onSelectAnswer(questionId: number, answer: string) {
+    this.store.dispatch(
+      QuizActions.fetchAnswer({
+        answerRequest: {
+          question_id: questionId,
+          answer: answer,
+        },
+      }),
+    );
   }
 }

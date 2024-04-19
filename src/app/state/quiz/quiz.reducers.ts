@@ -6,29 +6,30 @@ export const quizReducer = createReducer(
   initialQuizState,
 
   on(
-    QuizActions.getQuestion,
+    QuizActions.fetchQuestion,
     (state): QuizState => ({
       ...state,
+      question: null,
+      answer: null,
       loadingQuestion: true,
       loadingQuestionError: null,
       loadingAnswer: false,
       loadingAnswerError: null,
-      currentAnswerId: null,
     }),
   ),
 
   on(
-    QuizActions.getQuestionSuccess,
+    QuizActions.fetchQuestionSuccess,
     (state, { question }): QuizState => ({
       ...state,
-      currentQuestion: question,
+      question,
       loadingQuestion: false,
       loadingQuestionError: null,
     }),
   ),
 
   on(
-    QuizActions.getQuestionError,
+    QuizActions.fetchQuestionError,
     (state, { error }): QuizState => ({
       ...state,
       loadingQuestion: false,
@@ -37,42 +38,38 @@ export const quizReducer = createReducer(
   ),
 
   on(
-    QuizActions.sendAnswer,
-    (state, { answerId }): QuizState => ({
+    QuizActions.fetchAnswer,
+    (state): QuizState => ({
       ...state,
-      currentQuestion: state.currentQuestion
-        ? {
-            ...state.currentQuestion,
-            correctAnswerId: undefined,
-          }
-        : null,
-      currentAnswerId: answerId,
       loadingAnswer: true,
       loadingAnswerError: null,
     }),
   ),
 
   on(
-    QuizActions.sendAnswerSuccess,
-    (state, { correctAnswerId }): QuizState => ({
+    QuizActions.fetchAnswerSuccess,
+    (state, { answer }): QuizState => ({
       ...state,
-      currentQuestion: state.currentQuestion
-        ? {
-            ...state.currentQuestion,
-            correctAnswerId,
-          }
-        : null,
+      answer,
       loadingAnswer: false,
       loadingAnswerError: null,
     }),
   ),
 
   on(
-    QuizActions.sendAnswerError,
+    QuizActions.fetchAnswerError,
     (state, { error }): QuizState => ({
       ...state,
       loadingAnswer: false,
       loadingAnswerError: error,
+    }),
+  ),
+
+  on(
+    QuizActions.setPersonInQuestion,
+    (state, { personInQuestion }): QuizState => ({
+      ...state,
+      personInQuestion,
     }),
   ),
 );

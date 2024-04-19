@@ -3,9 +3,9 @@ import { QuizState } from './quiz.state';
 
 export const selectQuizState = createFeatureSelector<QuizState>('quiz');
 
-export const selectCurrentQuestion = createSelector(
+export const selectQuestion = createSelector(
   selectQuizState,
-  (state) => state.currentQuestion,
+  (state) => state.question,
 );
 
 export const selectLoadingQuestion = createSelector(
@@ -18,9 +18,9 @@ export const selectLoadingQuestionError = createSelector(
   (state) => state.loadingQuestionError,
 );
 
-export const selectCurrentAnswerId = createSelector(
+export const selectAnswer = createSelector(
   selectQuizState,
-  (state) => state.currentAnswerId,
+  (state) => state.answer,
 );
 
 export const selectLoadingAnswer = createSelector(
@@ -31,4 +31,9 @@ export const selectLoadingAnswer = createSelector(
 export const selectLoadingAnswerError = createSelector(
   selectQuizState,
   (state) => state.loadingAnswerError,
+);
+
+export const selectPersonInQuestion = createSelector(
+  selectQuizState,
+  (state) => state.personInQuestion,
 );

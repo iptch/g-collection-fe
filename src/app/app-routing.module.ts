@@ -10,6 +10,7 @@ import { QrScannerComponent } from './components/qr-scanner/qr-scanner.component
 import { QuizComponent } from './components/quiz/quiz.component';
 import { UserComponent } from './components/user/user.component';
 import { UserCardComponent } from './components/user-card/user-card.component';
+import { QuizSelectorComponent } from './components/quiz-selector/quiz-selector.component';
 
 const routes: Routes = [
   {
@@ -48,6 +49,10 @@ const routes: Routes = [
       },
       {
         path: 'quiz',
+        component: QuizSelectorComponent,
+      },
+      {
+        path: 'quiz/question/:question/answer/:answer',
         component: QuizComponent,
       },
       {

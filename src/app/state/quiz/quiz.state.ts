@@ -1,19 +1,21 @@
-import { QuizQuestion } from 'src/app/models/quiz.model';
+import { Answer, Question } from 'src/app/models/quiz.model';
 
 export interface QuizState {
-  currentQuestion: QuizQuestion | null;
-  currentAnswerId: string | null;
+  question: Question | null;
+  answer: Answer | null;
   loadingQuestion: boolean;
   loadingQuestionError: string | null;
   loadingAnswer: boolean;
   loadingAnswerError: string | null;
+  personInQuestion: boolean;
 }
 
 export const initialQuizState: QuizState = {
-  currentQuestion: null,
-  currentAnswerId: null,
+  question: null,
+  answer: null,
   loadingQuestion: false,
   loadingQuestionError: null,
   loadingAnswer: false,
   loadingAnswerError: null,
+  personInQuestion: false,
 };
