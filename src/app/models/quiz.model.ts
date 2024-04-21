@@ -8,6 +8,7 @@ export enum QuizType {
   WISH_PERSON = 'wish_person',
   WISH_SKILL = 'wish_skill',
   BEST_ADVICE = 'best_advice',
+  RANDOM = 'random',
 }
 
 export function getQuizType(value: string | null): QuizType | undefined {

@@ -12,14 +12,15 @@
   Dieser Toggle hat keinen Einfluss auf das Quiz "Bild".
 </p>
 <div class="grid grid-cols-3 gap-2 m-2">
-  <div
-    *ngFor="let quiz of quizzes"
-    routerLink="question/{{ quiz.questionType }}/answer/{{ quiz.answerType }}"
+  <button
+    *ngFor="let quiz of quizzes; let last = last"
     class="bg-dark-gray flex flex-col items-center p-2 active:bg-white active:bg-opacity-30"
+    [class.col-span-3]="last"
+    (click)="selectQuiz(quiz)"
   >
     <div class="text-light-pink text-sm">{{ quiz.text }}</div>
     <span class="material-symbols-outlined fine-symbol !text-7xl">{{
       quiz.symbol
     }}</span>
-  </div>
+  </button>
 </div>
