@@ -8,10 +8,7 @@
     <mat-button-toggle [value]="false">Person in Antwort</mat-button-toggle>
   </mat-button-toggle-group>
 </p>
-<p class="text-xs text-light-gray opacity-60 mb-4 mx-2">
-  Dieser Toggle hat keinen Einfluss auf das Quiz "Bild".
-</p>
-<div class="grid grid-cols-3 gap-2 m-2">
+<div class="grid grid-cols-3 gap-2 m-2 m">
   <button
     *ngFor="let quiz of quizzes; let last = last"
     class="bg-dark-gray flex flex-col items-center p-2 active:bg-white active:bg-opacity-30"

@@ -33,7 +33,7 @@ export class QuizComponent implements OnInit {
   loadingAnswer$ = this.store.select(selectLoadingAnswer);
   loadingAnswerError$ = this.store.select(selectLoadingAnswerError);
 
-  quizType = QuizType;
+  imageQuizType = QuizType.IMAGE;
   questionType?: QuizType;
   answerType?: QuizType;
 
@@ -45,7 +45,7 @@ export class QuizComponent implements OnInit {
     this.fetchQuestion();
   }
 
-  fetchQuestion() {
+  fetchQuestion(): void {
     if (!this.questionType || !this.answerType) {
       console.error('Invalid question or answer type.');
       return;
@@ -61,7 +61,7 @@ export class QuizComponent implements OnInit {
     );
   }
 
-  onSelectAnswer(questionId: number, answer: string) {
+  onSelectAnswer(questionId: number, answer: string): void {
     this.store.dispatch(
       QuizActions.fetchAnswer({
         answerRequest: {
@@ -70,5 +70,12 @@ export class QuizComponent implements OnInit {
         },
       }),
     );
+  }
+
+  // The back-end cannot validate the image URL in the answer, because it doesn't have it in the DB.
+  // As a workaround, the front-end sends the email instead of the image URL to validate the answer.
+  extractEmailFromImgUrl(url: string): string {
+    const match = url.match(/\b[a-z]+\.[a-z]+@ipt\.ch\b/);
+    return match ? match[0] : '';
   }
 }

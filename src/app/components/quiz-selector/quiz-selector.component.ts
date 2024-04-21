@@ -56,7 +56,7 @@ export class QuizSelectorComponent implements OnInit {
       type: QuizType.BEST_ADVICE,
     },
     {
-      text: 'Go random!',
+      text: 'Go random, baby!',
       symbol: 'quiz',
       type: QuizType.RANDOM,
     },
@@ -84,12 +84,6 @@ export class QuizSelectorComponent implements OnInit {
   }
 
   selectQuiz(quiz: Quiz) {
-    if (quiz.type === QuizType.IMAGE) {
-      this.router.navigate([
-        `/quiz/question/${QuizType.IMAGE}/answer/${QuizType.NAME}`,
-      ]);
-      return;
-    }
     const qType = this.personInQuestion.value ? QuizType.NAME : quiz.type;
     const aType = this.personInQuestion.value ? quiz.type : QuizType.NAME;
     this.router.navigate([`/quiz/question/${qType}/answer/${aType}`]);
