@@ -33,7 +33,7 @@
       <ng-template #questionContainer>
         <ng-container *ngIf="question$ | async as question">
           <div
-            *ngIf="question.question_type === quizType.IMAGE"
+            *ngIf="question.question_type === imageQuizType"
             class="w-full aspect-[4/3] flex items-center justify-center relative mb-4"
           >
             <img
@@ -47,32 +47,73 @@
 
           <div class="mb-4">{{ question.question_string }}</div>
 
-          <!-- For now only considers text answers; can later be distinguished by question.answerType -->
           <ng-container
-            *ngFor="
-              let answerOption of question.answer_possible_values;
-              let last = last
+            *ngIf="
+              question.answer_type === imageQuizType;
+              else textAnswerContainer
             "
           >
-            <app-button
-              class="w-full"
-              [class.mb-2]="!last"
-              [centerText]="true"
-              [color]="
-                (answer$ | async)?.correct_answer === answerOption
-                  ? 'green'
-                  : (answer$ | async)?.correct_answer !== answerOption &&
-                    (answer$ | async)?.given_answer === answerOption
-                  ? 'red'
-                  : 'gray'
-              "
-              [disabled]="(loadingAnswer$ | async) || !!(answer$ | async)"
-              [outlined]="(loadingAnswer$ | async) || !!(answer$ | async)"
-              [fullWidth]="true"
-              [text]="answerOption"
-              (click)="onSelectAnswer(question.question_id, answerOption)"
-            ></app-button>
+            <div class="grid grid-cols-2 gap-2 w-full">
+              <ng-container
+                *ngFor="let answerOption of question.answer_possible_values"
+              >
+                <button
+                  class="w-full aspect-[4/3] flex items-center justify-center relative border-2 border-light-gray"
+                  [ngClass]="{
+                    '!border-light-green':
+                      (answer$ | async)?.correct_answer ===
+                      extractEmailFromImgUrl(answerOption),
+                    '!border-light-red':
+                      (answer$ | async)?.correct_answer !==
+                        extractEmailFromImgUrl(answerOption) &&
+                      (answer$ | async)?.given_answer ===
+                        extractEmailFromImgUrl(answerOption)
+                  }"
+                  (click)="
+                    onSelectAnswer(
+                      question.question_id,
+                      extractEmailFromImgUrl(answerOption)
+                    )
+                  "
+                >
+                  <img
+                    #image
+                    [src]="answerOption"
+                    alt="Wer bin ich?"
+                    class="w-full h-full object-cover absolute"
+                    onerror="this.src='assets/icon.png'"
+                  />
+                </button>
+              </ng-container>
+            </div>
           </ng-container>
+          <ng-template #textAnswerContainer>
+            <ng-container
+              *ngFor="
+                let answerOption of question.answer_possible_values;
+                let last = last
+              "
+            >
+              <app-button
+                class="w-full"
+                [class.mb-2]="!last"
+                [centerText]="true"
+                [color]="
+                  (answer$ | async)?.correct_answer === answerOption
+                    ? 'green'
+                    : (answer$ | async)?.correct_answer !== answerOption &&
+                      (answer$ | async)?.given_answer === answerOption
+                    ? 'red'
+                    : 'gray'
+                "
+                [disabled]="(loadingAnswer$ | async) || !!(answer$ | async)"
+                [outlined]="(loadingAnswer$ | async) || !!(answer$ | async)"
+                [fullWidth]="true"
+                [text]="answerOption"
+                (click)="onSelectAnswer(question.question_id, answerOption)"
+              ></app-button>
+            </ng-container>
+          </ng-template>
         </ng-container>
       </ng-template>
     </ng-template>
