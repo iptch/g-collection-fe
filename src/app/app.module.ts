@@ -4,7 +4,7 @@ import { LOCALE_ID, NgModule, isDevMode } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
-import { NgOptimizedImage, registerLocaleData } from '@angular/common';
+import { registerLocaleData } from '@angular/common';
 import { MatInputModule } from '@angular/material/input';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatPaginatorModule } from '@angular/material/paginator';
@@ -205,7 +205,6 @@ export function MSALGuardConfigFactory(): MsalGuardConfiguration {
     MatButtonModule,
     MatInputModule,
     MatProgressBarModule,
-    NgOptimizedImage,
     MatTabsModule,
   ],
   providers: [
